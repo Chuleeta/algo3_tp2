@@ -28,5 +28,38 @@ public class ExtractorTest {
         assertEquals(10, extractor.obtenerGas());    
     }
 
-    
+    @Test
+    public void extractorConDosZanganosGeneraVeinteDeGas() 
+    {
+        Extractor extractor = new Extractor();
+        extractor.agregarZangano();
+        extractor.agregarZangano();
+        extractor.pasarTiempo();
+        assertEquals(20, extractor.obtenerGas());    
+    }
+
+    @Test
+    public void extractorConTresZanganosGeneraTreintaDeGas() 
+    {
+        Extractor extractor = new Extractor();
+        extractor.agregarZangano();
+        extractor.agregarZangano();
+        extractor.agregarZangano();
+        extractor.pasarTiempo();
+        assertEquals(30, extractor.obtenerGas());   
+    }
+
+    @Test
+    public void extractorConCuatroZanganosGeneraTreintaDeGas() 
+    {
+        Extractor extractor = new Extractor();
+        extractor.agregarZangano();
+        extractor.agregarZangano();
+        extractor.agregarZangano();
+        extractor.agregarZangano();
+        extractor.pasarTiempo();
+        assertEquals(30, extractor.obtenerGas());   
+    }
+
+
 }
