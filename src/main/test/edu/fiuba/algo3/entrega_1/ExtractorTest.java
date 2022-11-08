@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.Criadero;
 import edu.fiuba.algo3.modelo.Extractor;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Message;
 import edu.fiuba.algo3.modelo.Posicion;
 
@@ -17,7 +18,7 @@ public class ExtractorTest {
     @Test
     public void extractorSinZanganosNoGeneraGas() 
     {
-        Extractor extractor = new Extractor(new Posicion(1, 1));
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -31,7 +32,7 @@ public class ExtractorTest {
     @Test
     public void extractorConUnZanganoGeneraDiezDeGas() 
     {
-        Extractor extractor = new Extractor(new Posicion(1, 1));
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -46,7 +47,7 @@ public class ExtractorTest {
     @Test
     public void extractorConDosZanganosGeneraVeinteDeGas() 
     {
-        Extractor extractor = new Extractor(new Posicion(1, 1));
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -62,7 +63,7 @@ public class ExtractorTest {
     @Test
     public void extractorConTresZanganosGeneraTreintaDeGas() 
     {
-        Extractor extractor = new Extractor(new Posicion(1, 1));
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -79,7 +80,7 @@ public class ExtractorTest {
     @Test
     public void extractorConCuatroZanganosGeneraTreintaDeGas() 
     {
-        Extractor extractor = new Extractor(new Posicion(1, 1));
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -97,7 +98,7 @@ public class ExtractorTest {
     @Test
     public void extractorNoAgregaZanganosSiNoSeConstruyo() 
     {
-        Extractor extractor = new Extractor(new Posicion(1, 1));
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.agregarZangano();

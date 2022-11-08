@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.Criadero;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Mena;
 import edu.fiuba.algo3.modelo.Message;
 import edu.fiuba.algo3.modelo.NexoMineral;
@@ -16,7 +17,7 @@ public class NexoMineralTest {
     //Caso de uso 7
     @Test
     public void SeMinaUnMineralConUnNexoMineralYLoMinaExitosamente(){
-        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)));
+        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
         nexito.pasarTiempo();
         nexito.pasarTiempo();
         nexito.pasarTiempo();
@@ -27,7 +28,7 @@ public class NexoMineralTest {
 
     @Test
     public void nexoMineralNoConstruidoNoMina(){
-        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)));
+        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
         nexito.pasarTiempo();
         nexito.pasarTiempo();
         nexito.pasarTiempo();
@@ -36,7 +37,7 @@ public class NexoMineralTest {
 
     @Test
     public void nexoMineralNoMinaMenaAgotada(){
-        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)));
+        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
         nexito.pasarTiempo();
         nexito.pasarTiempo();
         nexito.pasarTiempo();
