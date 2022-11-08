@@ -8,17 +8,24 @@ public class EstadoConstruido extends EstadoConstruccion {
         this.tiempo = 0;
     }
 
-    public EstadoConstruido construir() {
+    public EstadoConstruido construir(int limit) {
         return this;
     }
 
-    public int pasarTiempo(int larvas) {
-        if ((this.tiempo == 0) || (larvas == 3)) {
-            return 3;
-        }
 
+    public void pasarTiempo(Construccion construccion) {
         this.tiempo += 1;
-        return 1;
+        if (this.tiempo == 1)
+        {
+            construccion.construir();
+            return;
+        }
+        construccion.actualizar();
+    }
+
+    public boolean estaConstruido()
+    {
+        return true;
     }
 
 }

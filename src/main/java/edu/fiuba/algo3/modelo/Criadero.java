@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 
-public class Criadero {
+public class Criadero implements Construccion {
 
     private Posicion posicion;
     private EstadoConstruccion estado;
@@ -14,20 +14,33 @@ public class Criadero {
     }
 
     public void pasarTiempo() {
-        this.larvas = this.estado.pasarTiempo(this.larvas);
-        this.estado = this.estado.construir();
+        this.estado.pasarTiempo(this);
+        this.estado = this.estado.construir(3);
     }
 
     public boolean llenoDeLarvas() {
         return (this.larvas == 3);
     }
 
-    public Zangano engendrarZangano() throws CriaderoVacioNoEngendraException {
+    public Zangano engendrarZangano() throws CriaderoNoDisponibleException {
         if (this.larvas == 0) {
-            throw new CriaderoVacioNoEngendraException();
+            throw new CriaderoNoDisponibleException();
         }
         this.larvas -= 1;
         return new Zangano();
+    }
+
+    @Override
+    public void construir()
+    {
+        this.larvas = 3;
+    }
+
+    @Override
+    public void actualizar()
+    {
+        if(this.larvas < 3)
+            this.larvas += 1;
     }
     
 }

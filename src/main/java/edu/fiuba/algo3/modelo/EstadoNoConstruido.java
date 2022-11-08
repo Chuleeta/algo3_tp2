@@ -4,20 +4,28 @@ public class EstadoNoConstruido extends EstadoConstruccion {
 
     private int tiempo;
 
-    public EstadoNoConstruido() {
+    public EstadoNoConstruido() 
+    {
         this.tiempo = 0;
     }
 
-    public EstadoConstruccion construir() {
-        if (this.tiempo >= 3) {
+    public EstadoConstruccion construir(int limit) 
+    {
+        if (this.tiempo >= limit) {
             return new EstadoConstruido();
         }
         return this;
     }
 
-    public int pasarTiempo(int larvas) {
+    public void pasarTiempo(Construccion construccion) 
+    {
         this.tiempo += 1;
-        return larvas;
+        return;
+    }
+
+    public boolean estaConstruido()
+    {
+        return false;
     }
 
 }
