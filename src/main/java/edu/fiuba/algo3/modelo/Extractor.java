@@ -24,10 +24,6 @@ public class Extractor implements Construccion{
         return this.gas;
     }
 
-    public void accionar(int accion)
-    {
-    }
-
     public void agregarZangano() 
     {
         if(this.zanganos < 3)
