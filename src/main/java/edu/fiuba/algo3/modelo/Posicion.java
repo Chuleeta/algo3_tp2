@@ -12,7 +12,7 @@ public class Posicion {
 
     public boolean adentro(float radio, Posicion centro)
     {
-        return (centro.distX(this.x, radio)*centro.distX(this.x, radio) + centro.distY(this.y, radio)*centro.distY(this.y, radio) <= radio*radio);
+        return ((centro.distX(this.x, radio)*centro.distX(this.x, radio)) + (centro.distY(this.y, radio)*centro.distY(this.y, radio)) <= (radio*radio));
     }
 
     private float distX(float axisX, float radio)
