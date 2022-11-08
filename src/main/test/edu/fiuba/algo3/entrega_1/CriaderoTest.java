@@ -94,6 +94,5 @@ public class CriaderoTest {
         criadero.pasarTiempo();
         assertTrue(criadero.llenoDeLarvas());
     }
-
 }
 
