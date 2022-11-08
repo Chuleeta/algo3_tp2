@@ -9,7 +9,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Integrante 1** - [Lucas Franciulli](https://github.com/Chuleeta)
 * **Integrante 2** - [Nazareno Gabriel Taibo](https://github.com/PMNaza)
 * **Integrante 3** - [Lautaro Barrionuevo](https://github.com/lebarrionuevo)
-* **Integrante 4** - [integrante4](https://github.com/integrante4)
+* **Integrante 4** - [Nicolas Garcia](https://github.com/nicolasg98)
 
 Corrector: **{Corrector}**
 
