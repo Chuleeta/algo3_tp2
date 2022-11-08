@@ -8,58 +8,58 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ExtractorTest {
+// public class ExtractorTest {
     
-    // Caso de uso 4
-    @Test
-    public void extractorSinZanganosNoGeneraGas() 
-    {
-        Extractor extractor = new Extractor();
-        extractor.pasarTiempo();
-        assertEquals(0, extractor.obtenerGas());    
-    }
+//     // Caso de uso 4
+//     @Test
+//     public void extractorSinZanganosNoGeneraGas() 
+//     {
+//         Extractor extractor = new Extractor();
+//         extractor.pasarTiempo();
+//         assertEquals(0, extractor.obtenerGas());    
+//     }
 
-    @Test
-    public void extractorConUnZanganoGeneraDiezDeGas() 
-    {
-        Extractor extractor = new Extractor();
-        extractor.agregarZangano();
-        extractor.pasarTiempo();
-        assertEquals(10, extractor.obtenerGas());    
-    }
+//     @Test
+//     public void extractorConUnZanganoGeneraDiezDeGas() 
+//     {
+//         Extractor extractor = new Extractor();
+//         extractor.agregarZangano();
+//         extractor.pasarTiempo();
+//         assertEquals(10, extractor.obtenerGas());    
+//     }
 
-    @Test
-    public void extractorConDosZanganosGeneraVeinteDeGas() 
-    {
-        Extractor extractor = new Extractor();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
-        extractor.pasarTiempo();
-        assertEquals(20, extractor.obtenerGas());    
-    }
+//     @Test
+//     public void extractorConDosZanganosGeneraVeinteDeGas() 
+//     {
+//         Extractor extractor = new Extractor();
+//         extractor.agregarZangano();
+//         extractor.agregarZangano();
+//         extractor.pasarTiempo();
+//         assertEquals(20, extractor.obtenerGas());    
+//     }
 
-    @Test
-    public void extractorConTresZanganosGeneraTreintaDeGas() 
-    {
-        Extractor extractor = new Extractor();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
-        extractor.pasarTiempo();
-        assertEquals(30, extractor.obtenerGas());   
-    }
+//     @Test
+//     public void extractorConTresZanganosGeneraTreintaDeGas() 
+//     {
+//         Extractor extractor = new Extractor();
+//         extractor.agregarZangano();
+//         extractor.agregarZangano();
+//         extractor.agregarZangano();
+//         extractor.pasarTiempo();
+//         assertEquals(30, extractor.obtenerGas());   
+//     }
 
-    @Test
-    public void extractorConCuatroZanganosGeneraTreintaDeGas() 
-    {
-        Extractor extractor = new Extractor();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
-        extractor.pasarTiempo();
-        assertEquals(30, extractor.obtenerGas());   
-    }
+//     @Test
+//     public void extractorConCuatroZanganosGeneraTreintaDeGas() 
+//     {
+//         Extractor extractor = new Extractor();
+//         extractor.agregarZangano();
+//         extractor.agregarZangano();
+//         extractor.agregarZangano();
+//         extractor.agregarZangano();
+//         extractor.pasarTiempo();
+//         assertEquals(30, extractor.obtenerGas());   
+//     }
 
 
-}
+// }
