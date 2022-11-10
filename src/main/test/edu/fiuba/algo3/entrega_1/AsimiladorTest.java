@@ -1,10 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Asimilador;
-import edu.fiuba.algo3.modelo.Criadero;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Message;
-import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.*;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -59,6 +55,22 @@ public class AsimiladorTest {
         assertEquals(60, asimilador.obtenerGas()); 
         asimilador.pasarTiempo();
         assertEquals(80, asimilador.obtenerGas());     
+    }
+
+    // Caso de uso 11
+    @Test
+    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() {
+
+        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Mapa());
+        asimilador.dañar(450);
+        assertFalse(asimilador.tieneEscudoCompleto());
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        assertTrue(asimilador.tieneEscudoCompleto());
+
     }
 
 }

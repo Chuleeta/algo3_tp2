@@ -46,6 +46,7 @@ public class Extractor extends Edificio implements HabitanteMoho {
     public void construir()
     {
         estado = new EstadoConstruido();
+        zona = new ZonaNeutral();
         mapa.agregarZona(this.zona);
     }
 

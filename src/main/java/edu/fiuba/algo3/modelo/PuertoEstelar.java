@@ -1,19 +1,18 @@
 package edu.fiuba.algo3.modelo;
 
-public class Pilon extends Edificio{
-
-    private static int VIDA_ESCUDO_COMPLETA = 300;
-
+public class PuertoEstelar extends Edificio {
     private VidaEscudoProtoss vidaYEscudo;
 
-    public Pilon (Posicion posicion, Mapa mapa) {
+    public PuertoEstelar(Posicion posicion, Mapa mapa) {
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
         tiempo = 0;
-        TURNOS_PARA_CONSTRUIRSE = 5;
-        this.vidaYEscudo = new VidaEscudoProtoss(300, 300);
+        TURNOS_PARA_CONSTRUIRSE = 10;
+        this.vidaYEscudo = new VidaEscudoProtoss(600, 600);
     }
+
+    @Override
     public void pasarTiempo() {
         this.vidaYEscudo.repararEscudo();
     }
@@ -22,6 +21,7 @@ public class Pilon extends Edificio{
     @Override
     public void construir()
     {
+
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Pilon extends Edificio{
     }
 
     public void dañar(int daño){
-       this.vidaYEscudo.dañar(daño);
+        this.vidaYEscudo.dañar(daño);
     }
 
     public boolean tieneVidaCompleta() {

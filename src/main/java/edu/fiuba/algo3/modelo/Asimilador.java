@@ -4,7 +4,7 @@ public class Asimilador extends Edificio{
 
     private static int VIDA_COMPLETA = 500;
     private int gas;
-
+    private VidaEscudoProtoss vidaYEscudo;
     public Asimilador(Posicion posicion, Mapa mapa)
     { 
         this.gas = 0;
@@ -12,6 +12,7 @@ public class Asimilador extends Edificio{
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
         TURNOS_PARA_CONSTRUIRSE = 6;
+        this.vidaYEscudo = new VidaEscudoProtoss(450, 450);
     }
 
     @Override
@@ -22,7 +23,7 @@ public class Asimilador extends Edificio{
 
     public void pasarTiempo() 
     {
-
+        this.vidaYEscudo.repararEscudo();
     }
 
     public Integer obtenerGas() 
@@ -36,11 +37,15 @@ public class Asimilador extends Edificio{
     }
 
     public void dañar(int daño){
-        vida -= daño;
+        this.vidaYEscudo.dañar(daño);
     }
 
     public boolean tieneVidaCompleta(){
-        return vida == VIDA_COMPLETA;
+        return this.vidaYEscudo.tieneVidaCompleta();
+    }
+
+    public boolean tieneEscudoCompleto(){
+        return this.vidaYEscudo.tieneEscudoCompleto();
     }
 
 }

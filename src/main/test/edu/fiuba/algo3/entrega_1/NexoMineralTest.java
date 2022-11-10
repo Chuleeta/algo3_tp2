@@ -48,4 +48,21 @@ public class NexoMineralTest {
         }
         assertEquals(nexito.recogerMineral(), 2000); //no tenemos la menor idea de como se mina ni cuanto devuelve
     }
+
+    // Caso de uso 11
+    @Test
+    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() {
+
+        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
+        nexito.pasarTiempo();
+        nexito.pasarTiempo();
+        nexito.pasarTiempo();
+        nexito.pasarTiempo();
+        nexito.dañar(200);
+        assertFalse(nexito.tieneEscudoCompleto());
+        nexito.pasarTiempo();
+        nexito.pasarTiempo();
+        assertTrue(nexito.tieneEscudoCompleto());
+
+    }
 }
