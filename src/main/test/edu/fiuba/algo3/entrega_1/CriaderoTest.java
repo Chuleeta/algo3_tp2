@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Message;
 import edu.fiuba.algo3.modelo.Mineral;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Volcan;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -154,7 +155,7 @@ public class CriaderoTest {
         mapa.pasarTiempo();              
         mapa.pasarTiempo();
         criadero.dañar(550);
-        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(9, 14), mapa), mineral, gas));
+        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(9, 14), new Volcan(new Posicion(1, 1)), mapa), mineral, gas));
     }
 }
 

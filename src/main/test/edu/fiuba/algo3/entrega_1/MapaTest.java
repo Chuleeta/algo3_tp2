@@ -17,6 +17,7 @@ import edu.fiuba.algo3.modelo.Pilon;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.PuertoEstelar;
 import edu.fiuba.algo3.modelo.ReservaDeProduccion;
+import edu.fiuba.algo3.modelo.Volcan;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -41,8 +42,8 @@ public class MapaTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(8,8), mapa), mineral, gas));
-        assertFalse(mapa.agregarConstruccion(new Extractor(new Posicion(125,3), mapa), mineral, gas));
+        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(8,8), new Volcan(new Posicion(8, 8)), mapa), mineral, gas));
+        assertFalse(mapa.agregarConstruccion(new Extractor(new Posicion(125,3), new Volcan(new Posicion(125, 3)), mapa), mineral, gas));
     }
 
     @Test
@@ -76,9 +77,9 @@ public class MapaTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        assertFalse(mapa.agregarConstruccion(new Extractor(new Posicion(8, 8), mapa), mineral, gas)); 
+        assertFalse(mapa.agregarConstruccion(new Extractor(new Posicion(8, 8), new Volcan(new Posicion(8, 8)), mapa), mineral, gas)); 
         mapa.pasarTiempo();
-        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(8, 8), mapa), mineral, gas));
+        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(8, 8), new Volcan(new Posicion(8, 8)), mapa), mineral, gas));
     }
 
     @Test
@@ -93,7 +94,7 @@ public class MapaTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();              
         mapa.pasarTiempo();
-        assertFalse(mapa.agregarConstruccion(new Extractor(new Posicion(9, 15), mapa), mineral, gas));
+        assertFalse(mapa.agregarConstruccion(new Extractor(new Posicion(9, 16), new Volcan(new Posicion(9, 16)), mapa), mineral, gas));
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
@@ -102,7 +103,7 @@ public class MapaTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(3, 15), mapa), mineral, gas));
+        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(3, 15), new Volcan(new Posicion(3, 15)), mapa), mineral, gas));
     }
 
     @Test
@@ -117,7 +118,7 @@ public class MapaTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        assertFalse(mapa.agregarConstruccion(new Extractor(new Posicion(9,8), mapa), mineral, gas));
+        assertFalse(mapa.agregarConstruccion(new Extractor(new Posicion(9,8), new Volcan(new Posicion(9, 8)), mapa), mineral, gas));
     }
 
     @Test
@@ -198,7 +199,7 @@ public class MapaTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        assertFalse(mapa.agregarConstruccion(new NexoMineral(new Posicion(9,8), new Mena(new Posicion(9, 3)), mapa), mineral, gas));
+        assertFalse(mapa.agregarConstruccion(new NexoMineral(new Posicion(9,8), new Mena(new Posicion(9, 8)), mapa), mineral, gas));
     }
 
     @Test
@@ -232,7 +233,7 @@ public class MapaTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        assertFalse(mapa.agregarConstruccion(new Asimilador(new Posicion(9,8), mapa), mineral, gas));
+        assertFalse(mapa.agregarConstruccion(new Asimilador(new Posicion(9,8), new Volcan(new Posicion(9, 8)), mapa), mineral, gas));
     }
 
     @Test
@@ -298,7 +299,7 @@ public class MapaTest {
         Pilon pilon = new Pilon(new Posicion(9,9), mapa);
         mapa.agregarConstruccion(pilon, mineral, gas);
         Pilon pilon2 = new Pilon(new Posicion(9,7), mapa);
-        mapa.agregarConstruccion(pilon, mineral, gas);
+        mapa.agregarConstruccion(pilon2, mineral, gas);
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
@@ -324,6 +325,51 @@ public class MapaTest {
         mapa.pasarTiempo();
         assertFalse(acceso.estaActivado());
 
+    }
+
+    // Caso de uso 14
+    @Test
+    public void noSePuedeConstruirUnaEstructuraProtossSiHayMohoEnSuAreaEnergizada() 
+    {
+        Mineral mineral = new Mineral(10000);
+        GasVespeno gas = new GasVespeno(10000);
+        
+        Mapa mapa = new Mapa();
+        Pilon pilon = new Pilon(new Posicion(9,9), mapa);
+        mapa.agregarConstruccion(pilon, mineral, gas);
+        Criadero criadero = new Criadero(new Posicion(9,7), mapa);
+        mapa.agregarConstruccion(criadero, mineral, gas);
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        Construccion acceso = new Acceso(new Posicion(9,8), mapa);
+        assertFalse(mapa.agregarConstruccion(acceso, mineral, gas));
+    }
+
+    @Test
+    public void elMohoSePuedeExpandirPorUnAreaEnergizada() 
+    {
+        Mineral mineral = new Mineral(10000);
+        GasVespeno gas = new GasVespeno(10000);
+        
+        Mapa mapa = new Mapa();
+        Pilon pilon = new Pilon(new Posicion(9,9), mapa);
+        mapa.agregarConstruccion(pilon, mineral, gas);
+        Criadero criadero = new Criadero(new Posicion(9,20), mapa);
+        mapa.agregarConstruccion(criadero, mineral, gas);
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+
+        for(int i = 0; i < 40; i+=1){
+            mapa.pasarTiempo();
+        }
+        Construccion extractor = new Extractor(new Posicion(9,10), new Volcan(new Posicion(9, 10)), mapa);
+        assertTrue(mapa.agregarConstruccion(extractor, mineral, gas));
     }
 
 

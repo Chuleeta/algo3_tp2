@@ -6,8 +6,7 @@ public class GasVespeno extends Recurso{
         this.cantidad = cantidad;
     }
 
-    @Override
-    public void colectar(int cantidad) {
-        this.cantidad += cantidad;
+    public void colectarGas(Volcan volcan) {
+        this.cantidad += volcan.colectarGas();
     }
 }

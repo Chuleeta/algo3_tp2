@@ -29,6 +29,7 @@ public class Acceso extends Edificio{
 
     @Override
     public boolean habita(Zona zona) {
+        if(this.mapa.hayMohoEnPosicion(this.posicion)) return false;
         if(!this.zona.getClass().equals(zona.getClass())) return false;
         return zona.abarca(posicion);
     }

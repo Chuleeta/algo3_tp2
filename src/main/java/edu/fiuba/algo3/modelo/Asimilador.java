@@ -4,10 +4,11 @@ public class Asimilador extends Edificio{
 
     private static int VIDA_COMPLETA = 500;
     private GasVespeno gas;
+    private Volcan volcan;
 
     //private int gas;
     private VidaEscudoProtoss vidaYEscudo;
-    public Asimilador(Posicion posicion, Mapa mapa)
+    public Asimilador(Posicion posicion, Volcan volcan, Mapa mapa)
     { 
         gas = new GasVespeno(0);
         this.posicion = posicion;
@@ -15,6 +16,7 @@ public class Asimilador extends Edificio{
         this.mapa = mapa;
         this.vidaYEscudo = new VidaEscudoProtoss(450, 450);
         this.zona = new ZonaNeutral();
+        this.volcan = volcan;
     }
 
     @Override
@@ -26,9 +28,9 @@ public class Asimilador extends Edificio{
     public void pasarTiempo() 
     {
         tiempo += 1;
-        if (estado.puedeConstruirse(6, tiempo)) construir();
         this.vidaYEscudo.repararEscudo();
         this.encapsularGas();
+        if (estado.puedeConstruirse(6, tiempo)) construir();
     }
 
     public Integer obtenerGas()
@@ -37,7 +39,10 @@ public class Asimilador extends Edificio{
     }
 
     public void encapsularGas(){
-        if(estado.estaActivado()) gas.colectar(20);
+        if(estado.estaActivado()){
+            gas.colectarGas(volcan);
+            gas.colectarGas(volcan);  
+        }//hay q cambiar esto
     }
 
     @Override

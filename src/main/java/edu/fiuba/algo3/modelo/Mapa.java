@@ -28,6 +28,7 @@ public class Mapa {
         {
             construccion.pasarTiempo();
         }
+        this.filtrarConstrucciones();
     }
 
     private boolean verificarPosicionDisponible(Construccion construccion){
@@ -69,9 +70,13 @@ public class Mapa {
             if(!this.verificarPosicionDisponible(construccion))
                 construcciones_a_destruir.add(construccion);
         }
-        for (Construccion construccion:construcciones)
+        for (Construccion construccion:construcciones_a_destruir)
         {
             construccion.desactivar();
         }
+    }
+
+    public boolean hayMohoEnPosicion(Posicion posicion) {
+        return verificarPosicionDisponible(new Extractor(posicion, new Volcan(new Posicion(1,1)),this));
     }
 }

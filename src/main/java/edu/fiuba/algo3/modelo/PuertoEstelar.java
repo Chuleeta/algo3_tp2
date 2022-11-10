@@ -28,7 +28,9 @@ public class PuertoEstelar extends Edificio {
 
     @Override
     public boolean habita(Zona zona) {
-        return true;
+        if(this.mapa.hayMohoEnPosicion(this.posicion)) return false;
+        if(!this.zona.getClass().equals(zona.getClass())) return false;
+        return zona.abarca(posicion);
     }
 
     public void dañar(int daño){

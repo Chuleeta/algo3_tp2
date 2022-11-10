@@ -15,63 +15,63 @@ public class AsimiladorTest {
     @Test
     public void asimiladorConsigueVeinteDeGasEnUnTurno() 
     {
-        GasVespeno mockGasVespeno = mock(GasVespeno.class);
-        EstadoConstruido estado = mock(EstadoConstruido.class);
-        doCallRealMethod().when(estado).estaConstruido();
-        when(estado.puedeConstruirse(6,6)).thenReturn(true);
-        doCallRealMethod().when(mockGasVespeno).colectar(20);
-        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Mapa());
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
+        Mineral mineral = new Mineral(10000);
+        GasVespeno gas = new GasVespeno(10000);
+        Mapa mapa = new Mapa();
+        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), mapa);
+        mapa.agregarConstruccion(asimilador, mineral, gas);
+
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+
+        mapa.pasarTiempo();
+ 
         assertEquals(20, asimilador.obtenerGas());
     }
 
     @Test
     public void asimiladorEmpiezaSinGasRecolectado() 
     {
-        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Mapa());
+        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         assertEquals(0, asimilador.obtenerGas());    
     }
 
     @Test
     public void asimiladorConsigueVeinteDeGasEnCadaTurno() 
     {
-        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Mapa());
-        GasVespeno mockGasVespeno = mock(GasVespeno.class);
-        EstadoConstruido estado = mock(EstadoConstruido.class);
-        doCallRealMethod().when(estado).estaConstruido();
-        when(estado.puedeConstruirse(6,6)).thenReturn(true);
-        doCallRealMethod().when(mockGasVespeno).colectar(20);
-        asimilador.pasarTiempo();
-        assertEquals(0, asimilador.obtenerGas());
-        asimilador.pasarTiempo();
-        assertEquals(0, asimilador.obtenerGas());
-        asimilador.pasarTiempo();
-        assertEquals(0, asimilador.obtenerGas());
-        asimilador.pasarTiempo();
-        assertEquals(0, asimilador.obtenerGas());
-        asimilador.pasarTiempo();
-        assertEquals(0, asimilador.obtenerGas());
-        asimilador.pasarTiempo();
+        Mineral mineral = new Mineral(10000);
+        GasVespeno gas = new GasVespeno(10000);
+        Mapa mapa = new Mapa();
+        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), mapa);
+        mapa.agregarConstruccion(asimilador, mineral, gas);
+
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+
+        mapa.pasarTiempo();
         assertEquals(20, asimilador.obtenerGas());
-        asimilador.pasarTiempo();
+        mapa.pasarTiempo();
         assertEquals(40, asimilador.obtenerGas());
-        asimilador.pasarTiempo();
+        mapa.pasarTiempo();
         assertEquals(60, asimilador.obtenerGas());
-        asimilador.pasarTiempo();
+        mapa.pasarTiempo();
         assertEquals(80, asimilador.obtenerGas());
-        asimilador.pasarTiempo();
+        mapa.pasarTiempo();
         assertEquals(100, asimilador.obtenerGas());
     }
 
     // Caso de uso 11
     @Test
     public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() {
-        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Mapa());
+        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         asimilador.dañar(450);
         assertFalse(asimilador.tieneEscudoCompleto());
         asimilador.pasarTiempo();
@@ -85,7 +85,7 @@ public class AsimiladorTest {
     // Caso de uso 12
     @Test
     public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() {
-        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Mapa());
+        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         asimilador.dañar(500);
         assertFalse(asimilador.tieneEscudoCompleto());
         asimilador.pasarTiempo();

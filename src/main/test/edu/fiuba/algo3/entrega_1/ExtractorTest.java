@@ -16,7 +16,7 @@ public class ExtractorTest {
     @Test
     public void extractorSinZanganosNoGeneraGas() 
     {
-        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -31,7 +31,7 @@ public class ExtractorTest {
     public void extractorConUnZanganoGeneraDiezDeGas() 
     {
         //given
-        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         GasVespeno mockGasVespeno = mock(GasVespeno.class);
         EstadoConstruido estado = mock(EstadoConstruido.class);
         doCallRealMethod().when(estado).estaConstruido();
@@ -55,7 +55,7 @@ public class ExtractorTest {
     @Test
     public void extractorConDosZanganosGeneraVeinteDeGas() 
     {
-        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -71,7 +71,7 @@ public class ExtractorTest {
     @Test
     public void extractorConTresZanganosGeneraTreintaDeGas() 
     {
-        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -88,7 +88,7 @@ public class ExtractorTest {
     @Test
     public void extractorConCuatroZanganosGeneraTreintaDeGas() 
     {
-        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -106,7 +106,7 @@ public class ExtractorTest {
     @Test
     public void extractorNoAgregaZanganosSiNoSeConstruyo() 
     {
-        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.agregarZangano();
@@ -121,7 +121,7 @@ public class ExtractorTest {
     @Test
     public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos(){
         //given
-        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -141,7 +141,7 @@ public class ExtractorTest {
     @Test
     public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno(){
         //given
-        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -157,4 +157,38 @@ public class ExtractorTest {
         assertFalse(extractor.tieneVidaCompleta());
     }
 
+    // Caso de uso 15
+
+    @Test
+    public void unaVezAgotadoTodoElGasNoRecolectaMasDeEste() 
+    {
+        Mineral mineral = new Mineral(10000);
+        GasVespeno gas = new GasVespeno(10000);
+        Mapa mapa = new Mapa();
+        Criadero criadero = new Criadero(new Posicion(2, 1), mapa);
+        mapa.agregarConstruccion(criadero, mineral, gas);
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), mapa);
+        extractor.agregarZangano();
+        extractor.agregarZangano();
+        extractor.agregarZangano();
+        mapa.agregarConstruccion(extractor, mineral, gas);
+
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+
+        for(int i = 0; i < 550; i += 1){
+            mapa.pasarTiempo();
+        }
+
+        assertEquals(5000, extractor.obtenerGas());    
+    }
 }

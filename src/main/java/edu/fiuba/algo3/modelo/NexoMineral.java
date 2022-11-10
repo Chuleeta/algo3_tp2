@@ -21,9 +21,9 @@ public class NexoMineral extends Edificio{
     public void pasarTiempo()
     {
         tiempo += 1;
-        if (estado.puedeConstruirse(4, tiempo)) construir();
         if (this.estado.estaConstruido())
             minerales.minarMena(mena);
+        if (estado.puedeConstruirse(4, tiempo)) construir();
         //recogerMineral(50);
         this.vidaYEscudo.repararEscudo();
     }
