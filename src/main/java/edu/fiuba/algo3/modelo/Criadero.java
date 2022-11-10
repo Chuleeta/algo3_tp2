@@ -64,18 +64,14 @@ public class Criadero extends Edificio {
 
     public void pasarTiempo() {
         tiempo += 1;
-        regenerarVida();
-        if (tiempo % 2 == 0 && this.estado.estaConstruido())
-            zona.propagar();
-        if (larvas.size() < 3 && this.estado.estaConstruido())
-            larvas.add(new Larva());
         if (estado.puedeConstruirse(4, tiempo)){
             construir();
         }
-    }
-
-    private void regenerarVida() {
         this.vida.regenerarVida();
+        if (tiempo % 2 == 0 && this.estado.estaActivado())
+        zona.propagar();
+        if (larvas.size() < 3 && this.estado.estaActivado())
+        larvas.add(new Larva());
     }
 
     @Override

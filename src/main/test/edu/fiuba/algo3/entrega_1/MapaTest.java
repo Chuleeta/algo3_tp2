@@ -42,7 +42,7 @@ public class MapaTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(8,8), mapa), mineral, gas));
-        assertFalse(mapa.agregarConstruccion(new Extractor(new Posicion(9,3), mapa), mineral, gas));
+        assertFalse(mapa.agregarConstruccion(new Extractor(new Posicion(125,3), mapa), mineral, gas));
     }
 
     @Test

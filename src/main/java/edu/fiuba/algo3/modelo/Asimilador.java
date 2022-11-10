@@ -28,6 +28,7 @@ public class Asimilador extends Edificio{
         tiempo += 1;
         if (estado.puedeConstruirse(6, tiempo)) construir();
         this.vidaYEscudo.repararEscudo();
+        this.encapsularGas();
     }
 
     public Integer obtenerGas()
@@ -36,7 +37,7 @@ public class Asimilador extends Edificio{
     }
 
     public void encapsularGas(){
-        if(estado.estaConstruido()) gas.colectar(20);
+        if(estado.estaActivado()) gas.colectar(20);
     }
 
     @Override
