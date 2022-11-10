@@ -11,8 +11,8 @@ public class EstadoConstruido extends EstadoConstruccion {
         return false;
     }
 
-    /*public boolean estaConstruido(){
+    public boolean estaConstruido(){
         return true;
-    }*/
+    }
 
 }

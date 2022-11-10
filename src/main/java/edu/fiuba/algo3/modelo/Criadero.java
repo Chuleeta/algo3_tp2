@@ -16,6 +16,7 @@ public class Criadero extends Edificio {
         this.estado = new EstadoNoConstruido();
         larvas = new ArrayList<>();
         this.mapa = mapa;
+        zona = new ZonaNeutral();
         tiempo = 0;
         vida = 500;
         TURNOS_PARA_CONSTRUIRSE = 4;

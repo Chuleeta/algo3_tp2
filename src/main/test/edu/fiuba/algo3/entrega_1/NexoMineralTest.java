@@ -18,34 +18,34 @@ public class NexoMineralTest {
     @Test
     public void SeMinaUnMineralConUnNexoMineralYLoMinaExitosamente(){
         NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        assertEquals(nexito.recogerMineral(), 50); //no tenemos la menor idea de como se mina ni cuanto devuelve
+        nexito.pasarTiempo(50);
+        nexito.pasarTiempo(50);
+        nexito.pasarTiempo(50);
+        nexito.pasarTiempo(50);
+        //nexito.pasarTiempo();
+        assertEquals(nexito.obtenerMineral(), 50); //no tenemos la menor idea de como se mina ni cuanto devuelve
     }
 
     @Test
     public void nexoMineralNoConstruidoNoMina(){
         NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        assertEquals(nexito.recogerMineral(), 0); //no tenemos la menor idea de como se mina ni cuanto devuelve
+        nexito.pasarTiempo(50);
+        nexito.pasarTiempo(50);
+        nexito.pasarTiempo(50);
+        assertEquals(nexito.obtenerMineral(), 0); //no tenemos la menor idea de como se mina ni cuanto devuelve
     }
 
     @Test
     public void nexoMineralNoMinaMenaAgotada(){
         NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
+        nexito.pasarTiempo(50);
+        nexito.pasarTiempo(50);
+        nexito.pasarTiempo(50);
+        nexito.pasarTiempo(50);
         for (int i = 0; i < 70; i++)
         {
             nexito.pasarTiempo();
         }
-        assertEquals(nexito.recogerMineral(), 2000); //no tenemos la menor idea de como se mina ni cuanto devuelve
+        assertEquals(nexito.obtenerMineral(), 2050); //no tenemos la menor idea de como se mina ni cuanto devuelve
     }
 }

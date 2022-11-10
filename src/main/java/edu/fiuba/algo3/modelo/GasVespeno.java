@@ -7,7 +7,7 @@ public class GasVespeno extends Recurso{
     }
 
     @Override
-    public void colectar() {
-        super.colectar();
+    public void colectar(int cantidad) {
+        this.cantidad += cantidad;
     }
 }

@@ -1,16 +1,14 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Criadero;
-import edu.fiuba.algo3.modelo.Extractor;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Message;
-import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.*;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doCallRealMethod;
 
 public class ExtractorTest {
     
@@ -32,15 +30,25 @@ public class ExtractorTest {
     @Test
     public void extractorConUnZanganoGeneraDiezDeGas() 
     {
+        //given
         Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
+        GasVespeno mockGasVespeno = mock(GasVespeno.class);
+        EstadoConstruido estado = mock(EstadoConstruido.class);
+        doCallRealMethod().when(estado).estaConstruido();
+        when(estado.puedeConstruirse(6,6)).thenReturn(true);
+        doCallRealMethod().when(mockGasVespeno).colectar(10);
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
         extractor.pasarTiempo();
+
+        //when
         extractor.agregarZangano();
         extractor.pasarTiempo();
+
+        //then
         assertEquals(10, extractor.obtenerGas());    
     }
 

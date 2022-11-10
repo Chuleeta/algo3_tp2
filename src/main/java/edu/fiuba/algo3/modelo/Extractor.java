@@ -1,18 +1,22 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Extractor extends Edificio implements HabitanteMoho {
 
     private List<Zangano> zanganos;
     private static int VIDA_COMPLETA = 750;
-    private int gas;
+    private GasVespeno gas;
 
     public Extractor(Posicion posicion, Mapa mapa)
     {
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
+        zona = new ZonaNeutral();
+        zanganos = new ArrayList<>();
+        gas = new GasVespeno(0);
         TURNOS_PARA_CONSTRUIRSE = 6;
         tiempo = 0;
         vida = 750;
@@ -23,6 +27,7 @@ public class Extractor extends Edificio implements HabitanteMoho {
         tiempo += 1;
         regenerarVida();
         if (estado.puedeConstruirse(TURNOS_PARA_CONSTRUIRSE, tiempo)) construir();
+        extraerGas();
     }
 
     private void regenerarVida() {
@@ -30,9 +35,15 @@ public class Extractor extends Edificio implements HabitanteMoho {
         if(vida > VIDA_COMPLETA) vida = VIDA_COMPLETA;
     }
 
-    public int obtenerGas()
+    public Integer obtenerGas()
     {
-        return this.gas;
+        return gas.getCantidad();
+    }
+
+    public void extraerGas(){
+        for(Zangano zangano: zanganos){
+            if(estado.estaConstruido()) gas.colectar(10);
+        }
     }
 
     public void agregarZangano() 
@@ -46,7 +57,8 @@ public class Extractor extends Edificio implements HabitanteMoho {
     public void construir()
     {
         estado = new EstadoConstruido();
-        mapa.agregarZona(this.zona);
+        zona = new ZonaNeutral();
+        mapa.agregarZona(zona);
     }
 
     @Override

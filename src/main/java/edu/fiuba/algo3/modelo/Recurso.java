@@ -9,7 +9,7 @@ public abstract class Recurso implements Colectable{
     }
 
     @Override
-    public void colectar() {
+    public void colectar(int cantidad) {
 
     }
 }

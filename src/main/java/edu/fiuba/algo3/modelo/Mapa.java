@@ -15,7 +15,7 @@ public class Mapa {
     }
 
     public boolean agregarConstruccion(Construccion construccion){
-        if(!this.verificarPosicionDisponible(construccion)){
+        if(!verificarPosicionDisponible(construccion)){
             return false;
         }
         construcciones.add(construccion);

@@ -91,16 +91,14 @@ public class CriaderoTest {
         criadero.pasarTiempo();
         assertFalse(criadero.llenoDeLarvas());
         criadero.pasarTiempo();
-        assertFalse(criadero.llenoDeLarvas());
-        criadero.pasarTiempo();
         assertTrue(criadero.llenoDeLarvas());
+        criadero.pasarTiempo();
+        assertEquals(criadero.getLarvas().size(), 3);
     }
 
     @Test
     public void noSeEngendraZanganoSinConstruirseCriadero() throws CriaderoNoDisponibleException{
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
-        criadero.pasarTiempo();
-        criadero.pasarTiempo();
         assertThrows(CriaderoNoDisponibleException.class, ()->{ criadero.engendrarZangano(); });
     }
 

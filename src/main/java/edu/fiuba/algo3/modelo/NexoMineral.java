@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 public class NexoMineral extends Edificio{
 
-    private int minerales;
+    private Mineral minerales;
     private Mena mena;
     private static int VIDA_COMPLETA = 500;
 
@@ -10,29 +10,47 @@ public class NexoMineral extends Edificio{
     {
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
-        this.minerales = 0;
+        minerales = new Mineral(0);
         this.mena = mena;
         this.mapa = mapa;
         TURNOS_PARA_CONSTRUIRSE = 4;
         vida = 500;
     }
 
-    public void pasarTiempo() 
+    public void pasarTiempo(int cantidad)
     {
         tiempo += 1;
+        regenerarVida();
+        if (estado.puedeConstruirse(TURNOS_PARA_CONSTRUIRSE, tiempo)) construir();
+        recogerMineral(cantidad);
+    }
 
+    public void pasarTiempo(){
+        tiempo += 1;
+        minerales.minarMena(mena);
     }
 
     @Override
     public void construir()
     {
-        this.minerales = 0;
-        return;
+        estado = new EstadoConstruido();
+        zona = new ZonaNeutral();
+        mapa.agregarZona(zona);
     }
 
-    public int recogerMineral()
+    private void regenerarVida() {
+        vida += 100;
+        if(vida > VIDA_COMPLETA) vida = VIDA_COMPLETA;
+    }
+
+    public Integer obtenerMineral()
     {
-        return this.minerales;
+        return minerales.getCantidad();
+    }
+
+    public void recogerMineral(int cantidad)
+    {
+        if(estado.estaConstruido()) minerales.colectar(cantidad);
     }
 
     @Override
