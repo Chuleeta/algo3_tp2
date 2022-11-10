@@ -65,4 +65,33 @@ public class AsimiladorTest {
         assertEquals(100, asimilador.obtenerGas());
     }
 
+    // Caso de uso 11
+    @Test
+    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() {
+        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Mapa());
+        asimilador.dañar(450);
+        assertFalse(asimilador.tieneEscudoCompleto());
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        assertTrue(asimilador.tieneEscudoCompleto());
+    }
+
+    // Caso de uso 12
+    @Test
+    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() {
+        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Mapa());
+        asimilador.dañar(500);
+        assertFalse(asimilador.tieneEscudoCompleto());
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        assertTrue(asimilador.tieneEscudoCompleto());
+        assertFalse(asimilador.tieneVidaCompleta());
+    }
+
 }

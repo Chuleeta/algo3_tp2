@@ -8,6 +8,8 @@ public class Extractor extends Edificio implements HabitanteMoho {
     private List<Zangano> zanganos;
     private static int VIDA_COMPLETA = 750;
     private GasVespeno gas;
+    //private int gas;
+    private VidaZerg vida;
 
     public Extractor(Posicion posicion, Mapa mapa)
     {
@@ -18,7 +20,7 @@ public class Extractor extends Edificio implements HabitanteMoho {
         zanganos = new ArrayList<>();
         gas = new GasVespeno(0);
         tiempo = 0;
-        vida = 750;
+        this.vida = new VidaZerg(VIDA_COMPLETA);
     }
 
     public void pasarTiempo()
@@ -30,8 +32,7 @@ public class Extractor extends Edificio implements HabitanteMoho {
     }
 
     private void regenerarVida() {
-        vida += 100;
-        if(vida > VIDA_COMPLETA) vida = VIDA_COMPLETA;
+        this.vida.regenerarVida();
     }
 
     public Integer obtenerGas()
@@ -71,11 +72,11 @@ public class Extractor extends Edificio implements HabitanteMoho {
     }*/
 
     public void dañar(int daño){
-        vida -= daño;
+        this.vida.dañar(daño);
     }
 
     public boolean tieneVidaCompleta(){
-        return vida == VIDA_COMPLETA;
+        return this.vida.tieneVidaCompleta();
     }
 
 }

@@ -1,48 +1,43 @@
 package edu.fiuba.algo3.modelo;
 
-public class Acceso extends Edificio{
-
-    private static int VIDA_COMPLETA = 500;
+public class PuertoEstelar extends Edificio {
     private VidaEscudoProtoss vidaYEscudo;
 
-    public Acceso(Posicion posicion, Mapa mapa)
-    {
+    public PuertoEstelar(Posicion posicion, Mapa mapa) {
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
         tiempo = 0;
-        this.zona = new ZonaEnergia(this.posicion);
-        this.vidaYEscudo = new VidaEscudoProtoss(500, 500);
+        TURNOS_PARA_CONSTRUIRSE = 10;
+        this.vidaYEscudo = new VidaEscudoProtoss(600, 600);
     }
 
+    @Override
     public void pasarTiempo() {
-        this.tiempo += 1;
-        if (estado.puedeConstruirse(8, tiempo)) construir();
         this.vidaYEscudo.repararEscudo();
     }
+
 
     @Override
     public void construir()
     {
-        estado = new EstadoConstruido();
-        //mapa.agregarZona(zona);
+
     }
 
     @Override
     public boolean habita(Zona zona) {
-        if(!this.zona.getClass().equals(zona.getClass())) return false;
-        return zona.abarca(posicion);
+        return true;
     }
 
     public void dañar(int daño){
         this.vidaYEscudo.dañar(daño);
     }
 
-    public boolean tieneVidaCompleta(){
+    public boolean tieneVidaCompleta() {
         return this.vidaYEscudo.tieneVidaCompleta();
     }
-    public boolean tieneEscudoCompleto(){
+
+    public boolean tieneEscudoCompleto() {
         return this.vidaYEscudo.tieneEscudoCompleto();
     }
-
 }

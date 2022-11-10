@@ -7,7 +7,6 @@ public abstract class Edificio implements Construccion{
     public EstadoConstruccion estado;
     public Zona zona;
     public int tiempo;
-    public int vida;
 
     @Override
     public abstract void construir();

@@ -4,7 +4,8 @@ public class NexoMineral extends Edificio{
 
     private Mineral minerales;
     private Mena mena;
-    private static int VIDA_COMPLETA = 500;
+    private static int VIDA_ESCUDO_COMPLETO = 250;
+    private VidaEscudoProtoss vidaYEscudo;
 
     public NexoMineral(Posicion posicion, Mena mena, Mapa mapa)
     {
@@ -13,20 +14,16 @@ public class NexoMineral extends Edificio{
         minerales = new Mineral(0);
         this.mena = mena;
         this.mapa = mapa;
-        vida = 500;
+        this.vidaYEscudo = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
     }
 
     public void pasarTiempo(int cantidad)
     {
         tiempo += 1;
-        regenerarVida();
         if (estado.puedeConstruirse(4, tiempo)) construir();
         recogerMineral(cantidad);
-    }
-
-    public void pasarTiempo(){
-        tiempo += 1;
         minerales.minarMena(mena);
+        this.vidaYEscudo.repararEscudo();
     }
 
     @Override
@@ -35,11 +32,6 @@ public class NexoMineral extends Edificio{
         estado = new EstadoConstruido();
         zona = new ZonaNeutral();
         mapa.agregarZona(zona);
-    }
-
-    private void regenerarVida() {
-        vida += 100;
-        if(vida > VIDA_COMPLETA) vida = VIDA_COMPLETA;
     }
 
     public Integer obtenerMineral()
@@ -57,11 +49,15 @@ public class NexoMineral extends Edificio{
         return this.zona.equals(zona);
     }
 
+
     public void dañar(int daño){
-        vida -= daño;
+        this.vidaYEscudo.dañar(daño);
     }
 
     public boolean tieneVidaCompleta(){
-        return vida == VIDA_COMPLETA;
+        return this.vidaYEscudo.tieneVidaCompleta();
+    }
+    public boolean tieneEscudoCompleto(){
+        return this.vidaYEscudo.tieneEscudoCompleto();
     }
 }
