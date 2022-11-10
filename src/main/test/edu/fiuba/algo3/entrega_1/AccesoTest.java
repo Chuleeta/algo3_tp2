@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AccesoTest {
 
-    // caso 11
+    //Caso de uso 12
     @Test
     public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() {
         Acceso acceso = new Acceso(new Posicion(1, 1), new Mapa());
@@ -24,6 +24,25 @@ public class AccesoTest {
         acceso.pasarTiempo();
         acceso.pasarTiempo();
         assertTrue(acceso.tieneEscudoCompleto());
+    }
+
+    //Caso de uso 12
+    @Test
+    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() {
+        Acceso acceso = new Acceso(new Posicion(1, 1), new Mapa());
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.dañar(550);
+        assertFalse(acceso.tieneEscudoCompleto());
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        assertTrue(acceso.tieneEscudoCompleto());
+        assertFalse(acceso.tieneVidaCompleta());
     }
 
 }

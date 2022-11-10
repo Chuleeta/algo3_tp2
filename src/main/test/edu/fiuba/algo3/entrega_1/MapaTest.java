@@ -1,11 +1,9 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Acceso;
 import edu.fiuba.algo3.modelo.Criadero;
 import edu.fiuba.algo3.modelo.Extractor;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Message;
-import edu.fiuba.algo3.modelo.Pilon;
 import edu.fiuba.algo3.modelo.Posicion;
 
 import org.junit.jupiter.api.Test;
@@ -32,22 +30,22 @@ public class MapaTest {
         assertFalse(mapa.agregarConstruccion(new Extractor(new Posicion(9,3), mapa)));
     }
 
-    @Test
-    public void noSePuedeConstruirAccesoFueraDeEnergia() 
-    {
-        Mapa mapa = new Mapa();
-        Pilon pilon = new Pilon(new Posicion(9,9), mapa);
-        mapa.agregarConstruccion(pilon);
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        assertTrue(mapa.agregarConstruccion(new Acceso(new Posicion(8, 8), mapa))); 
-        assertFalse(mapa.agregarConstruccion(new Acceso(new Posicion(1, 1), mapa)));
-    }
+    // @Test
+    // public void noSePuedeConstruirAccesoFueraDeEnergia() 
+    // {
+    //     Mapa mapa = new Mapa();
+    //     Pilon pilon = new Pilon(new Posicion(9,9));
+    //     mapa.agregarConstruccion(pilon);
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     assertTrue(mapa.agregarConstruccion(new Acceso(new Posicion(8, 8), mapa))); 
+    //     assertFalse(mapa.agregarConstruccion(new Acceso(new Posicion(1, 1), mapa)));
+    // }
 
-    //Caso de uso 6
+    // Caso de uso 6
 
     @Test
     public void sePropagaElMohoAlConstruirse() 
@@ -76,10 +74,16 @@ public class MapaTest {
         assertFalse(mapa.agregarConstruccion(new Extractor(new Posicion(9, 15), mapa)));
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(9, 15), mapa)));
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(3, 15), mapa)));
     }
 
-    // Caso de uso 9
+    //Caso de uso 9
 
     // @Test
     // public void hayUnaConstruccionConDosPilonesSeDestruyeUnoDeEstosPeroLaEstructuraSigueFuncionando(){

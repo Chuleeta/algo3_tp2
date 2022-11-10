@@ -21,6 +21,22 @@ public class PilonTest {
         pilon.pasarTiempo();
         pilon.pasarTiempo();
         assertTrue(pilon.tieneEscudoCompleto());
+    }
 
+    // Caso de uso 12
+    @Test
+    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() {
+        Pilon pilon = new Pilon(new Posicion(1, 1), new Mapa());
+        pilon.pasarTiempo();
+        pilon.pasarTiempo();
+        pilon.pasarTiempo();
+        pilon.pasarTiempo();
+        pilon.dañar(350);
+        assertFalse(pilon.tieneEscudoCompleto());
+        pilon.pasarTiempo();
+        pilon.pasarTiempo();
+        pilon.pasarTiempo();
+        assertTrue(pilon.tieneEscudoCompleto());
+        assertFalse(pilon.tieneVidaCompleta());
     }
 }

@@ -32,9 +32,8 @@ public class VidaEscudoProtoss {
         }
     }
     public void repararEscudo() {
-
         this.escudo += 100;
-        if (this.escudo > 250) {
+        if (this.escudo > this.vidaCompleta) {
             this.escudo = this.escudoCompleto;
         }
     }

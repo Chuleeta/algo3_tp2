@@ -5,7 +5,6 @@ public class NexoMineral extends Edificio{
     private int minerales;
     private Mena mena;
     private static int VIDA_ESCUDO_COMPLETO = 250;
-    private int escudo;
     private VidaEscudoProtoss vidaYEscudo;
 
     public NexoMineral(Posicion posicion, Mena mena, Mapa mapa)
@@ -15,9 +14,8 @@ public class NexoMineral extends Edificio{
         this.minerales = 0;
         this.mena = mena;
         this.mapa = mapa;
-        this.vidaYEscudo = new VidaEscudoProtoss(250, 250);
+        this.vidaYEscudo = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
         TURNOS_PARA_CONSTRUIRSE = 4;
-        vida = 500;
     }
 
     public void pasarTiempo() 

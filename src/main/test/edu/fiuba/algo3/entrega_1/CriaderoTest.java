@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CriaderoTest {
 
     //Comienzo caso de uso 1
-
     @Test
     public void criaderoSeInicializaConTresLarvas() 
     {

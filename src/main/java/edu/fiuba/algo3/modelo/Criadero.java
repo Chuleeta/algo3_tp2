@@ -9,6 +9,7 @@ public class Criadero extends Edificio {
     private List<Larva> larvas;
     private static int COSTO_DE_CONSTRUCCION = 50;
     private static int VIDA_COMPLETA = 500;
+    private VidaZerg vida;
 
     public Criadero(Posicion posicion, Mapa mapa) {
         //validarMinerales(recursosDelJugador);
@@ -17,9 +18,8 @@ public class Criadero extends Edificio {
         larvas = new ArrayList<>();
         this.mapa = mapa;
         tiempo = 0;
-        vida = 500;
         TURNOS_PARA_CONSTRUIRSE = 4;
-
+        this.vida = new VidaZerg(VIDA_COMPLETA);
     }
 
     private void validarMinerales(int recursosDelJugador) throws RecursosInsuficientesException{
@@ -73,8 +73,7 @@ public class Criadero extends Edificio {
     }
 
     private void regenerarVida() {
-        vida += 100;
-        if(vida > VIDA_COMPLETA) vida = VIDA_COMPLETA;
+        this.vida.regenerarVida();
     }
 
     @Override
@@ -83,10 +82,10 @@ public class Criadero extends Edificio {
     }
 
     public void dañar(int daño){
-        vida -= daño;
+        this.vida.dañar(daño);
     }
 
     public boolean tieneVidaCompleta(){
-        return vida == VIDA_COMPLETA;
+        return this.vida.tieneVidaCompleta();
     }
 }

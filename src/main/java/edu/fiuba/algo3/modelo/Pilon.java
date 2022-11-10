@@ -22,6 +22,8 @@ public class Pilon extends Edificio{
     @Override
     public void construir()
     {
+        zona = new ZonaEnergia(this.posicion);
+        mapa.agregarZona(this.zona);
     }
 
     @Override

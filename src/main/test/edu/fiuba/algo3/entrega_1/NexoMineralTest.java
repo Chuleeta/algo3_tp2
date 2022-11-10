@@ -65,4 +65,22 @@ public class NexoMineralTest {
         assertTrue(nexito.tieneEscudoCompleto());
 
     }
+
+    // Caso de uso 12
+    @Test
+    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() {
+
+        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
+        nexito.pasarTiempo();
+        nexito.pasarTiempo();
+        nexito.pasarTiempo();
+        nexito.pasarTiempo();
+        nexito.dañar(300);
+        assertFalse(nexito.tieneEscudoCompleto());
+        nexito.pasarTiempo();
+        nexito.pasarTiempo();
+        nexito.pasarTiempo();
+        assertTrue(nexito.tieneEscudoCompleto());
+        assertFalse(nexito.tieneVidaCompleta());
+    }
 }
