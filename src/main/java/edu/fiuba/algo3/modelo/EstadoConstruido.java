@@ -2,23 +2,17 @@ package edu.fiuba.algo3.modelo;
 
 public class EstadoConstruido extends EstadoConstruccion {
 
-    private int tiempo;
-
     public EstadoConstruido() {
-        this.tiempo = 0;
+
     }
 
-    public EstadoConstruido construir() {
-        return this;
+    @Override
+    public boolean puedeConstruirse(int tiempoDeConstruccion, int turnos) {
+        return false;
     }
 
-    public int pasarTiempo(int larvas) {
-        if ((this.tiempo == 0) || (larvas == 3)) {
-            return 3;
-        }
-
-        this.tiempo += 1;
-        return 1;
-    }
+    /*public boolean estaConstruido(){
+        return true;
+    }*/
 
 }

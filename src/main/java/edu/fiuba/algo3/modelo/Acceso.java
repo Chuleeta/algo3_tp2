@@ -1,38 +1,31 @@
 package edu.fiuba.algo3.modelo;
 
-public class Asimilador extends Edificio{
+public class Acceso extends Edificio{
 
     private static int VIDA_COMPLETA = 500;
-    private int gas;
 
-    public Asimilador(Posicion posicion, Mapa mapa)
-    { 
-        this.gas = 0;
+    public Acceso(Posicion posicion, Mapa mapa)
+    {
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
-        TURNOS_PARA_CONSTRUIRSE = 6;
+        tiempo = 0;
+        TURNOS_PARA_CONSTRUIRSE = 8;
+    }
+
+    public void pasarTiempo() {
+
     }
 
     @Override
-    public void construir() 
+    public void construir()
     {
-
-    }
-
-    public void pasarTiempo() 
-    {
-
-    }
-
-    public Integer obtenerGas() 
-    {
-        return this.gas;
     }
 
     @Override
     public boolean habita(Zona zona) {
-        return true;
+        if(!this.zona.equals(zona)) return false;
+        return zona.abarca(posicion);
     }
 
     public void dañar(int daño){

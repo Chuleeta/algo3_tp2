@@ -1,7 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.Criadero;
-import edu.fiuba.algo3.modelo.CriaderoVacioNoEngendraException;
+import edu.fiuba.algo3.modelo.CriaderoNoDisponibleException;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Message;
 import edu.fiuba.algo3.modelo.Posicion;
 
@@ -18,7 +19,7 @@ public class CriaderoTest {
     @Test
     public void criaderoSeInicializaConTresLarvas() 
     {
-        Criadero criadero = new Criadero(new Posicion(1, 1));
+        Criadero criadero = new Criadero(new Posicion(1, 1), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -27,9 +28,9 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seEngendraUnZanganoEnCriaderoYDisminuyeLarva() throws CriaderoVacioNoEngendraException 
+    public void seEngendraUnZanganoEnCriaderoYDisminuyeLarva() throws CriaderoNoDisponibleException
     {
-        Criadero criadero = new Criadero(new Posicion(2,2));
+        Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -39,9 +40,9 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seRegeneraUnaLarvaLuegoDeUnTiempo() throws CriaderoVacioNoEngendraException 
+    public void seRegeneraUnaLarvaLuegoDeUnTiempo() throws CriaderoNoDisponibleException
     {
-        Criadero criadero = new Criadero(new Posicion(2,2));
+        Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -52,8 +53,8 @@ public class CriaderoTest {
     }
 
     @Test
-    public void noSePuedeEngendrarMasDeTresZanganos() throws CriaderoVacioNoEngendraException {
-        Criadero criadero = new Criadero(new Posicion(2,2));
+    public void noSePuedeEngendrarMasDeTresZanganos() throws CriaderoNoDisponibleException {
+        Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -61,12 +62,12 @@ public class CriaderoTest {
         criadero.engendrarZangano();
         criadero.engendrarZangano();
         criadero.engendrarZangano();
-        assertThrows(CriaderoVacioNoEngendraException.class, ()->{ criadero.engendrarZangano(); });
+        assertThrows(CriaderoNoDisponibleException.class, ()->{ criadero.engendrarZangano(); });
     }
 
     @Test
-    public void seConsumenTodasLasLarvasYSeRegeneranDespsDeTresTurnos() throws CriaderoVacioNoEngendraException {
-        Criadero criadero = new Criadero(new Posicion(2,2));
+    public void seConsumenTodasLasLarvasYSeRegeneranDespsDeTresTurnos() throws CriaderoNoDisponibleException {
+        Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -84,7 +85,7 @@ public class CriaderoTest {
 
     @Test
     public void seConstruyeEnElCuartoTurno() {
-        Criadero criadero = new Criadero(new Posicion(2,2));
+        Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         assertFalse(criadero.llenoDeLarvas());
         criadero.pasarTiempo();
@@ -93,6 +94,14 @@ public class CriaderoTest {
         assertFalse(criadero.llenoDeLarvas());
         criadero.pasarTiempo();
         assertTrue(criadero.llenoDeLarvas());
+    }
+
+    @Test
+    public void noSeEngendraZanganoSinConstruirseCriadero() throws CriaderoNoDisponibleException{
+        Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        assertThrows(CriaderoNoDisponibleException.class, ()->{ criadero.engendrarZangano(); });
     }
 }
 

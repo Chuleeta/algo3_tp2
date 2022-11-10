@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.Asimilador;
 import edu.fiuba.algo3.modelo.Criadero;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Message;
 import edu.fiuba.algo3.modelo.Posicion;
 
@@ -16,7 +17,13 @@ public class AsimiladorTest {
     @Test
     public void asimiladorConsigueVeinteDeGasEnUnTurno() 
     {
-        Asimilador asimilador = new Asimilador(new Posicion(1, 1));
+        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Mapa());
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
         asimilador.pasarTiempo();
         assertEquals(20, asimilador.obtenerGas());    
     }
@@ -24,14 +31,26 @@ public class AsimiladorTest {
     @Test
     public void asimiladorEmpiezaSinGasRecolectado() 
     {
-        Asimilador asimilador = new Asimilador(new Posicion(1, 1));
+        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Mapa());
         assertEquals(0, asimilador.obtenerGas());    
     }
 
     @Test
     public void asimiladorConsigueVeinteDeGasEnCadaTurno() 
     {
-        Asimilador asimilador = new Asimilador(new Posicion(1, 1));
+        Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Mapa());
+        asimilador.pasarTiempo();
+        assertEquals(0, asimilador.obtenerGas());
+        asimilador.pasarTiempo();
+        assertEquals(0, asimilador.obtenerGas());
+        asimilador.pasarTiempo();
+        assertEquals(0, asimilador.obtenerGas());
+        asimilador.pasarTiempo();
+        assertEquals(0, asimilador.obtenerGas());
+        asimilador.pasarTiempo();
+        assertEquals(0, asimilador.obtenerGas());
+        asimilador.pasarTiempo();
+        assertEquals(0, asimilador.obtenerGas());
         asimilador.pasarTiempo();
         assertEquals(20, asimilador.obtenerGas());
         asimilador.pasarTiempo();
