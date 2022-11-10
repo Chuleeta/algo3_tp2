@@ -16,11 +16,9 @@ public class Criadero extends Edificio {
         this.estado = new EstadoNoConstruido();
         larvas = new ArrayList<>();
         this.mapa = mapa;
-        zona = new ZonaNeutral();
+        zona = mapa.getZonaNeutral();
         tiempo = 0;
         vida = 500;
-        TURNOS_PARA_CONSTRUIRSE = 4;
-
     }
 
     private void validarMinerales(int recursosDelJugador) throws RecursosInsuficientesException{
@@ -66,11 +64,13 @@ public class Criadero extends Edificio {
     public void pasarTiempo() {
         tiempo += 1;
         regenerarVida();
-        if (tiempo % 2 == 0 && tiempo > TURNOS_PARA_CONSTRUIRSE)
+        if (tiempo % 2 == 0 && tiempo > 4)
             zona.propagar();
         if (larvas.size() < 3)
             larvas.add(new Larva());
-        if (estado.puedeConstruirse(TURNOS_PARA_CONSTRUIRSE, tiempo)) construir();
+        if (estado.puedeConstruirse(4, tiempo)){
+            construir();
+        }
     }
 
     private void regenerarVida() {

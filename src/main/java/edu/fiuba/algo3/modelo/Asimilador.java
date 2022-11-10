@@ -11,7 +11,6 @@ public class Asimilador extends Edificio{
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
-        TURNOS_PARA_CONSTRUIRSE = 6;
         vida = 900;
     }
 
@@ -24,7 +23,7 @@ public class Asimilador extends Edificio{
     public void pasarTiempo() 
     {
         tiempo += 1;
-        if (estado.puedeConstruirse(TURNOS_PARA_CONSTRUIRSE, tiempo)) construir();
+        if (estado.puedeConstruirse(6, tiempo)) construir();
         encapsularGas();
     }
 

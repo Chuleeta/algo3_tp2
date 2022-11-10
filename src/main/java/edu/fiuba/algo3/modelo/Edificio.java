@@ -8,7 +8,6 @@ public abstract class Edificio implements Construccion{
     public Zona zona;
     public int tiempo;
     public int vida;
-    public static int TURNOS_PARA_CONSTRUIRSE;
 
     @Override
     public abstract void construir();

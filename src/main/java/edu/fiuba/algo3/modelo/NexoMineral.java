@@ -13,7 +13,6 @@ public class NexoMineral extends Edificio{
         minerales = new Mineral(0);
         this.mena = mena;
         this.mapa = mapa;
-        TURNOS_PARA_CONSTRUIRSE = 4;
         vida = 500;
     }
 
@@ -21,7 +20,7 @@ public class NexoMineral extends Edificio{
     {
         tiempo += 1;
         regenerarVida();
-        if (estado.puedeConstruirse(TURNOS_PARA_CONSTRUIRSE, tiempo)) construir();
+        if (estado.puedeConstruirse(4, tiempo)) construir();
         recogerMineral(cantidad);
     }
 

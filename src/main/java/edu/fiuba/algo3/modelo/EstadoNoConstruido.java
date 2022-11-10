@@ -8,7 +8,7 @@ public class EstadoNoConstruido extends EstadoConstruccion {
     }
 
     public boolean puedeConstruirse(int tiempoDeConstruccion, int turnosInicializado) {
-        return tiempoDeConstruccion == turnosInicializado;
+        return (tiempoDeConstruccion == turnosInicializado);
     }
 
     public boolean estaConstruido()

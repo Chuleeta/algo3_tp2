@@ -9,17 +9,20 @@ public class Pilon extends Edificio{
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
         tiempo = 0;
-        TURNOS_PARA_CONSTRUIRSE = 5;
+        this.zona = mapa.getZonaNeutral();
     }
 
     public void pasarTiempo() {
-
+        tiempo += 1;
+        if (estado.puedeConstruirse(5, tiempo)) construir();
     }
 
     @Override
     public void construir()
     {
-
+        this.zona = new ZonaEnergia(this.posicion);
+        mapa.agregarZona(this.zona);
+        this.estado = new EstadoConstruido();
     }
 
     @Override

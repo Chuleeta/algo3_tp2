@@ -42,4 +42,8 @@ public class Mapa {
     public void agregarZona(Zona zona){
         zonas.add(zona);
     }
+
+    public Zona getZonaNeutral() {
+        return this.zonas.get(0);
+    }
 }

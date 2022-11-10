@@ -10,21 +10,24 @@ public class Acceso extends Edificio{
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
         tiempo = 0;
-        TURNOS_PARA_CONSTRUIRSE = 8;
+        this.zona = new ZonaEnergia(this.posicion);
     }
 
     public void pasarTiempo() {
-
+        this.tiempo += 1;
+        if (estado.puedeConstruirse(8, tiempo)) construir();
     }
 
     @Override
     public void construir()
     {
+        estado = new EstadoConstruido();
+        //mapa.agregarZona(zona);
     }
 
     @Override
     public boolean habita(Zona zona) {
-        if(!this.zona.equals(zona)) return false;
+        if(!this.zona.getClass().equals(zona.getClass())) return false;
         return zona.abarca(posicion);
     }
 

@@ -14,10 +14,9 @@ public class Extractor extends Edificio implements HabitanteMoho {
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
-        zona = new ZonaNeutral();
+        zona = new ZonaMoho(this.posicion);
         zanganos = new ArrayList<>();
         gas = new GasVespeno(0);
-        TURNOS_PARA_CONSTRUIRSE = 6;
         tiempo = 0;
         vida = 750;
     }
@@ -26,7 +25,7 @@ public class Extractor extends Edificio implements HabitanteMoho {
     {
         tiempo += 1;
         regenerarVida();
-        if (estado.puedeConstruirse(TURNOS_PARA_CONSTRUIRSE, tiempo)) construir();
+        if (estado.puedeConstruirse(6, tiempo)) construir();
         extraerGas();
     }
 
@@ -57,14 +56,12 @@ public class Extractor extends Edificio implements HabitanteMoho {
     public void construir()
     {
         estado = new EstadoConstruido();
-        zona = new ZonaNeutral();
-        mapa.agregarZona(zona);
+        //mapa.agregarZona(zona);
     }
 
     @Override
     public boolean habita(Zona zona) {
-        //return this.zona.equals(zona);
-        if(!this.zona.equals(zona)) return false;
+        if(!this.zona.getClass().equals(zona.getClass())) return false;
         return zona.abarca(posicion);
     }
 
