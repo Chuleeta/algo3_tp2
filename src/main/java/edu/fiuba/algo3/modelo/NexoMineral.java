@@ -14,10 +14,12 @@ public class NexoMineral extends Edificio{
         this.mena = mena;
         this.mapa = mapa;
         TURNOS_PARA_CONSTRUIRSE = 4;
+        vida = 500;
     }
 
     public void pasarTiempo() 
     {
+        tiempo += 1;
 
     }
 

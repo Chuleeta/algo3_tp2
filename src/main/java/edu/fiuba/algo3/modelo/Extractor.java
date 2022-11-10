@@ -5,7 +5,7 @@ import java.util.List;
 public class Extractor extends Edificio implements HabitanteMoho {
 
     private List<Zangano> zanganos;
-    private static int VIDA_COMPLETA = 100;
+    private static int VIDA_COMPLETA = 750;
     private int gas;
 
     public Extractor(Posicion posicion, Mapa mapa)
@@ -15,10 +15,19 @@ public class Extractor extends Edificio implements HabitanteMoho {
         this.mapa = mapa;
         TURNOS_PARA_CONSTRUIRSE = 6;
         tiempo = 0;
+        vida = 750;
     }
 
-    public void pasarTiempo() 
+    public void pasarTiempo()
     {
+        tiempo += 1;
+        regenerarVida();
+        if (estado.puedeConstruirse(TURNOS_PARA_CONSTRUIRSE, tiempo)) construir();
+    }
+
+    private void regenerarVida() {
+        vida += 100;
+        if(vida > VIDA_COMPLETA) vida = VIDA_COMPLETA;
     }
 
     public int obtenerGas()
@@ -36,6 +45,8 @@ public class Extractor extends Edificio implements HabitanteMoho {
     @Override
     public void construir()
     {
+        estado = new EstadoConstruido();
+        mapa.agregarZona(this.zona);
     }
 
     @Override

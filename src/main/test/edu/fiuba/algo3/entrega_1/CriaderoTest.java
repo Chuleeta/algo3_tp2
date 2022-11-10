@@ -103,5 +103,41 @@ public class CriaderoTest {
         criadero.pasarTiempo();
         assertThrows(CriaderoNoDisponibleException.class, ()->{ criadero.engendrarZangano(); });
     }
+
+    //caso de uso 10
+    @Test
+    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos(){
+        //given
+        Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+
+        //when
+        criadero.dañar(200);
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+
+        //then
+        assertTrue(criadero.tieneVidaCompleta());
+    }
+
+    @Test
+    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno(){
+        //given
+        Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+
+        //when
+        criadero.dañar(200);
+        criadero.pasarTiempo();
+
+        //then
+        assertFalse(criadero.tieneVidaCompleta());
+    }
 }
 

@@ -109,5 +109,44 @@ public class ExtractorTest {
         assertEquals(0, extractor.obtenerGas());   
     }
 
+    //caso de uso 10
+    @Test
+    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos(){
+        //given
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
+        extractor.pasarTiempo();
+        extractor.pasarTiempo();
+        extractor.pasarTiempo();
+        extractor.pasarTiempo();
+        extractor.pasarTiempo();
+        extractor.pasarTiempo();
+
+        //when
+        extractor.dañar(200);
+        extractor.pasarTiempo();
+        extractor.pasarTiempo();
+
+        //then
+        assertTrue(extractor.tieneVidaCompleta());
+    }
+
+    @Test
+    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno(){
+        //given
+        Extractor extractor = new Extractor(new Posicion(1, 1), new Mapa());
+        extractor.pasarTiempo();
+        extractor.pasarTiempo();
+        extractor.pasarTiempo();
+        extractor.pasarTiempo();
+        extractor.pasarTiempo();
+        extractor.pasarTiempo();
+
+        //when
+        extractor.dañar(200);
+        extractor.pasarTiempo();
+
+        //then
+        assertFalse(extractor.tieneVidaCompleta());
+    }
 
 }
