@@ -9,6 +9,7 @@ public class Guarida extends Edificio{
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
+        this.zona = new ZonaMoho(this.posicion);
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
     }
@@ -28,8 +29,6 @@ public class Guarida extends Edificio{
     public void construir()
     {
         estado = new EstadoConstruido();
-        zona = new ZonaNeutral();
-        mapa.agregarZona(this.zona);
     }
 
     @Override
@@ -44,5 +43,15 @@ public class Guarida extends Edificio{
 
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(200)&& gas.invertir(100))
+        {
+            this.mapa.agregarEnListaConstruccion(this);
+            return true;
+        }
+        return false;
     }
 }

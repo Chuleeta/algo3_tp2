@@ -5,4 +5,7 @@ public interface Construccion {
     //void actualizar();
     boolean habita(Zona zona);
     void pasarTiempo();
+    boolean agregarAlMapa(Mineral mineral, GasVespeno gas);
+    void desactivar();
+    boolean estaActivado();
 }

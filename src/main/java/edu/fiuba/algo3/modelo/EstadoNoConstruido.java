@@ -16,4 +16,8 @@ public class EstadoNoConstruido extends EstadoConstruccion {
         return false;
     }
 
+    public boolean estaActivado(){
+        return false;
+    }
+
 }

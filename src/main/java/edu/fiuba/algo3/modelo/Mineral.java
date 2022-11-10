@@ -14,4 +14,5 @@ public class Mineral extends Recurso{
     public void minarMena(Mena mena){
         cantidad += mena.minarMena();
     }
+
 }

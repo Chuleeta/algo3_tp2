@@ -25,7 +25,6 @@ public class Acceso extends Edificio{
     public void construir()
     {
         estado = new EstadoConstruido();
-        //mapa.agregarZona(zona);
     }
 
     @Override
@@ -43,6 +42,16 @@ public class Acceso extends Edificio{
     }
     public boolean tieneEscudoCompleto(){
         return this.vidaYEscudo.tieneEscudoCompleto();
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(150))
+        {
+            this.mapa.agregarEnListaConstruccion(this);
+            return true;
+        }
+        return false;
     }
 
 }

@@ -14,12 +14,12 @@ public class Mapa {
         this.zonas.add(new ZonaNeutral());
     }
 
-    public boolean agregarConstruccion(Construccion construccion){
+    public boolean agregarConstruccion(Construccion construccion, Mineral mineral, GasVespeno gas){
         if(!verificarPosicionDisponible(construccion)){
             return false;
         }
-        construcciones.add(construccion);
-        return true;
+        //construcciones.add(construccion);
+        return construccion.agregarAlMapa(mineral, gas);
     }
 
     public void pasarTiempo()
@@ -45,5 +45,33 @@ public class Mapa {
 
     public Zona getZonaNeutral() {
         return this.zonas.get(0);
+    }
+
+    public void agregarEnListaConstruccion(Construccion construccion) {
+        construcciones.add(construccion);
+    }
+
+    public void destruirConstruccion(Construccion construccion)
+    {
+        construcciones.remove(construccion);
+    }
+
+    public void destruirZona(Zona zona)
+    {
+        zonas.remove(zona);
+    }
+
+    public void filtrarConstrucciones()
+    {
+        ArrayList<Construccion> construcciones_a_destruir = new ArrayList<>();
+        for (Construccion construccion:construcciones)
+        {
+            if(!this.verificarPosicionDisponible(construccion))
+                construcciones_a_destruir.add(construccion);
+        }
+        for (Construccion construccion:construcciones)
+        {
+            construccion.desactivar();
+        }
     }
 }

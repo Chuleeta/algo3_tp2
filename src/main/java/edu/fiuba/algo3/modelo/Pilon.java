@@ -45,4 +45,20 @@ public class Pilon extends Edificio{
     public boolean tieneEscudoCompleto() {
         return this.vidaYEscudo.tieneEscudoCompleto();
     }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(100))
+        {
+            this.mapa.agregarEnListaConstruccion(this);
+            return true;
+        }
+        return false;
+    }
+
+    public void destruir()
+    {
+        this.mapa.destruirZona(this.zona);
+        this.mapa.destruirConstruccion(this);
+    }
 }

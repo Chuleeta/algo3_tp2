@@ -3,8 +3,10 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.Criadero;
 import edu.fiuba.algo3.modelo.CriaderoNoDisponibleException;
 import edu.fiuba.algo3.modelo.Extractor;
+import edu.fiuba.algo3.modelo.GasVespeno;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Message;
+import edu.fiuba.algo3.modelo.Mineral;
 import edu.fiuba.algo3.modelo.Posicion;
 
 import org.junit.jupiter.api.Test;
@@ -142,15 +144,17 @@ public class CriaderoTest {
     @Test
     public void seDestruyeUnCriaderoYSePuedeConstruirIgualArribaDelMoho() 
     {
+        Mineral mineral = new Mineral(10000);
+        GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
         Criadero criadero = new Criadero(new Posicion(9, 9), mapa);
-        mapa.agregarConstruccion(criadero);
+        mapa.agregarConstruccion(criadero, mineral, gas);
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();              
         mapa.pasarTiempo();
         criadero.dañar(550);
-        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(9, 14), mapa)));
+        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(9, 14), mapa), mineral, gas));
     }
 }
 

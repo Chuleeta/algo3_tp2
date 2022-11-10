@@ -7,11 +7,12 @@ import java.util.Set;
 
 public class Zerg {
 
-   /* private List<Larva> larvas;
-    private Criadero criadero;
+/*     private List<Larva> larvas;
+    //private Criadero criadero;
     //private Set<Recurso> recursos;
     private ArrayList<Zangano> zanganos;
     private ArrayList<Construccion> edificios;
+    private HashSet recursos;
 
     public Zerg(){
         //larvas = 0;
@@ -20,7 +21,7 @@ public class Zerg {
         edificios = new ArrayList<>();
     }
 
-    public void setCriadero(Criadero criadero){
+    /*public void setCriadero(Criadero criadero){
         this.criadero = criadero;
     }
 

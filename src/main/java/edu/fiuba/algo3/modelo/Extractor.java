@@ -29,7 +29,7 @@ public class Extractor extends Edificio implements HabitanteMoho {
         regenerarVida();
         if (estado.puedeConstruirse(6, tiempo))
             construir();
-        if (tiempo > 6)
+        if (this.estado.estaConstruido())
             extraerGas();
     }
 
@@ -59,7 +59,6 @@ public class Extractor extends Edificio implements HabitanteMoho {
     public void construir()
     {
         estado = new EstadoConstruido();
-        //mapa.agregarZona(zona);
     }
 
     @Override
@@ -79,6 +78,16 @@ public class Extractor extends Edificio implements HabitanteMoho {
 
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(100))
+        {
+            this.mapa.agregarEnListaConstruccion(this);
+            return true;
+        }
+        return false;
     }
 
 }

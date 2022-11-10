@@ -65,9 +65,9 @@ public class Criadero extends Edificio {
     public void pasarTiempo() {
         tiempo += 1;
         regenerarVida();
-        if (tiempo % 2 == 0 && tiempo > 4)
+        if (tiempo % 2 == 0 && this.estado.estaConstruido())
             zona.propagar();
-        if (larvas.size() < 3 && tiempo > 4)
+        if (larvas.size() < 3 && this.estado.estaConstruido())
             larvas.add(new Larva());
         if (estado.puedeConstruirse(4, tiempo)){
             construir();
@@ -89,5 +89,15 @@ public class Criadero extends Edificio {
 
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(50))
+        {
+            this.mapa.agregarEnListaConstruccion(this);
+            return true;
+        }
+        return false;
     }
 }

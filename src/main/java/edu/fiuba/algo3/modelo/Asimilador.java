@@ -14,6 +14,7 @@ public class Asimilador extends Edificio{
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
         this.vidaYEscudo = new VidaEscudoProtoss(450, 450);
+        this.zona = new ZonaNeutral();
     }
 
     @Override
@@ -26,7 +27,6 @@ public class Asimilador extends Edificio{
     {
         tiempo += 1;
         if (estado.puedeConstruirse(6, tiempo)) construir();
-        encapsularGas();
         this.vidaYEscudo.repararEscudo();
     }
 
@@ -54,6 +54,16 @@ public class Asimilador extends Edificio{
 
     public boolean tieneEscudoCompleto(){
         return this.vidaYEscudo.tieneEscudoCompleto();
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(100))
+        {
+            this.mapa.agregarEnListaConstruccion(this);
+            return true;
+        }
+        return false;
     }
 
 }

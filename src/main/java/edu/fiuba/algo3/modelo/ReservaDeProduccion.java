@@ -9,6 +9,7 @@ public class ReservaDeProduccion extends Edificio{
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
+        zona = new ZonaMoho(this.posicion);
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
     }
@@ -25,8 +26,7 @@ public class ReservaDeProduccion extends Edificio{
     public void construir()
     {
         estado = new EstadoConstruido();
-        zona = new ZonaNeutral();
-        mapa.agregarZona(this.zona);
+        
     }
 
     @Override
@@ -41,5 +41,15 @@ public class ReservaDeProduccion extends Edificio{
 
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(150))
+        {
+            this.mapa.agregarEnListaConstruccion(this);
+            return true;
+        }
+        return false;
     }
 }

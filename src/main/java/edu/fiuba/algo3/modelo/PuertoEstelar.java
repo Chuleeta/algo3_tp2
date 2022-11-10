@@ -6,6 +6,7 @@ public class PuertoEstelar extends Edificio {
     public PuertoEstelar(Posicion posicion, Mapa mapa) {
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
+        this.zona = new ZonaEnergia(this.posicion);
         this.mapa = mapa;
         tiempo = 0;
         this.vidaYEscudo = new VidaEscudoProtoss(600, 600);
@@ -22,7 +23,7 @@ public class PuertoEstelar extends Edificio {
     @Override
     public void construir()
     {
-
+        this.estado = new EstadoConstruido();
     }
 
     @Override
@@ -40,5 +41,15 @@ public class PuertoEstelar extends Edificio {
 
     public boolean tieneEscudoCompleto() {
         return this.vidaYEscudo.tieneEscudoCompleto();
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(150) && gas.invertir(150))
+        {
+            this.mapa.agregarEnListaConstruccion(this);
+            return true;
+        }
+        return false;
     }
 }

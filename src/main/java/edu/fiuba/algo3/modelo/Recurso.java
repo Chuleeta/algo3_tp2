@@ -8,6 +8,15 @@ public abstract class Recurso implements Colectable{
         return cantidad;
     }
 
+    public boolean invertir(int i) {
+        if (this.cantidad >= i)
+        {
+            this.cantidad -= i;
+            return true;
+        }
+        return false;
+    }
+    
     @Override
     public void colectar(int cantidad) {
 

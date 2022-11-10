@@ -12,6 +12,7 @@ public class NexoMineral extends Edificio{
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         minerales = new Mineral(0);
+        this.zona = new ZonaNeutral();
         this.mena = mena;
         this.mapa = mapa;
         this.vidaYEscudo = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
@@ -22,7 +23,7 @@ public class NexoMineral extends Edificio{
         tiempo += 1;
         if (estado.puedeConstruirse(4, tiempo)) construir();
         //recogerMineral(50);
-        if (tiempo > 4)
+        if (this.estado.estaConstruido())
             minerales.minarMena(mena);
         this.vidaYEscudo.repararEscudo();
     }
@@ -31,7 +32,6 @@ public class NexoMineral extends Edificio{
     public void construir()
     {
         estado = new EstadoConstruido();
-        zona = new ZonaNeutral();
         mapa.agregarZona(zona);
     }
 
@@ -60,5 +60,15 @@ public class NexoMineral extends Edificio{
     }
     public boolean tieneEscudoCompleto(){
         return this.vidaYEscudo.tieneEscudoCompleto();
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(50))
+        {
+            this.mapa.agregarEnListaConstruccion(this);
+            return true;
+        }
+        return false;
     }
 }

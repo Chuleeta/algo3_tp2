@@ -23,4 +23,19 @@ public abstract class Edificio implements Construccion{
     public abstract void dañar(int daño);
 
     public abstract boolean tieneVidaCompleta();
+
+    public void destruir()
+    {
+        this.mapa.destruirConstruccion(this);
+    }
+
+    public void desactivar()
+    {
+        this.estado = new EstadoDesactivado();
+    }
+
+    public boolean estaActivado()
+    {
+        return this.estado.estaActivado();
+    }
 }
