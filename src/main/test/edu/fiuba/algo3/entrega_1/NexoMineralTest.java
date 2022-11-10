@@ -1,11 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Criadero;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Mena;
-import edu.fiuba.algo3.modelo.Message;
-import edu.fiuba.algo3.modelo.NexoMineral;
-import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.*;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class NexoMineralTest {
     //Caso de uso 7
     @Test
-    public void SeMinaUnMineralConUnNexoMineralYLoMinaExitosamente(){
+    public void SeMinaUnMineralConUnNexoMineralYLoMinaExitosamente() throws MenaOcupadaException {
         NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
         nexito.pasarTiempo();
         nexito.pasarTiempo();
@@ -27,7 +22,7 @@ public class NexoMineralTest {
     }
 
     @Test
-    public void nexoMineralNoConstruidoNoMina(){
+    public void nexoMineralNoConstruidoNoMina() throws MenaOcupadaException {
         NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
         nexito.pasarTiempo();
         nexito.pasarTiempo();
@@ -37,7 +32,7 @@ public class NexoMineralTest {
     }
 
     @Test
-    public void nexoMineralNoMinaMenaAgotada(){
+    public void nexoMineralNoMinaMenaAgotada() throws MenaOcupadaException {
         NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
         nexito.pasarTiempo();
         nexito.pasarTiempo();
@@ -51,7 +46,7 @@ public class NexoMineralTest {
 
     // Caso de uso 11
     @Test
-    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() {
+    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() throws MenaOcupadaException {
 
         NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
         nexito.pasarTiempo();
@@ -68,7 +63,7 @@ public class NexoMineralTest {
 
     // Caso de uso 12
     @Test
-    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() {
+    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() throws MenaOcupadaException {
 
         NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
         nexito.pasarTiempo();

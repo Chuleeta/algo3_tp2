@@ -5,5 +5,8 @@ public class Zangano {
     public Zangano() {
         
     }
+    public void minarMena(Mena mena) throws MenaOcupadaException {
+        mena.ocupar();
+    }
 
 }

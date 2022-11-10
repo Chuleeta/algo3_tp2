@@ -7,13 +7,13 @@ public class NexoMineral extends Edificio{
     private static int VIDA_ESCUDO_COMPLETO = 250;
     private VidaEscudoProtoss vidaYEscudo;
 
-    public NexoMineral(Posicion posicion, Mena mena, Mapa mapa)
-    {
+    public NexoMineral(Posicion posicion, Mena mena, Mapa mapa) throws MenaOcupadaException {
+        this.mena = mena;
+        this.mena.ocupar();
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         minerales = new Mineral(0);
         this.zona = new ZonaNeutral();
-        this.mena = mena;
         this.mapa = mapa;
         this.vidaYEscudo = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
     }

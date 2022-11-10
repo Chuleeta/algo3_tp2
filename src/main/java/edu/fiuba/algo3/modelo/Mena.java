@@ -5,11 +5,13 @@ public class Mena {
     private EstadoConstruccion estado;
     private int minerales;
     private Mena mena;
+    private boolean estaOcupado;
 
     public Mena(Posicion posicion)
     {
         this.posicion = posicion;
         this.minerales = 2000;
+        this.estaOcupado = false;
     }
 
     public int minarMena()
@@ -20,5 +22,12 @@ public class Mena {
             return 50;
         }
         return 0;    
+    }
+
+    public void ocupar() throws MenaOcupadaException {
+        if (this.estaOcupado) {
+            throw new MenaOcupadaException();
+        }
+        this.estaOcupado = true;
     }
 }

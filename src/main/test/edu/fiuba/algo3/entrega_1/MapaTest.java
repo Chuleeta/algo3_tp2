@@ -165,8 +165,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirNexoMineralSinRecursos() 
-    {
+    public void noSePuedeConstruirNexoMineralSinRecursos() throws MenaOcupadaException {
         Mineral mineral = new Mineral(0);
         GasVespeno gas = new GasVespeno(0);
         
