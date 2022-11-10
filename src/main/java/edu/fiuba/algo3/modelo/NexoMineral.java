@@ -17,12 +17,13 @@ public class NexoMineral extends Edificio{
         this.vidaYEscudo = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
     }
 
-    public void pasarTiempo(int cantidad)
+    public void pasarTiempo()
     {
         tiempo += 1;
         if (estado.puedeConstruirse(4, tiempo)) construir();
-        recogerMineral(cantidad);
-        minerales.minarMena(mena);
+        //recogerMineral(50);
+        if (tiempo > 4)
+            minerales.minarMena(mena);
         this.vidaYEscudo.repararEscudo();
     }
 

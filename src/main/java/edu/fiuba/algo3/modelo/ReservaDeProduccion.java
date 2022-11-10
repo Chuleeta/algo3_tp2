@@ -9,7 +9,6 @@ public class ReservaDeProduccion extends Edificio{
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
-        TURNOS_PARA_CONSTRUIRSE = 12;
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
     }
@@ -17,13 +16,10 @@ public class ReservaDeProduccion extends Edificio{
     public void pasarTiempo()
     {
         tiempo += 1;
-        regenerarVida();
-        if (estado.puedeConstruirse(TURNOS_PARA_CONSTRUIRSE, tiempo)) construir();
+        this.vida.regenerarVida();
+        if (estado.puedeConstruirse(12, tiempo)) construir();
     }
 
-    private void regenerarVida() {
-        this.vida.regenerarVida();
-    }
 
     @Override
     public void construir()

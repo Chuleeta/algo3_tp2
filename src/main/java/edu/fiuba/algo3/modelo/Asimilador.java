@@ -48,11 +48,6 @@ public class Asimilador extends Edificio{
         this.vidaYEscudo.dañar(daño);
     }
 
-    private void regenerarVida() {
-        vida += 100;
-        if(vida > VIDA_COMPLETA) vida = VIDA_COMPLETA;
-    }
-
     public boolean tieneVidaCompleta(){
         return this.vidaYEscudo.tieneVidaCompleta();
     }

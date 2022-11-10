@@ -67,7 +67,7 @@ public class Criadero extends Edificio {
         regenerarVida();
         if (tiempo % 2 == 0 && tiempo > 4)
             zona.propagar();
-        if (larvas.size() < 3)
+        if (larvas.size() < 3 && tiempo > 4)
             larvas.add(new Larva());
         if (estado.puedeConstruirse(4, tiempo)){
             construir();

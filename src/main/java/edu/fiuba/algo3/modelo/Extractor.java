@@ -27,8 +27,10 @@ public class Extractor extends Edificio implements HabitanteMoho {
     {
         tiempo += 1;
         regenerarVida();
-        if (estado.puedeConstruirse(6, tiempo)) construir();
-        extraerGas();
+        if (estado.puedeConstruirse(6, tiempo))
+            construir();
+        if (tiempo > 6)
+            extraerGas();
     }
 
     private void regenerarVida() {

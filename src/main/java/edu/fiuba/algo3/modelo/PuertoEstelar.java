@@ -8,13 +8,14 @@ public class PuertoEstelar extends Edificio {
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
         tiempo = 0;
-        TURNOS_PARA_CONSTRUIRSE = 10;
         this.vidaYEscudo = new VidaEscudoProtoss(600, 600);
     }
 
     @Override
     public void pasarTiempo() {
+        tiempo += 1;
         this.vidaYEscudo.repararEscudo();
+        if (estado.puedeConstruirse(10, tiempo)) construir();
     }
 
 

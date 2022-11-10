@@ -9,7 +9,6 @@ public class Espiral extends Edificio{
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
-        TURNOS_PARA_CONSTRUIRSE = 12;
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
     }
@@ -18,7 +17,7 @@ public class Espiral extends Edificio{
     {
         tiempo += 1;
         regenerarVida();
-        if (estado.puedeConstruirse(TURNOS_PARA_CONSTRUIRSE, tiempo)) construir();
+        if (estado.puedeConstruirse(12, tiempo)) construir();
     }
 
     private void regenerarVida() {
