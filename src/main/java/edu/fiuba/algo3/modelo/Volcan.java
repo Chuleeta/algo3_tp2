@@ -4,11 +4,18 @@ public class Volcan {
     private Posicion posicion;
     private int gas;
 
+    private boolean estaOcupado;
+
+
+
     public Volcan(Posicion posicion)
     {
         this.posicion = posicion;
         this.gas = 5000;
+        this.estaOcupado = false;
     }
+
+
 
     public int colectarGas()
     {
@@ -18,5 +25,12 @@ public class Volcan {
             return 10;
         }
         return 0;    
+    }
+
+    public void ocupar() throws VolcanOcupadoException {
+        if (this.estaOcupado) {
+            throw new VolcanOcupadoException();
+        }
+        this.estaOcupado = true;
     }
 }

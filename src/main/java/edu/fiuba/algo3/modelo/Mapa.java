@@ -18,6 +18,7 @@ public class Mapa {
         if(!verificarPosicionDisponible(construccion)){
             return false;
         }
+
         //construcciones.add(construccion);
         return construccion.agregarAlMapa(mineral, gas);
     }
@@ -76,7 +77,12 @@ public class Mapa {
         }
     }
 
-    public boolean hayMohoEnPosicion(Posicion posicion) {
-        return verificarPosicionDisponible(new Extractor(posicion, new Volcan(new Posicion(1,1)),this));
+    public boolean hayMohoEnPosicion(Posicion posicion)  {
+        try {
+            boolean result = verificarPosicionDisponible(new Extractor(posicion, new Volcan(new Posicion(1,1)),this));
+            return result;
+        } catch (VolcanOcupadoException e) {
+            return false;
+        }
     }
 }

@@ -14,8 +14,7 @@ public class ExtractorTest {
     
     // Caso de uso 4
     @Test
-    public void extractorSinZanganosNoGeneraGas() 
-    {
+    public void extractorSinZanganosNoGeneraGas() throws VolcanOcupadoException {
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -28,8 +27,7 @@ public class ExtractorTest {
 
 
     @Test
-    public void extractorConUnZanganoGeneraDiezDeGas() 
-    {
+    public void extractorConUnZanganoGeneraDiezDeGas() throws VolcanOcupadoException {
         //given
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         GasVespeno mockGasVespeno = mock(GasVespeno.class);
@@ -53,8 +51,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void extractorConDosZanganosGeneraVeinteDeGas() 
-    {
+    public void extractorConDosZanganosGeneraVeinteDeGas() throws VolcanOcupadoException {
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -69,8 +66,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void extractorConTresZanganosGeneraTreintaDeGas() 
-    {
+    public void extractorConTresZanganosGeneraTreintaDeGas() throws VolcanOcupadoException {
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -86,8 +82,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void extractorConCuatroZanganosGeneraTreintaDeGas() 
-    {
+    public void extractorConCuatroZanganosGeneraTreintaDeGas() throws VolcanOcupadoException {
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -104,8 +99,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void extractorNoAgregaZanganosSiNoSeConstruyo() 
-    {
+    public void extractorNoAgregaZanganosSiNoSeConstruyo() throws VolcanOcupadoException {
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -119,7 +113,7 @@ public class ExtractorTest {
 
     //caso de uso 10
     @Test
-    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos(){
+    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos() throws VolcanOcupadoException {
         //given
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
@@ -139,7 +133,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno(){
+    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno() throws VolcanOcupadoException {
         //given
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
@@ -160,8 +154,7 @@ public class ExtractorTest {
     // Caso de uso 15
 
     @Test
-    public void unaVezAgotadoTodoElGasNoRecolectaMasDeEste() 
-    {
+    public void unaVezAgotadoTodoElGasNoRecolectaMasDeEste() throws VolcanOcupadoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();

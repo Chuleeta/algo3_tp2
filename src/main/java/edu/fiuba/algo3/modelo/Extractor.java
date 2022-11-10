@@ -12,8 +12,9 @@ public class Extractor extends Edificio implements HabitanteMoho {
     private VidaZerg vida;
     private Volcan volcan;
 
-    public Extractor(Posicion posicion, Volcan volcan, Mapa mapa)
-    {
+    public Extractor(Posicion posicion, Volcan volcan, Mapa mapa) throws VolcanOcupadoException {
+        this.volcan = volcan;
+        this.volcan.ocupar();
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
@@ -22,7 +23,6 @@ public class Extractor extends Edificio implements HabitanteMoho {
         gas = new GasVespeno(0);
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
-        this.volcan = volcan;
     }
 
     public void pasarTiempo()

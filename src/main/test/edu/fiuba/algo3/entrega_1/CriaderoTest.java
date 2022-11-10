@@ -1,14 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Criadero;
-import edu.fiuba.algo3.modelo.CriaderoNoDisponibleException;
-import edu.fiuba.algo3.modelo.Extractor;
-import edu.fiuba.algo3.modelo.GasVespeno;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Message;
-import edu.fiuba.algo3.modelo.Mineral;
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Volcan;
+import edu.fiuba.algo3.modelo.*;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -143,8 +135,7 @@ public class CriaderoTest {
 
     //Caso de uso 13
     @Test
-    public void seDestruyeUnCriaderoYSePuedeConstruirIgualArribaDelMoho() 
-    {
+    public void seDestruyeUnCriaderoYSePuedeConstruirIgualArribaDelMoho() throws VolcanOcupadoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();

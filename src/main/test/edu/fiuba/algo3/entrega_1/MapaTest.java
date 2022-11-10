@@ -1,23 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Acceso;
-import edu.fiuba.algo3.modelo.Asimilador;
-import edu.fiuba.algo3.modelo.Construccion;
-import edu.fiuba.algo3.modelo.Criadero;
-import edu.fiuba.algo3.modelo.Espiral;
-import edu.fiuba.algo3.modelo.Extractor;
-import edu.fiuba.algo3.modelo.GasVespeno;
-import edu.fiuba.algo3.modelo.Guarida;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Mena;
-import edu.fiuba.algo3.modelo.Message;
-import edu.fiuba.algo3.modelo.Mineral;
-import edu.fiuba.algo3.modelo.NexoMineral;
-import edu.fiuba.algo3.modelo.Pilon;
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.PuertoEstelar;
-import edu.fiuba.algo3.modelo.ReservaDeProduccion;
-import edu.fiuba.algo3.modelo.Volcan;
+import edu.fiuba.algo3.modelo.*;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,8 +13,7 @@ public class MapaTest {
 
      
     @Test
-    public void noSePuedeConstruirExtractorFueraDelMoho() 
-    {
+    public void noSePuedeConstruirExtractorFueraDelMoho() throws VolcanOcupadoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         
@@ -67,8 +49,7 @@ public class MapaTest {
     // Caso de uso 6
 
     @Test
-    public void sePropagaElMohoAlConstruirse() 
-    {
+    public void sePropagaElMohoAlConstruirse() throws VolcanOcupadoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
@@ -83,8 +64,7 @@ public class MapaTest {
     }
 
     @Test
-    public void sePropagaElMohoLentamentePosteriorALaConstruccion() 
-    {
+    public void sePropagaElMohoLentamentePosteriorALaConstruccion() throws VolcanOcupadoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
@@ -107,8 +87,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirExtractorSinRecursos() 
-    {
+    public void noSePuedeConstruirExtractorSinRecursos() throws VolcanOcupadoException {
         Mineral mineral = new Mineral(0);
         GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
@@ -220,8 +199,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirAsimiladorSinRecursos() 
-    {
+    public void noSePuedeConstruirAsimiladorSinRecursos() throws VolcanOcupadoException {
         Mineral mineral = new Mineral(0);
         GasVespeno gas = new GasVespeno(0);
         
@@ -349,8 +327,7 @@ public class MapaTest {
     }
 
     @Test
-    public void elMohoSePuedeExpandirPorUnAreaEnergizada() 
-    {
+    public void elMohoSePuedeExpandirPorUnAreaEnergizada() throws VolcanOcupadoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         

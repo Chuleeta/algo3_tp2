@@ -8,15 +8,16 @@ public class Asimilador extends Edificio{
 
     //private int gas;
     private VidaEscudoProtoss vidaYEscudo;
-    public Asimilador(Posicion posicion, Volcan volcan, Mapa mapa)
-    { 
+    public Asimilador(Posicion posicion, Volcan volcan, Mapa mapa) throws VolcanOcupadoException {
+        this.volcan = volcan;
+        this.volcan.ocupar();
         gas = new GasVespeno(0);
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
         this.vidaYEscudo = new VidaEscudoProtoss(450, 450);
         this.zona = new ZonaNeutral();
-        this.volcan = volcan;
+
     }
 
     @Override

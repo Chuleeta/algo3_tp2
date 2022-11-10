@@ -13,8 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class AsimiladorTest {
     
     @Test
-    public void asimiladorConsigueVeinteDeGasEnUnTurno() 
-    {
+    public void asimiladorConsigueVeinteDeGasEnUnTurno() throws VolcanOcupadoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
@@ -34,15 +33,13 @@ public class AsimiladorTest {
     }
 
     @Test
-    public void asimiladorEmpiezaSinGasRecolectado() 
-    {
+    public void asimiladorEmpiezaSinGasRecolectado() throws VolcanOcupadoException {
         Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         assertEquals(0, asimilador.obtenerGas());    
     }
 
     @Test
-    public void asimiladorConsigueVeinteDeGasEnCadaTurno() 
-    {
+    public void asimiladorConsigueVeinteDeGasEnCadaTurno() throws VolcanOcupadoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
@@ -70,7 +67,7 @@ public class AsimiladorTest {
 
     // Caso de uso 11
     @Test
-    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() {
+    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() throws VolcanOcupadoException {
         Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         asimilador.dañar(450);
         assertFalse(asimilador.tieneEscudoCompleto());
@@ -84,7 +81,7 @@ public class AsimiladorTest {
 
     // Caso de uso 12
     @Test
-    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() {
+    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() throws VolcanOcupadoException {
         Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         asimilador.dañar(500);
         assertFalse(asimilador.tieneEscudoCompleto());
