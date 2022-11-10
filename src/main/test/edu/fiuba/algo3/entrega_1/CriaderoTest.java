@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.Criadero;
 import edu.fiuba.algo3.modelo.CriaderoNoDisponibleException;
+import edu.fiuba.algo3.modelo.Extractor;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Message;
 import edu.fiuba.algo3.modelo.Posicion;
@@ -137,6 +138,21 @@ public class CriaderoTest {
 
         //then
         assertFalse(criadero.tieneVidaCompleta());
+    }
+
+    //Caso de uso 13
+    @Test
+    public void seDestruyeUnCriaderoYSePuedeConstruirIgualArribaDelMoho() 
+    {
+        Mapa mapa = new Mapa();
+        Criadero criadero = new Criadero(new Posicion(9, 9), mapa);
+        mapa.agregarConstruccion(criadero);
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();              
+        mapa.pasarTiempo();
+        criadero.dañar(550);
+        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(9, 14), mapa)));
     }
 }
 
