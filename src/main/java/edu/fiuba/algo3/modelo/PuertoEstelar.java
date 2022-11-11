@@ -13,7 +13,7 @@ public class PuertoEstelar extends Edificio {
     }
 
     @Override
-    public void pasarTiempo() {
+    public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
         tiempo += 1;
         this.vidaYEscudo.repararEscudo();
         if (estado.puedeConstruirse(10, tiempo)) construir();
@@ -21,8 +21,10 @@ public class PuertoEstelar extends Edificio {
 
 
     @Override
-    public void construir()
-    {
+    public void construir() throws NoExisteEdificioCorrelativoException {
+        if (!this.mapa.verificarEdificacionCorrelativa(new Acceso(new Posicion(0,0), new Mapa()))){
+            throw new NoExisteEdificioCorrelativoException();
+        }
         this.estado = new EstadoConstruido();
     }
 

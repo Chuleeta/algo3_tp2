@@ -13,7 +13,7 @@ public class MapaTest {
 
      
     @Test
-    public void noSePuedeConstruirExtractorFueraDelMoho() throws VolcanOcupadoException {
+    public void noSePuedeConstruirExtractorFueraDelMoho() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         
@@ -29,8 +29,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirAccesoFueraDeEnergia() 
-    {
+    public void noSePuedeConstruirAccesoFueraDeEnergia() throws NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
 
@@ -49,7 +48,7 @@ public class MapaTest {
     // Caso de uso 6
 
     @Test
-    public void sePropagaElMohoAlConstruirse() throws VolcanOcupadoException {
+    public void sePropagaElMohoAlConstruirse() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
@@ -64,7 +63,7 @@ public class MapaTest {
     }
 
     @Test
-    public void sePropagaElMohoLentamentePosteriorALaConstruccion() throws VolcanOcupadoException {
+    public void sePropagaElMohoLentamentePosteriorALaConstruccion() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
@@ -87,7 +86,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirExtractorSinRecursos() throws VolcanOcupadoException {
+    public void noSePuedeConstruirExtractorSinRecursos() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(0);
         GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
@@ -101,8 +100,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirCriaderoSinRecursos() 
-    {
+    public void noSePuedeConstruirCriaderoSinRecursos() throws NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(0);
         GasVespeno gas = new GasVespeno(0);
         
@@ -117,8 +115,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirReservaSinRecursos() 
-    {
+    public void noSePuedeConstruirReservaSinRecursos() throws NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(0);
         GasVespeno gas = new GasVespeno(0);
         
@@ -133,8 +130,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirGuaridaSinRecursos() 
-    {
+    public void noSePuedeConstruirGuaridaSinRecursos() throws NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(0);
         GasVespeno gas = new GasVespeno(0);
         
@@ -149,8 +145,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirEspiralSinRecursos() 
-    {
+    public void noSePuedeConstruirEspiralSinRecursos() throws NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(0);
         GasVespeno gas = new GasVespeno(0);
         
@@ -165,7 +160,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirNexoMineralSinRecursos() throws MenaOcupadaException {
+    public void noSePuedeConstruirNexoMineralSinRecursos() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(0);
         GasVespeno gas = new GasVespeno(0);
         
@@ -181,8 +176,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirPilonSinRecursos() 
-    {
+    public void noSePuedeConstruirPilonSinRecursos() throws NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(0);
         GasVespeno gas = new GasVespeno(0);
         
@@ -198,7 +192,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirAsimiladorSinRecursos() throws VolcanOcupadoException {
+    public void noSePuedeConstruirAsimiladorSinRecursos() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(0);
         GasVespeno gas = new GasVespeno(0);
         
@@ -214,8 +208,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirAccesoSinRecursos() 
-    {
+    public void noSePuedeConstruirAccesoSinRecursos() throws NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(0);
         GasVespeno gas = new GasVespeno(0);
         
@@ -231,8 +224,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirPuertoEstelarSinRecursos() 
-    {
+    public void noSePuedeConstruirPuertoEstelarSinRecursos() throws NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(0);
         GasVespeno gas = new GasVespeno(0);
         
@@ -248,8 +240,7 @@ public class MapaTest {
     }
 
     @Test
-    public void seDestruyeUnPilonYNoSePuedeConstruirCercaDeSuCadaver() 
-    {
+    public void seDestruyeUnPilonYNoSePuedeConstruirCercaDeSuCadaver() throws NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         
@@ -267,8 +258,7 @@ public class MapaTest {
     }
 
     @Test
-    public void seDestruyeUnPilonPeroExistiendoOtroEnElAreaNoSeDesactiva() 
-    {
+    public void seDestruyeUnPilonPeroExistiendoOtroEnElAreaNoSeDesactiva() throws NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         
@@ -306,8 +296,7 @@ public class MapaTest {
 
     // Caso de uso 14
     @Test
-    public void noSePuedeConstruirUnaEstructuraProtossSiHayMohoEnSuAreaEnergizada() 
-    {
+    public void noSePuedeConstruirUnaEstructuraProtossSiHayMohoEnSuAreaEnergizada() throws NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         
@@ -326,7 +315,7 @@ public class MapaTest {
     }
 
     @Test
-    public void elMohoSePuedeExpandirPorUnAreaEnergizada() throws VolcanOcupadoException {
+    public void elMohoSePuedeExpandirPorUnAreaEnergizada() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         

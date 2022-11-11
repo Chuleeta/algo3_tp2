@@ -154,7 +154,7 @@ public class ExtractorTest {
     // Caso de uso 15
 
     @Test
-    public void unaVezAgotadoTodoElGasNoRecolectaMasDeEste() throws VolcanOcupadoException {
+    public void unaVezAgotadoTodoElGasNoRecolectaMasDeEste() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();

@@ -14,8 +14,7 @@ public class Guarida extends Edificio{
         this.vida = new VidaZerg(VIDA_COMPLETA);
     }
 
-    public void pasarTiempo()
-    {
+    public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
         tiempo += 1;
         regenerarVida();
         if (estado.puedeConstruirse(12, tiempo)) construir();
@@ -26,8 +25,10 @@ public class Guarida extends Edificio{
     }
 
     @Override
-    public void construir()
-    {
+    public void construir() throws NoExisteEdificioCorrelativoException {
+        if (!this.mapa.verificarEdificacionCorrelativa(new ReservaDeProduccion(new Posicion(0,0), new Mapa()))){
+            throw new NoExisteEdificioCorrelativoException();
+        }
         estado = new EstadoConstruido();
     }
 

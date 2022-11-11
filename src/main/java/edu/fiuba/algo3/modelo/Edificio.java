@@ -9,7 +9,7 @@ public abstract class Edificio implements Construccion{
     public int tiempo;
 
     @Override
-    public abstract void construir();
+    public abstract void construir() throws NoExisteEdificioCorrelativoException;
 
     //@Override
     //public abstract void actualizar();
@@ -18,7 +18,7 @@ public abstract class Edificio implements Construccion{
     public abstract boolean habita(Zona zona);
 
     @Override
-    public abstract void pasarTiempo();
+    public abstract void pasarTiempo() throws NoExisteEdificioCorrelativoException;
 
     public abstract void dañar(int daño);
 

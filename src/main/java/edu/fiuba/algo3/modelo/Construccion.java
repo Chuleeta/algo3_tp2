@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
 public interface Construccion {
-    void construir();
+    void construir() throws NoExisteEdificioCorrelativoException;
     //void actualizar();
     boolean habita(Zona zona);
-    void pasarTiempo();
+    void pasarTiempo() throws NoExisteEdificioCorrelativoException;
     boolean agregarAlMapa(Mineral mineral, GasVespeno gas);
     void desactivar();
     boolean estaActivado();

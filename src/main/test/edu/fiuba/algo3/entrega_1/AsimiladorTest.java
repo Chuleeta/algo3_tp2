@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class AsimiladorTest {
     
     @Test
-    public void asimiladorConsigueVeinteDeGasEnUnTurno() throws VolcanOcupadoException {
+    public void asimiladorConsigueVeinteDeGasEnUnTurno() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
@@ -39,7 +39,7 @@ public class AsimiladorTest {
     }
 
     @Test
-    public void asimiladorConsigueVeinteDeGasEnCadaTurno() throws VolcanOcupadoException {
+    public void asimiladorConsigueVeinteDeGasEnCadaTurno() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();

@@ -1,18 +1,14 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
 
-import edu.fiuba.algo3.modelo.Guarida;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Posicion;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GuaridaTest {
     //caso de uso 10
     @Test
-    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos(){
+    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos() throws NoExisteEdificioCorrelativoException {
         //given
         Guarida guarida = new Guarida(new Posicion(1,1), new Mapa());
         guarida.pasarTiempo();
@@ -30,7 +26,7 @@ public class GuaridaTest {
     }
 
     @Test
-    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno(){
+    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno() throws NoExisteEdificioCorrelativoException {
         //given
         Guarida guarida = new Guarida(new Posicion(1,1), new Mapa());
         guarida.pasarTiempo();
@@ -44,5 +40,23 @@ public class GuaridaTest {
 
         //then
         assertFalse(guarida.tieneVidaCompleta());
+    }
+    // caso de uso 17
+    @Test
+    public void noSePuedeConstruirGuaridaSiNoHayReservaDeReproduccion() throws NoExisteEdificioCorrelativoException {
+        //given
+        Guarida guarida = new Guarida(new Posicion(1,1), new Mapa());
+        guarida.pasarTiempo();
+        guarida.pasarTiempo();
+        guarida.pasarTiempo();
+        guarida.pasarTiempo();
+        guarida.pasarTiempo();
+        guarida.pasarTiempo();
+        guarida.pasarTiempo();
+        guarida.pasarTiempo();
+        guarida.pasarTiempo();
+        guarida.pasarTiempo();
+        guarida.pasarTiempo();
+        assertThrows(NoExisteEdificioCorrelativoException.class, () ->{ guarida.pasarTiempo();});
     }
 }

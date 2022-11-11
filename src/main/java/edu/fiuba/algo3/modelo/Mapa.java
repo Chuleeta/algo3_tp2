@@ -14,17 +14,20 @@ public class Mapa {
         this.zonas.add(new ZonaNeutral());
     }
 
+    public boolean verificarEdificacionCorrelativa(Edificio edificioCorrelativo) {
+        return construcciones.stream().anyMatch(clase -> clase.getClass().isInstance(edificioCorrelativo));
+    }
+
     public boolean agregarConstruccion(Construccion construccion, Mineral mineral, GasVespeno gas){
         if(!verificarPosicionDisponible(construccion)){
             return false;
         }
 
-        //construcciones.add(construccion);
+        construcciones.add(construccion);
         return construccion.agregarAlMapa(mineral, gas);
     }
 
-    public void pasarTiempo()
-    {
+    public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
         for (Construccion construccion:construcciones)
         {
             construccion.pasarTiempo();

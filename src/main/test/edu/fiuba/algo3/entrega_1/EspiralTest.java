@@ -1,18 +1,14 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
 
-import edu.fiuba.algo3.modelo.Espiral;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Posicion;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EspiralTest {
     //caso de uso 10
     @Test
-    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos(){
+    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos() throws NoExisteEdificioCorrelativoException {
         //given
         Espiral espiral = new Espiral(new Posicion(1,1), new Mapa());
         espiral.pasarTiempo();
@@ -30,7 +26,7 @@ public class EspiralTest {
     }
 
     @Test
-    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno(){
+    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno() throws NoExisteEdificioCorrelativoException {
         //given
         Espiral espiral = new Espiral(new Posicion(1,1), new Mapa());
         espiral.pasarTiempo();
@@ -44,5 +40,21 @@ public class EspiralTest {
 
         //then
         assertFalse(espiral.tieneVidaCompleta());
+    }
+
+    @Test
+    public void noSePuedeConstruirEspiralSiNoHayGuarida() throws NoExisteEdificioCorrelativoException {
+        //given
+        Espiral espiral = new Espiral(new Posicion(1,1), new Mapa());
+        espiral.pasarTiempo();
+        espiral.pasarTiempo();
+        espiral.pasarTiempo();
+        espiral.pasarTiempo();
+        espiral.pasarTiempo();
+        espiral.pasarTiempo();
+        espiral.pasarTiempo();
+        espiral.pasarTiempo();
+        espiral.pasarTiempo();
+        assertThrows(NoExisteEdificioCorrelativoException.class, () ->{ espiral.pasarTiempo();});
     }
 }

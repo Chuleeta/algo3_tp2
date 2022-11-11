@@ -135,7 +135,7 @@ public class CriaderoTest {
 
     //Caso de uso 13
     @Test
-    public void seDestruyeUnCriaderoYSePuedeConstruirIgualArribaDelMoho() throws VolcanOcupadoException {
+    public void seDestruyeUnCriaderoYSePuedeConstruirIgualArribaDelMoho() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();

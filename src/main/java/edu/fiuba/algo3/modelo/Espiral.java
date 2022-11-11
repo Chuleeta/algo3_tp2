@@ -14,11 +14,10 @@ public class Espiral extends Edificio{
         this.vida = new VidaZerg(VIDA_COMPLETA);
     }
 
-    public void pasarTiempo()
-    {
+    public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
         tiempo += 1;
         regenerarVida();
-        if (estado.puedeConstruirse(12, tiempo)) construir();
+        if (estado.puedeConstruirse(10, tiempo)) construir();
     }
 
     private void regenerarVida() {
@@ -26,8 +25,10 @@ public class Espiral extends Edificio{
     }
 
     @Override
-    public void construir()
-    {
+    public void construir() throws NoExisteEdificioCorrelativoException {
+        if (!this.mapa.verificarEdificacionCorrelativa(new Guarida(new Posicion(0,0), new Mapa()))){
+            throw new NoExisteEdificioCorrelativoException();
+        }
         estado = new EstadoConstruido();
     }
 
