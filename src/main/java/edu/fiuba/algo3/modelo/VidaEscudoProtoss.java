@@ -41,4 +41,5 @@ public class VidaEscudoProtoss {
     public void dañar(int daño) {
         dañarEscudo(daño);
     }
+
 }

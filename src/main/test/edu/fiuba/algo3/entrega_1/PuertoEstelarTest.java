@@ -26,26 +26,37 @@ public class PuertoEstelarTest {
     @Test
     public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() throws NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
-        Acceso acceso = new Acceso(new Posicion(0,0), mapa);
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
+        Pilon pilon = new Pilon(new Posicion(1, 1), mapa);
+        mapa.agregarConstruccion(pilon, mineral, gas);
+
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        Acceso acceso = new Acceso(new Posicion(0,0), mapa);
         mapa.agregarConstruccion(acceso, mineral, gas);
-        PuertoEstelar puertoEstelar = new PuertoEstelar(new Posicion(1, 1), mapa);
-        puertoEstelar.pasarTiempo();
-        puertoEstelar.pasarTiempo();
-        puertoEstelar.pasarTiempo();
-        puertoEstelar.pasarTiempo();
+
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Posicion(2, 2), mapa);
+        mapa.agregarConstruccion(puertoEstelar, mineral, gas);
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
         puertoEstelar.dañar(700);
         assertFalse(puertoEstelar.tieneEscudoCompleto());
-        puertoEstelar.pasarTiempo();
-        puertoEstelar.pasarTiempo();
-        puertoEstelar.pasarTiempo();
-        puertoEstelar.pasarTiempo();
-        puertoEstelar.pasarTiempo();
-        puertoEstelar.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
         assertTrue(puertoEstelar.tieneEscudoCompleto());
         assertFalse(puertoEstelar.tieneVidaCompleta());
     }
+
     @Test
     public void noSePuedeConstruirPuertoEstelarSiNoHayAcceso() throws NoExisteEdificioCorrelativoException {
         //given

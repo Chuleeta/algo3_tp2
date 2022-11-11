@@ -23,7 +23,7 @@ public class Mapa {
             return false;
         }
 
-        construcciones.add(construccion);
+        //construcciones.add(construccion);
         return construccion.agregarAlMapa(mineral, gas);
     }
 

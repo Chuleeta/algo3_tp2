@@ -30,6 +30,7 @@ public class Espiral extends Edificio{
             throw new NoExisteEdificioCorrelativoException();
         }
         estado = new EstadoConstruido();
+
     }
 
     @Override

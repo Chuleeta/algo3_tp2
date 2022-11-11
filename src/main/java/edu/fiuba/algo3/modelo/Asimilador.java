@@ -40,7 +40,7 @@ public class Asimilador extends Edificio{
     }
 
     public void encapsularGas(){
-        if(estado.estaActivado()){
+        if(estado.estaActivado() ){
             gas.colectarGas(volcan);
             gas.colectarGas(volcan);  
         }//hay q cambiar esto
