@@ -7,14 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class HidraliscoTest {
     @Test
-    public void HidraliscoDañaNexoMineral() throws MenaOcupadaException {
+    public void HidraliscoAtacaNexoMineral20VecesYGenera200UnidadesDeDaño() throws MenaOcupadaException {
 
         NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), new Mapa());
 
         // tiempo de construccion
 
         Hidralisco hidralisco = new Hidralisco();
-        // Su unidad de ataque es de 4, con 50 ataques son 200 de daño
+        // Su unidad de ataque es de 10, con 20 ataques son 200 de daño
         for (int i = 0; i < 20; i++)
             hidralisco.atacarEdificio(nexo);
 

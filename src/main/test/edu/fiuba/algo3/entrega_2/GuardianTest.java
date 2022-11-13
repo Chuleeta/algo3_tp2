@@ -24,6 +24,5 @@ public class GuardianTest {
         nexo.pasarTiempo();
         //escudo completo
         assertTrue(nexo.tieneEscudoCompleto());
-
     }
 }
