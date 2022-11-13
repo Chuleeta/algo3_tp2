@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ReservaDeReproduccionTest {
 
     @Test
-    void creoReservaDeReproduccion() {
+    public void creoReservaDeReproduccion() {
 
     }
 

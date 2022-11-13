@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class MenaTest {
     // Caso 16
     @Test
-    void noSePuedoConstruirEnMenaSiYaExisteUnNexoMineral () throws MenaOcupadaException {
+    public void noSePuedoConstruirEnMenaSiYaExisteUnNexoMineral () throws MenaOcupadaException {
         Mena mena = new Mena(new Posicion(1,1));
         Mapa mapa = new Mapa();
         NexoMineral nexo = new NexoMineral(new Posicion(1, 1), mena, mapa);
@@ -17,7 +17,7 @@ public class MenaTest {
         assertThrows(MenaOcupadaException.class, ()->{ new NexoMineral(new Posicion(1, 1), mena, mapa); });
     }
     @Test
-    void noSePuedoConstruirNexoEnMenaSiYaHayUnZanganoMinando () throws MenaOcupadaException {
+    public void noSePuedoConstruirNexoEnMenaSiYaHayUnZanganoMinando () throws MenaOcupadaException {
         Mena mena = new Mena(new Posicion(1,1));
         Mapa mapa = new Mapa();
         Zangano zangano = new Zangano();
@@ -26,7 +26,7 @@ public class MenaTest {
     }
 
     @Test
-    void zanganoNoPuedeMinarSiHayNexoMineralEnMena () throws MenaOcupadaException {
+    public void zanganoNoPuedeMinarSiHayNexoMineralEnMena () throws MenaOcupadaException {
         Mena mena = new Mena(new Posicion(1,1));
         Mapa mapa = new Mapa();
         Zangano zangano = new Zangano();

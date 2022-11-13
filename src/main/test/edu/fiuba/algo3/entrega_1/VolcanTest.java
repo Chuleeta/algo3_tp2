@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class VolcanTest {
     // Caso 16
     @Test
-    void noSePuedoConstruirEnVolcanSiYaExisteUnaEdificacionDeLaMismaRaza () throws VolcanOcupadoException {
+    public void noSePuedoConstruirEnVolcanSiYaExisteUnaEdificacionDeLaMismaRaza () throws VolcanOcupadoException {
         Volcan volcan = new Volcan(new Posicion(1,1));
         Mapa mapa = new Mapa();
         Asimilador asimiladorUno = new Asimilador(new Posicion(1, 1), volcan, mapa);
@@ -17,7 +17,7 @@ public class VolcanTest {
         assertThrows(VolcanOcupadoException.class, ()->{ new Asimilador(new Posicion(1, 1), volcan, mapa); });
     }
     @Test
-    void noSePuedoConstruirEnVolcanSiYaExisteUnaEdificacionDeOtraRaza () throws VolcanOcupadoException {
+    public void noSePuedoConstruirEnVolcanSiYaExisteUnaEdificacionDeOtraRaza () throws VolcanOcupadoException {
         Volcan volcan = new Volcan(new Posicion(1,1));
         Mapa mapa = new Mapa();
         Asimilador asimiladorUno = new Asimilador(new Posicion(1, 1), volcan, mapa);
