@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 public class Mena {
     private Posicion posicion;
+    // falta incorporar estado de construccion
     private EstadoConstruccion estado;
     private int minerales;
     private Mena mena;

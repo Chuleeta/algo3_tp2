@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
-public class ReservaDeProduccion extends Edificio{
+public class ReservaDeReproduccion extends Edificio{
     private static int VIDA_COMPLETA = 1000;
     private VidaZerg vida;
 
-    public ReservaDeProduccion(Posicion posicion, Mapa mapa)
+    public ReservaDeReproduccion(Posicion posicion, Mapa mapa)
     {
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
@@ -52,4 +52,9 @@ public class ReservaDeProduccion extends Edificio{
         }
         return false;
     }
+    public Zerling generarZerling(Mineral mineral) throws RequerimientosInsuficientesException {
+            return new Zerling(mineral);
+        }
+
+
 }

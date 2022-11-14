@@ -126,7 +126,7 @@ public class MapaTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        assertFalse(mapa.agregarConstruccion(new ReservaDeProduccion(new Posicion(9,8), mapa), mineral, gas));
+        assertFalse(mapa.agregarConstruccion(new ReservaDeReproduccion(new Posicion(9,8), mapa), mineral, gas));
     }
 
     @Test

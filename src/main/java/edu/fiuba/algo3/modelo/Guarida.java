@@ -26,7 +26,7 @@ public class Guarida extends Edificio{
 
     @Override
     public void construir() throws NoExisteEdificioCorrelativoException {
-        if (!this.mapa.verificarEdificacionCorrelativa(new ReservaDeProduccion(new Posicion(0,0), new Mapa()))){
+        if (!this.mapa.verificarEdificacionCorrelativa(new ReservaDeReproduccion(new Posicion(0,0), new Mapa()))){
             throw new NoExisteEdificioCorrelativoException();
         }
         estado = new EstadoConstruido();
