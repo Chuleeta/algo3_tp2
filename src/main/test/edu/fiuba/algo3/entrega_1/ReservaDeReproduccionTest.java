@@ -42,23 +42,5 @@ public class ReservaDeReproduccionTest {
         //then
         assertFalse(reserva.tieneVidaCompleta());
     }
-    @Test
-    public void creoZerlingAlPasar2Tiempos() throws RequerimientosInsuficientesException {
-        //given
-        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Posicion(1,1), new Mapa());
-        reserva.pasarTiempo();
-        reserva.pasarTiempo();
-        reserva.pasarTiempo();
-        reserva.pasarTiempo();
-        Mineral mineral = new Mineral(25);
-        //when
-        Zerling nuevoZerling = reserva.generarZerling(mineral);
-        assertNull(nuevoZerling);
-        reserva.pasarTiempo();
-        reserva.pasarTiempo();
-        assertNotNull(nuevoZerling);
 
-        //then
-        assertFalse(reserva.tieneVidaCompleta());
-    }
 }
