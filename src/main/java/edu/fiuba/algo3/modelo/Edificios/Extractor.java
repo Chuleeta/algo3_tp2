@@ -1,7 +1,23 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Edificios;
 
 import java.util.ArrayList;
 import java.util.List;
+import edu.fiuba.algo3.modelo.EstadoConstruido;
+import edu.fiuba.algo3.modelo.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.GasVespeno;
+import edu.fiuba.algo3.modelo.HabitanteMoho;
+import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Mineral;
+import edu.fiuba.algo3.modelo.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.VidaZerg;
+import edu.fiuba.algo3.modelo.Volcan;
+import edu.fiuba.algo3.modelo.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Zangano;
+import edu.fiuba.algo3.modelo.Zona;
+import edu.fiuba.algo3.modelo.ZonaEnergia;
+import edu.fiuba.algo3.modelo.ZonaMoho;
+import edu.fiuba.algo3.modelo.ZonaNeutral;
 
 public class Extractor extends Edificio implements HabitanteMoho {
 
@@ -25,19 +41,20 @@ public class Extractor extends Edificio implements HabitanteMoho {
         this.vida = new VidaZerg(VIDA_COMPLETA);
     }
 
-    public void pasarTiempo()
+    public void pasarTiempo() throws NoExisteEdificioCorrelativoException
     {
         tiempo += 1;
-        regenerarVida();
-        if (estado.puedeConstruirse(6, tiempo))
-            construir();
-        if (this.estado.estaConstruido())
-            extraerGas();
+        //regenerarVida();
+        // if (estado.puedeConstruirse(6, tiempo))
+        //     construir();
+        // if (this.estado.estaConstruido())
+        //     extraerGas();
+        this.estado = this.estado.desarrollar(this, 6, tiempo);
     }
 
-    private void regenerarVida() {
-        this.vida.regenerarVida();
-    }
+    // private void regenerarVida() {
+    //     this.vida.regenerarVida();
+    // }
 
     public Integer obtenerGas()
     {
@@ -64,9 +81,18 @@ public class Extractor extends Edificio implements HabitanteMoho {
     }
 
     @Override
-    public boolean habita(Zona zona) {
-        if(!this.zona.getClass().equals(zona.getClass())) return false;
+    public boolean habita(ZonaNeutral zona) {
+        return false;
+    }
+
+    @Override
+    public boolean habita(ZonaMoho zona) {
         return zona.abarca(posicion);
+    }
+
+    @Override
+    public boolean habita(ZonaEnergia zona) {
+        return false;
     }
 
     /*@Override
@@ -90,6 +116,12 @@ public class Extractor extends Edificio implements HabitanteMoho {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void actualizar(){
+        this.vida.regenerarVida();
+        extraerGas();
     }
 
 }

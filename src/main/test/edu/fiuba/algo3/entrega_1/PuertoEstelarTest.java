@@ -1,6 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Edificios.Acceso;
+import edu.fiuba.algo3.modelo.Edificios.Pilon;
+import edu.fiuba.algo3.modelo.Edificios.PuertoEstelar;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +14,31 @@ public class PuertoEstelarTest {
     //Caso de uso 11
     @Test
     public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() throws NoExisteEdificioCorrelativoException {
-        PuertoEstelar puertoEstelar = new PuertoEstelar(new Posicion(1, 1), new Mapa());
+        Mapa mapa = new Mapa();
+        Pilon pilon = new Pilon(new Posicion(1, 3), mapa);
+        mapa.agregarConstruccion(pilon, new Mineral(10000), new GasVespeno(10000));
+        pilon.pasarTiempo();
+        pilon.pasarTiempo();
+        pilon.pasarTiempo();
+        pilon.pasarTiempo();
+        pilon.pasarTiempo();
+        Acceso acceso = new Acceso(new Posicion(1, 2), mapa);
+        mapa.agregarConstruccion(acceso, new Mineral(10000), new GasVespeno(10000));
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Posicion(1, 1), mapa);
+        puertoEstelar.pasarTiempo();
+        puertoEstelar.pasarTiempo();
+        puertoEstelar.pasarTiempo();
+        puertoEstelar.pasarTiempo();
+        puertoEstelar.pasarTiempo();
+        puertoEstelar.pasarTiempo();
         puertoEstelar.pasarTiempo();
         puertoEstelar.pasarTiempo();
         puertoEstelar.pasarTiempo();
@@ -47,6 +75,13 @@ public class PuertoEstelarTest {
         mapa.pasarTiempo();
         puertoEstelar.dañar(700);
         assertFalse(puertoEstelar.tieneEscudoCompleto());
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();

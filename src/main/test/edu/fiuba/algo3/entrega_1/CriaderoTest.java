@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Edificios.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.Extractor;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,7 +14,7 @@ public class CriaderoTest {
 
     //Comienzo caso de uso 1
     @Test
-    public void criaderoSeInicializaConTresLarvas() 
+    public void criaderoSeInicializaConTresLarvas() throws NoExisteEdificioCorrelativoException 
     {
         Criadero criadero = new Criadero(new Posicion(1, 1), new Mapa());
         criadero.pasarTiempo();
@@ -23,7 +25,7 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seEngendraUnZanganoEnCriaderoYDisminuyeLarva() throws CriaderoNoDisponibleException
+    public void seEngendraUnZanganoEnCriaderoYDisminuyeLarva() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException
     {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
@@ -35,7 +37,7 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seRegeneraUnaLarvaLuegoDeUnTiempo() throws CriaderoNoDisponibleException
+    public void seRegeneraUnaLarvaLuegoDeUnTiempo() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException
     {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
@@ -48,7 +50,7 @@ public class CriaderoTest {
     }
 
     @Test
-    public void noSePuedeEngendrarMasDeTresZanganos() throws CriaderoNoDisponibleException {
+    public void noSePuedeEngendrarMasDeTresZanganos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -61,7 +63,7 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seConsumenTodasLasLarvasYSeRegeneranDespsDeTresTurnos() throws CriaderoNoDisponibleException {
+    public void seConsumenTodasLasLarvasYSeRegeneranDespsDeTresTurnos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -79,7 +81,7 @@ public class CriaderoTest {
     // Caso de uso 2
 
     @Test
-    public void seConstruyeEnElCuartoTurno() {
+    public void seConstruyeEnElCuartoTurno() throws NoExisteEdificioCorrelativoException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         assertFalse(criadero.llenoDeLarvas());
@@ -99,7 +101,7 @@ public class CriaderoTest {
 
     //caso de uso 10
     @Test
-    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos(){
+    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos() throws NoExisteEdificioCorrelativoException{
         //given
         Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
         criadero.pasarTiempo();
@@ -117,7 +119,7 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno(){
+    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno() throws NoExisteEdificioCorrelativoException{
         //given
         Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
         criadero.pasarTiempo();

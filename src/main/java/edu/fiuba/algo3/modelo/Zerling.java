@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
+
 public class Zerling {
     private int tiempo;
     private int vida;

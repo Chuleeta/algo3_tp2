@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Edificios.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,7 +25,7 @@ public class ZealotTest {
     }
     // caso 18
     @Test
-    public void ZealotAtacaCriadero25VecesYGenera200UnidadesDeAtaque() throws RequerimientosInsuficientesException {
+    public void ZealotAtacaCriadero25VecesYGenera200UnidadesDeAtaque() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
 
         Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
         Mineral mineral = new Mineral(100);
@@ -35,6 +38,11 @@ public class ZealotTest {
         for (int i = 0; i < 25; i++)
             zealot.atacarEdificio(criadero);
 
+        //SE TIENE QUE TERMINAR DE CONSTRUIR EL CRIADERO PARA REGENERARSE
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
         //vida incompleta
         assertFalse(criadero.tieneVidaCompleta());
         criadero.pasarTiempo();

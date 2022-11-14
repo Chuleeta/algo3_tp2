@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,7 +26,7 @@ public class GuardianTest {
 
     // caso 18
     @Test
-    public void guardianAtacaNexoMineral8vecesYDaña200unidades() throws MenaOcupadaException, RequerimientosInsuficientesException {
+    public void guardianAtacaNexoMineral8vecesYDaña200unidades() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), new Mapa());
         Mineral mineral = new Mineral(50);
         GasVespeno gas = new GasVespeno(100);
@@ -36,6 +38,12 @@ public class GuardianTest {
         // Su unidad de ataque es de 25, con 8 ataques son 200 de daño
         for (int i = 0; i < 8; i++)
             guardian.atacarEdificio(nexo);
+
+        // SE TIENE QUE TERMINAR DE CONSTRUIR PARA QUE SE REGENERE
+        nexo.pasarTiempo();
+        nexo.pasarTiempo();
+        nexo.pasarTiempo();
+        nexo.pasarTiempo();
 
         //escudo dañado
         assertFalse(nexo.tieneEscudoCompleto());

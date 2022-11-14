@@ -1,4 +1,19 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Edificios;
+
+import edu.fiuba.algo3.modelo.EstadoConstruido;
+import edu.fiuba.algo3.modelo.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.GasVespeno;
+import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Mena;
+import edu.fiuba.algo3.modelo.MenaOcupadaException;
+import edu.fiuba.algo3.modelo.Mineral;
+import edu.fiuba.algo3.modelo.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
+import edu.fiuba.algo3.modelo.Zona;
+import edu.fiuba.algo3.modelo.ZonaEnergia;
+import edu.fiuba.algo3.modelo.ZonaMoho;
+import edu.fiuba.algo3.modelo.ZonaNeutral;
 
 public class NexoMineral extends Edificio{
 
@@ -18,14 +33,15 @@ public class NexoMineral extends Edificio{
         this.vidaYEscudo = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
     }
 
-    public void pasarTiempo()
+    public void pasarTiempo() throws NoExisteEdificioCorrelativoException
     {
         tiempo += 1;
-        if (this.estado.estaConstruido())
-            minerales.minarMena(mena);
-        if (estado.puedeConstruirse(4, tiempo)) construir();
-        //recogerMineral(50);
-        this.vidaYEscudo.repararEscudo();
+        // if (this.estado.estaConstruido())
+        //     minerales.minarMena(mena);
+        // if (estado.puedeConstruirse(4, tiempo)) construir();
+        // //recogerMineral(50);
+        // this.vidaYEscudo.repararEscudo();
+        this.estado = this.estado.desarrollar(this, 4, tiempo);
     }
 
     @Override
@@ -46,8 +62,18 @@ public class NexoMineral extends Edificio{
     }
 
     @Override
-    public boolean habita(Zona zona) {
-        return this.zona.equals(zona);
+    public boolean habita(ZonaNeutral zona) {
+        return true;
+    }
+
+    @Override
+    public boolean habita(ZonaMoho zona) {
+        return false;
+    }
+
+    @Override
+    public boolean habita(ZonaEnergia zona) {
+        return true;
     }
 
 
@@ -70,5 +96,11 @@ public class NexoMineral extends Edificio{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void actualizar() {
+        minerales.minarMena(mena);
+        this.vidaYEscudo.repararEscudo();
     }
 }

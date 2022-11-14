@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Edificios.Acceso;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -10,8 +12,12 @@ public class AccesoTest {
 
     //Caso de uso 12
     @Test
-    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() {
+    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() throws NoExisteEdificioCorrelativoException {
         Acceso acceso = new Acceso(new Posicion(1, 1), new Mapa());
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
         acceso.pasarTiempo();
         acceso.pasarTiempo();
         acceso.pasarTiempo();
@@ -28,8 +34,12 @@ public class AccesoTest {
 
     //Caso de uso 12
     @Test
-    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() {
+    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() throws NoExisteEdificioCorrelativoException {
         Acceso acceso = new Acceso(new Posicion(1, 1), new Mapa());
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
         acceso.pasarTiempo();
         acceso.pasarTiempo();
         acceso.pasarTiempo();
@@ -41,6 +51,7 @@ public class AccesoTest {
         acceso.pasarTiempo();
         acceso.pasarTiempo();
         acceso.pasarTiempo();
+
         assertTrue(acceso.tieneEscudoCompleto());
         assertFalse(acceso.tieneVidaCompleta());
     }

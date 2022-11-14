@@ -1,4 +1,17 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Edificios;
+
+import edu.fiuba.algo3.modelo.EstadoConstruido;
+import edu.fiuba.algo3.modelo.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.GasVespeno;
+import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Mineral;
+import edu.fiuba.algo3.modelo.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
+import edu.fiuba.algo3.modelo.Zona;
+import edu.fiuba.algo3.modelo.ZonaEnergia;
+import edu.fiuba.algo3.modelo.ZonaMoho;
+import edu.fiuba.algo3.modelo.ZonaNeutral;
 
 public class PuertoEstelar extends Edificio {
     private VidaEscudoProtoss vidaYEscudo;
@@ -15,8 +28,9 @@ public class PuertoEstelar extends Edificio {
     @Override
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
         tiempo += 1;
-        this.vidaYEscudo.repararEscudo();
-        if (estado.puedeConstruirse(10, tiempo)) construir();
+        // this.vidaYEscudo.repararEscudo();
+        // if (estado.puedeConstruirse(10, tiempo)) construir();
+        this.estado = this.estado.desarrollar(this, 10, tiempo);
     }
 
 
@@ -29,9 +43,18 @@ public class PuertoEstelar extends Edificio {
     }
 
     @Override
-    public boolean habita(Zona zona) {
+    public boolean habita(ZonaNeutral zona) {
+        return false;
+    }
+
+    @Override
+    public boolean habita(ZonaMoho zona) {
+        return false;
+    }
+
+    @Override
+    public boolean habita(ZonaEnergia zona) {
         if(this.mapa.hayMohoEnPosicion(this.posicion)) return false;
-        if(!this.zona.getClass().equals(zona.getClass())) return false;
         return zona.abarca(posicion);
     }
 
@@ -55,6 +78,11 @@ public class PuertoEstelar extends Edificio {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void actualizar() {
+        this.vidaYEscudo.repararEscudo();
     }
 
 }

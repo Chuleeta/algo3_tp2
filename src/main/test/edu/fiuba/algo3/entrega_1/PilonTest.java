@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Edificios.Pilon;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -9,9 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PilonTest {
     // Caso de uso 11
     @Test
-    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() {
+    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() throws NoExisteEdificioCorrelativoException {
 
         Pilon pilon = new Pilon(new Posicion(1, 1), new Mapa());
+        pilon.pasarTiempo();
         pilon.pasarTiempo();
         pilon.pasarTiempo();
         pilon.pasarTiempo();
@@ -25,8 +28,9 @@ public class PilonTest {
 
     // Caso de uso 12
     @Test
-    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() {
+    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() throws NoExisteEdificioCorrelativoException {
         Pilon pilon = new Pilon(new Posicion(1, 1), new Mapa());
+        pilon.pasarTiempo();
         pilon.pasarTiempo();
         pilon.pasarTiempo();
         pilon.pasarTiempo();

@@ -1,6 +1,16 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Edificios.Acceso;
+import edu.fiuba.algo3.modelo.Edificios.Asimilador;
+import edu.fiuba.algo3.modelo.Edificios.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.Espiral;
+import edu.fiuba.algo3.modelo.Edificios.Extractor;
+import edu.fiuba.algo3.modelo.Edificios.Guarida;
+import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
+import edu.fiuba.algo3.modelo.Edificios.Pilon;
+import edu.fiuba.algo3.modelo.Edificios.PuertoEstelar;
+import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -256,43 +266,44 @@ public class MapaTest {
         pilon.destruir();
         assertFalse(mapa.agregarConstruccion(new Acceso(new Posicion(9,10), mapa), mineral, gas));
     }
-
-    @Test
-    public void seDestruyeUnPilonPeroExistiendoOtroEnElAreaNoSeDesactiva() throws NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
+    // ----------------------------------C A M B I A R----------------------------------------------------
+    // @Test
+    // public void seDestruyeUnPilonPeroExistiendoOtroEnElAreaNoSeDesactiva() throws NoExisteEdificioCorrelativoException {
+    //     Mineral mineral = new Mineral(10000);
+    //     GasVespeno gas = new GasVespeno(10000);
         
-        Mapa mapa = new Mapa();
-        Pilon pilon = new Pilon(new Posicion(9,9), mapa);
-        mapa.agregarConstruccion(pilon, mineral, gas);
-        Pilon pilon2 = new Pilon(new Posicion(9,7), mapa);
-        mapa.agregarConstruccion(pilon2, mineral, gas);
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        Construccion acceso = new Acceso(new Posicion(9,8), mapa);
-        assertTrue(mapa.agregarConstruccion(acceso, mineral, gas));
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        assertTrue(acceso.estaActivado());
-        pilon.destruir();
-        mapa.pasarTiempo();
-        assertTrue(acceso.estaActivado());
-        pilon2.destruir();
-        mapa.pasarTiempo();
-        assertFalse(acceso.estaActivado());
+    //     Mapa mapa = new Mapa();
+    //     Pilon pilon = new Pilon(new Posicion(9,9), mapa);
+    //     mapa.agregarConstruccion(pilon, mineral, gas);
+    //     Pilon pilon2 = new Pilon(new Posicion(9,7), mapa);
+    //     mapa.agregarConstruccion(pilon2, mineral, gas);
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     Construccion acceso = new Acceso(new Posicion(9,8), mapa);
+    //     assertTrue(mapa.agregarConstruccion(acceso, mineral, gas));
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     mapa.pasarTiempo();
+    //     assertTrue(acceso.estaActivado());
+    //     pilon.destruir();
+    //     mapa.pasarTiempo();
+    //     assertTrue(acceso.estaActivado());
+    //     pilon2.destruir();
+    //     mapa.pasarTiempo();
+    //     assertFalse(acceso.estaActivado());
 
-    }
+    // }
+    // ----------------------------------C A M B I A R----------------------------------------------------
 
     // Caso de uso 14
     @Test

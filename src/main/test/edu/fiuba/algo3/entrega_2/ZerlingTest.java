@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -26,7 +28,7 @@ public class ZerlingTest {
     }
     // caso 18
     @Test
-    public void zerlingDañaNexoMineral50vecesYSon200UnidadesDeAtaque() throws MenaOcupadaException, RequerimientosInsuficientesException {
+    public void zerlingDañaNexoMineral50vecesYSon200UnidadesDeAtaque() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
 
         NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), new Mapa());
 
@@ -40,6 +42,12 @@ public class ZerlingTest {
         for (int i = 0; i < 50; i++)
             zerling.atacarEdificio(nexo);
 
+
+        //SE CONSTRUYE EL NEXO PARA QUE SE PUEDA REGENERAR EL ESCUDO
+        nexo.pasarTiempo();
+        nexo.pasarTiempo();
+        nexo.pasarTiempo();
+        nexo.pasarTiempo();
         //escudo dañado
         assertFalse(nexo.tieneEscudoCompleto());
         nexo.pasarTiempo();

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Edificios.Asimilador;
 
 import org.junit.jupiter.api.Test;
 
@@ -67,10 +68,17 @@ public class AsimiladorTest {
 
     // Caso de uso 11
     @Test
-    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() throws VolcanOcupadoException {
+    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         asimilador.dañar(450);
         assertFalse(asimilador.tieneEscudoCompleto());
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+
         asimilador.pasarTiempo();
         asimilador.pasarTiempo();
         asimilador.pasarTiempo();
@@ -81,10 +89,17 @@ public class AsimiladorTest {
 
     // Caso de uso 12
     @Test
-    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() throws VolcanOcupadoException {
+    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Asimilador asimilador = new Asimilador(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         asimilador.dañar(500);
         assertFalse(asimilador.tieneEscudoCompleto());
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+        asimilador.pasarTiempo();
+
         asimilador.pasarTiempo();
         asimilador.pasarTiempo();
         asimilador.pasarTiempo();

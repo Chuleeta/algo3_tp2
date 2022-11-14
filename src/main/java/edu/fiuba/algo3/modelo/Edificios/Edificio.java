@@ -1,4 +1,15 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Edificios;
+
+import edu.fiuba.algo3.modelo.Construccion;
+import edu.fiuba.algo3.modelo.EstadoConstruccion;
+import edu.fiuba.algo3.modelo.EstadoDesactivado;
+import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Zona;
+import edu.fiuba.algo3.modelo.ZonaEnergia;
+import edu.fiuba.algo3.modelo.ZonaMoho;
+import edu.fiuba.algo3.modelo.ZonaNeutral;
 
 public abstract class Edificio implements Construccion{
 
@@ -13,9 +24,6 @@ public abstract class Edificio implements Construccion{
 
     //@Override
     //public abstract void actualizar();
-
-    @Override
-    public abstract boolean habita(Zona zona);
 
     @Override
     public abstract void pasarTiempo() throws NoExisteEdificioCorrelativoException;
@@ -34,8 +42,10 @@ public abstract class Edificio implements Construccion{
         this.estado = new EstadoDesactivado();
     }
 
-    public boolean estaActivado()
-    {
-        return this.estado.estaActivado();
-    }
+    // public boolean estaActivado()
+    // {
+    //     return this.estado.estaActivado();
+    // }
+
+    public abstract void actualizar();
 }

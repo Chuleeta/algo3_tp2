@@ -1,4 +1,19 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Edificios;
+
+import edu.fiuba.algo3.modelo.EstadoConstruido;
+import edu.fiuba.algo3.modelo.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.GasVespeno;
+import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Mineral;
+import edu.fiuba.algo3.modelo.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
+import edu.fiuba.algo3.modelo.Volcan;
+import edu.fiuba.algo3.modelo.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Zona;
+import edu.fiuba.algo3.modelo.ZonaEnergia;
+import edu.fiuba.algo3.modelo.ZonaMoho;
+import edu.fiuba.algo3.modelo.ZonaNeutral;
 
 public class Asimilador extends Edificio{
 
@@ -26,12 +41,11 @@ public class Asimilador extends Edificio{
         estado = new EstadoConstruido();
     }
 
-    public void pasarTiempo() 
+    public void pasarTiempo() throws NoExisteEdificioCorrelativoException 
     {
         tiempo += 1;
-        this.vidaYEscudo.repararEscudo();
-        this.encapsularGas();
-        if (estado.puedeConstruirse(6, tiempo)) construir();
+        //if (estado.puedeConstruirse(6, tiempo)) construir();
+        this.estado = this.estado.desarrollar(this, 6, tiempo);
     }
 
     public Integer obtenerGas()
@@ -40,14 +54,24 @@ public class Asimilador extends Edificio{
     }
 
     public void encapsularGas(){
-        if(estado.estaActivado() ){
+        //if(estado.estaActivado() ){
             gas.colectarGas(volcan);
-            gas.colectarGas(volcan);  
-        }//hay q cambiar esto
+            gas.colectarGas(volcan);
+        //}//hay q cambiar esto
     }
 
     @Override
-    public boolean habita(Zona zona) {
+    public boolean habita(ZonaNeutral zona) {
+        return true;
+    }
+
+    @Override
+    public boolean habita(ZonaMoho zona) {
+        return false;
+    }
+
+    @Override
+    public boolean habita(ZonaEnergia zona) {
         return true;
     }
 
@@ -71,6 +95,12 @@ public class Asimilador extends Edificio{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void actualizar() {
+        this.vidaYEscudo.repararEscudo();
+        this.encapsularGas();
     }
 
 }

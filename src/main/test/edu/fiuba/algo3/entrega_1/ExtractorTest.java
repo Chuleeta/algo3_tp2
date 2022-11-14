@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Edificios.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.Extractor;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +16,7 @@ public class ExtractorTest {
     
     // Caso de uso 4
     @Test
-    public void extractorSinZanganosNoGeneraGas() throws VolcanOcupadoException {
+    public void extractorSinZanganosNoGeneraGas() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -27,7 +29,7 @@ public class ExtractorTest {
 
 
     @Test
-    public void extractorConUnZanganoGeneraDiezDeGas() throws VolcanOcupadoException {
+    public void extractorConUnZanganoGeneraDiezDeGas() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         //given
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         GasVespeno mockGasVespeno = mock(GasVespeno.class);
@@ -51,7 +53,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void extractorConDosZanganosGeneraVeinteDeGas() throws VolcanOcupadoException {
+    public void extractorConDosZanganosGeneraVeinteDeGas() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -66,7 +68,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void extractorConTresZanganosGeneraTreintaDeGas() throws VolcanOcupadoException {
+    public void extractorConTresZanganosGeneraTreintaDeGas() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -82,7 +84,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void extractorConCuatroZanganosGeneraTreintaDeGas() throws VolcanOcupadoException {
+    public void extractorConCuatroZanganosGeneraTreintaDeGas() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -99,7 +101,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void extractorNoAgregaZanganosSiNoSeConstruyo() throws VolcanOcupadoException {
+    public void extractorNoAgregaZanganosSiNoSeConstruyo() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
         extractor.pasarTiempo();
@@ -113,7 +115,7 @@ public class ExtractorTest {
 
     //caso de uso 10
     @Test
-    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos() throws VolcanOcupadoException {
+    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         //given
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();
@@ -133,7 +135,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno() throws VolcanOcupadoException {
+    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         //given
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), new Mapa());
         extractor.pasarTiempo();

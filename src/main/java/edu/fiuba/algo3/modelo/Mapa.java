@@ -2,6 +2,9 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
+import edu.fiuba.algo3.modelo.Edificios.Extractor;
+
 public class Mapa {
     
     private ArrayList<Construccion> construcciones;

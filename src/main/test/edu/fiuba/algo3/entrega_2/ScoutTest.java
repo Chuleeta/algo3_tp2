@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Edificios.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,7 +27,7 @@ public class ScoutTest {
     }
     // caso 18
     @Test
-    public void scoutAtaca10VecesACriaderoYSon200UnidadesDeAtaque() throws RequerimientosInsuficientesException {
+    public void scoutAtaca10VecesACriaderoYSon200UnidadesDeAtaque() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
 
         Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
         Mineral mineral = new Mineral(300);
@@ -44,6 +47,12 @@ public class ScoutTest {
 
         for (int i = 0; i < 25; i++)
             scout.atacarEdificio(criadero);
+
+        //SE TIENE QUE TERMINAR DE CONSTRUIR EL CRIADERO PARA REGENERARSE
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
 
         //vida incompleta
         assertFalse(criadero.tieneVidaCompleta());

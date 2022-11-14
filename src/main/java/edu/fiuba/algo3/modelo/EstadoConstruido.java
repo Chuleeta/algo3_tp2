@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
+
 public class EstadoConstruido extends EstadoConstruccion {
 
     public EstadoConstruido() {
@@ -15,8 +17,9 @@ public class EstadoConstruido extends EstadoConstruccion {
         return true;
     }
 
-    public boolean estaActivado(){
-        return true;
+    public EstadoConstruccion desarrollar(Edificio edificio, int tiempoDeConstruccion, int turnosParaConstruirse) throws NoExisteEdificioCorrelativoException{
+        edificio.actualizar();
+        return this;
     }
 
 }
