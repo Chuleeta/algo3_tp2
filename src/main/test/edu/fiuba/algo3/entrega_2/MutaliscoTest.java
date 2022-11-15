@@ -12,15 +12,21 @@ public class MutaliscoTest {
 
     // caso 22
     @Test
-    public void mutaliscoNoGeneraDañoPorNoEstarConstruidoAun() throws MenaOcupadaException, RequerimientosInsuficientesException {
-
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), new Mapa());
-        Mineral mineral = new Mineral(100);
+    public void mutaliscoNoGeneraDañoPorNoEstarConstruidoAun() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+        Mapa mapa = new Mapa();
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+        Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
+        mapa.agregarConstruccion(nexo, mineral, gas);
         Mutalisco mutalisco = new Mutalisco(mineral, gas);
 
         // EL tiempo de construccion es 4, con un solo tiempo no esta construido
         mutalisco.pasarTiempo();
+
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
         mutalisco.atacarEdificio(nexo);
         //escudo completo
         assertTrue(nexo.tieneEscudoCompleto());
@@ -30,10 +36,12 @@ public class MutaliscoTest {
     @Test
     public void MutaliscoAtacaNexoMineral23VecesYGenera207UnidadesDeDaño() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
 
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), new Mapa());
-        Mineral mineral = new Mineral(100);
+        Mapa mapa = new Mapa();
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+        Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
         Mutalisco mutalisco = new Mutalisco(mineral, gas);
+        mapa.agregarConstruccion(nexo, mineral, gas);
         // tiempo de construccion
         mutalisco.pasarTiempo();
         mutalisco.pasarTiempo();
@@ -48,10 +56,10 @@ public class MutaliscoTest {
             mutalisco.atacarEdificio(nexo);
         
         //SE TIENE QUE TERMINAR DE CONSTRUIR EL CRIADERO PARA REGENERARSE
-        nexo.pasarTiempo();
-        nexo.pasarTiempo();
-        nexo.pasarTiempo();
-        nexo.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
 
         //escudo dañado
         assertFalse(nexo.tieneEscudoCompleto());

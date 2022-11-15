@@ -13,69 +13,89 @@ public class NexoMineralTest {
     //Caso de uso 7
     @Test
     public void SeMinaUnMineralConUnNexoMineralYLoMinaExitosamente() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
-        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        assertEquals(nexito.obtenerMineral(), 50); //no tenemos la menor idea de como se mina ni cuanto devuelve
+        Mineral mineral = new Mineral(10000);
+        GasVespeno gas = new GasVespeno(10000);
+        Mapa mapa = new Mapa();
+        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), mapa);
+        mapa.agregarConstruccion(nexito, mineral, gas);
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        assertEquals(mineral.getCantidad(), 10050); 
     }
 
     @Test
     public void nexoMineralNoConstruidoNoMina() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
-        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
+        Mineral mineral = new Mineral(10000);
+        GasVespeno gas = new GasVespeno(10000);
+        Mapa mapa = new Mapa();
+        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), mapa);
+        mapa.agregarConstruccion(nexito, mineral, gas);
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
 
-        assertEquals(nexito.obtenerMineral(), 0); //no tenemos la menor idea de como se mina ni cuanto devuelve
+        assertEquals(mineral.getCantidad(), 9950); 
     }
 
     @Test
     public void nexoMineralNoMinaMenaAgotada() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
-        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
+        Mineral mineral = new Mineral(10000);
+        GasVespeno gas = new GasVespeno(10000);
+        Mapa mapa = new Mapa();
+        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), mapa);
+        mapa.agregarConstruccion(nexito, mineral, gas);
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
         for(int i = 0; i<60; i+=1){
-            nexito.pasarTiempo();
+            mapa.pasarTiempo();
         }
-        assertEquals(nexito.obtenerMineral(), 2000); //no tenemos la menor idea de como se mina ni cuanto devuelve
+        assertEquals(mineral.getCantidad(), 11950); //no tenemos la menor idea de como se mina ni cuanto devuelve
     }
 
     // Caso de uso 11
     @Test
     public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
 
-        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
+        Mineral mineral = new Mineral(10000);
+        GasVespeno gas = new GasVespeno(10000);
+        Mapa mapa = new Mapa();
+        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), mapa);
+        mapa.agregarConstruccion(nexito, mineral, gas);
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
         nexito.dañar(200);
         assertFalse(nexito.tieneEscudoCompleto());
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
         assertTrue(nexito.tieneEscudoCompleto());
-
     }
 
     // Caso de uso 12
     @Test
     public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
 
-        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), new Mapa());
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
+        Mineral mineral = new Mineral(10000);
+        GasVespeno gas = new GasVespeno(10000);
+        Mapa mapa = new Mapa();
+        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), mapa);
+        mapa.agregarConstruccion(nexito, mineral, gas);
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
         nexito.dañar(300);
         assertFalse(nexito.tieneEscudoCompleto());
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
-        nexito.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
         assertTrue(nexito.tieneEscudoCompleto());
         assertFalse(nexito.tieneVidaCompleta());
     }

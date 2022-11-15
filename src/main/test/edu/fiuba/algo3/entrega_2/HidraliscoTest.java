@@ -11,12 +11,17 @@ public class HidraliscoTest {
 
     // caso 22
     @Test
-    public void hidraliscoNoGeneraDañoPorNoEstarConstruidoAun() throws MenaOcupadaException, RequerimientosInsuficientesException {
-
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), new Mapa());
-        Mineral mineral = new Mineral(75);
+    public void hidraliscoNoGeneraDañoPorNoEstarConstruidoAun() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+        Mapa mapa = new Mapa();
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+        Mineral mineral = new Mineral(125);
         GasVespeno gas = new GasVespeno(25);
         Hidralisco hidralisco = new Hidralisco(mineral, gas);
+        mapa.agregarConstruccion(nexo, mineral, gas);
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
 
         // EL tiempo de construccion es 4, con un solo tiempo no esta construido
         hidralisco.pasarTiempo();
@@ -28,13 +33,14 @@ public class HidraliscoTest {
     // caso 18
     @Test
     public void HidraliscoAtacaNexoMineral20VecesYGenera200UnidadesDeDaño() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
-
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), new Mapa());
+        Mapa mapa = new Mapa();
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
 
         // tiempo de construccion
-        Mineral mineral = new Mineral(75);
+        Mineral mineral = new Mineral(125);
         GasVespeno gas = new GasVespeno(25);
         Hidralisco hidralisco = new Hidralisco(mineral, gas);
+        mapa.agregarConstruccion(nexo, mineral, gas);
         hidralisco.pasarTiempo();
         hidralisco.pasarTiempo();
         hidralisco.pasarTiempo();
@@ -44,17 +50,17 @@ public class HidraliscoTest {
             hidralisco.atacarEdificio(nexo);
 
         // SE TIENE QUE TERMINAR DE CONSTRUIR PARA QUE SE REGENERE
-        nexo.pasarTiempo();
-        nexo.pasarTiempo();
-        nexo.pasarTiempo();
-        nexo.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
 
         //escudo dañado
         assertFalse(nexo.tieneEscudoCompleto());
-        nexo.pasarTiempo();
+        mapa.pasarTiempo();
         //sigue dañado
         assertFalse(nexo.tieneEscudoCompleto());
-        nexo.pasarTiempo();
+        mapa.pasarTiempo();
         //escudo completo
         assertTrue(nexo.tieneEscudoCompleto());
 

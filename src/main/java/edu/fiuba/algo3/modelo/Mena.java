@@ -15,14 +15,14 @@ public class Mena {
         this.estaOcupado = false;
     }
 
-    public int minarMena()
+    public int extraerMineral(int cantidad)
     {
-        if (this.minerales >= 50)
+        if (this.minerales >= cantidad)
         {
-            this.minerales -= 50; //Estipulado
-            return 50;
+            this.minerales -= cantidad; 
+            return cantidad;
         }
-        return 0;    
+        return this.minerales;   
     }
 
     public void ocupar() throws MenaOcupadaException {

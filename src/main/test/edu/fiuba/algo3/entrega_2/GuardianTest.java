@@ -27,9 +27,11 @@ public class GuardianTest {
     // caso 18
     @Test
     public void guardianAtacaNexoMineral8vecesYDaña200unidades() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), new Mapa());
-        Mineral mineral = new Mineral(50);
+        Mapa mapa = new Mapa();
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+        Mineral mineral = new Mineral(100);
         GasVespeno gas = new GasVespeno(100);
+        mapa.agregarConstruccion(nexo, mineral, gas);
         Guardian guardian = new Guardian(mineral, gas);
         guardian.pasarTiempo();
         guardian.pasarTiempo();
@@ -40,10 +42,10 @@ public class GuardianTest {
             guardian.atacarEdificio(nexo);
 
         // SE TIENE QUE TERMINAR DE CONSTRUIR PARA QUE SE REGENERE
-        nexo.pasarTiempo();
-        nexo.pasarTiempo();
-        nexo.pasarTiempo();
-        nexo.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
 
         //escudo dañado
         assertFalse(nexo.tieneEscudoCompleto());

@@ -7,12 +7,12 @@ public class Mineral extends Recurso{
     }
 
     @Override
-    public void colectar(int cantidad) {
-        this.cantidad += cantidad;
+    public int getCantidad() {
+        return this.cantidad;
     }
 
-    public void minarMena(Mena mena){
-        cantidad += mena.minarMena();
+    public void agregarMineral(int cantidad){
+        this.cantidad += cantidad;
     }
 
 }
