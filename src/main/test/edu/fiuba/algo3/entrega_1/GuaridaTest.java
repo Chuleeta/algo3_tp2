@@ -4,6 +4,9 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.Guarida;
 import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
+import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
 import org.junit.jupiter.api.Test;
 

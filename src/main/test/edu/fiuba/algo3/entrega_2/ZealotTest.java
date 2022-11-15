@@ -3,6 +3,12 @@ package edu.fiuba.algo3.entrega_2;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
+import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Individuos.Zealot;
+import edu.fiuba.algo3.modelo.Recursos.Mena;
+import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;

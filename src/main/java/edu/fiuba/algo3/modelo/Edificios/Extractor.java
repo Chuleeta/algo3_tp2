@@ -2,29 +2,27 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import java.util.ArrayList;
 import java.util.List;
-import edu.fiuba.algo3.modelo.EstadoConstruido;
-import edu.fiuba.algo3.modelo.EstadoNoConstruido;
-import edu.fiuba.algo3.modelo.GasVespeno;
+import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
+import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.HabitanteMoho;
 import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Mineral;
-import edu.fiuba.algo3.modelo.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Recursos.Mineral;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaZerg;
-import edu.fiuba.algo3.modelo.Volcan;
-import edu.fiuba.algo3.modelo.VolcanOcupadoException;
-import edu.fiuba.algo3.modelo.Zangano;
-import edu.fiuba.algo3.modelo.Zona;
-import edu.fiuba.algo3.modelo.ZonaEnergia;
-import edu.fiuba.algo3.modelo.ZonaMoho;
-import edu.fiuba.algo3.modelo.ZonaNeutral;
+import edu.fiuba.algo3.modelo.Recursos.Volcan;
+import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Individuos.Zangano;
+import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
+import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
+import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Extractor extends Edificio implements HabitanteMoho {
 
     private List<Zangano> zanganos;
     private static int VIDA_COMPLETA = 750;
     private GasVespeno gas;
-    //private int gas;
     private VidaZerg vida;
     private Volcan volcan;
 
@@ -36,7 +34,6 @@ public class Extractor extends Edificio implements HabitanteMoho {
         this.mapa = mapa;
         zona = new ZonaMoho(this.posicion);
         zanganos = new ArrayList<>();
-        gas = new GasVespeno(0);
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
     }
@@ -44,17 +41,8 @@ public class Extractor extends Edificio implements HabitanteMoho {
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException
     {
         tiempo += 1;
-        //regenerarVida();
-        // if (estado.puedeConstruirse(6, tiempo))
-        //     construir();
-        // if (this.estado.estaConstruido())
-        //     extraerGas();
         this.estado = this.estado.desarrollar(this, 6, tiempo);
     }
-
-    // private void regenerarVida() {
-    //     this.vida.regenerarVida();
-    // }
 
     public Integer obtenerGas()
     {
@@ -63,7 +51,7 @@ public class Extractor extends Edificio implements HabitanteMoho {
 
     public void extraerGas(){
         for(Zangano zangano: zanganos){
-            if(estado.estaConstruido()) gas.colectarGas(volcan);
+            this.gas.agregarGas(zangano.extraerGas(this.volcan));
         }
     }
 
@@ -95,11 +83,6 @@ public class Extractor extends Edificio implements HabitanteMoho {
         return false;
     }
 
-    /*@Override
-    public boolean habita(ZonaMoho zona) {
-        return zona.abarca(this.posicion);
-    }*/
-
     public void dañar(int daño){
         this.vida.dañar(daño);
     }
@@ -113,6 +96,7 @@ public class Extractor extends Edificio implements HabitanteMoho {
         if(mineral.invertir(100))
         {
             this.mapa.agregarEnListaConstruccion(this);
+            this.gas = gas;
             return true;
         }
         return false;

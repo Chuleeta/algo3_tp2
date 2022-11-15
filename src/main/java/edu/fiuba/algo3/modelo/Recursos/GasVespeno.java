@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Recursos;
 
 public class GasVespeno extends Recurso{
 
@@ -6,7 +6,7 @@ public class GasVespeno extends Recurso{
         this.cantidad = cantidad;
     }
 
-    public void colectarGas(Volcan volcan) {
-        this.cantidad += volcan.colectarGas();
+    public void agregarGas(int cantidadDada) {
+        this.cantidad += cantidadDada;
     }
 }

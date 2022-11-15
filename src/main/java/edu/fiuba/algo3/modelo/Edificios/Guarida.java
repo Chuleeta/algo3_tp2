@@ -1,17 +1,16 @@
 package edu.fiuba.algo3.modelo.Edificios;
 
-import edu.fiuba.algo3.modelo.EstadoConstruido;
-import edu.fiuba.algo3.modelo.EstadoNoConstruido;
-import edu.fiuba.algo3.modelo.GasVespeno;
+import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
+import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Mineral;
-import edu.fiuba.algo3.modelo.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Recursos.Mineral;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaZerg;
-import edu.fiuba.algo3.modelo.Zona;
-import edu.fiuba.algo3.modelo.ZonaEnergia;
-import edu.fiuba.algo3.modelo.ZonaMoho;
-import edu.fiuba.algo3.modelo.ZonaNeutral;
+import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
+import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
+import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Guarida extends Edificio{
     private static int VIDA_COMPLETA = 1250;
@@ -29,14 +28,8 @@ public class Guarida extends Edificio{
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
         tiempo += 1;
-        //regenerarVida();
-        //if (estado.puedeConstruirse(12, tiempo)) construir();
         this.estado = this.estado.desarrollar(this, 12, tiempo);
     }
-
-    // private void regenerarVida() {
-    //     this.vida.regenerarVida();
-    // }
 
     @Override
     public void construir() throws NoExisteEdificioCorrelativoException {

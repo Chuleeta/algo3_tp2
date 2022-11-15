@@ -1,4 +1,7 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Zonas;
+
+import edu.fiuba.algo3.modelo.Construccion;
+import edu.fiuba.algo3.modelo.Posicion;
 
 public class ZonaMoho extends Zona{
     public ZonaMoho(Posicion centro)

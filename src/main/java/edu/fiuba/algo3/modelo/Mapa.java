@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.Extractor;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
+import edu.fiuba.algo3.modelo.Recursos.Mineral;
+import edu.fiuba.algo3.modelo.Recursos.Volcan;
+import edu.fiuba.algo3.modelo.Zonas.Zona;
+import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Mapa {
     
@@ -26,7 +33,6 @@ public class Mapa {
             return false;
         }
 
-        //construcciones.add(construccion);
         return construccion.agregarAlMapa(mineral, gas);
     }
 

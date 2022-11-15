@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

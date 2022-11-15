@@ -1,8 +1,11 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Recursos;
+
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
+import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 
 public class Mena {
     private Posicion posicion;
-    // falta incorporar estado de construccion
     private EstadoConstruccion estado;
     private int minerales;
     private Mena mena;

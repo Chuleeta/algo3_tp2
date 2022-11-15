@@ -1,6 +1,12 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Individuos;
 
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
+import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
+import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
+import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
+import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
 public class Mutalisco {
 

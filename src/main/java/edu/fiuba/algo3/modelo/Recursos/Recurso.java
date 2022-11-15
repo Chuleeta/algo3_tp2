@@ -1,4 +1,6 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Recursos;
+
+import edu.fiuba.algo3.modelo.Colectable;
 
 public abstract class Recurso implements Colectable{
 
