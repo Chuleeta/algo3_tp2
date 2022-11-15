@@ -29,11 +29,13 @@ public class ZerlingTest {
     // caso 18
     @Test
     public void zerlingDañaNexoMineral50vecesYSon200UnidadesDeAtaque() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
-
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), new Mapa());
+        Mapa mapa = new Mapa();
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
 
         // tiempo de construccion
-        Mineral mineral = new Mineral(25);
+        Mineral mineral = new Mineral(75);
+        GasVespeno gas = new GasVespeno(0);
+        mapa.agregarConstruccion(nexo, mineral, gas);
 
         Zerling zerling = new Zerling(mineral);
         zerling.pasarTiempo();
@@ -44,16 +46,16 @@ public class ZerlingTest {
 
 
         //SE CONSTRUYE EL NEXO PARA QUE SE PUEDA REGENERAR EL ESCUDO
-        nexo.pasarTiempo();
-        nexo.pasarTiempo();
-        nexo.pasarTiempo();
-        nexo.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
+        mapa.pasarTiempo();
         //escudo dañado
         assertFalse(nexo.tieneEscudoCompleto());
-        nexo.pasarTiempo();
+        mapa.pasarTiempo();
         //sigue dañado
         assertFalse(nexo.tieneEscudoCompleto());
-        nexo.pasarTiempo();
+        mapa.pasarTiempo();
         //escudo completo
         assertTrue(nexo.tieneEscudoCompleto());
 
