@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.Extractor;
 import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
@@ -31,53 +32,60 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seEngendraUnZanganoEnCriaderoYDisminuyeLarva() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException
-    {
+    public void seEngendraUnZanganoEnCriaderoYDisminuyeLarva() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        criadero.engendrarZangano();
+        Mineral mineral = new Mineral(25);
+        criadero.engendrarZangano(mineral);
         assertFalse(criadero.llenoDeLarvas());
     }
 
     @Test
-    public void seRegeneraUnaLarvaLuegoDeUnTiempo() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException
-    {
+    public void seRegeneraUnaLarvaLuegoDeUnTiempo() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        criadero.engendrarZangano();
+        Mineral mineral = new Mineral(25);
+        criadero.engendrarZangano(mineral);
         criadero.pasarTiempo();
         assertTrue(criadero.llenoDeLarvas());
     }
 
     @Test
-    public void noSePuedeEngendrarMasDeTresZanganos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException {
+    public void noSePuedeEngendrarMasDeTresZanganos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        criadero.engendrarZangano();
-        criadero.engendrarZangano();
-        criadero.engendrarZangano();
-        assertThrows(CriaderoNoDisponibleException.class, ()->{ criadero.engendrarZangano(); });
+        Mineral mineral1 = new Mineral(25);
+        Mineral mineral2 = new Mineral(25);
+        Mineral mineral3 = new Mineral(25);
+        Mineral mineral4 = new Mineral(25);
+        criadero.engendrarZangano(mineral1);
+        criadero.engendrarZangano(mineral2);
+        criadero.engendrarZangano(mineral3);
+        assertThrows(CriaderoNoDisponibleException.class, ()->{ criadero.engendrarZangano(mineral4); });
     }
 
     @Test
-    public void seConsumenTodasLasLarvasYSeRegeneranDespsDeTresTurnos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException {
+    public void seConsumenTodasLasLarvasYSeRegeneranDespsDeTresTurnos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        criadero.engendrarZangano();
-        criadero.engendrarZangano();
-        criadero.engendrarZangano();
+        Mineral mineral1 = new Mineral(25);
+        Mineral mineral2 = new Mineral(25);
+        Mineral mineral3 = new Mineral(25);
+        criadero.engendrarZangano(mineral1);
+        criadero.engendrarZangano(mineral2);
+        criadero.engendrarZangano(mineral3);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -101,8 +109,9 @@ public class CriaderoTest {
 
     @Test
     public void noSeEngendraZanganoSinConstruirseCriadero() throws CriaderoNoDisponibleException{
+        Mineral mineral = new Mineral(25);
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
-        assertThrows(CriaderoNoDisponibleException.class, ()->{ criadero.engendrarZangano(); });
+        assertThrows(CriaderoNoDisponibleException.class, ()->{ criadero.engendrarZangano(mineral); });
     }
 
     //caso de uso 10

@@ -28,7 +28,8 @@ public class MenaTest {
         Mena mena = new Mena(new Posicion(1,1));
         Mapa mapa = new Mapa();
         Zangano zangano = new Zangano();
-        zangano.minarMena(mena);
+        zangano.pasarTiempo();
+        zangano.ocuparMena(mena);
         assertThrows(MenaOcupadaException.class, ()->{ new NexoMineral(new Posicion(1, 1), mena, mapa); });
     }
 
@@ -37,11 +38,12 @@ public class MenaTest {
         Mena mena = new Mena(new Posicion(1,1));
         Mapa mapa = new Mapa();
         Zangano zangano = new Zangano();
+        zangano.pasarTiempo();
         NexoMineral nexo = new NexoMineral(new Posicion(1, 1), mena, mapa);
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         mapa.agregarConstruccion(nexo, mineral, gas);
-        assertThrows(MenaOcupadaException.class, ()->{ zangano.minarMena(mena); });
+        assertThrows(MenaOcupadaException.class, ()->{ zangano.ocuparMena(mena); });
     }
 
 }

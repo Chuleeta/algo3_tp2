@@ -64,11 +64,22 @@ public class Criadero extends Edificio {
         return larvas.size() == 3;
     }
 
-    public Zangano engendrarZangano() throws CriaderoNoDisponibleException {
+    public Zangano engendrarZangano(Mineral mineral) throws CriaderoNoDisponibleException, RecursosInsuficientesException {
         if (larvas.size() == 0) {
             throw new CriaderoNoDisponibleException();
         }
+        if (!mineral.invertir(25)){
+            throw new RecursosInsuficientesException();
+        }
         return larvas.remove(0).mutar();
+    }
+
+    // cree este metodo porque al leer el enunciado me parece que las larvas solo salen de aca, las necesitaremos para pasarla a otros edificios, despues lo vemos.
+    public Larva engendrarLarva() throws CriaderoNoDisponibleException {
+        if (larvas.size() == 0) {
+            throw new CriaderoNoDisponibleException();
+        }
+        return larvas.remove(0);
     }
 
     @Override

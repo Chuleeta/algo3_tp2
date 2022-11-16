@@ -5,17 +5,15 @@ import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.Extractor;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Individuos.Zangano;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.doCallRealMethod;
+
 
 public class ExtractorTest {
     
@@ -59,9 +57,10 @@ public class ExtractorTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-
+        Zangano zangano = new Zangano();
+        zangano.pasarTiempo();
         //when
-        extractor.agregarZangano();
+        extractor.agregarZangano(zangano);
         mapa.pasarTiempo();
 
         //then
@@ -85,8 +84,10 @@ public class ExtractorTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
+        Zangano zangano = new Zangano();
+        zangano.pasarTiempo();
+        extractor.agregarZangano(zangano);
+        extractor.agregarZangano(zangano);
         mapa.pasarTiempo();
         assertEquals(20, extractor.obtenerGas());    
     }
@@ -108,9 +109,11 @@ public class ExtractorTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
+        Zangano zangano = new Zangano();
+        zangano.pasarTiempo();
+        extractor.agregarZangano(zangano);
+        extractor.agregarZangano(zangano);
+        extractor.agregarZangano(zangano);
         mapa.pasarTiempo();
         assertEquals(30, extractor.obtenerGas());   
     }
@@ -132,10 +135,12 @@ public class ExtractorTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
+        Zangano zangano = new Zangano();
+        zangano.pasarTiempo();
+        extractor.agregarZangano(zangano);
+        extractor.agregarZangano(zangano);
+        extractor.agregarZangano(zangano);
+        extractor.agregarZangano(zangano);
         mapa.pasarTiempo();
         assertEquals(30, extractor.obtenerGas());   
     }
@@ -153,10 +158,12 @@ public class ExtractorTest {
         mapa.agregarConstruccion(extractor, new Mineral(10000), new GasVespeno(0));
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
+        Zangano zangano = new Zangano();
+        zangano.pasarTiempo();
+        extractor.agregarZangano(zangano);
+        extractor.agregarZangano(zangano);
+        extractor.agregarZangano(zangano);
+        extractor.agregarZangano(zangano);
         mapa.pasarTiempo();
         assertEquals(0, extractor.obtenerGas());   
     }
@@ -216,9 +223,11 @@ public class ExtractorTest {
         mapa.pasarTiempo();
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), mapa);
         mapa.agregarConstruccion(extractor, new Mineral(10000), gas);
-        extractor.agregarZangano();
-        extractor.agregarZangano();
-        extractor.agregarZangano();
+        Zangano zangano = new Zangano();
+        zangano.pasarTiempo();
+        extractor.agregarZangano(zangano);
+        extractor.agregarZangano(zangano);
+        extractor.agregarZangano(zangano);
         mapa.agregarConstruccion(extractor, mineral, gas);
 
         mapa.pasarTiempo();

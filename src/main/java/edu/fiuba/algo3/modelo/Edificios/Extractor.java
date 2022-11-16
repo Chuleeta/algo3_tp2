@@ -55,10 +55,10 @@ public class Extractor extends Edificio implements HabitanteMoho {
         }
     }
 
-    public void agregarZangano() 
+    public void agregarZangano(Zangano zangano)
     {
         if(zanganos.size() < 3)
-            zanganos.add(new Zangano());
+            zanganos.add(zangano);
     }
 
 
