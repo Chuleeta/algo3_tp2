@@ -37,4 +37,8 @@ public abstract class Edificio implements Construccion{
     }
 
     public abstract void actualizar();
+
+    public Posicion posicion() {
+        return posicion;
+    }
 }

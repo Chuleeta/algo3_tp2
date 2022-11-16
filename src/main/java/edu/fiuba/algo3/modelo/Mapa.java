@@ -13,16 +13,33 @@ import edu.fiuba.algo3.modelo.Zonas.Zona;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Mapa {
-    
+
+    private int bases;
     private ArrayList<Construccion> construcciones;
     private ArrayList<Zona> zonas;
+    private Posicion[][] tablero;
 
-    public Mapa() 
+    public Mapa()
     {
         this.construcciones = new ArrayList<>();
         this.zonas = new ArrayList<>();
         this.zonas.add(new ZonaNeutral());
+        // bases = cantidadDeBases;
+       // generarMapa(cantidadDeBases);
     }
+    /*
+    private void generarMapa(int cantidadDeBases) {
+        if (cantidadDeBases < 2) {
+        }
+        int filasYColumnas = cantidadDeBases * 10;
+        tablero = new Posicion[filasYColumnas][filasYColumnas];
+        int posicionFila = cantidadDeBases * 5;
+        int posicionColumnaFinal = (cantidadDeBases * 10) - 1;
+        new Volcan(tablero[posicionFila][0]);
+        new Volcan(tablero[posicionFila][posicionColumnaFinal]);
+
+    }
+    */
 
     public boolean verificarEdificacionCorrelativa(Edificio edificioCorrelativo) {
         return construcciones.stream().anyMatch(clase -> clase.getClass().isInstance(edificioCorrelativo));
@@ -32,7 +49,6 @@ public class Mapa {
         if(!verificarPosicionDisponible(construccion)){
             return false;
         }
-
         return construccion.agregarAlMapa(mineral, gas);
     }
 

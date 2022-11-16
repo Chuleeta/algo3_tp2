@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
@@ -15,7 +16,10 @@ public class Mutalisco {
     private final int tiempoDeConstruccion;
     private int tiempo;
     private EstadoConstruccion estado;
-    public Mutalisco(Mineral mineral, GasVespeno gas) throws RequerimientosInsuficientesException {
+    private int rangoDeAtaque;
+    private Posicion posicion;
+
+    public Mutalisco(Mineral mineral, GasVespeno gas, Posicion posicion) throws RequerimientosInsuficientesException {
         if (!mineral.invertir(100) | !gas.invertir(100)) {
             throw new RequerimientosInsuficientesException();
         }
@@ -24,6 +28,8 @@ public class Mutalisco {
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 7;
         this.tiempo = 0;
+        rangoDeAtaque= 3;
+        this.posicion = posicion;
     }
     private void construir() {
         this.estado = new EstadoConstruido();
@@ -33,9 +39,14 @@ public class Mutalisco {
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
     }
     public void atacarEdificio(Edificio edificio) {
-        if (this.estado.estaConstruido()) {
-            edificio.dañar(this.unidadesDeDaño);
+        if (estado.estaConstruido()) {
+            if (estaDentroDelRango(edificio.posicion())) {
+                edificio.dañar(unidadesDeDaño);
+            }
         }
+    }
+    private boolean estaDentroDelRango(Posicion posicion) {
+        return posicion.adentro(this.rangoDeAtaque, this.posicion);
     }
 
 }

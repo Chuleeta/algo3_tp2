@@ -24,7 +24,7 @@ public class ScoutTest {
         NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), new Mapa());
         Mineral mineral = new Mineral(300);
         GasVespeno gas = new GasVespeno(150);
-        Scout scout = new Scout(mineral, gas);
+        Scout scout = new Scout(mineral, gas, new Posicion(1, 5));
 
         // EL tiempo de construccion es 4, con un solo tiempo no esta construido
         scout.pasarTiempo();
@@ -39,7 +39,7 @@ public class ScoutTest {
         Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
         Mineral mineral = new Mineral(300);
         GasVespeno gas = new GasVespeno(150);
-        Scout scout = new Scout(mineral, gas);
+        Scout scout = new Scout(mineral, gas, new Posicion(1,5));
         scout.pasarTiempo();
         scout.pasarTiempo();
         scout.pasarTiempo();
@@ -68,6 +68,34 @@ public class ScoutTest {
         //sigue incompleta
         assertFalse(criadero.tieneVidaCompleta());
         criadero.pasarTiempo();
+
+        //vida completa
+        assertTrue(criadero.tieneVidaCompleta());
+
+    }
+
+    // caso 23
+    @Test
+    public void scoutNoAtacaCriaderolPorqueEstaFueraDeRango() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+
+        Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
+        Mineral mineral = new Mineral(300);
+        GasVespeno gas = new GasVespeno(150);
+        Scout scout = new Scout(mineral, gas, new Posicion(1,6));
+        scout.pasarTiempo();
+        scout.pasarTiempo();
+        scout.pasarTiempo();
+        scout.pasarTiempo();
+        scout.pasarTiempo();
+        scout.pasarTiempo();
+        scout.pasarTiempo();
+        scout.pasarTiempo();
+        scout.pasarTiempo();
+
+        // Su unidad de ataque a tierra es de 8, con 25 ataques son 200 de daño
+
+        for (int i = 0; i < 25; i++)
+            scout.atacarEdificio(criadero);
 
         //vida completa
         assertTrue(criadero.tieneVidaCompleta());

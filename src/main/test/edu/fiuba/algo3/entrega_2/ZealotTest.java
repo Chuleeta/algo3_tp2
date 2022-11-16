@@ -21,7 +21,7 @@ public class ZealotTest {
 
         NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), new Mapa());
         Mineral mineral = new Mineral(100);
-        Zealot zealot = new Zealot(mineral);
+        Zealot zealot = new Zealot(mineral, new Posicion(1, 2));
 
         // EL tiempo de construccion es 4, con un solo tiempo no esta construido
         zealot.pasarTiempo();
@@ -31,11 +31,11 @@ public class ZealotTest {
     }
     // caso 18
     @Test
-    public void ZealotAtacaCriadero25VecesYGenera200UnidadesDeAtaque() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void zealotAtacaCriadero25VecesYGenera200UnidadesDeAtaque() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
 
         Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
         Mineral mineral = new Mineral(100);
-        Zealot zealot = new Zealot(mineral);
+        Zealot zealot = new Zealot(mineral, new Posicion(1,2));
         zealot.pasarTiempo();
         zealot.pasarTiempo();
         zealot.pasarTiempo();
@@ -55,6 +55,23 @@ public class ZealotTest {
         //sigue incompleta
         assertFalse(criadero.tieneVidaCompleta());
         criadero.pasarTiempo();
+        //vida completa
+        assertTrue(criadero.tieneVidaCompleta());
+    }
+    // caso 23
+    @Test
+    public void zealotNoAtacaCriaderoPorqueEstaFueraDeRango() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+
+        Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
+        Mineral mineral = new Mineral(100);
+        Zealot zealot = new Zealot(mineral, new Posicion(1,3));
+        zealot.pasarTiempo();
+        zealot.pasarTiempo();
+        zealot.pasarTiempo();
+        zealot.pasarTiempo();
+        for (int i = 0; i < 25; i++)
+            zealot.atacarEdificio(criadero);
+
         //vida completa
         assertTrue(criadero.tieneVidaCompleta());
     }

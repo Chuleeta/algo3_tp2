@@ -25,7 +25,7 @@ public class MutaliscoTest {
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
         mapa.agregarConstruccion(nexo, mineral, gas);
-        Mutalisco mutalisco = new Mutalisco(mineral, gas);
+        Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(3, 3));
 
         // EL tiempo de construccion es 4, con un solo tiempo no esta construido
         mutalisco.pasarTiempo();
@@ -41,13 +41,13 @@ public class MutaliscoTest {
 
     // caso 18
     @Test
-    public void MutaliscoAtacaNexoMineral23VecesYGenera207UnidadesDeDaño() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void mutaliscoAtacaNexoMineral23VecesYGenera207UnidadesDeDaño() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
 
         Mapa mapa = new Mapa();
         NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
-        Mutalisco mutalisco = new Mutalisco(mineral, gas);
+        Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(3,3));
         mapa.agregarConstruccion(nexo, mineral, gas);
         // tiempo de construccion
         mutalisco.pasarTiempo();
@@ -80,5 +80,31 @@ public class MutaliscoTest {
         //escudo completo
         assertTrue(nexo.tieneEscudoCompleto());
 
+    }
+    // caso 23
+    @Test
+    public void mutaliscoNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+
+        Mapa mapa = new Mapa();
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+        Mineral mineral = new Mineral(150);
+        GasVespeno gas = new GasVespeno(100);
+        Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(4,3));
+        mapa.agregarConstruccion(nexo, mineral, gas);
+        // tiempo de construccion
+        mutalisco.pasarTiempo();
+        mutalisco.pasarTiempo();
+        mutalisco.pasarTiempo();
+        mutalisco.pasarTiempo();
+        mutalisco.pasarTiempo();
+        mutalisco.pasarTiempo();
+        mutalisco.pasarTiempo();
+
+        // Su unidad de ataque es de 9, con 23 ataques son 207 de daño
+        for (int i = 0; i < 23; i++)
+            mutalisco.atacarEdificio(nexo);
+
+        //escudo completo
+        assertTrue(nexo.tieneEscudoCompleto());
     }
 }

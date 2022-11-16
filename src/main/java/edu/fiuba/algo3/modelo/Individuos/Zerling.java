@@ -5,9 +5,12 @@ import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
 public class Zerling {
+    private final Posicion posicion;
+    private final int rangoDeAtaque;
     private int tiempo;
     private int vida;
     private int unidadesDeDaño;
@@ -15,20 +18,27 @@ public class Zerling {
     private EstadoConstruccion estado;
     private int tiempoDeConstruccion;
 
-    public Zerling(Mineral mineral) throws RequerimientosInsuficientesException {
+    public Zerling(Mineral mineral, Posicion posicion) throws RequerimientosInsuficientesException {
         if (!mineral.invertir(25)) {
             throw new RequerimientosInsuficientesException();
         }
+        this.posicion = posicion;
         this.unidadesDeDaño = 4;
         this.vida = 35;
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 2;
         this.tiempo = 0;
+        rangoDeAtaque = 1;
     }
     public void atacarEdificio(Edificio edificio) {
-        if (this.estado.estaConstruido()) {
-            edificio.dañar(this.unidadesDeDaño);
+        if (estado.estaConstruido()) {
+            if (estaDentroDelRango(edificio.posicion())) {
+                edificio.dañar(unidadesDeDaño);
+            }
         }
+    }
+    private boolean estaDentroDelRango(Posicion posicion) {
+        return posicion.adentro(this.rangoDeAtaque, this.posicion);
     }
 
     public void pasarTiempo() {

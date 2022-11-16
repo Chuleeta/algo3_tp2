@@ -23,7 +23,7 @@ public class HidraliscoTest {
         NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
         Mineral mineral = new Mineral(125);
         GasVespeno gas = new GasVespeno(25);
-        Hidralisco hidralisco = new Hidralisco(mineral, gas);
+        Hidralisco hidralisco = new Hidralisco(mineral, gas, new Posicion(3,3));
         mapa.agregarConstruccion(nexo, mineral, gas);
         mapa.pasarTiempo();
         mapa.pasarTiempo();
@@ -46,7 +46,7 @@ public class HidraliscoTest {
         // tiempo de construccion
         Mineral mineral = new Mineral(125);
         GasVespeno gas = new GasVespeno(25);
-        Hidralisco hidralisco = new Hidralisco(mineral, gas);
+        Hidralisco hidralisco = new Hidralisco(mineral, gas, new Posicion(3,3));
         mapa.agregarConstruccion(nexo, mineral, gas);
         hidralisco.pasarTiempo();
         hidralisco.pasarTiempo();
@@ -69,6 +69,28 @@ public class HidraliscoTest {
         assertFalse(nexo.tieneEscudoCompleto());
         mapa.pasarTiempo();
         //escudo completo
+        assertTrue(nexo.tieneEscudoCompleto());
+
+    }
+    // caso 23
+    @Test
+    public void hidraliscoNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+        Mapa mapa = new Mapa();
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+
+        // tiempo de construccion
+        Mineral mineral = new Mineral(125);
+        GasVespeno gas = new GasVespeno(25);
+        Hidralisco hidralisco = new Hidralisco(mineral, gas, new Posicion(10,10));
+        mapa.agregarConstruccion(nexo, mineral, gas);
+        hidralisco.pasarTiempo();
+        hidralisco.pasarTiempo();
+        hidralisco.pasarTiempo();
+        hidralisco.pasarTiempo();
+        // Su unidad de ataque es de 10, con 20 ataques son 200 de daño
+        for (int i = 0; i < 20; i++)
+            hidralisco.atacarEdificio(nexo);
+
         assertTrue(nexo.tieneEscudoCompleto());
 
     }

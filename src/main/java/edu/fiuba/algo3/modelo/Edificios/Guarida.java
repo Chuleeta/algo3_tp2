@@ -82,7 +82,7 @@ public class Guarida extends Edificio{
         
     }
     public Hidralisco generarHidralisco(Mineral mineral, GasVespeno gas, Larva larva) throws RequerimientosInsuficientesException {
-        return new Hidralisco(mineral, gas);
+        return new Hidralisco(mineral, gas, new Posicion(3,3));
     }
 
 }

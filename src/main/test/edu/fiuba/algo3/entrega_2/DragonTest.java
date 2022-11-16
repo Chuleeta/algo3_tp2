@@ -23,7 +23,7 @@ public class DragonTest {
         NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), new Mapa());
         Mineral mineral = new Mineral(125);
         GasVespeno gas = new GasVespeno(50);
-        Dragon dragon = new Dragon(mineral, gas);
+        Dragon dragon = new Dragon(mineral, gas, new Posicion(1, 3));
 
         // EL tiempo de construccion es 4, con un solo tiempo no esta construido
         dragon.pasarTiempo();
@@ -38,7 +38,7 @@ public class DragonTest {
         Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
         Mineral mineral = new Mineral(125);
         GasVespeno gas = new GasVespeno(50);
-        Dragon dragon = new Dragon(mineral, gas);
+        Dragon dragon = new Dragon(mineral, gas, new Posicion(1,5));
         dragon.pasarTiempo();
         dragon.pasarTiempo();
         dragon.pasarTiempo();
@@ -66,6 +66,28 @@ public class DragonTest {
         criadero.pasarTiempo();
 
         //vida completa
+        assertTrue(criadero.tieneVidaCompleta());
+
+    }
+
+    // caso 23
+    @Test
+    public void dragonNoAtacaCriaderoPorqueEstaFueraDeRango() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+
+        Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
+        Mineral mineral = new Mineral(125);
+        GasVespeno gas = new GasVespeno(50);
+        Dragon dragon = new Dragon(mineral, gas, new Posicion(1,6));
+        dragon.pasarTiempo();
+        dragon.pasarTiempo();
+        dragon.pasarTiempo();
+        dragon.pasarTiempo();
+        dragon.pasarTiempo();
+        dragon.pasarTiempo();
+
+        for (int i = 0; i < 10; i++)
+            dragon.atacarEdificio(criadero);
+
         assertTrue(criadero.tieneVidaCompleta());
 
     }

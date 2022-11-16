@@ -78,7 +78,7 @@ public class ReservaDeReproduccion extends Edificio{
         return false;
     }
     public Zerling generarZerling(Mineral mineral, Larva larva) throws RequerimientosInsuficientesException {
-            return new Zerling(mineral);
+            return new Zerling(mineral, new Posicion(3, 3));
     }
 
     @Override

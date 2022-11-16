@@ -22,7 +22,7 @@ public class GuardianTest {
         NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), new Mapa());
         Mineral mineral = new Mineral(50);
         GasVespeno gas = new GasVespeno(100);
-        Guardian guardian = new Guardian(mineral, gas);
+        Guardian guardian = new Guardian(mineral, gas, new Posicion(8, 8));
 
         // EL tiempo de construccion es 4, con un solo tiempo no esta construido
         guardian.pasarTiempo();
@@ -39,7 +39,7 @@ public class GuardianTest {
         Mineral mineral = new Mineral(100);
         GasVespeno gas = new GasVespeno(100);
         mapa.agregarConstruccion(nexo, mineral, gas);
-        Guardian guardian = new Guardian(mineral, gas);
+        Guardian guardian = new Guardian(mineral, gas, new Posicion(8, 8));
         guardian.pasarTiempo();
         guardian.pasarTiempo();
         guardian.pasarTiempo();
@@ -62,5 +62,27 @@ public class GuardianTest {
         nexo.pasarTiempo();
         //escudo completo
         assertTrue(nexo.tieneEscudoCompleto());
+    }
+
+    // caso 23
+    @Test
+    public void guardianNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+        Mapa mapa = new Mapa();
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+        Mineral mineral = new Mineral(100);
+        GasVespeno gas = new GasVespeno(100);
+        mapa.agregarConstruccion(nexo, mineral, gas);
+        Guardian guardian = new Guardian(mineral, gas, new Posicion(1, 12));
+        guardian.pasarTiempo();
+        guardian.pasarTiempo();
+        guardian.pasarTiempo();
+        guardian.pasarTiempo();
+        // Su unidad de ataque es de 25, con 8 ataques son 200 de daño
+        for (int i = 0; i < 8; i++)
+            guardian.atacarEdificio(nexo);
+
+        //escudo completo porque esta fuera de rango
+        assertTrue(nexo.tieneEscudoCompleto());
+
     }
 }

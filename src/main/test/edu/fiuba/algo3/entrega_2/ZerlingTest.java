@@ -24,7 +24,7 @@ public class ZerlingTest {
 
         Mineral mineral = new Mineral(25);
 
-        Zerling zerling = new Zerling(mineral);
+        Zerling zerling = new Zerling(mineral, new Posicion(1, 2));
         // EL tiempo de construccion es 2, con un solo tiempo no esta construido.
         zerling.pasarTiempo();
         zerling.atacarEdificio(nexo);
@@ -44,7 +44,7 @@ public class ZerlingTest {
         GasVespeno gas = new GasVespeno(0);
         mapa.agregarConstruccion(nexo, mineral, gas);
 
-        Zerling zerling = new Zerling(mineral);
+        Zerling zerling = new Zerling(mineral, new Posicion(1,2));
         zerling.pasarTiempo();
         zerling.pasarTiempo();
         // Su unidad de ataque es de 10, con 20 ataques son 200 de daño
@@ -63,6 +63,29 @@ public class ZerlingTest {
         //sigue dañado
         assertFalse(nexo.tieneEscudoCompleto());
         mapa.pasarTiempo();
+        //escudo completo
+        assertTrue(nexo.tieneEscudoCompleto());
+
+    }
+
+    // caso 23
+    @Test
+    public void zerlingNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+        Mapa mapa = new Mapa();
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+
+        // tiempo de construccion
+        Mineral mineral = new Mineral(75);
+        GasVespeno gas = new GasVespeno(0);
+        mapa.agregarConstruccion(nexo, mineral, gas);
+
+        Zerling zerling = new Zerling(mineral, new Posicion(3,3));
+        zerling.pasarTiempo();
+        zerling.pasarTiempo();
+        // Su unidad de ataque es de 10, con 20 ataques son 200 de daño
+        for (int i = 0; i < 50; i++)
+            zerling.atacarEdificio(nexo);
+
         //escudo completo
         assertTrue(nexo.tieneEscudoCompleto());
 
