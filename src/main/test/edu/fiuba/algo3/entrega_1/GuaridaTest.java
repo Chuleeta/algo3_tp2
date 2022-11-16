@@ -5,6 +5,9 @@ import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.Guarida;
 import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Individuos.Hidralisco;
+import edu.fiuba.algo3.modelo.Individuos.Zerling;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
@@ -88,5 +91,24 @@ public class GuaridaTest {
         guarida.pasarTiempo();
         guarida.pasarTiempo();
         assertThrows(NoExisteEdificioCorrelativoException.class, () ->{ guarida.pasarTiempo();});
+    }
+
+    // caso 22
+    @Test
+    public void seEngendraHidraliscoExitosamente() throws NoExisteEdificioCorrelativoException, RequerimientosInsuficientesException {
+        //given
+        Mapa mapa = new Mapa();
+        // es el edificio correlativo
+        ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(2,2), mapa);
+        reservaDeReproduccion.agregarAlMapa(new Mineral(150), new GasVespeno(100));
+        Guarida guarida = new Guarida(new Posicion(1,1), mapa);
+
+        for (int i = 0; i < 12; i++)
+            guarida.pasarTiempo();
+
+        Mineral mineral = new Mineral(75);
+        GasVespeno gas = new GasVespeno(25);
+        Hidralisco hidralisco = guarida.generarHidralisco(mineral, gas, new Larva());
+        assertNotNull(hidralisco);
     }
 }

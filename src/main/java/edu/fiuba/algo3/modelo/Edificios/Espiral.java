@@ -2,6 +2,10 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Individuos.Hidralisco;
+import edu.fiuba.algo3.modelo.Individuos.Mutalisco;
+import edu.fiuba.algo3.modelo.Larva;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
@@ -76,5 +80,9 @@ public class Espiral extends Edificio{
     @Override
     public void actualizar() {
         this.vida.regenerarVida();
+    }
+
+    public Mutalisco generarMutalisco(Mineral mineral, GasVespeno gas, Larva larva) throws RequerimientosInsuficientesException {
+        return new Mutalisco(mineral, gas);
     }
 }

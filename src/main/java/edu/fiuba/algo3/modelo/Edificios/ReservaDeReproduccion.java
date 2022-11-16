@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Larva;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
@@ -76,9 +77,9 @@ public class ReservaDeReproduccion extends Edificio{
         }
         return false;
     }
-    public Zerling generarZerling(Mineral mineral) throws RequerimientosInsuficientesException {
+    public Zerling generarZerling(Mineral mineral, Larva larva) throws RequerimientosInsuficientesException {
             return new Zerling(mineral);
-        }
+    }
 
     @Override
     public void actualizar() {
