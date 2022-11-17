@@ -6,41 +6,40 @@ public class Jugador {
 
     private String nombre;
     private String color;
-    private String raza; //TODO: cambiarlo a Raza?
+    private String raza;
+    private Posicion posicion;
 
 
-    public Jugador(String name, String color, String race){
+    public Jugador(String name, String color, String race, Jugador jugadorContrario){
         nombre = name;
         this.color = color;
         raza = race;
+        crearPosicion(jugadorContrario);
     }
 
-    /*public Jugador(String name, String color, String race, Jugador jugadorUno){
-        nombre = name;
-        this.color = color;
-        raza = race;
-    }*/
-
-    public void validarAtributos(String name) throws AtributoInvalidoException {
-        validarNombre(name, null);
+    private void crearPosicion(Jugador jugadorContrario){
+        if(jugadorContrario == null)
+            this.posicion = new Posicion(1, 1);
+        this.posicion = new Posicion(100, 100);
     }
 
-    public void validarAtributos(String name, String color, String race, Jugador jugadorUno) throws AtributoInvalidoException {
-        validarNombre(name, jugadorUno.nombre);
-        validarColor(color, jugadorUno.color);
-        validarRaza(race, jugadorUno.raza);
+    public void validarAtributos(Jugador jugadorDado) throws AtributoInvalidoException {
+        if(jugadorDado == null) return;
+        validarNombre(this.nombre, jugadorDado.nombre);
+        validarColor(this.color, jugadorDado.color);
+        validarRaza(this.raza, jugadorDado.raza);
     }
 
     private void validarRaza(String race, String razaUno) throws AtributoInvalidoException {
-        if(razaUno.equals(race)) throw new AtributoInvalidoException(race);
+        if(razaUno.equals(race)) throw new AtributoInvalidoException();
     }
 
     private void validarColor(String color, String colorUno) throws AtributoInvalidoException {
-        if(colorUno.equals(color)) throw new AtributoInvalidoException(color);
+        if(colorUno.equals(color)) throw new AtributoInvalidoException();
     }
 
     private void validarNombre(String name, String nombreUno) throws AtributoInvalidoException {
-        if(name.length() < 6 || (nombreUno != null && nombreUno.equals(name))) throw new AtributoInvalidoException(name);
+        if(name.length() < 6 || (nombreUno != null && nombreUno.equals(name))) throw new AtributoInvalidoException();
     }
 
 
