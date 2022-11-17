@@ -1,20 +1,15 @@
 package edu.fiuba.algo3.modelo;
 
-public class VidaEscudoProtoss {
+public class VidaEscudoProtoss extends Vida{
 
     private int escudo;
     private int escudoCompleto;
-    private int vida;
-    private int vidaCompleta;
 
     public VidaEscudoProtoss(int vida, int escudo) {
         this.vidaCompleta = vida;
         this.vida = vida;
         this.escudoCompleto = escudo;
         this.escudo = escudo;
-    }
-    public boolean tieneVidaCompleta(){
-        return this.vida == this.vidaCompleta;
     }
     public boolean tieneEscudoCompleto(){
         return this.escudo == this.escudoCompleto;
@@ -31,7 +26,7 @@ public class VidaEscudoProtoss {
             this.escudo -= daño;
         }
     }
-    public void repararEscudo() {
+    public void regenerar() {
         this.escudo += 100;
         if (this.escudo > this.vidaCompleta) {
             this.escudo = this.escudoCompleto;
@@ -41,5 +36,7 @@ public class VidaEscudoProtoss {
     public void dañar(int daño) {
         dañarEscudo(daño);
     }
+
+    
 
 }

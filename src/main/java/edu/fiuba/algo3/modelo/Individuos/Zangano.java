@@ -1,24 +1,23 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
-import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Recursos.Mena;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 
-public class Zangano {
+public class Zangano extends Individuo implements UnidadTierra{
 
     private int tiempoDeConstruccion;
     private int tiempo;
-    private int vida;
     private Mena mena;
     private int minerales;
-    private EstadoConstruccion estado;
 
     public Zangano() {
         this.mena = null;
-        this.vida = 25;
+        this.vida = new VidaZerg(25);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 1;
         this.tiempo = 0;
@@ -50,6 +49,24 @@ public class Zangano {
             return volcan.extraerGas(10);
         }
         return 0;
+    }
+
+    public boolean atacar(UnidadTierra unidad)
+    {
+        return false;
+    }
+
+    public boolean atacar(UnidadVoladora unidad)
+    {
+        return false;
+    }
+
+    public boolean mover(Posicion posicion)
+    {
+        if(mapa.enAreaEspacial(posicion))
+            return false;
+        this.posicion = posicion;
+        return true;
     }
 
 }

@@ -17,12 +17,14 @@ public class Mapa {
     private int bases;
     private ArrayList<Construccion> construcciones;
     private ArrayList<Zona> zonas;
+    private ArrayList<AreaEspacial> areasEspaciales;
     private Posicion[][] tablero;
 
     public Mapa()
     {
         this.construcciones = new ArrayList<>();
         this.zonas = new ArrayList<>();
+        this.areasEspaciales = new ArrayList<>();
         this.zonas.add(new ZonaNeutral());
         // bases = cantidadDeBases;
        // generarMapa(cantidadDeBases);
@@ -69,8 +71,22 @@ public class Mapa {
         return false;
     }
 
+    public boolean enAreaEspacial(Posicion posicion)
+    {
+        for (AreaEspacial area : areasEspaciales)
+        {
+            if(area.abarca(posicion))
+                return true;
+        }
+        return false;
+    }
+
     public void agregarZona(Zona zona){
         zonas.add(zona);
+    }
+
+    public void agregarAreaEspacial(AreaEspacial area){
+        areasEspaciales.add(area);
     }
 
     public Zona getZonaNeutral() {

@@ -16,7 +16,6 @@ import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Individuos.Zangano;
-import edu.fiuba.algo3.modelo.Zonas.Zona;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
 import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
@@ -37,10 +36,6 @@ public class Criadero extends Edificio {
         zona = mapa.getZonaNeutral();
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
-    }
-
-    private void validarMinerales(int recursosDelJugador) throws RecursosInsuficientesException{
-        if(recursosDelJugador < COSTO_DE_CONSTRUCCION) throw new RecursosInsuficientesException();
     }
 
     public int getCostoDeConstruccion(){
@@ -96,7 +91,7 @@ public class Criadero extends Edificio {
     }
 
     public void actualizar(){
-        this.vida.regenerarVida();
+        this.vida.regenerar();
         if (tiempo % 2 == 0)
         zona.propagar();
         if (larvas.size() < 3)

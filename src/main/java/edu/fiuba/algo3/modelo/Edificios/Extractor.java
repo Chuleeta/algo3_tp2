@@ -104,7 +104,7 @@ public class Extractor extends Edificio implements HabitanteMoho {
 
     @Override
     public void actualizar(){
-        this.vida.regenerarVida();
+        this.vida.regenerar();
         extraerGas();
     }
 

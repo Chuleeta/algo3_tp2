@@ -81,7 +81,7 @@ public class PuertoEstelar extends Edificio {
 
     @Override
     public void actualizar() {
-        this.vidaYEscudo.repararEscudo();
+        this.vidaYEscudo.regenerar();
     }
 
 }

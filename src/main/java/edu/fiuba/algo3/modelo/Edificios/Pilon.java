@@ -14,7 +14,6 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Pilon extends Edificio{
 
-    private static int VIDA_ESCUDO_COMPLETA = 300;
 
     private VidaEscudoProtoss vidaYEscudo;
 
@@ -86,6 +85,6 @@ public class Pilon extends Edificio{
     }
     @Override
     public void actualizar() {
-        this.vidaYEscudo.repararEscudo();
+        this.vidaYEscudo.regenerar();
     }
 }

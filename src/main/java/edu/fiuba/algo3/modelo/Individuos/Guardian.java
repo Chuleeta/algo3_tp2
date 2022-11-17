@@ -1,28 +1,24 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
-import edu.fiuba.algo3.modelo.Edificios.Edificio;
-import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
-public class Guardian {
-    private int vida;
-    private int unidadesDeDaño;
-    private int rangoDeAtaque;
+public class Guardian extends Individuo implements UnidadVoladora{
     private final int tiempoDeConstruccion;
     private int tiempo;
-    private EstadoConstruccion estado;
-    private Posicion posicion;
 
-    public Guardian(Mineral mineral, GasVespeno gas, Posicion posicion) throws RequerimientosInsuficientesException {
+    public Guardian(Mineral mineral, GasVespeno gas, Posicion posicion, Mapa mapa) throws RequerimientosInsuficientesException {
         if (!mineral.invertir(50) | !gas.invertir(100)) {
             throw new RequerimientosInsuficientesException();
         }
-        this.vida = 100;
+        this.mapa = mapa;
+        this.vida = new VidaZerg(100);
         this.unidadesDeDaño = 25;
         this.rangoDeAtaque = 10;
         this.estado = new EstadoNoConstruido();
@@ -38,15 +34,35 @@ public class Guardian {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
     }
-    public void atacarEdificio(Edificio edificio) {
-        if (estado.estaConstruido()) {
-            if (estaDentroDelRango(edificio.posicion())) {
-                edificio.dañar(unidadesDeDaño);
-            }
-        }
+
+    public void elevar()
+    {
+        this.posicion.ascender();
     }
-    private boolean estaDentroDelRango(Posicion posicion) {
-        return posicion.adentro(this.rangoDeAtaque, this.posicion);
+
+    public void bajar()
+    {
+        this.posicion.descender();
+    }
+
+    public boolean atacar(UnidadTierra unidad)
+    {
+        if (estaDentroDelRango(unidad.posicion())) {
+            unidad.recibirDaño(this.unidadesDeDaño);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean atacar(UnidadVoladora unidad)
+    {
+        return false;
+    }
+    
+    public boolean mover(Posicion posicion)
+    {
+        this.posicion = posicion;
+        return true;
     }
 
 }

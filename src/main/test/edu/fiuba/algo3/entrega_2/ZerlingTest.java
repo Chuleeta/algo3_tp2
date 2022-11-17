@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Individuos.Dragon;
+import edu.fiuba.algo3.modelo.Individuos.Guardian;
 import edu.fiuba.algo3.modelo.Individuos.Zerling;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mena;
@@ -24,10 +26,10 @@ public class ZerlingTest {
 
         Mineral mineral = new Mineral(25);
 
-        Zerling zerling = new Zerling(mineral, new Posicion(1, 2));
+        Zerling zerling = new Zerling(mineral, new Posicion(1, 2), new Mapa());
         // EL tiempo de construccion es 2, con un solo tiempo no esta construido.
         zerling.pasarTiempo();
-        zerling.atacarEdificio(nexo);
+        zerling.atacar(nexo);
 
         //escudo completo
         assertTrue(nexo.tieneEscudoCompleto());
@@ -44,12 +46,12 @@ public class ZerlingTest {
         GasVespeno gas = new GasVespeno(0);
         mapa.agregarConstruccion(nexo, mineral, gas);
 
-        Zerling zerling = new Zerling(mineral, new Posicion(1,2));
+        Zerling zerling = new Zerling(mineral, new Posicion(1,2), new Mapa());
         zerling.pasarTiempo();
         zerling.pasarTiempo();
         // Su unidad de ataque es de 10, con 20 ataques son 200 de daño
         for (int i = 0; i < 50; i++)
-            zerling.atacarEdificio(nexo);
+            zerling.atacar(nexo);
 
 
         //SE CONSTRUYE EL NEXO PARA QUE SE PUEDA REGENERAR EL ESCUDO
@@ -79,16 +81,60 @@ public class ZerlingTest {
         GasVespeno gas = new GasVespeno(0);
         mapa.agregarConstruccion(nexo, mineral, gas);
 
-        Zerling zerling = new Zerling(mineral, new Posicion(3,3));
+        Zerling zerling = new Zerling(mineral, new Posicion(3,3), new Mapa());
         zerling.pasarTiempo();
         zerling.pasarTiempo();
         // Su unidad de ataque es de 10, con 20 ataques son 200 de daño
         for (int i = 0; i < 50; i++)
-            zerling.atacarEdificio(nexo);
+            zerling.atacar(nexo);
 
         //escudo completo
         assertTrue(nexo.tieneEscudoCompleto());
 
+    }
+
+    @Test
+    public void zerlingNoPuedeAtacarUnidadVoladoraPeroSiTerrestre() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+
+        Mineral mineral = new Mineral(10000);
+        GasVespeno gas = new GasVespeno(1000);
+        Zerling zerling = new Zerling(mineral, new Posicion(1,2), new Mapa());
+        Guardian guardian = new Guardian(mineral, gas, new Posicion(1,2), new Mapa());
+        Dragon dragon = new Dragon(mineral,gas, new Posicion(1,2), new Mapa());
+        zerling.pasarTiempo();
+        zerling.pasarTiempo();
+        zerling.pasarTiempo();
+        zerling.pasarTiempo();
+        zerling.pasarTiempo();
+        zerling.pasarTiempo();
+        assertTrue(dragon.tieneVidaCompleta());
+        assertTrue(guardian.tieneVidaCompleta());
+        for (int i = 0; i < 30; i++)
+        {
+            zerling.atacar(dragon);
+            zerling.atacar(guardian);
+        }
+
+
+        assertFalse(dragon.tieneVidaCompleta());
+        assertTrue(guardian.tieneVidaCompleta());
+    }
+
+    @Test
+    public void zealotNoPuedeMoverseAZonaEspacialPeroSiAOtroLado() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+
+        Mapa mapa = new Mapa();
+        mapa.agregarAreaEspacial(new AreaEspacial(0, 0, 10, 10));
+        Mineral mineral = new Mineral(10000);
+        Zerling zerling = new Zerling(mineral, new Posicion(11,11), mapa);
+        zerling.pasarTiempo();
+        zerling.pasarTiempo();
+        zerling.pasarTiempo();
+        zerling.pasarTiempo();
+        zerling.pasarTiempo();
+        zerling.pasarTiempo();
+        assertTrue(zerling.mover(new Posicion(12, 12)));
+        assertFalse(zerling.mover(new Posicion(3, 3)));
     }
 
 }

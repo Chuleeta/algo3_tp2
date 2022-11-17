@@ -1,23 +1,17 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
-import edu.fiuba.algo3.modelo.Edificios.Edificio;
-import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
-public class Zealot {
-    private int rangoDeAtaque;
-    private Posicion posicion;
-    private VidaEscudoProtoss vida;
-    private int unidadesDeDaño;
+public class Zealot extends Individuo implements UnidadTierra{
     private final int tiempoDeConstruccion;
     private int tiempo;
-    private EstadoConstruccion estado;
-    public Zealot(Mineral mineral, Posicion posicion) throws RequerimientosInsuficientesException {
+    public Zealot(Mineral mineral, Posicion posicion, Mapa mapa) throws RequerimientosInsuficientesException {
         if (!mineral.invertir(100)) {
             throw new RequerimientosInsuficientesException();
         }
@@ -28,6 +22,7 @@ public class Zealot {
         this.tiempo = 0;
         rangoDeAtaque = 1;
         this.posicion = posicion;
+        this.mapa = mapa;
     }
     private void construir() {
         this.estado = new EstadoConstruido();
@@ -36,14 +31,26 @@ public class Zealot {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
     }
-    public void atacarEdificio(Edificio edificio) {
-        if (estado.estaConstruido()) {
-            if (estaDentroDelRango(edificio.posicion())) {
-                edificio.dañar(unidadesDeDaño);
-            }
+
+    public boolean atacar(UnidadTierra unidad)
+    {
+        if (estaDentroDelRango(unidad.posicion())) {
+            unidad.recibirDaño(this.unidadesDeDaño);
+            return true;
         }
+        return false;
     }
-    private boolean estaDentroDelRango(Posicion posicion) {
-        return posicion.adentro(this.rangoDeAtaque, this.posicion);
+
+    public boolean atacar(UnidadVoladora unidad)
+    {
+        return false;
+    }
+
+    public boolean mover(Posicion posicion)
+    {
+        if(mapa.enAreaEspacial(posicion))
+            return false;
+        this.posicion = posicion;
+        return true;
     }
 }

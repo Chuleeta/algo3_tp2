@@ -14,7 +14,6 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Acceso extends Edificio{
 
-    private static int VIDA_COMPLETA = 500;
     private VidaEscudoProtoss vidaYEscudo;
 
     public Acceso(Posicion posicion, Mapa mapa)
@@ -77,7 +76,7 @@ public class Acceso extends Edificio{
 
     @Override
     public void actualizar() {
-        this.vidaYEscudo.repararEscudo();
+        this.vidaYEscudo.regenerar();
     }
 
 }

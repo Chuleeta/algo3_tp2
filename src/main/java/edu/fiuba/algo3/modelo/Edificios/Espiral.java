@@ -78,10 +78,10 @@ public class Espiral extends Edificio{
 
     @Override
     public void actualizar() {
-        this.vida.regenerarVida();
+        this.vida.regenerar();
     }
 
     public Mutalisco generarMutalisco(Mineral mineral, GasVespeno gas, Larva larva) throws RequerimientosInsuficientesException {
-        return new Mutalisco(mineral, gas, new Posicion(3, 3));
+        return new Mutalisco(mineral, gas, new Posicion(3, 3), this.mapa);
     }
 }

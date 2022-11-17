@@ -1,44 +1,30 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
-import edu.fiuba.algo3.modelo.Edificios.Edificio;
-import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
-public class Zerling {
-    private final Posicion posicion;
-    private final int rangoDeAtaque;
+public class Zerling extends Individuo implements UnidadTierra{
     private int tiempo;
-    private int vida;
-    private int unidadesDeDaño;
 
-    private EstadoConstruccion estado;
     private int tiempoDeConstruccion;
 
-    public Zerling(Mineral mineral, Posicion posicion) throws RequerimientosInsuficientesException {
+    public Zerling(Mineral mineral, Posicion posicion, Mapa mapa) throws RequerimientosInsuficientesException {
         if (!mineral.invertir(25)) {
             throw new RequerimientosInsuficientesException();
         }
         this.posicion = posicion;
         this.unidadesDeDaño = 4;
-        this.vida = 35;
+        this.vida = new VidaZerg(35);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 2;
         this.tiempo = 0;
         rangoDeAtaque = 1;
-    }
-    public void atacarEdificio(Edificio edificio) {
-        if (estado.estaConstruido()) {
-            if (estaDentroDelRango(edificio.posicion())) {
-                edificio.dañar(unidadesDeDaño);
-            }
-        }
-    }
-    private boolean estaDentroDelRango(Posicion posicion) {
-        return posicion.adentro(this.rangoDeAtaque, this.posicion);
+        this.mapa = mapa;
     }
 
     public void pasarTiempo() {
@@ -47,5 +33,27 @@ public class Zerling {
     }
     private void construir() {
         this.estado = new EstadoConstruido();
+    }
+
+    public boolean atacar(UnidadTierra unidad)
+    {
+        if (estaDentroDelRango(unidad.posicion())) {
+            unidad.recibirDaño(this.unidadesDeDaño);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean atacar(UnidadVoladora unidad)
+    {
+        return false;
+    }
+
+    public boolean mover(Posicion posicion)
+    {
+        if(mapa.enAreaEspacial(posicion))
+            return false;
+        this.posicion = posicion;
+        return true;
     }
 }

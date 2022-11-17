@@ -355,6 +355,8 @@ public class MapaTest {
         assertTrue(mapa.agregarConstruccion(extractor, mineral, gas));
     }
 
+    
+
 
 
 

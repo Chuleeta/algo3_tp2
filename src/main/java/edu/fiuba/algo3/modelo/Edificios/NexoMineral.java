@@ -84,6 +84,6 @@ public class NexoMineral extends Edificio{
     @Override
     public void actualizar() {
         mineral.agregarMineral(mena.extraerMineral(100));
-        this.vidaYEscudo.repararEscudo();
+        this.vidaYEscudo.regenerar();
     }
 }

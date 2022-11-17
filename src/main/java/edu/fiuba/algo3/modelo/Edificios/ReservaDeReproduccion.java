@@ -78,12 +78,12 @@ public class ReservaDeReproduccion extends Edificio{
         return false;
     }
     public Zerling generarZerling(Mineral mineral, Larva larva) throws RequerimientosInsuficientesException {
-            return new Zerling(mineral, new Posicion(3, 3));
+            return new Zerling(mineral, this.posicion.clone(), this.mapa);
     }
 
     @Override
     public void actualizar() {
-        this.vida.regenerarVida();
+        this.vida.regenerar();
     }
 
 

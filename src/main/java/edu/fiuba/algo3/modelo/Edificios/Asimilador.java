@@ -16,7 +16,6 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Asimilador extends Edificio{
 
-    private static int VIDA_COMPLETA = 500;
     private GasVespeno gas;
     private Volcan volcan;
 
@@ -89,7 +88,7 @@ public class Asimilador extends Edificio{
 
     @Override
     public void actualizar() {
-        this.vidaYEscudo.repararEscudo();
+        this.vidaYEscudo.regenerar();
         this.gas.agregarGas(volcan.extraerGas(20));
     }
 
