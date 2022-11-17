@@ -15,4 +15,5 @@ public interface Construccion {
     void pasarTiempo() throws NoExisteEdificioCorrelativoException;
     boolean agregarAlMapa(Mineral mineral, GasVespeno gas);
     void desactivar();
+    boolean estaOcupada(Posicion posicionDada);
 }

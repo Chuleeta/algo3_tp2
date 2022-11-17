@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Edificios.Extractor;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
+import edu.fiuba.algo3.modelo.Recursos.Mena;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 import edu.fiuba.algo3.modelo.Zonas.Zona;
@@ -14,11 +15,11 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Mapa {
 
-    private int bases;
     private ArrayList<Construccion> construcciones;
     private ArrayList<Zona> zonas;
     private ArrayList<AreaEspacial> areasEspaciales;
-    private Posicion[][] tablero;
+    private ArrayList<Volcan> volcanes;
+    private ArrayList<Mena> menas;
 
     public Mapa()
     {
@@ -26,22 +27,56 @@ public class Mapa {
         this.zonas = new ArrayList<>();
         this.areasEspaciales = new ArrayList<>();
         this.zonas.add(new ZonaNeutral());
-        // bases = cantidadDeBases;
-       // generarMapa(cantidadDeBases);
-    }
-    /*
-    private void generarMapa(int cantidadDeBases) {
-        if (cantidadDeBases < 2) {
-        }
-        int filasYColumnas = cantidadDeBases * 10;
-        tablero = new Posicion[filasYColumnas][filasYColumnas];
-        int posicionFila = cantidadDeBases * 5;
-        int posicionColumnaFinal = (cantidadDeBases * 10) - 1;
-        new Volcan(tablero[posicionFila][0]);
-        new Volcan(tablero[posicionFila][posicionColumnaFinal]);
+        this.volcanes = new ArrayList<>();
+        this.menas = new ArrayList<>();
 
     }
-    */
+
+    public boolean agregarVolcan(Volcan volcanDado){
+        if(volcanDado == null || !verificarPosicion(volcanDado.getPosicion()))
+            return false;
+        
+        this.volcanes.add(volcanDado);
+        return true;
+    }
+
+    public boolean agregarMena(Mena menaDada){
+        if(menaDada == null || !verificarPosicion(menaDada.getPosicion()))
+            return false;
+        
+        this.menas.add(menaDada);
+        return true;
+    }
+
+    private boolean verificarPosicion(Posicion posicionDada){
+        if(verificarPosicionVolcanes(posicionDada) && verificarPosicionMenas(posicionDada) && verificarPosicionConstrucciones(posicionDada))
+            return true;
+        return false;
+    }
+
+    private boolean verificarPosicionVolcanes(Posicion posicionDada){
+        for (Volcan volcan:volcanes){
+            if(volcan.estaOcupado(posicionDada))
+                return false;
+        }
+        return true;
+    }
+
+    private boolean verificarPosicionMenas(Posicion posicionDada){
+        for (Mena mena:menas){
+            if(mena.estaOcupada(posicionDada))
+                return false;
+        }
+        return true;
+    }
+
+    private boolean verificarPosicionConstrucciones(Posicion posicionDada){
+        for (Construccion construccion:construcciones){
+            if(construccion.estaOcupada(posicionDada))
+                return false;
+        }
+        return true;
+    }
 
     public boolean verificarEdificacionCorrelativa(Edificio edificioCorrelativo) {
         return construcciones.stream().anyMatch(clase -> clase.getClass().isInstance(edificioCorrelativo));

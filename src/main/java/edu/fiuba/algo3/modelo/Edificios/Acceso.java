@@ -79,4 +79,9 @@ public class Acceso extends Edificio{
         this.vidaYEscudo.regenerar();
     }
 
+    @Override
+    public boolean estaOcupada(Posicion posicionDada) {
+        return this.posicion.equals(posicionDada);
+    }
+
 }

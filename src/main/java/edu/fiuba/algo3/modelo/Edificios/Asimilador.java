@@ -92,4 +92,9 @@ public class Asimilador extends Edificio{
         this.gas.agregarGas(volcan.extraerGas(20));
     }
 
+    @Override
+    public boolean estaOcupada(Posicion posicionDada) {
+        return this.posicion.equals(posicionDada);
+    }
+
 }

@@ -2,7 +2,9 @@ package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.App;
 import edu.fiuba.algo3.modelo.Exceptions.AtributoInvalidoException;
+import edu.fiuba.algo3.modelo.Recursos.Mena;
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Mapa;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -45,7 +47,6 @@ public class JugadorTest {
 
         assertThrows(AtributoInvalidoException.class, () -> jugadorDos.validarAtributos(jugadorUno));
     }
-
     // @Test
     // public void testSeLanzaExcepcionAlCrearAlJugadorUno() throws AtributoInvalidoException {
     //     Jugador jugadorUno = new Jugador("juga", "azul", "zerg");

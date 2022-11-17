@@ -131,4 +131,9 @@ public class Criadero extends Edificio {
         }
         return false;
     }
+
+    @Override
+    public boolean estaOcupada(Posicion posicionDada) {
+        return this.posicion.equals(posicionDada);
+    }
 }

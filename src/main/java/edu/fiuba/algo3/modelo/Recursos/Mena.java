@@ -34,4 +34,12 @@ public class Mena {
         }
         this.estaOcupado = true;
     }
+
+    public boolean estaOcupada(Posicion posicionDada) {
+        return this.posicion.equals(posicionDada);
+    }
+
+    public Posicion getPosicion() {
+        return this.posicion;
+    }
 }

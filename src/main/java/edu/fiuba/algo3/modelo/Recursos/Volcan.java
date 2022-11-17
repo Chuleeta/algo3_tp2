@@ -30,4 +30,12 @@ public class Volcan {
         }
         return this.gas;
     }
+
+    public Posicion getPosicion() {
+        return this.posicion;
+    }
+
+    public boolean estaOcupado(Posicion posicionDada) {
+        return this.posicion.equals(posicionDada);
+    }
 }

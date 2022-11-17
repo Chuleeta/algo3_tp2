@@ -87,4 +87,8 @@ public class Pilon extends Edificio{
     public void actualizar() {
         this.vidaYEscudo.regenerar();
     }
+    @Override
+    public boolean estaOcupada(Posicion posicionDada) {
+        return this.posicion.equals(posicionDada);
+    }
 }

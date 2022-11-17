@@ -86,5 +86,10 @@ public class ReservaDeReproduccion extends Edificio{
         this.vida.regenerar();
     }
 
+    @Override
+    public boolean estaOcupada(Posicion posicionDada) {
+        return this.posicion.equals(posicionDada);
+    }
+
 
 }

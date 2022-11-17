@@ -86,4 +86,9 @@ public class NexoMineral extends Edificio{
         mineral.agregarMineral(mena.extraerMineral(100));
         this.vidaYEscudo.regenerar();
     }
+
+    @Override
+    public boolean estaOcupada(Posicion posicionDada) {
+        return this.posicion.equals(posicionDada);
+    }
 }

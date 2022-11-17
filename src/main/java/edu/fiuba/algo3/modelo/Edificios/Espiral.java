@@ -84,4 +84,9 @@ public class Espiral extends Edificio{
     public Mutalisco generarMutalisco(Mineral mineral, GasVespeno gas, Larva larva) throws RequerimientosInsuficientesException {
         return new Mutalisco(mineral, gas, new Posicion(3, 3), this.mapa);
     }
+
+    @Override
+    public boolean estaOcupada(Posicion posicionDada) {
+        return this.posicion.equals(posicionDada);
+    }
 }
