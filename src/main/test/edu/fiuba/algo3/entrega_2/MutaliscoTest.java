@@ -158,21 +158,40 @@ public class MutaliscoTest {
     }
 
     @Test
-    public void mutaliscoNoPuedeEvolucionarSinRecursos() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void mutaliscoNoPuedeEvolucionarAGuardianSinRecursos() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Mineral mineral = new Mineral(100);
         GasVespeno gas = new GasVespeno(100);
         Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(11,11), mapa);
-        assertThrows(RequerimientosInsuficientesException.class, ()->{ mutalisco.evolucionar(mineral, gas); });
+        assertThrows(RequerimientosInsuficientesException.class, ()->{ mutalisco.evolucionarAGurdian(mineral, gas); });
     }
 
     @Test
-    public void mutaliscoPuedeEvolucionarConRecursos() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void mutaliscoPuedeEvolucionarAGuardianConRecursos() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Mineral mineral = new Mineral(1000);
         GasVespeno gas = new GasVespeno(1000);
         Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(11,11), mapa);
-        assertTrue(mutalisco.evolucionar(mineral, gas) != null);
+        assertTrue(mutalisco.evolucionarAGurdian(mineral, gas) != null);
+    }
+
+    //Caso de uso 27
+    @Test
+    public void mutaliscoNoPuedeEvolucionarADevoradorSinRecursos() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+        Mapa mapa = new Mapa();
+        Mineral mineral = new Mineral(100);
+        GasVespeno gas = new GasVespeno(100);
+        Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(11,11), mapa);
+        assertThrows(RequerimientosInsuficientesException.class, ()->{ mutalisco.evolucionarADevorador(mineral, gas); });
+    }
+
+    @Test
+    public void mutaliscoPuedeEvolucionarADevoradorConRecursos() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+        Mapa mapa = new Mapa();
+        Mineral mineral = new Mineral(1000);
+        GasVespeno gas = new GasVespeno(1000);
+        Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(11,11), mapa);
+        assertTrue(mutalisco.evolucionarADevorador(mineral, gas) != null);
     }
 
 }

@@ -69,9 +69,14 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
         return true;
     }
 
-    public Guardian evolucionar(Mineral mineral, GasVespeno gas) throws RequerimientosInsuficientesException
+    public Guardian evolucionarAGurdian(Mineral mineral, GasVespeno gas) throws RequerimientosInsuficientesException
     {
         return new Guardian(mineral, gas, this.posicion, this.mapa);
+    }
+
+    public Devorador evolucionarADevorador(Mineral mineral, GasVespeno gas) throws RequerimientosInsuficientesException
+    {
+        return new Devorador(mineral, gas, this.posicion, this.mapa);
     }
 
 }
