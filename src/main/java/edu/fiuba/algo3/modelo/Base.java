@@ -36,7 +36,7 @@ public class Base {
             posiblePosicion = new Posicion(x, y);
             posibleMena = new Mena(posiblePosicion);
     
-            if(this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion) && mapa.agregarMena(posibleMena))
+            if(this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion) && mapa.agregarOcupable(posibleMena, posiblePosicion))
                 seAgregoAlMapa = true;
         }
     }
@@ -54,7 +54,7 @@ public class Base {
             posiblePosicion = new Posicion(x, y);
             posibleVolcan = new Volcan(posiblePosicion);
     
-            if(this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion) && mapa.agregarVolcan(posibleVolcan))
+            if(this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion) && mapa.agregarOcupable(posibleVolcan, posiblePosicion))
                 seAgregoAlMapa = true;
         }
     }

@@ -108,9 +108,9 @@ public class Extractor extends Edificio implements HabitanteMoho {
         extraerGas();
     }
 
-    @Override
-    public boolean estaOcupada(Posicion posicionDada) {
-        return this.posicion.equals(posicionDada);
-    }
+    // @Override
+    // public boolean estaOcupada(Posicion posicionDada) {
+    //     return this.posicion.equals(posicionDada);
+    // }
 
 }

@@ -85,8 +85,8 @@ public class Espiral extends Edificio{
         return new Mutalisco(mineral, gas, new Posicion(3, 3), this.mapa);
     }
 
-    @Override
-    public boolean estaOcupada(Posicion posicionDada) {
-        return this.posicion.equals(posicionDada);
-    }
+    // @Override
+    // public boolean estaOcupada(Posicion posicionDada) {
+    //     return this.posicion.equals(posicionDada);
+    // }
 }

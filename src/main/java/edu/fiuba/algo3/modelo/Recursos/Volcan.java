@@ -1,9 +1,10 @@
 package edu.fiuba.algo3.modelo.Recursos;
 
+import edu.fiuba.algo3.modelo.Ocupable;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 
-public class Volcan {
+public class Volcan implements Ocupable{
     private Posicion posicion;
     private int gas;
     private boolean estaOcupado;
@@ -35,7 +36,7 @@ public class Volcan {
         return this.posicion;
     }
 
-    public boolean estaOcupado(Posicion posicionDada) {
+    public boolean estaOcupada(Posicion posicionDada) {
         return this.posicion.equals(posicionDada);
     }
 }

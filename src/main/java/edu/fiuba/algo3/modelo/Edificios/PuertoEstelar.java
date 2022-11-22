@@ -84,9 +84,9 @@ public class PuertoEstelar extends Edificio {
         this.vidaYEscudo.regenerar();
     }
 
-    @Override
-    public boolean estaOcupada(Posicion posicionDada) {
-        return this.posicion.equals(posicionDada);
-    }
+    // @Override
+    // public boolean estaOcupada(Posicion posicionDada) {
+    //     return this.posicion.equals(posicionDada);
+    // }
 
 }

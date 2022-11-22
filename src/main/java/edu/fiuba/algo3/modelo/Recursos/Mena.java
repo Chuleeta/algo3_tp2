@@ -1,10 +1,11 @@
 package edu.fiuba.algo3.modelo.Recursos;
 
+import edu.fiuba.algo3.modelo.Ocupable;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 
-public class Mena {
+public class Mena implements Ocupable{
     private Posicion posicion;
     private EstadoConstruccion estado;
     private int minerales;

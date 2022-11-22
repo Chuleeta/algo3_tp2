@@ -84,9 +84,9 @@ public class Guarida extends Edificio{
         return new Hidralisco(mineral, gas, new Posicion(3,3), this.mapa);
     }
 
-    @Override
-    public boolean estaOcupada(Posicion posicionDada) {
-        return this.posicion.equals(posicionDada);
-    }
+    // @Override
+    // public boolean estaOcupada(Posicion posicionDada) {
+    //     return this.posicion.equals(posicionDada);
+    // }
 
 }

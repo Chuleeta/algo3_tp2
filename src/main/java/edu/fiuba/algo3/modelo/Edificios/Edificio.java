@@ -4,11 +4,12 @@ import edu.fiuba.algo3.modelo.Construccion;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
 import edu.fiuba.algo3.modelo.Estados.EstadoDesactivado;
 import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Ocupable;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Zonas.Zona;
 
-public abstract class Edificio implements Construccion{
+public abstract class Edificio implements Construccion, Ocupable{
 
     public Mapa mapa;
     public Posicion posicion;
@@ -40,5 +41,10 @@ public abstract class Edificio implements Construccion{
 
     public Posicion posicion() {
         return posicion;
+    }
+
+    @Override
+    public boolean estaOcupada(Posicion posicionDada) {
+        return this.posicion.equals(posicionDada);
     }
 }

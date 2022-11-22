@@ -18,8 +18,9 @@ public class Mapa {
     private ArrayList<Construccion> construcciones;
     private ArrayList<Zona> zonas;
     private ArrayList<AreaEspacial> areasEspaciales;
-    private ArrayList<Volcan> volcanes;
-    private ArrayList<Mena> menas;
+    // private ArrayList<Volcan> volcanes;
+    // private ArrayList<Mena> menas;
+    private ArrayList<Ocupable> ocupables;
 
     public Mapa()
     {
@@ -27,56 +28,67 @@ public class Mapa {
         this.zonas = new ArrayList<>();
         this.areasEspaciales = new ArrayList<>();
         this.zonas.add(new ZonaNeutral());
-        this.volcanes = new ArrayList<>();
-        this.menas = new ArrayList<>();
+        this.ocupables = new ArrayList<>();
+        // this.volcanes = new ArrayList<>();
+        // this.menas = new ArrayList<>();
 
     }
 
-    public boolean agregarVolcan(Volcan volcanDado){
-        if(volcanDado == null || !verificarPosicion(volcanDado.getPosicion()))
-            return false;
+    // public boolean agregarVolcan(Volcan volcanDado){
+    //     if(volcanDado == null || !verificarPosicion(volcanDado.getPosicion()))
+    //         return false;
         
-        this.volcanes.add(volcanDado);
-        return true;
-    }
+    //     this.volcanes.add(volcanDado);
+    //     return true;
+    // }
 
-    public boolean agregarMena(Mena menaDada){
-        if(menaDada == null || !verificarPosicion(menaDada.getPosicion()))
+    // public boolean agregarMena(Mena menaDada){
+    //     if(menaDada == null || !verificarPosicion(menaDada.getPosicion()))
+    //         return false;
+        
+    //     this.menas.add(menaDada);
+    //     return true;
+    // }
+
+    public boolean agregarOcupable(Ocupable ocupable, Posicion posicion){
+        if(ocupable == null || !verificarPosicion(posicion))
             return false;
         
-        this.menas.add(menaDada);
+        this.ocupables.add(ocupable);
         return true;
     }
 
     private boolean verificarPosicion(Posicion posicionDada){
-        if(verificarPosicionVolcanes(posicionDada) && verificarPosicionMenas(posicionDada) && verificarPosicionConstrucciones(posicionDada))
-            return true;
-        return false;
-    }
-
-    private boolean verificarPosicionVolcanes(Posicion posicionDada){
-        for (Volcan volcan:volcanes){
-            if(volcan.estaOcupado(posicionDada))
-                return false;
-        }
+        for (Ocupable ocupable:ocupables){
+            if(ocupable.estaOcupada(posicionDada))
+               return false;
+            }
         return true;
     }
-
-    private boolean verificarPosicionMenas(Posicion posicionDada){
-        for (Mena mena:menas){
-            if(mena.estaOcupada(posicionDada))
-                return false;
-        }
-        return true;
-    }
-
-    private boolean verificarPosicionConstrucciones(Posicion posicionDada){
-        for (Construccion construccion:construcciones){
-            if(construccion.estaOcupada(posicionDada))
-                return false;
-        }
-        return true;
-    }
+    // // TO DO: APLICAR INTERFAZ OCUPABLE PARA LOS 3
+    // private boolean verificarPosicionVolcanes(Posicion posicionDada){
+    //     for (Volcan volcan:volcanes){
+    //         if(volcan.estaOcupada(posicionDada))
+    //             return false;
+    //     }
+    //     return true;
+    // }
+    // // TO DO: APLICAR INTERFAZ OCUPABLE PARA LOS 3
+    // private boolean verificarPosicionMenas(Posicion posicionDada){
+    //     for (Mena mena:menas){
+    //         if(mena.estaOcupada(posicionDada))
+    //             return false;
+    //     }
+    //     return true;
+    // }
+    // // TO DO: APLICAR INTERFAZ OCUPABLE PARA LOS 3
+    // private boolean verificarPosicionConstrucciones(Posicion posicionDada){
+    //     for (Construccion construccion:construcciones){
+    //         if(construccion.estaOcupada(posicionDada))
+    //             return false;
+    //     }
+    //     return true;
+    // }
 
     public boolean verificarEdificacionCorrelativa(Edificio edificioCorrelativo) {
         return construcciones.stream().anyMatch(clase -> clase.getClass().isInstance(edificioCorrelativo));
