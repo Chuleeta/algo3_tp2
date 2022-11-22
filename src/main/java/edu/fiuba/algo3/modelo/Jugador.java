@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
+
 import edu.fiuba.algo3.modelo.Exceptions.AtributoInvalidoException;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
@@ -11,27 +13,25 @@ public class Jugador {
     private Posicion posicion;
     public Mineral mineral;
 
-    public Jugador(String name, String color, String race, Jugador jugadorContrario){
+    public Jugador(String name, String color, String race, Posicion posicionJugador){
         this.nombre = name;
         this.color = color;
         this.raza = race;
-        crearPosicion(jugadorContrario);
+        this.posicion = posicionJugador;
         this.mineral = new Mineral(200);
     }
 
-    private void crearPosicion(Jugador jugadorContrario){
-        if(jugadorContrario == null){
-            this.posicion = new Posicion(1, 1);
-            return;
-        }
-        this.posicion = new Posicion(100, 100);
-    }
 
     public void validarAtributos(Jugador jugadorDado) throws AtributoInvalidoException {
         if(jugadorDado == null) return;
         validarNombre(this.nombre, jugadorDado.nombre);
         validarColor(this.color, jugadorDado.color);
         validarRaza(this.raza, jugadorDado.raza);
+        jugadorDado.compararPosicionConOtroJugador(this.posicion);
+    }
+
+    public void compararPosicionConOtroJugador(Posicion posicionDada) throws AtributoInvalidoException{
+        if(this.posicion.adentro(99, posicionDada)) throw new AtributoInvalidoException();
     }
 
     private void validarRaza(String race, String razaUno) throws AtributoInvalidoException {
