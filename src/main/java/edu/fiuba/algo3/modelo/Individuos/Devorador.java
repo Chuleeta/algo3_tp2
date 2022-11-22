@@ -65,5 +65,4 @@ public class Devorador extends Individuo implements UnidadVoladora{
         }
         return false;
     }
-    
 }
