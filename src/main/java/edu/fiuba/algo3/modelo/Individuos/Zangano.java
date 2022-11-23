@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
+import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
@@ -15,7 +17,9 @@ public class Zangano extends Individuo implements UnidadTierra{
     private Mena mena;
     private int minerales;
 
-    public Zangano() {
+    public Zangano(Mineral mineral) throws RequerimientosInsuficientesException {
+        if (!mineral.invertir(25))
+            throw new RequerimientosInsuficientesException();
         this.mena = null;
         this.vida = new VidaZerg(25);
         this.estado = new EstadoNoConstruido();

@@ -3,10 +3,7 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.Extractor;
-import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
-import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
-import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
-import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Exceptions.*;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
@@ -32,7 +29,7 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seEngendraUnZanganoEnCriaderoYDisminuyeLarva() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+    public void seEngendraUnZanganoEnCriaderoYDisminuyeLarva() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -44,7 +41,7 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seRegeneraUnaLarvaLuegoDeUnTiempo() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+    public void seRegeneraUnaLarvaLuegoDeUnTiempo() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -57,7 +54,7 @@ public class CriaderoTest {
     }
 
     @Test
-    public void noSePuedeEngendrarMasDeTresZanganos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+    public void noSePuedeEngendrarMasDeTresZanganos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -74,7 +71,7 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seConsumenTodasLasLarvasYSeRegeneranDespsDeTresTurnos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+    public void seConsumenTodasLasLarvasYSeRegeneranDespsDeTresTurnos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();

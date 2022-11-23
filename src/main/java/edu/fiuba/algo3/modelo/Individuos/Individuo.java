@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Vida;
@@ -14,6 +15,7 @@ public abstract class Individuo
     protected float rangoDeAtaque;
     protected Posicion posicion;
     protected Mapa mapa;
+    protected Jugador jugador;
 
     public Posicion posicion()
     {
@@ -46,4 +48,7 @@ public abstract class Individuo
 
     public abstract boolean atacar(UnidadTierra unidad);
     public abstract boolean atacar(UnidadVoladora unidad);
+    public void crearJugadorPorDefecto() {
+        jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6,6), 200);
+    }
 }

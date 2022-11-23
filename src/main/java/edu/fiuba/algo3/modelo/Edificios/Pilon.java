@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
@@ -24,7 +25,14 @@ public class Pilon extends Edificio{
         tiempo = 0;
         this.zona = mapa.getZonaNeutral();
         this.vidaYEscudo = new VidaEscudoProtoss(300, 300);
+        crearJugadorPorDefecto();
     }
+
+    public Pilon(Posicion posicion, Mapa mapa, Jugador jugador) {
+        this(posicion, mapa);
+        this.jugador = jugador;
+    }
+
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
         tiempo += 1;
         // if (estado.puedeConstruirse(5, tiempo)) construir();
@@ -39,6 +47,7 @@ public class Pilon extends Edificio{
         this.zona = new ZonaEnergia(this.posicion);
         mapa.agregarZona(this.zona);
         this.estado = new EstadoConstruido();
+        jugador.incrementarCapacidadDePoblacion(5);
     }
 
     @Override

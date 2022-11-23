@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.Extractor;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import edu.fiuba.algo3.modelo.Individuos.Zangano;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
@@ -40,7 +41,7 @@ public class ExtractorTest {
 
 
     @Test
-    public void extractorConUnZanganoGeneraDiezDeGas() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
+    public void extractorConUnZanganoGeneraDiezDeGas() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException, RequerimientosInsuficientesException {
         //given
         Mapa mapa  = new Mapa();
         Criadero criadero = new Criadero(new Posicion(1 , 2), mapa);
@@ -57,7 +58,7 @@ public class ExtractorTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        Zangano zangano = new Zangano();
+        Zangano zangano = new Zangano(new Mineral(25));
         zangano.pasarTiempo();
         //when
         extractor.agregarZangano(zangano);
@@ -68,7 +69,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void extractorConDosZanganosGeneraVeinteDeGas() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
+    public void extractorConDosZanganosGeneraVeinteDeGas() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException, RequerimientosInsuficientesException {
         Mapa mapa  = new Mapa();
         Criadero criadero = new Criadero(new Posicion(1 , 2), mapa);
         mapa.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(0));
@@ -84,7 +85,7 @@ public class ExtractorTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        Zangano zangano = new Zangano();
+        Zangano zangano = new Zangano(new Mineral(25));
         zangano.pasarTiempo();
         extractor.agregarZangano(zangano);
         extractor.agregarZangano(zangano);
@@ -93,7 +94,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void extractorConTresZanganosGeneraTreintaDeGas() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
+    public void extractorConTresZanganosGeneraTreintaDeGas() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException, RequerimientosInsuficientesException {
         Mapa mapa  = new Mapa();
         Criadero criadero = new Criadero(new Posicion(1 , 2), mapa);
         mapa.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(0));
@@ -109,7 +110,7 @@ public class ExtractorTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        Zangano zangano = new Zangano();
+        Zangano zangano = new Zangano(new Mineral(25));
         zangano.pasarTiempo();
         extractor.agregarZangano(zangano);
         extractor.agregarZangano(zangano);
@@ -119,7 +120,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void extractorConCuatroZanganosGeneraTreintaDeGas() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
+    public void extractorConCuatroZanganosGeneraTreintaDeGas() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException, RequerimientosInsuficientesException {
         Mapa mapa  = new Mapa();
         Criadero criadero = new Criadero(new Posicion(1 , 2), mapa);
         mapa.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(0));
@@ -135,7 +136,7 @@ public class ExtractorTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        Zangano zangano = new Zangano();
+        Zangano zangano = new Zangano(new Mineral(25));
         zangano.pasarTiempo();
         extractor.agregarZangano(zangano);
         extractor.agregarZangano(zangano);
@@ -146,7 +147,7 @@ public class ExtractorTest {
     }
 
     @Test
-    public void extractorNoAgregaZanganosSiNoSeConstruyo() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
+    public void extractorNoAgregaZanganosSiNoSeConstruyo() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException, RequerimientosInsuficientesException {
         Mapa mapa  = new Mapa();
         Criadero criadero = new Criadero(new Posicion(1 , 2), mapa);
         mapa.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(0));
@@ -158,7 +159,7 @@ public class ExtractorTest {
         mapa.agregarConstruccion(extractor, new Mineral(10000), new GasVespeno(0));
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        Zangano zangano = new Zangano();
+        Zangano zangano = new Zangano(new Mineral(25));
         zangano.pasarTiempo();
         extractor.agregarZangano(zangano);
         extractor.agregarZangano(zangano);
@@ -211,7 +212,7 @@ public class ExtractorTest {
     // Caso de uso 15
 
     @Test
-    public void unaVezAgotadoTodoElGasNoRecolectaMasDeEste() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
+    public void unaVezAgotadoTodoElGasNoRecolectaMasDeEste() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException, RequerimientosInsuficientesException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(0);
         Mapa mapa  = new Mapa();
@@ -223,7 +224,7 @@ public class ExtractorTest {
         mapa.pasarTiempo();
         Extractor extractor = new Extractor(new Posicion(1, 1), new Volcan(new Posicion(1, 1)), mapa);
         mapa.agregarConstruccion(extractor, new Mineral(10000), gas);
-        Zangano zangano = new Zangano();
+        Zangano zangano = new Zangano(new Mineral(25));
         zangano.pasarTiempo();
         extractor.agregarZangano(zangano);
         extractor.agregarZangano(zangano);

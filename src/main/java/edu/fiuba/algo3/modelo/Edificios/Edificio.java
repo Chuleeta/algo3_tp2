@@ -1,12 +1,9 @@
 package edu.fiuba.algo3.modelo.Edificios;
 
-import edu.fiuba.algo3.modelo.Construccion;
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
 import edu.fiuba.algo3.modelo.Estados.EstadoDesactivado;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Ocupable;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
-import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Zonas.Zona;
 
 public abstract class Edificio implements Construccion, Ocupable{
@@ -16,6 +13,7 @@ public abstract class Edificio implements Construccion, Ocupable{
     public EstadoConstruccion estado;
     public Zona zona;
     public int tiempo;
+    protected Jugador jugador;
 
     @Override
     public abstract void construir() throws NoExisteEdificioCorrelativoException;
@@ -46,5 +44,9 @@ public abstract class Edificio implements Construccion, Ocupable{
     @Override
     public boolean estaOcupada(Posicion posicionDada) {
         return this.posicion.equals(posicionDada);
+    }
+
+    public void crearJugadorPorDefecto() {
+        jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6,6), 200);
     }
 }

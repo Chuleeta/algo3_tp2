@@ -58,7 +58,7 @@ public class MapaTest {
         mapa.pasarTiempo();
         mapa.pasarTiempo();
         mapa.pasarTiempo();
-        assertTrue(mapa.agregarConstruccion(new Acceso(new Posicion(8, 8), mapa), mineral, gas)); 
+        assertTrue(mapa.agregarConstruccion(new Acceso(new Posicion(8, 8), mapa ), mineral, gas));
         assertFalse(mapa.agregarConstruccion(new Acceso(new Posicion(1, 1), mapa), mineral, gas));
     }
 

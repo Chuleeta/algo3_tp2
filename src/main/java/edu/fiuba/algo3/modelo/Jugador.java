@@ -1,24 +1,26 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
-
 import edu.fiuba.algo3.modelo.Exceptions.AtributoInvalidoException;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
 public class Jugador {
 
+    private int capacidad;
     private String nombre;
     private String color;
     private String raza;
     private Posicion posicion;
     public Mineral mineral;
+    private int unidadesCreadas;
 
-    public Jugador(String name, String color, String race, Posicion posicionJugador){
+    public Jugador(String name, String color, String race, Posicion posicionJugador, int capacidad){
         this.nombre = name;
         this.color = color;
         this.raza = race;
         this.posicion = posicionJugador;
         this.mineral = new Mineral(200);
+        this.capacidad = capacidad;
+        unidadesCreadas = 0;
     }
 
 
@@ -50,5 +52,17 @@ public class Jugador {
         return (posicionDada.adentro( 10, this.posicion));
     }
 
+    public void incrementarCapacidadDePoblacion(int nuevaCapacidad) {
+        capacidad += nuevaCapacidad;
+        if (capacidad > 200)
+            capacidad = 200;
+    }
 
+    public void añadirUnidad() {
+        unidadesCreadas += 1;
+    }
+
+    public boolean unidadesDisponibles() {
+        return unidadesCreadas < capacidad;
+    }
 }

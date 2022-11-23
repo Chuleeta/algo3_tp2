@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
+import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Individuos.Zangano;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mena;
@@ -24,20 +25,20 @@ public class MenaTest {
         assertThrows(MenaOcupadaException.class, ()->{ new NexoMineral(new Posicion(1, 1), mena, mapa); });
     }
     @Test
-    public void noSePuedoConstruirNexoEnMenaSiYaHayUnZanganoMinando () throws MenaOcupadaException {
+    public void noSePuedoConstruirNexoEnMenaSiYaHayUnZanganoMinando () throws MenaOcupadaException, RequerimientosInsuficientesException {
         Mena mena = new Mena(new Posicion(1,1));
         Mapa mapa = new Mapa();
-        Zangano zangano = new Zangano();
+        Zangano zangano = new Zangano(new Mineral(25));
         zangano.pasarTiempo();
         zangano.ocuparMena(mena);
         assertThrows(MenaOcupadaException.class, ()->{ new NexoMineral(new Posicion(1, 1), mena, mapa); });
     }
 
     @Test
-    public void zanganoNoPuedeMinarSiHayNexoMineralEnMena () throws MenaOcupadaException {
+    public void zanganoNoPuedeMinarSiHayNexoMineralEnMena () throws MenaOcupadaException, RequerimientosInsuficientesException {
         Mena mena = new Mena(new Posicion(1,1));
         Mapa mapa = new Mapa();
-        Zangano zangano = new Zangano();
+        Zangano zangano = new Zangano(new Mineral(25));
         zangano.pasarTiempo();
         NexoMineral nexo = new NexoMineral(new Posicion(1, 1), mena, mapa);
         Mineral mineral = new Mineral(10000);

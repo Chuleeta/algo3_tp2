@@ -2,6 +2,9 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Individuos.Zealot;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
@@ -24,6 +27,12 @@ public class Acceso extends Edificio{
         tiempo = 0;
         this.zona = new ZonaEnergia(this.posicion);
         this.vidaYEscudo = new VidaEscudoProtoss(500, 500);
+        crearJugadorPorDefecto();
+    }
+
+    public Acceso(Posicion posicion, Mapa mapa, Jugador jugador) {
+        this(posicion, mapa);
+        this.jugador = jugador;
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
@@ -77,6 +86,15 @@ public class Acceso extends Edificio{
     @Override
     public void actualizar() {
         this.vidaYEscudo.regenerar();
+    }
+
+
+    public Zealot crearZealot(Mineral mineral) throws RequerimientosInsuficientesException {
+        if (jugador.unidadesDisponibles()) {
+            jugador.añadirUnidad();
+            return new Zealot(mineral, posicion.clone(),this.mapa);
+        }
+        return null;
     }
 
     // @Override

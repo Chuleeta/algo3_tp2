@@ -4,17 +4,15 @@ package edu.fiuba.algo3.modelo.Edificios;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
-import edu.fiuba.algo3.modelo.Larva;
-import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
-import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
-import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Individuos.Zangano;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
 import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
@@ -36,6 +34,12 @@ public class Criadero extends Edificio {
         zona = mapa.getZonaNeutral();
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
+        crearJugadorPorDefecto();
+    }
+
+    public Criadero(Posicion posicion, Mapa mapa, Jugador jugador) {
+        this(posicion, mapa);
+        this.jugador = jugador;
     }
 
     public int getCostoDeConstruccion(){
@@ -59,14 +63,17 @@ public class Criadero extends Edificio {
         return larvas.size() == 3;
     }
 
-    public Zangano engendrarZangano(Mineral mineral) throws CriaderoNoDisponibleException, RecursosInsuficientesException {
+    public Zangano engendrarZangano(Mineral mineral) throws CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         if (larvas.size() == 0) {
             throw new CriaderoNoDisponibleException();
         }
-        if (!mineral.invertir(25)){
-            throw new RecursosInsuficientesException();
+        // esto lo debe hacer el zangano
+
+        if (jugador.unidadesDisponibles()) {
+            jugador.añadirUnidad();
+            return larvas.remove(0).mutar(mineral);
         }
-        return larvas.remove(0).mutar();
+        return null;
     }
 
     // cree este metodo porque al leer el enunciado me parece que las larvas solo salen de aca, las necesitaremos para pasarla a otros edificios, despues lo vemos.
@@ -83,6 +90,7 @@ public class Criadero extends Edificio {
         estado = new EstadoConstruido();
         zona = new ZonaMoho(this.posicion);
         mapa.agregarZona(this.zona);
+        jugador.incrementarCapacidadDePoblacion(5);
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException{
