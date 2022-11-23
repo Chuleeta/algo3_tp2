@@ -167,35 +167,26 @@ public class JugadorTest {
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
-        Mineral mineral1 = new Mineral(25);
-        Mineral mineral2 = new Mineral(25);
-        Mineral mineral3 = new Mineral(25);
-        Mineral mineral4 = new Mineral(25);
-        Mineral mineral5 = new Mineral(25);
-        Mineral mineral6 = new Mineral(25);
-        Mineral mineral7 = new Mineral(25);
-        Mineral mineral8 = new Mineral(25);
-        Mineral mineral9 = new Mineral(25);
-        Mineral mineral10 = new Mineral(25);
-        assertNotNull(criadero.engendrarZangano(mineral1));
-        assertNotNull(criadero.engendrarZangano(mineral2));
-        assertNotNull(criadero.engendrarZangano(mineral3));
+        Mineral mineral = new Mineral(300);
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        assertNotNull(criadero.engendrarZangano(mineral4));
-        assertNotNull(criadero.engendrarZangano(mineral5));
-        assertNotNull(criadero.engendrarZangano(mineral6));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        assertNotNull(criadero.engendrarZangano(mineral7));
-        assertNotNull(criadero.engendrarZangano(mineral8));
-        assertNotNull(criadero.engendrarZangano(mineral9));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        assertNotNull(criadero.engendrarZangano(mineral10));
-        assertNull(criadero.engendrarZangano(mineral10));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNull(criadero.engendrarZangano(mineral));
     }
 
     @Test
