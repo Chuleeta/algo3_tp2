@@ -308,5 +308,31 @@ public class JugadorTest {
         assertNotNull(criadero.engendrarZangano(mineral));
         assertNull(criadero.engendrarZangano(mineral));
     }
+    // caso 29 y 30
+    @Test
+    public void alAlcanzarCapacidadMaximaNoSeSumaMasCapacidadConEdificio() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+        Posicion posicionUno = new Posicion(1,1);
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 200);
+        Mapa mapa = new Mapa();
+        Criadero criadero = new Criadero(new Posicion(2,2), mapa, jugadorUno);
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        Mineral mineral = new Mineral(5000);
 
+        for (int i = 0; i < 66; i++) {
+            criadero.engendrarZangano(mineral);
+            criadero.engendrarZangano(mineral);
+            criadero.engendrarZangano(mineral);
+            criadero.pasarTiempo();
+            criadero.pasarTiempo();
+            criadero.pasarTiempo();
+        }
+
+        criadero.engendrarZangano(mineral);
+        criadero.engendrarZangano(mineral);
+        // ya hay 200 unidades creadas y al intentar crear la 201 devuelve null
+        assertNull(criadero.engendrarZangano(mineral));
+    }
 }
