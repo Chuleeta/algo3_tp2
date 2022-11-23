@@ -51,4 +51,5 @@ public abstract class Individuo
     public void crearJugadorPorDefecto() {
         jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6,6), 200);
     }
+
 }

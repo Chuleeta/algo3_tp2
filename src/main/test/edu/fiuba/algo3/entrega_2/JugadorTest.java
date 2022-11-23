@@ -88,18 +88,14 @@ public class JugadorTest {
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        Mineral mineral1 = new Mineral(25);
-        Mineral mineral2 = new Mineral(25);
-        Mineral mineral3 = new Mineral(25);
-        Mineral mineral4 = new Mineral(25);
-        Mineral mineral5 = new Mineral(25);
-        assertNotNull(criadero.engendrarZangano(mineral1));
-        assertNotNull(criadero.engendrarZangano(mineral2));
-        assertNotNull(criadero.engendrarZangano(mineral3));
+        Mineral mineral = new Mineral(125);
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        assertNotNull(criadero.engendrarZangano(mineral4));
-        assertNotNull(criadero.engendrarZangano(mineral5));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
     }
 
     @Test
@@ -120,33 +116,24 @@ public class JugadorTest {
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
-        Mineral mineral1 = new Mineral(25);
-        Mineral mineral2 = new Mineral(25);
-        Mineral mineral3 = new Mineral(25);
-        Mineral mineral4 = new Mineral(25);
-        Mineral mineral5 = new Mineral(25);
-        Mineral mineral6 = new Mineral(25);
-        Mineral mineral7 = new Mineral(25);
-        Mineral mineral8 = new Mineral(25);
-        Mineral mineral9 = new Mineral(25);
-        Mineral mineral10 = new Mineral(25);
-        assertNotNull(criadero.engendrarZangano(mineral1));
-        assertNotNull(criadero.engendrarZangano(mineral2));
-        assertNotNull(criadero.engendrarZangano(mineral3));
+        Mineral mineral = new Mineral(250);
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        assertNotNull(criadero.engendrarZangano(mineral4));
-        assertNotNull(criadero.engendrarZangano(mineral5));
-        assertNotNull(criadero.engendrarZangano(mineral6));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        assertNotNull(criadero.engendrarZangano(mineral7));
-        assertNotNull(criadero.engendrarZangano(mineral8));
-        assertNotNull(criadero.engendrarZangano(mineral9));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
         criadero.pasarTiempo();
-        assertNotNull(criadero.engendrarZangano(mineral10));
+        assertNotNull(criadero.engendrarZangano(mineral));
     }
 
     @Test
@@ -192,10 +179,9 @@ public class JugadorTest {
     @Test
     public void seCreanUnidadesAlTenerCapacidadPorPilon() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Posicion posicionUno = new Posicion(1,1);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 0);
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protos", posicionUno, 0);
         Mapa mapa = new Mapa();
         Mineral mineral = new Mineral(500);
-        GasVespeno gas = new GasVespeno(0);
         Pilon pilon = new Pilon(new Posicion(3,3), mapa, jugadorUno);
         pilon.pasarTiempo();
         pilon.pasarTiempo();
@@ -222,7 +208,7 @@ public class JugadorTest {
     @Test
     public void noSeCreanUnidadesAlAlcanzarElMaximoConPilon() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Posicion posicionUno = new Posicion(1,1);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 0);
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protos", posicionUno, 0);
         Mapa mapa = new Mapa();
         Mineral mineral = new Mineral(600);
         GasVespeno gas = new GasVespeno(0);
@@ -249,9 +235,78 @@ public class JugadorTest {
         assertNull(acceso.crearZealot(mineral));
 
     }
+    // caso 31
+    @Test
+    public void seDestruyePilonYLaCapacidadDisminuye() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+        Posicion posicionUno = new Posicion(1,1);
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protos", posicionUno, 0);
+        Mapa mapa = new Mapa();
+        Mineral mineral = new Mineral(600);
+        GasVespeno gas = new GasVespeno(0);
+        Pilon pilon = new Pilon(new Posicion(3,3), mapa, jugadorUno);
+        pilon.pasarTiempo();
+        pilon.pasarTiempo();
+        pilon.pasarTiempo();
+        pilon.pasarTiempo();
+        pilon.pasarTiempo();
+        Acceso acceso = new Acceso(new Posicion(1,1), mapa, jugadorUno);
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        acceso.pasarTiempo();
+        pilon.destruir();
+        assertNull(acceso.crearZealot(mineral));
 
+    }
 
+    @Test
+    public void seDestruyeCriaderoYLaCapacidadDisminuye() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+        Posicion posicionUno = new Posicion(1,1);
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 0);
+        Mapa mapa = new Mapa();
+        Criadero criadero = new Criadero(new Posicion(2,2), mapa, jugadorUno);
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        Mineral mineral1 = new Mineral(25);
+        criadero.destruir();
+        assertNull(criadero.engendrarZangano(mineral1));
+    }
 
-
+    @Test
+    public void seDestruyeAmoSupremoYLaCapacidadDisminuye() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+        Posicion posicionUno = new Posicion(1,1);
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 0);
+        Mapa mapa = new Mapa();
+        Mineral mineralAmo = new Mineral(50);
+        GasVespeno gas = new GasVespeno(0);
+        AmoSupremo amoSupremo = new AmoSupremo(mineralAmo, gas, new Posicion(4,4), mapa, jugadorUno);
+        amoSupremo.pasarTiempo();
+        amoSupremo.pasarTiempo();
+        amoSupremo.pasarTiempo();
+        amoSupremo.pasarTiempo();
+        amoSupremo.pasarTiempo();
+        amoSupremo.destruir();
+        Criadero criadero = new Criadero(new Posicion(2,2), mapa, jugadorUno);
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        Mineral mineral = new Mineral(150);
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNotNull(criadero.engendrarZangano(mineral));
+        assertNull(criadero.engendrarZangano(mineral));
+    }
 
 }

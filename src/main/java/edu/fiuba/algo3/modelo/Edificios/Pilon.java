@@ -89,6 +89,7 @@ public class Pilon extends Edificio{
 
     public void destruir()
     {
+        this.jugador.decrementarCapacidadDePoblacion(5);
         this.mapa.destruirZona(this.zona);
         this.mapa.destruirConstruccion(this);
     }

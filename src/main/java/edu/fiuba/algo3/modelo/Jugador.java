@@ -65,4 +65,12 @@ public class Jugador {
     public boolean unidadesDisponibles() {
         return unidadesCreadas < capacidad;
     }
+
+    public void decrementarCapacidadDePoblacion(int nuevaCapacidad) {
+        capacidad -= nuevaCapacidad;
+    }
+
+    public void eliminarUnidad() {
+        unidadesCreadas -= 1;
+    }
 }

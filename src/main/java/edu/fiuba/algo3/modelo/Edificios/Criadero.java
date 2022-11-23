@@ -139,6 +139,12 @@ public class Criadero extends Edificio {
         }
         return false;
     }
+    public void destruir()
+    {
+        this.jugador.decrementarCapacidadDePoblacion(5);
+        this.mapa.destruirZona(this.zona);
+        this.mapa.destruirConstruccion(this);
+    }
 
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {

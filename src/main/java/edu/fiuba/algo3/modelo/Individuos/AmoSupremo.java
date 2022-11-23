@@ -76,4 +76,8 @@ public class AmoSupremo extends Individuo implements UnidadVoladora {
         this.posicion = posicion;
         return true;
     }
+
+    public void destruir() {
+        jugador.decrementarCapacidadDePoblacion(5);
+    }
 }
