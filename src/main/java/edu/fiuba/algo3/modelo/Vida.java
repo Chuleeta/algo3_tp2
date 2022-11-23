@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 
 public abstract class Vida {
-    protected int vida;
+    public int vida;
     protected int vidaCompleta;
     public boolean tieneVidaCompleta()
     {
@@ -10,4 +10,5 @@ public abstract class Vida {
     }
     public abstract void dañar(int daño);
     public abstract void regenerar();
+    public abstract boolean tieneEscudoCompleto();
 }

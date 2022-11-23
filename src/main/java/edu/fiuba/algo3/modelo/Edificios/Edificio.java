@@ -6,12 +6,13 @@ import edu.fiuba.algo3.modelo.Estados.EstadoDesactivado;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Zonas.Zona;
 
-public abstract class Edificio implements Construccion, Ocupable{
+public abstract class Edificio implements Construccion, Ocupable {
 
     public Mapa mapa;
     public Posicion posicion;
     public EstadoConstruccion estado;
     public Zona zona;
+    public Vida vida;
     public int tiempo;
     protected Jugador jugador;
 
@@ -25,13 +26,15 @@ public abstract class Edificio implements Construccion, Ocupable{
 
     public abstract boolean tieneVidaCompleta();
 
-    public void destruir()
-    {
+    public Vida obtenerVida() {
+        return vida;
+    }
+
+    public void destruir() {
         this.mapa.destruirConstruccion(this);
     }
 
-    public void desactivar()
-    {
+    public void desactivar() {
         this.estado = new EstadoDesactivado();
     }
 
@@ -47,6 +50,6 @@ public abstract class Edificio implements Construccion, Ocupable{
     }
 
     public void crearJugadorPorDefecto() {
-        jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6,6), 200);
+        jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6, 6), 200);
     }
 }

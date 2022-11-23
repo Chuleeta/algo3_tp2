@@ -17,7 +17,7 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Acceso extends Edificio{
 
-    private VidaEscudoProtoss vidaYEscudo;
+    //private VidaEscudoProtoss vidaYEscudo;
 
     public Acceso(Posicion posicion, Mapa mapa)
     {
@@ -26,7 +26,7 @@ public class Acceso extends Edificio{
         this.mapa = mapa;
         tiempo = 0;
         this.zona = new ZonaEnergia(this.posicion);
-        this.vidaYEscudo = new VidaEscudoProtoss(500, 500);
+        this.vida = new VidaEscudoProtoss(500, 500);
         crearJugadorPorDefecto();
     }
 
@@ -63,14 +63,14 @@ public class Acceso extends Edificio{
     }
 
     public void dañar(int daño){
-        this.vidaYEscudo.dañar(daño);
+        this.vida.dañar(daño);
     }
 
     public boolean tieneVidaCompleta(){
-        return this.vidaYEscudo.tieneVidaCompleta();
+        return this.vida.tieneVidaCompleta();
     }
     public boolean tieneEscudoCompleto(){
-        return this.vidaYEscudo.tieneEscudoCompleto();
+        return this.vida.tieneEscudoCompleto();
     }
 
     @Override
@@ -85,7 +85,7 @@ public class Acceso extends Edificio{
 
     @Override
     public void actualizar() {
-        this.vidaYEscudo.regenerar();
+        this.vida.regenerar();
     }
 
 

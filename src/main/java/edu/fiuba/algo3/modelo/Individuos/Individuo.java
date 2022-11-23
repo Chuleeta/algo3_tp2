@@ -22,13 +22,17 @@ public abstract class Individuo
         return this.posicion;
     }
 
+    public Vida obtenerVida(){
+        return vida;
+    }
+
     public void recibirDaño(int cantidad)
     {
-        this.vida.dañar(cantidad);
+        vida.dañar(cantidad);
     }
 
     public boolean estaDentroDelRango(Posicion posicion) {
-        return posicion.adentro(this.rangoDeAtaque, this.posicion);
+        return posicion.adentro(rangoDeAtaque, this.posicion);
     }
 
     public boolean atacar(Edificio edificio) {
@@ -43,7 +47,7 @@ public abstract class Individuo
 
     public boolean tieneVidaCompleta()
     {
-        return this.vida.tieneVidaCompleta();
+        return vida.tieneVidaCompleta();
     }
 
     public abstract boolean atacar(UnidadTierra unidad);

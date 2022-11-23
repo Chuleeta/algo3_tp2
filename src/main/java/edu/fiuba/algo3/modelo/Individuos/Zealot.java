@@ -1,20 +1,28 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
+import java.util.HashMap;
+
 public class Zealot extends Individuo implements UnidadTierra{
     private final int tiempoDeConstruccion;
     private int tiempo;
+    private int asesinatos;
+    private HashMap<Object, Vida> atacados;
     public Zealot(Mineral mineral, Posicion posicion, Mapa mapa) throws RequerimientosInsuficientesException {
         if (!mineral.invertir(100)) {
             throw new RequerimientosInsuficientesException();
         }
+        atacados = new HashMap<>();
+        asesinatos = 0;
         this.unidadesDeDaño = 8;
         this.vida = new VidaEscudoProtoss(100, 60);
         this.estado = new EstadoNoConstruido();
@@ -36,9 +44,21 @@ public class Zealot extends Individuo implements UnidadTierra{
     {
         if (estaDentroDelRango(unidad.posicion())) {
             unidad.recibirDaño(this.unidadesDeDaño);
+            atacados.put(unidad, unidad.obtenerVida());
+            if (atacados.get(unidad).vida <= 0) contarAsesinato();
             return true;
         }
         return false;
+    }
+
+    private void contarAsesinato() {
+        asesinatos += 1;
+        if(asesinatos == 3) invisibilizar();
+    }
+
+    public boolean atacar(Edificio edificio){
+        atacados.put(edificio, edificio.obtenerVida());
+        if(atacados.get(edificio).vida <= 0) contarAsesinato();
     }
 
     public boolean atacar(UnidadVoladora unidad)

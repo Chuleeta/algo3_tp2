@@ -14,7 +14,12 @@ public class VidaZerg extends Vida{
         }
     }
 
-    
+    //TODO: a debatir, de todas formas no va a utilizarse
+    @Override
+    public boolean tieneEscudoCompleto() {
+        return false;
+    }
+
 
     public void dañar(int daño) {
         this.vida -= daño;

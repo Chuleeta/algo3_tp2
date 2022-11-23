@@ -23,7 +23,7 @@ public class Criadero extends Edificio {
     private List<Larva> larvas;
     private static int COSTO_DE_CONSTRUCCION = 50;
     private static int VIDA_COMPLETA = 500;
-    private VidaZerg vida;
+    //private VidaZerg vida;
 
     public Criadero(Posicion posicion, Mapa mapa) {
         //validarMinerales(recursosDelJugador);
