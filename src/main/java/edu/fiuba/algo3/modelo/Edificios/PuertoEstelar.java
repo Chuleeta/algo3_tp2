@@ -13,7 +13,7 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class PuertoEstelar extends Edificio {
-    private VidaEscudoProtoss vidaYEscudo;
+    //private VidaEscudoProtoss vidaYEscudo;
 
     public PuertoEstelar(Posicion posicion, Mapa mapa) {
         this.posicion = posicion;
@@ -21,7 +21,7 @@ public class PuertoEstelar extends Edificio {
         this.zona = new ZonaEnergia(this.posicion);
         this.mapa = mapa;
         tiempo = 0;
-        this.vidaYEscudo = new VidaEscudoProtoss(600, 600);
+        this.vida = new VidaEscudoProtoss(600, 600);
     }
 
     @Override
@@ -58,15 +58,15 @@ public class PuertoEstelar extends Edificio {
     }
 
     public void dañar(int daño){
-        this.vidaYEscudo.dañar(daño);
+        this.vida.dañar(daño);
     }
 
     public boolean tieneVidaCompleta() {
-        return this.vidaYEscudo.tieneVidaCompleta();
+        return this.vida.tieneVidaCompleta();
     }
 
     public boolean tieneEscudoCompleto() {
-        return this.vidaYEscudo.tieneEscudoCompleto();
+        return this.vida.tieneEscudoCompleto();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class PuertoEstelar extends Edificio {
 
     @Override
     public void actualizar() {
-        this.vidaYEscudo.regenerar();
+        this.vida.regenerar();
     }
 
     // @Override

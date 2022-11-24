@@ -17,7 +17,7 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Espiral extends Edificio{
     private static int VIDA_COMPLETA = 1250;
-    private VidaZerg vida;
+    //private VidaZerg vida;
 
     public Espiral(Posicion posicion, Mapa mapa)
     {

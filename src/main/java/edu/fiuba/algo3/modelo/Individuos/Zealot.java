@@ -58,7 +58,11 @@ public class Zealot extends Individuo implements UnidadTierra{
 
     public boolean atacar(Edificio edificio){
         atacados.put(edificio, edificio.obtenerVida());
-        if(atacados.get(edificio).vida <= 0) contarAsesinato();
+        if(atacados.get(edificio).vida <= 0) {
+            contarAsesinato();
+            return true;
+        }
+        return false;
     }
 
     public boolean atacar(UnidadVoladora unidad)

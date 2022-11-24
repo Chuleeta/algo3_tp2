@@ -26,10 +26,6 @@ public abstract class Edificio implements Construccion, Ocupable {
 
     public abstract boolean tieneVidaCompleta();
 
-    public Vida obtenerVida() {
-        return vida;
-    }
-
     public void destruir() {
         this.mapa.destruirConstruccion(this);
     }
@@ -43,6 +39,8 @@ public abstract class Edificio implements Construccion, Ocupable {
     public Posicion posicion() {
         return posicion;
     }
+
+    public Vida obtenerVida(){ return vida;}
 
     @Override
     public boolean estaOcupada(Posicion posicionDada) {

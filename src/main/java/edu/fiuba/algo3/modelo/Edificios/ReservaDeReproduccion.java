@@ -17,7 +17,7 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class ReservaDeReproduccion extends Edificio{
     private static int VIDA_COMPLETA = 1000;
-    private VidaZerg vida;
+    //private VidaZerg vida;
 
     public ReservaDeReproduccion(Posicion posicion, Mapa mapa)
     {

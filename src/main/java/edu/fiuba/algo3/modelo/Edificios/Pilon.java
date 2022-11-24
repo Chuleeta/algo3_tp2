@@ -16,7 +16,7 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 public class Pilon extends Edificio{
 
 
-    private VidaEscudoProtoss vidaYEscudo;
+    //private VidaEscudoProtoss vidaYEscudo;
 
     public Pilon (Posicion posicion, Mapa mapa) {
         this.posicion = posicion;
@@ -24,7 +24,7 @@ public class Pilon extends Edificio{
         this.mapa = mapa;
         tiempo = 0;
         this.zona = mapa.getZonaNeutral();
-        this.vidaYEscudo = new VidaEscudoProtoss(300, 300);
+        this.vida = new VidaEscudoProtoss(300, 300);
         crearJugadorPorDefecto();
     }
 
@@ -66,15 +66,15 @@ public class Pilon extends Edificio{
     }
 
     public void dañar(int daño){
-       this.vidaYEscudo.dañar(daño);
+       this.vida.dañar(daño);
     }
 
     public boolean tieneVidaCompleta() {
-        return this.vidaYEscudo.tieneVidaCompleta();
+        return this.vida.tieneVidaCompleta();
     }
 
     public boolean tieneEscudoCompleto() {
-        return this.vidaYEscudo.tieneEscudoCompleto();
+        return this.vida.tieneEscudoCompleto();
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Pilon extends Edificio{
     }
     @Override
     public void actualizar() {
-        this.vidaYEscudo.regenerar();
+        this.vida.regenerar();
     }
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {

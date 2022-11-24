@@ -23,7 +23,7 @@ public class Extractor extends Edificio implements HabitanteMoho {
     private List<Zangano> zanganos;
     private static int VIDA_COMPLETA = 750;
     private GasVespeno gas;
-    private VidaZerg vida;
+    //private VidaZerg vida;
     private Volcan volcan;
 
     public Extractor(Posicion posicion, Volcan volcan, Mapa mapa) throws VolcanOcupadoException {
