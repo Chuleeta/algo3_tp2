@@ -59,4 +59,9 @@ public class Hidralisco extends Individuo implements UnidadTierra{
         this.posicion = posicion;
         return true;
     }
+
+    @Override
+    public boolean estaHabilitado() {
+        return true;
+    }
 }

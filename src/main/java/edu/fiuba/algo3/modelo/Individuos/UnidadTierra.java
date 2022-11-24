@@ -8,4 +8,6 @@ public interface UnidadTierra {
     Posicion posicion();
     boolean mover(Posicion posicion);
     Vida obtenerVida();
+
+    boolean estaHabilitado();
 }

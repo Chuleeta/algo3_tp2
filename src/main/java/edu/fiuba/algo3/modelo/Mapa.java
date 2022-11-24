@@ -176,4 +176,13 @@ public class Mapa {
             return false;
         }
     }
+
+    public boolean laZonaEstaVigilada(Posicion posicion) {
+        for (Zona zona:zonas)
+        {
+            if(zona.puedeAtacar(posicion))
+                return true;
+        }
+        return false;
+    }
 }

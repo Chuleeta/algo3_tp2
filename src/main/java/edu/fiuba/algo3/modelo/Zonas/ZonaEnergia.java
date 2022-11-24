@@ -15,4 +15,9 @@ public class ZonaEnergia extends Zona {
         return construccion.habita(this);
     }
 
+    @Override
+    public boolean puedeAtacar(Posicion posicion) {
+        return true;
+    }
+
 }

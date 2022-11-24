@@ -16,6 +16,7 @@ public class Zealot extends Individuo implements UnidadTierra{
     private final int tiempoDeConstruccion;
     private int tiempo;
     private int asesinatos;
+    public boolean invisible;
     private HashMap<Object, Vida> atacados;
     public Zealot(Mineral mineral, Posicion posicion, Mapa mapa) throws RequerimientosInsuficientesException {
         if (!mineral.invertir(100)) {
@@ -29,6 +30,7 @@ public class Zealot extends Individuo implements UnidadTierra{
         this.tiempoDeConstruccion = 4;
         this.tiempo = 0;
         rangoDeAtaque = 1;
+        invisible = false;
         this.posicion = posicion;
         this.mapa = mapa;
     }
@@ -45,7 +47,10 @@ public class Zealot extends Individuo implements UnidadTierra{
         if (estaDentroDelRango(unidad.posicion())) {
             unidad.recibirDaño(this.unidadesDeDaño);
             atacados.put(unidad, unidad.obtenerVida());
-            if (atacados.get(unidad).vida <= 0) contarAsesinato();
+            if (atacados.get(unidad).vida <= 0){
+                atacados.remove(unidad);
+                contarAsesinato();
+            }
             return true;
         }
         return false;
@@ -53,12 +58,13 @@ public class Zealot extends Individuo implements UnidadTierra{
 
     private void contarAsesinato() {
         asesinatos += 1;
-        if(asesinatos == 3) invisibilizar();
+        if(asesinatos == 3) invisible = true;
     }
 
     public boolean atacar(Edificio edificio){
         atacados.put(edificio, edificio.obtenerVida());
         if(atacados.get(edificio).vida <= 0) {
+            atacados.remove(edificio);
             contarAsesinato();
             return true;
         }
@@ -76,5 +82,10 @@ public class Zealot extends Individuo implements UnidadTierra{
             return false;
         this.posicion = posicion;
         return true;
+    }
+
+    @Override
+    public boolean estaHabilitado() {
+        return mapa.laZonaEstaVigilada(posicion);
     }
 }

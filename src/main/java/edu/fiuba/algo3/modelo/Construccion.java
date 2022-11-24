@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
 import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
+import edu.fiuba.algo3.modelo.Zonas.ZonaVigilada;
 
 public interface Construccion {
     void construir() throws NoExisteEdificioCorrelativoException;

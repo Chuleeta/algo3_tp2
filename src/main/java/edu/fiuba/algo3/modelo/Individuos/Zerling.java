@@ -37,11 +37,15 @@ public class Zerling extends Individuo implements UnidadTierra{
 
     public boolean atacar(UnidadTierra unidad)
     {
-        if (estaDentroDelRango(unidad.posicion())) {
+        if (estaDentroDelRango(unidad.posicion()) && estaHabilitadoParaAtacar(unidad)) {
             unidad.recibirDaño(this.unidadesDeDaño);
             return true;
         }
         return false;
+    }
+
+    private boolean estaHabilitadoParaAtacar(UnidadTierra unidad) {
+        return unidad.estaHabilitado();
     }
 
     public boolean atacar(UnidadVoladora unidad)
@@ -54,6 +58,11 @@ public class Zerling extends Individuo implements UnidadTierra{
         if(mapa.enAreaEspacial(posicion))
             return false;
         this.posicion = posicion;
+        return true;
+    }
+
+    @Override
+    public boolean estaHabilitado() {
         return true;
     }
 }

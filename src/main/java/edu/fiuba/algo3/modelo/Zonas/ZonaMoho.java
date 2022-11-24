@@ -18,4 +18,9 @@ public class ZonaMoho extends Zona{
     {
         this.radio += 1;
     }
+
+    @Override
+    public boolean puedeAtacar(Posicion posicion) {
+        return true;
+    }
 }

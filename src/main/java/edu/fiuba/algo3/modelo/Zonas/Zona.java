@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.Posicion;
 public abstract class Zona 
 {   
     protected float radio;
-    protected Posicion centro;
+    public Posicion centro;
     public abstract boolean puedeHabitar(Construccion construccion);
     public boolean abarca(Posicion posicion)
     {
@@ -16,4 +16,6 @@ public abstract class Zona
     public void propagar(){
 
     }
+
+    public abstract boolean puedeAtacar(Posicion posicion);
 }

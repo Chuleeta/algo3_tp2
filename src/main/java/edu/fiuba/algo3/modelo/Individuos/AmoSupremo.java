@@ -9,6 +9,8 @@ import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.VidaZerg;
+import edu.fiuba.algo3.modelo.Zonas.Zona;
+import edu.fiuba.algo3.modelo.Zonas.ZonaVigilada;
 
 public class AmoSupremo extends Individuo implements UnidadVoladora {
     private final int tiempoDeConstruccion;
@@ -36,6 +38,7 @@ public class AmoSupremo extends Individuo implements UnidadVoladora {
 
     private void construir() {
         this.estado = new EstadoConstruido();
+        mapa.agregarZona(new ZonaVigilada(posicion));
         jugador.incrementarCapacidadDePoblacion(5);
     }
     public void pasarTiempo() {

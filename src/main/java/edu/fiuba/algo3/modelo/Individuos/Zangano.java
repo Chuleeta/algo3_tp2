@@ -73,4 +73,9 @@ public class Zangano extends Individuo implements UnidadTierra{
         return true;
     }
 
+    @Override
+    public boolean estaHabilitado() {
+        return true;
+    }
+
 }
