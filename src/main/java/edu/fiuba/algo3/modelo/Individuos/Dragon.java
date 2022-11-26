@@ -36,7 +36,7 @@ public class Dragon extends Individuo implements UnidadTierra {
 
     public boolean atacar(UnidadTierra unidad)
     {
-        if (estaDentroDelRango(unidad.posicion())) {
+        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
             unidad.recibirDaño(this.unidadesDeDaño);
             return true;
         }
@@ -45,7 +45,7 @@ public class Dragon extends Individuo implements UnidadTierra {
 
     public boolean atacar(UnidadVoladora unidad)
     {
-        if (estaDentroDelRango(unidad.posicion())) {
+        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
             unidad.recibirDaño(this.unidadesDeDaño);
             return true;
         }

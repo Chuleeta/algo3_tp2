@@ -44,7 +44,7 @@ public class Zealot extends Individuo implements UnidadTierra{
 
     public boolean atacar(UnidadTierra unidad)
     {
-        if (estaDentroDelRango(unidad.posicion())) {
+        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
             unidad.recibirDaño(this.unidadesDeDaño);
             atacados.put(unidad, unidad.obtenerVida());
             if (atacados.get(unidad).vida <= 0){
@@ -62,10 +62,13 @@ public class Zealot extends Individuo implements UnidadTierra{
     }
 
     public boolean atacar(Edificio edificio){
-        atacados.put(edificio, edificio.obtenerVida());
-        if(atacados.get(edificio).vida <= 0) {
-            atacados.remove(edificio);
-            contarAsesinato();
+        if (estado.estaConstruido() && estaDentroDelRango(edificio.posicion())) {
+            edificio.dañar(this.unidadesDeDaño);
+            atacados.put(edificio, edificio.obtenerVida());
+            if(atacados.get(edificio).vida <= 0) {
+                atacados.remove(edificio);
+                contarAsesinato();
+            }
             return true;
         }
         return false;

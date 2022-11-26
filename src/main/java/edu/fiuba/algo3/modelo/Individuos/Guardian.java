@@ -47,13 +47,16 @@ public class Guardian extends Individuo implements UnidadVoladora{
 
     public boolean atacar(UnidadTierra unidad)
     {
-        if (estaDentroDelRango(unidad.posicion())) {
+        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion()) && estaHabilitadoParaAtacar(unidad)) {
             unidad.recibirDaño(this.unidadesDeDaño);
             return true;
         }
         return false;
     }
 
+    private boolean estaHabilitadoParaAtacar(UnidadTierra unidad) {
+        return unidad.estaHabilitado();
+    }
     public boolean atacar(UnidadVoladora unidad)
     {
         return false;

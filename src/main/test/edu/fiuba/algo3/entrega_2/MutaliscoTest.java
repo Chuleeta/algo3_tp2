@@ -126,6 +126,7 @@ public class MutaliscoTest {
         mutal.pasarTiempo();
         mutal.pasarTiempo();
         mutal.pasarTiempo();
+        mutal.pasarTiempo();
         assertTrue(zerling.tieneVidaCompleta());
         assertTrue(guardian.tieneVidaCompleta());
         for (int i = 0; i < 10; i++)

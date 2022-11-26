@@ -46,7 +46,7 @@ public class Scout extends Individuo implements UnidadVoladora{
 
     public boolean atacar(UnidadTierra unidad)
     {
-        if (estaDentroDelRango(unidad.posicion())) {
+        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
             unidad.recibirDaño(8);
             return true;
         }
@@ -55,7 +55,7 @@ public class Scout extends Individuo implements UnidadVoladora{
 
     public boolean atacar(UnidadVoladora unidad)
     {
-        if (estaDentroDelRango(unidad.posicion())) {
+        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
             unidad.recibirDaño(14);
             return true;
         }

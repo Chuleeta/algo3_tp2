@@ -18,7 +18,7 @@ public class ZonaNeutral extends Zona {
 
     @Override
     public boolean puedeAtacar(Posicion posicion) {
-        return true;
+        return false;
     }
 
 }

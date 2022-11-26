@@ -56,23 +56,9 @@ public class AmoSupremo extends Individuo implements UnidadVoladora {
         this.posicion.ascender();
     }
 
-    public boolean atacar(UnidadTierra unidad)
-    {
-        if (estaDentroDelRango(unidad.posicion())) {
-            unidad.recibirDaño(this.unidadesDeDaño);
-            return true;
-        }
-        return false;
-    }
+    public boolean atacar(UnidadTierra unidad) { return false; }
 
-    public boolean atacar(UnidadVoladora unidad)
-    {
-        if (estaDentroDelRango(unidad.posicion())) {
-            unidad.recibirDaño(this.unidadesDeDaño);
-            return true;
-        }
-        return false;
-    }
+    public boolean atacar(UnidadVoladora unidad) { return false; }
 
     public boolean mover(Posicion posicion)
     {

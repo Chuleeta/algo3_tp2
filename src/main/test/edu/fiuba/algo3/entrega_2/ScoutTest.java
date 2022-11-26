@@ -118,6 +118,9 @@ public class ScoutTest {
         scout.pasarTiempo();
         scout.pasarTiempo();
         scout.pasarTiempo();
+        scout.pasarTiempo();
+        scout.pasarTiempo();
+        scout.pasarTiempo();
         assertTrue(zerling.tieneVidaCompleta());
         assertTrue(guardian.tieneVidaCompleta());
         for (int i = 0; i < 10; i++)

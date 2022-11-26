@@ -36,16 +36,19 @@ public class Hidralisco extends Individuo implements UnidadTierra{
 
     public boolean atacar(UnidadTierra unidad)
     {
-        if (estaDentroDelRango(unidad.posicion())) {
+        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion()) && estaHabilitadoParaAtacar(unidad)) {
             unidad.recibirDaño(this.unidadesDeDaño);
             return true;
         }
         return false;
     }
 
+    private boolean estaHabilitadoParaAtacar(UnidadTierra unidad) {
+        return unidad.estaHabilitado();
+    }
     public boolean atacar(UnidadVoladora unidad)
     {
-        if (estaDentroDelRango(unidad.posicion())) {
+        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
             unidad.recibirDaño(this.unidadesDeDaño);
             return true;
         }

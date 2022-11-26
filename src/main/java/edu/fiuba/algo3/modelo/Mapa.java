@@ -12,6 +12,7 @@ import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 import edu.fiuba.algo3.modelo.Zonas.Zona;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
+import edu.fiuba.algo3.modelo.Zonas.ZonaVigilada;
 
 public class Mapa {
 

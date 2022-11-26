@@ -17,7 +17,7 @@ public class ZonaEnergia extends Zona {
 
     @Override
     public boolean puedeAtacar(Posicion posicion) {
-        return true;
+        return false;
     }
 
 }

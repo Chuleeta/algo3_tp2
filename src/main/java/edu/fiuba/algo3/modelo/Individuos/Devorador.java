@@ -59,7 +59,7 @@ public class Devorador extends Individuo implements UnidadVoladora{
 
     @Override
     public boolean atacar(UnidadVoladora unidad) {
-        if (estaDentroDelRango(unidad.posicion())) {
+        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
             unidad.recibirDaño(this.unidadesDeDaño);
             return true;
         }
