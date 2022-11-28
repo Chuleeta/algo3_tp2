@@ -63,9 +63,12 @@ public class Asimilador extends Edificio{
         return true;
     }
 
-    public void dañar(int daño){
-        this.vida.dañar(daño);
-    }
+    // public void dañar(int daño){
+    //     this.vida.dañar(daño);
+    //     if(this.vida.verificarSiEstaMuerto()){
+    //         destruir();
+    //     }
+    // }
 
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
@@ -80,6 +83,7 @@ public class Asimilador extends Edificio{
         if(mineral.invertir(100))
         {
             this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionProtoss(this);
             this.gas = gas;
             return true;
         }
@@ -92,6 +96,11 @@ public class Asimilador extends Edificio{
         this.gas.agregarGas(volcan.extraerGas(20));
     }
 
+    public void destruir()
+    {
+        this.mapa.destruirConstruccion(this);
+        this.mapa.destruirConstruccionProtoss(this);
+    }
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {
     //     return this.posicion.equals(posicionDada);

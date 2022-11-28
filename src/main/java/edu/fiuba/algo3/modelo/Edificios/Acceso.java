@@ -62,9 +62,12 @@ public class Acceso extends Edificio{
         return zona.abarca(posicion);
     }
 
-    public void dañar(int daño){
-        this.vida.dañar(daño);
-    }
+    // public void dañar(int daño){
+    //     this.vida.dañar(daño);
+    //     if(this.vida.verificarSiEstaMuerto()){
+    //         destruir();
+    //     }
+    // }
 
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
@@ -78,6 +81,7 @@ public class Acceso extends Edificio{
         if(mineral.invertir(150))
         {
             this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionProtoss(this);
             return true;
         }
         return false;
@@ -97,6 +101,11 @@ public class Acceso extends Edificio{
         return null;
     }
 
+    public void destruir()
+    {
+        this.mapa.destruirConstruccion(this);
+        this.mapa.destruirConstruccionProtoss(this);
+    }
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {
     //     return this.posicion.equals(posicionDada);

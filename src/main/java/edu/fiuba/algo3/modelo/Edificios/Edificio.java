@@ -22,7 +22,14 @@ public abstract class Edificio implements Construccion, Ocupable {
     @Override
     public abstract void pasarTiempo() throws NoExisteEdificioCorrelativoException;
 
-    public abstract void dañar(int daño);
+    //public abstract void dañar(int daño);
+
+    public void dañar(int daño){
+        this.vida.dañar(daño);
+        if(this.vida.verificarSiEstaMuerto()){
+            destruir();
+        }
+    }
 
     public abstract boolean tieneVidaCompleta();
 

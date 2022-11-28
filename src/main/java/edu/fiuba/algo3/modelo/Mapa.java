@@ -17,39 +17,23 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaVigilada;
 public class Mapa {
 
     private ArrayList<Construccion> construcciones;
+    private ArrayList<Construccion> construccionesZerg;
+    private ArrayList<Construccion> construccionesProtoss;
     private ArrayList<Zona> zonas;
     private ArrayList<AreaEspacial> areasEspaciales;
-    // private ArrayList<Volcan> volcanes;
-    // private ArrayList<Mena> menas;
     private ArrayList<Ocupable> ocupables;
 
     public Mapa()
     {
         this.construcciones = new ArrayList<>();
+        this.construccionesZerg = new ArrayList<>();
+        this.construccionesProtoss = new ArrayList<>();
         this.zonas = new ArrayList<>();
         this.areasEspaciales = new ArrayList<>();
         this.zonas.add(new ZonaNeutral());
         this.ocupables = new ArrayList<>();
-        // this.volcanes = new ArrayList<>();
-        // this.menas = new ArrayList<>();
 
     }
-
-    // public boolean agregarVolcan(Volcan volcanDado){
-    //     if(volcanDado == null || !verificarPosicion(volcanDado.getPosicion()))
-    //         return false;
-        
-    //     this.volcanes.add(volcanDado);
-    //     return true;
-    // }
-
-    // public boolean agregarMena(Mena menaDada){
-    //     if(menaDada == null || !verificarPosicion(menaDada.getPosicion()))
-    //         return false;
-        
-    //     this.menas.add(menaDada);
-    //     return true;
-    // }
 
     public boolean agregarOcupable(Ocupable ocupable, Posicion posicion){
         if(ocupable == null || !verificarPosicion(posicion))
@@ -66,30 +50,6 @@ public class Mapa {
             }
         return true;
     }
-    // // TO DO: APLICAR INTERFAZ OCUPABLE PARA LOS 3
-    // private boolean verificarPosicionVolcanes(Posicion posicionDada){
-    //     for (Volcan volcan:volcanes){
-    //         if(volcan.estaOcupada(posicionDada))
-    //             return false;
-    //     }
-    //     return true;
-    // }
-    // // TO DO: APLICAR INTERFAZ OCUPABLE PARA LOS 3
-    // private boolean verificarPosicionMenas(Posicion posicionDada){
-    //     for (Mena mena:menas){
-    //         if(mena.estaOcupada(posicionDada))
-    //             return false;
-    //     }
-    //     return true;
-    // }
-    // // TO DO: APLICAR INTERFAZ OCUPABLE PARA LOS 3
-    // private boolean verificarPosicionConstrucciones(Posicion posicionDada){
-    //     for (Construccion construccion:construcciones){
-    //         if(construccion.estaOcupada(posicionDada))
-    //             return false;
-    //     }
-    //     return true;
-    // }
 
     public boolean verificarEdificacionCorrelativa(Edificio edificioCorrelativo) {
         return construcciones.stream().anyMatch(clase -> clase.getClass().isInstance(edificioCorrelativo));
@@ -145,9 +105,27 @@ public class Mapa {
         construcciones.add(construccion);
     }
 
+    public void agregarEnListaConstruccionZerg(Construccion construccion) {
+        construccionesZerg.add(construccion);
+    }
+
+    public void agregarEnListaConstruccionProtoss(Construccion construccion) {
+        construccionesProtoss.add(construccion);
+    }
+
     public void destruirConstruccion(Construccion construccion)
     {
         construcciones.remove(construccion);
+    }
+
+    public void destruirConstruccionProtoss(Construccion construccion)
+    {
+        construccionesProtoss.remove(construccion);
+    }
+
+    public void destruirConstruccionZerg(Construccion construccion)
+    {
+        construccionesZerg.remove(construccion);
     }
 
     public void destruirZona(Zona zona)
@@ -185,5 +163,9 @@ public class Mapa {
                 return true;
         }
         return false;
+    }
+
+    public boolean verificarConstruccionesVacias() {
+        return (!this.construccionesProtoss.isEmpty() && !this.construccionesZerg.isEmpty());
     }
 }

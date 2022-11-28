@@ -83,9 +83,9 @@ public class Extractor extends Edificio implements HabitanteMoho {
         return false;
     }
 
-    public void dañar(int daño){
-        this.vida.dañar(daño);
-    }
+    // public void dañar(int daño){
+    //     this.vida.dañar(daño);
+    // }
 
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
@@ -96,6 +96,7 @@ public class Extractor extends Edificio implements HabitanteMoho {
         if(mineral.invertir(100))
         {
             this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionZerg(this);
             this.gas = gas;
             return true;
         }
@@ -106,6 +107,12 @@ public class Extractor extends Edificio implements HabitanteMoho {
     public void actualizar(){
         this.vida.regenerar();
         extraerGas();
+    }
+
+    public void destruir()
+    {
+        this.mapa.destruirConstruccion(this);
+        this.mapa.destruirConstruccionZerg(this);
     }
 
     // @Override

@@ -122,10 +122,6 @@ public class Criadero extends Edificio {
     }
 
 
-    public void dañar(int daño){
-        this.vida.dañar(daño);
-    }
-
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
     }
@@ -135,15 +131,17 @@ public class Criadero extends Edificio {
         if(mineral.invertir(50))
         {
             this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionZerg(this);
             return true;
         }
         return false;
     }
+    //TO DO: CAMBIAR A PRIVATE Y CAMBIAR LOS TEST
     public void destruir()
     {
         this.jugador.decrementarCapacidadDePoblacion(5);
-        this.mapa.destruirZona(this.zona);
         this.mapa.destruirConstruccion(this);
+        this.mapa.destruirConstruccionZerg(this);
     }
 
     // @Override

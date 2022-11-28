@@ -60,9 +60,9 @@ public class ReservaDeReproduccion extends Edificio{
         return false;
     }
 
-    public void dañar(int daño){
-        this.vida.dañar(daño);
-    }
+    // public void dañar(int daño){
+    //     this.vida.dañar(daño);
+    // }
 
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
@@ -73,6 +73,7 @@ public class ReservaDeReproduccion extends Edificio{
         if(mineral.invertir(150))
         {
             this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionZerg(this);
             return true;
         }
         return false;
@@ -84,6 +85,12 @@ public class ReservaDeReproduccion extends Edificio{
     @Override
     public void actualizar() {
         this.vida.regenerar();
+    }
+
+    public void destruir()
+    {
+        this.mapa.destruirConstruccion(this);
+        this.mapa.destruirConstruccionZerg(this);
     }
 
     // @Override

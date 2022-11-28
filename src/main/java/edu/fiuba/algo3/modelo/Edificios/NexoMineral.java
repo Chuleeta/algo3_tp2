@@ -59,9 +59,9 @@ public class NexoMineral extends Edificio{
     }
 
 
-    public void dañar(int daño){
-        this.vida.dañar(daño);
-    }
+    // public void dañar(int daño){
+    //     this.vida.dañar(daño);
+    // }
 
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
@@ -76,6 +76,7 @@ public class NexoMineral extends Edificio{
         if(mineral.invertir(50))
         {
             this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionProtoss(this);
             return true;
         }
         return false;
@@ -87,6 +88,11 @@ public class NexoMineral extends Edificio{
         this.vida.regenerar();
     }
 
+    public void destruir()
+    {
+        this.mapa.destruirConstruccion(this);
+        this.mapa.destruirConstruccionProtoss(this);
+    }
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {
     //     return this.posicion.equals(posicionDada);
