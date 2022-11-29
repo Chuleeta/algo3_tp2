@@ -34,7 +34,7 @@ public abstract class Edificio implements Construccion, Ocupable {
     public abstract boolean tieneVidaCompleta();
 
     public void destruir() {
-        this.mapa.destruirConstruccion(this);
+        this.jugador.destruirConstruccion(this);
     }
 
     public void desactivar() {
@@ -55,6 +55,6 @@ public abstract class Edificio implements Construccion, Ocupable {
     }
 
     public void crearJugadorPorDefecto() {
-        jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6, 6), 200);
+        jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6, 6), mapa, 200);
     }
 }

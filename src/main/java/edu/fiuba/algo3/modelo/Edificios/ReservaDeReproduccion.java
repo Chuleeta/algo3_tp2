@@ -1,15 +1,12 @@
 package edu.fiuba.algo3.modelo.Edificios;
 
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
-import edu.fiuba.algo3.modelo.Larva;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
-import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
-import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
-import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Individuos.Zerling;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
 import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
@@ -27,6 +24,12 @@ public class ReservaDeReproduccion extends Edificio{
         zona = new ZonaMoho(this.posicion);
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
+        crearJugadorPorDefecto();
+    }
+
+    public ReservaDeReproduccion(Posicion posicion, Mapa mapa, Jugador jugador) {
+        this(posicion, mapa);
+        this.jugador = jugador;
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException
@@ -41,8 +44,8 @@ public class ReservaDeReproduccion extends Edificio{
     @Override
     public void construir()
     {
+
         estado = new EstadoConstruido();
-        
     }
 
     @Override
@@ -60,10 +63,6 @@ public class ReservaDeReproduccion extends Edificio{
         return false;
     }
 
-    // public void dañar(int daño){
-    //     this.vida.dañar(daño);
-    // }
-
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
     }
@@ -72,8 +71,9 @@ public class ReservaDeReproduccion extends Edificio{
     public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
         if(mineral.invertir(150))
         {
-            this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionZerg(this);
+            this.jugador.agregarEnListaConstruccion(this);
+            /*this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionZerg(this);*/
             return true;
         }
         return false;
@@ -87,11 +87,11 @@ public class ReservaDeReproduccion extends Edificio{
         this.vida.regenerar();
     }
 
-    public void destruir()
+    /*public void destruir()
     {
         this.mapa.destruirConstruccion(this);
         this.mapa.destruirConstruccionZerg(this);
-    }
+    }*/
 
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {

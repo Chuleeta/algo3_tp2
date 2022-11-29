@@ -1,10 +1,7 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Vida;
-import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
@@ -18,6 +15,7 @@ public class Zealot extends Individuo implements UnidadTierra{
     private int asesinatos;
     public boolean invisible;
     private HashMap<Object, Vida> atacados;
+
     public Zealot(Mineral mineral, Posicion posicion, Mapa mapa) throws RequerimientosInsuficientesException {
         if (!mineral.invertir(100)) {
             throw new RequerimientosInsuficientesException();
@@ -33,10 +31,13 @@ public class Zealot extends Individuo implements UnidadTierra{
         invisible = false;
         this.posicion = posicion;
         this.mapa = mapa;
+        crearJugadorPorDefecto();
     }
+
     private void construir() {
         this.estado = new EstadoConstruido();
     }
+
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();

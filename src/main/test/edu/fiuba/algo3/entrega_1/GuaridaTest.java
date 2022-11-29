@@ -21,21 +21,22 @@ public class GuaridaTest {
     public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos() throws NoExisteEdificioCorrelativoException {
         //given
         Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(1,3), mapa);
-        mapa.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(10000));
+        jugador.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(10000));
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Posicion(1,2), mapa);
-        mapa.agregarConstruccion(reserva, new Mineral(10000), new GasVespeno(10000));
+        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Posicion(1,2), mapa, jugador);
+        jugador.agregarConstruccion(reserva, new Mineral(10000), new GasVespeno(10000));
         for(int i = 0; i < 13; i += 1){
             reserva.pasarTiempo();
         }
-        Guarida guarida = new Guarida(new Posicion(1,1), mapa);
-        mapa.agregarConstruccion(guarida, new Mineral(10000), new GasVespeno(10000));
+        Guarida guarida = new Guarida(new Posicion(1,1), mapa, jugador);
+        jugador.agregarConstruccion(guarida, new Mineral(10000), new GasVespeno(10000));
         guarida.pasarTiempo();
         guarida.pasarTiempo();
         guarida.pasarTiempo();
@@ -98,13 +99,14 @@ public class GuaridaTest {
     public void seEngendraHidraliscoExitosamente() throws NoExisteEdificioCorrelativoException, RequerimientosInsuficientesException {
         //given
         Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         // es el edificio correlativo
-        ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(2,2), mapa);
-        reservaDeReproduccion.agregarAlMapa(new Mineral(150), new GasVespeno(100));
-        Guarida guarida = new Guarida(new Posicion(1,1), mapa);
-
-        for (int i = 0; i < 12; i++)
-            guarida.pasarTiempo();
+        ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(2,2), mapa, jugador);
+        jugador.agregarConstruccion(reservaDeReproduccion, new Mineral(150), new GasVespeno(100));
+        Guarida guarida = new Guarida(new Posicion(1,2), mapa, jugador);
+        jugador.agregarConstruccion(guarida, new Mineral(150), new GasVespeno(100));
+        for (int i = 0; i < 13; i++)
+            jugador.pasarTiempo();
 
         Mineral mineral = new Mineral(75);
         GasVespeno gas = new GasVespeno(25);

@@ -22,8 +22,9 @@ public class JugadorTest {
     public void testSeCreanLosDosJugadoresCorrectamente() throws AtributoInvalidoException {
         Posicion posicionUno = new Posicion(1,1);
         Posicion posicionDos = new Posicion(100,100);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 200);
-        Jugador jugadorDos = new Jugador("jugadorDos", "rojo", "protoss", posicionDos, 200);
+        Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 200);
+        Jugador jugadorDos = new Jugador("jugadorDos", "rojo", "protoss", posicionDos, mapa, 200);
         
         assertDoesNotThrow(()->jugadorUno.validarAtributos(null));
         assertDoesNotThrow(()->jugadorDos.validarAtributos(jugadorUno));
@@ -33,8 +34,9 @@ public class JugadorTest {
     public void testSeLanzaExcepcionPorElNombreDelJugadorDos() throws AtributoInvalidoException {
         Posicion posicionUno = new Posicion(1,1);
         Posicion posicionDos = new Posicion(100,100);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 200);
-        Jugador jugadorDos = new Jugador("jugadorUno", "rojo", "protoss", posicionDos, 200);
+        Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 200);
+        Jugador jugadorDos = new Jugador("jugadorUno", "rojo", "protoss", posicionDos, mapa, 200);
         
         assertThrows(AtributoInvalidoException.class, () -> jugadorDos.validarAtributos(jugadorUno));
     }
@@ -43,8 +45,9 @@ public class JugadorTest {
     public void testSeLanzaExcepcionPorElColorDelJugadorDos() throws AtributoInvalidoException {
         Posicion posicionUno = new Posicion(1,1);
         Posicion posicionDos = new Posicion(100,100);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 200);
-        Jugador jugadorDos = new Jugador("jugadorDos", "azul", "protoss", posicionDos, 200);
+        Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 200);
+        Jugador jugadorDos = new Jugador("jugadorDos", "azul", "protoss", posicionDos, mapa, 200);
         
         assertDoesNotThrow(()->jugadorUno.validarAtributos(null));
         assertThrows(AtributoInvalidoException.class, ()->jugadorDos.validarAtributos(jugadorUno));
@@ -54,8 +57,9 @@ public class JugadorTest {
     public void testSeLanzaExcepcionPorLaRazaDelJugadorDos() throws AtributoInvalidoException {
         Posicion posicionUno = new Posicion(1,1);
         Posicion posicionDos = new Posicion(100,100);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 200);
-        Jugador jugadorDos = new Jugador("jugadorDos", "rojo", "zerg", posicionDos, 200);
+        Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 200);
+        Jugador jugadorDos = new Jugador("jugadorDos", "rojo", "zerg", posicionDos, mapa, 200);
 
         assertThrows(AtributoInvalidoException.class, () -> jugadorDos.validarAtributos(jugadorUno));
     }
@@ -64,8 +68,9 @@ public class JugadorTest {
     public void testSeLanzaExcepcionPorLaPosicionDelJugadorDos() throws AtributoInvalidoException {
         Posicion posicionUno = new Posicion(1,1);
         Posicion posicionDos = new Posicion(99,99);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 200);
-        Jugador jugadorDos = new Jugador("jugadorDos", "rojo", "zerg", posicionDos, 200);
+        Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 200);
+        Jugador jugadorDos = new Jugador("jugadorDos", "rojo", "zerg", posicionDos, mapa, 200);
 
         assertThrows(AtributoInvalidoException.class, () -> jugadorDos.validarAtributos(jugadorUno));
     }
@@ -81,8 +86,8 @@ public class JugadorTest {
     @Test
     public void seCreanUnidadesAlTenerCapacidadPorCriadero() throws  NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Posicion posicionUno = new Posicion(1,1);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 0);
         Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 0);
         Criadero criadero = new Criadero(new Posicion(2,2), mapa, jugadorUno);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -101,8 +106,8 @@ public class JugadorTest {
     @Test
     public void seCreanUnidadesAlTenerCapacidadPorAmoSupremoYCriadero() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Posicion posicionUno = new Posicion(1,1);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 0);
         Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 0);
         Criadero criadero = new Criadero(new Posicion(1,1), mapa, jugadorUno);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -139,8 +144,8 @@ public class JugadorTest {
     @Test
     public void alAlcanzarLaCapacidadMaximaNoSeCreaUnidadNueva() throws AtributoInvalidoException, NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Posicion posicionUno = new Posicion(1,1);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 0);
         Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 0);
         Criadero criadero = new Criadero(new Posicion(1,1), mapa, jugadorUno);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -179,8 +184,8 @@ public class JugadorTest {
     @Test
     public void seCreanUnidadesAlTenerCapacidadPorPilon() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Posicion posicionUno = new Posicion(1,1);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protos", posicionUno, 0);
         Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protos", posicionUno, mapa, 0);
         Mineral mineral = new Mineral(500);
         Pilon pilon = new Pilon(new Posicion(3,3), mapa, jugadorUno);
         pilon.pasarTiempo();
@@ -208,8 +213,8 @@ public class JugadorTest {
     @Test
     public void noSeCreanUnidadesAlAlcanzarElMaximoConPilon() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Posicion posicionUno = new Posicion(1,1);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protos", posicionUno, 0);
         Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protos", posicionUno, mapa, 0);
         Mineral mineral = new Mineral(600);
         GasVespeno gas = new GasVespeno(0);
         Pilon pilon = new Pilon(new Posicion(3,3), mapa, jugadorUno);
@@ -239,8 +244,8 @@ public class JugadorTest {
     @Test
     public void seDestruyePilonYLaCapacidadDisminuye() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Posicion posicionUno = new Posicion(1,1);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protos", posicionUno, 0);
         Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protos", posicionUno, mapa, 0);
         Mineral mineral = new Mineral(600);
         GasVespeno gas = new GasVespeno(0);
         Pilon pilon = new Pilon(new Posicion(3,3), mapa, jugadorUno);
@@ -266,8 +271,8 @@ public class JugadorTest {
     @Test
     public void seDestruyeCriaderoYLaCapacidadDisminuye() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Posicion posicionUno = new Posicion(1,1);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 0);
         Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 0);
         Criadero criadero = new Criadero(new Posicion(2,2), mapa, jugadorUno);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -281,8 +286,8 @@ public class JugadorTest {
     @Test
     public void seDestruyeAmoSupremoYLaCapacidadDisminuye() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Posicion posicionUno = new Posicion(1,1);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 0);
         Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 0);
         Mineral mineralAmo = new Mineral(50);
         GasVespeno gas = new GasVespeno(0);
         AmoSupremo amoSupremo = new AmoSupremo(mineralAmo, gas, new Posicion(4,4), mapa, jugadorUno);
@@ -312,8 +317,8 @@ public class JugadorTest {
     @Test
     public void alAlcanzarCapacidadMaximaNoSeSumaMasCapacidadConEdificio() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
         Posicion posicionUno = new Posicion(1,1);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 200);
         Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 200);
         Criadero criadero = new Criadero(new Posicion(2,2), mapa, jugadorUno);
         criadero.pasarTiempo();
         criadero.pasarTiempo();

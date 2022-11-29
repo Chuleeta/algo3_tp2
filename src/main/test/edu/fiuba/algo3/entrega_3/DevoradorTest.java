@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_3;
 
+import edu.fiuba.algo3.modelo.Jugador;
 import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.AreaEspacial;
@@ -39,10 +40,12 @@ public class DevoradorTest {
     @Test
     public void devoradorAtacaNexoMineral14vecesYDaña210unidades() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa, jugador);
         Mineral mineral = new Mineral(1000);
         GasVespeno gas = new GasVespeno(1000);
-        mapa.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo, mineral, gas);
+        //mapa.agregarConstruccion(nexo, mineral, gas);
         Devorador devorador = new Devorador(mineral, gas, new Posicion(4, 1), new Mapa());
         devorador.pasarTiempo();
         devorador.pasarTiempo();
@@ -53,10 +56,10 @@ public class DevoradorTest {
             devorador.atacar(nexo);
 
         // SE TIENE QUE TERMINAR DE CONSTRUIR PARA QUE SE REGENERE
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
 
         //escudo dañado
         assertFalse(nexo.tieneEscudoCompleto());
@@ -72,10 +75,12 @@ public class DevoradorTest {
     @Test
     public void devoradorNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa, jugador);
         Mineral mineral = new Mineral(1000);
         GasVespeno gas = new GasVespeno(1000);
-        mapa.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo, mineral, gas);
+        //mapa.agregarConstruccion(nexo, mineral, gas);
         Devorador devorador = new Devorador(mineral, gas, new Posicion(1, 7), new Mapa());
         devorador.pasarTiempo();
         devorador.pasarTiempo();

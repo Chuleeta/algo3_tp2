@@ -53,7 +53,7 @@ public abstract class Individuo
     public abstract boolean atacar(UnidadTierra unidad);
     public abstract boolean atacar(UnidadVoladora unidad);
     public void crearJugadorPorDefecto() {
-        jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6,6), 200);
+        jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6,6), new Mapa(), 200);
     }
 
     public abstract void pasarTiempo();

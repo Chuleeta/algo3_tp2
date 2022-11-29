@@ -84,8 +84,9 @@ public class Pilon extends Edificio{
     public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
         if(mineral.invertir(100))
         {
-            this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionProtoss(this);
+            this.jugador.agregarEnListaConstruccion(this);
+            /*this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionProtoss(this);*/
             return true;
         }
         return false;
@@ -95,8 +96,9 @@ public class Pilon extends Edificio{
     {
         this.jugador.decrementarCapacidadDePoblacion(5);
         this.mapa.destruirZona(this.zona);
-        this.mapa.destruirConstruccion(this);
-        this.mapa.destruirConstruccionProtoss(this);
+        this.jugador.destruirConstruccion(this);
+        /*this.mapa.destruirConstruccion(this);
+        this.mapa.destruirConstruccionProtoss(this);*/
     }
     @Override
     public void actualizar() {

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_3;
 
+import edu.fiuba.algo3.modelo.Jugador;
 import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Juego;
@@ -20,52 +21,43 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class JuegoTest {
     @Test
     public void creoUnJuegoNuevoSinMapa(){
-        assertThrows(RequerimientosInsuficientesException.class, ()->{ new Juego(null); });
+        assertThrows(RequerimientosInsuficientesException.class, ()->{ new Juego(null, null, null); });
     }
 
     @Test
     public void elJuegoTerminaCuandoSeDestruyenTodosLosEdificiosDeUnJugador() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException{
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
-        
         Mapa mapa = new Mapa();
-        Pilon pilon = new Pilon(new Posicion(9,9), mapa);
-        mapa.agregarConstruccion(pilon, mineral, gas);
-        Criadero criadero = new Criadero(new Posicion(9,20), mapa);
-        mapa.agregarConstruccion(criadero, mineral, gas);
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
+        Jugador jugadorDos = new Jugador("jugadorDos", "rojo", "zerg", new Posicion(100,100), mapa, 200);
+        Pilon pilon = new Pilon(new Posicion(9,9), mapa, jugadorUno);
+        jugadorUno.agregarConstruccion(pilon, mineral, gas);
+        Criadero criadero = new Criadero(new Posicion(9,20), mapa, jugadorDos);
+        jugadorDos.agregarConstruccion(criadero, mineral, gas);
 
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
+        jugadorUno.pasarTiempo();
+        jugadorUno.pasarTiempo();
+        jugadorUno.pasarTiempo();
+        jugadorUno.pasarTiempo();
+        jugadorUno.pasarTiempo();
+        jugadorDos.pasarTiempo();
+        jugadorDos.pasarTiempo();
+        jugadorDos.pasarTiempo();
+        jugadorDos.pasarTiempo();
+        jugadorDos.pasarTiempo();
 
-        Juego juego = new Juego(mapa);
+        Juego juego = new Juego(mapa, jugadorUno, jugadorDos);
 
-        Dragon dragon = new Dragon(mineral, gas, new Posicion(9,18), mapa);
-        mapa.agregarIndividuo(dragon);
+        Dragon dragon = new Dragon(mineral, gas, new Posicion(9,18), mapa, jugadorUno);
+        jugadorUno.agregarIndividuo(dragon);
         
-        // assertTrue(juego.pasarTiempo());
-        // dragon.pasarTiempo();
-        // assertTrue(juego.pasarTiempo());
-        // dragon.pasarTiempo();
-        // assertTrue(juego.pasarTiempo());
-        // dragon.pasarTiempo();
-        // assertTrue(juego.pasarTiempo());
-        // dragon.pasarTiempo();
-        // assertTrue(juego.pasarTiempo());
-        // dragon.pasarTiempo();
-        // assertTrue(juego.pasarTiempo());
-        // dragon.pasarTiempo();
-
         assertTrue(juego.pasarTiempo());
         assertTrue(juego.pasarTiempo());
         assertTrue(juego.pasarTiempo());
         assertTrue(juego.pasarTiempo());
         assertTrue(juego.pasarTiempo());
         assertTrue(juego.pasarTiempo());
-
-        //TO DO: INDIVIDUOS TIENEN Q PODER PASAR TIEMPO ADENTRO DE MAPA
 
         for (int i = 0; i < 40; i++)
             dragon.atacar(criadero);

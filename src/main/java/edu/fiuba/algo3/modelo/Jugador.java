@@ -1,7 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Exceptions.AtributoInvalidoException;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Individuos.Individuo;
+import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
+
+import java.util.ArrayList;
 
 public class Jugador {
 
@@ -12,17 +17,22 @@ public class Jugador {
     private Posicion posicion;
     public Mineral mineral;
     private int unidadesCreadas;
+    public Mapa mapa;
+    public ArrayList<Construccion> construcciones;
+    private ArrayList<Individuo> individuos;
 
-    public Jugador(String name, String color, String race, Posicion posicionJugador, int capacidad){
+    public Jugador(String name, String color, String race, Posicion posicionJugador, Mapa mapa, int capacidad){
         this.nombre = name;
         this.color = color;
         this.raza = race;
         this.posicion = posicionJugador;
+        this.mapa = mapa;
+        this.construcciones = new ArrayList<>();
+        this.individuos = new ArrayList<>();
         this.mineral = new Mineral(200);
         this.capacidad = capacidad;
         unidadesCreadas = 0;
     }
-
 
     public void validarAtributos(Jugador jugadorDado) throws AtributoInvalidoException {
         if(jugadorDado == null) return;
@@ -72,5 +82,39 @@ public class Jugador {
 
     public void eliminarUnidad() {
         unidadesCreadas -= 1;
+    }
+
+    public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
+        for (Construccion construccion : construcciones) {
+            construccion.pasarTiempo();
+        }
+        for (Individuo individuo:individuos)
+        {
+            individuo.pasarTiempo();
+        }
+        mapa.filtrarConstrucciones(construcciones);
+    }
+
+    public boolean agregarConstruccion(Construccion construccion, Mineral mineral, GasVespeno gas){
+        if(!mapa.verificarPosicionDisponible(construccion)){
+            return false;
+        }
+        return construccion.agregarAlMapa(mineral, gas);
+    }
+
+    public boolean agregarIndividuo(Individuo individuo){
+        return individuos.add(individuo);
+    }
+
+    public void agregarEnListaConstruccion(Construccion construccion) {
+        construcciones.add(construccion);
+    }
+
+    public void destruirConstruccion(Construccion construccion)
+    {
+        construcciones.remove(construccion);
+    }
+    public boolean verificarConstruccionesVacias() {
+        return (!this.construcciones.isEmpty());
     }
 }

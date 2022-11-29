@@ -130,18 +130,21 @@ public class Criadero extends Edificio {
     public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
         if(mineral.invertir(50))
         {
-            this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionZerg(this);
+            this.jugador.agregarEnListaConstruccion(this);
+            /*this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionZerg(this);*/
             return true;
         }
         return false;
     }
+
     //TO DO: CAMBIAR A PRIVATE Y CAMBIAR LOS TEST
     public void destruir()
     {
         this.jugador.decrementarCapacidadDePoblacion(5);
-        this.mapa.destruirConstruccion(this);
-        this.mapa.destruirConstruccionZerg(this);
+        this.jugador.destruirConstruccion(this);
+        //this.mapa.destruirConstruccion(this);
+        //this.mapa.destruirConstruccionZerg(this);
     }
 
     // @Override

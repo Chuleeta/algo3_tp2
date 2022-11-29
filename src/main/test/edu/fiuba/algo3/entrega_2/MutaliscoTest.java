@@ -15,6 +15,8 @@ import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,19 +27,20 @@ public class MutaliscoTest {
     @Test
     public void mutaliscoNoGeneraDañoPorNoEstarConstruidoAun() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), mapa, jugador);
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
-        mapa.agregarConstruccion(nexo, mineral, gas);
-        Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(3, 3), new Mapa());
-
+        jugador.agregarConstruccion(nexo, mineral, gas);
+        Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(3, 3), mapa);
+        jugador.agregarIndividuo(mutalisco);
         // EL tiempo de construccion es 4, con un solo tiempo no esta construido
-        mutalisco.pasarTiempo();
+        jugador.pasarTiempo();
 
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
         mutalisco.atacar(nexo);
         //escudo completo
         assertTrue(nexo.tieneEscudoCompleto());
@@ -46,31 +49,27 @@ public class MutaliscoTest {
     // caso 18
     @Test
     public void mutaliscoAtacaNexoMineral23VecesYGenera207UnidadesDeDaño() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
-
         Mapa mapa = new Mapa();
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), mapa, jugador);
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
-        Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(3,3), new Mapa());
-        mapa.agregarConstruccion(nexo, mineral, gas);
+        Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(3,1), mapa);
+        jugador.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarIndividuo(mutalisco);
         // tiempo de construccion
-        mutalisco.pasarTiempo();
-        mutalisco.pasarTiempo();
-        mutalisco.pasarTiempo();
-        mutalisco.pasarTiempo();
-        mutalisco.pasarTiempo();
-        mutalisco.pasarTiempo();
-        mutalisco.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
 
         // Su unidad de ataque es de 9, con 23 ataques son 207 de daño
         for (int i = 0; i < 23; i++)
             mutalisco.atacar(nexo);
-        
-        //SE TIENE QUE TERMINAR DE CONSTRUIR EL CRIADERO PARA REGENERARSE
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
+
 
         //escudo dañado
         assertFalse(nexo.tieneEscudoCompleto());
@@ -88,21 +87,22 @@ public class MutaliscoTest {
     // caso 23
     @Test
     public void mutaliscoNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
-
         Mapa mapa = new Mapa();
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), mapa, jugador);
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
-        Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(4,3), new Mapa());
-        mapa.agregarConstruccion(nexo, mineral, gas);
+        Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(6,3),mapa);
+        jugador.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarIndividuo(mutalisco);
         // tiempo de construccion
-        mutalisco.pasarTiempo();
-        mutalisco.pasarTiempo();
-        mutalisco.pasarTiempo();
-        mutalisco.pasarTiempo();
-        mutalisco.pasarTiempo();
-        mutalisco.pasarTiempo();
-        mutalisco.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
 
         // Su unidad de ataque es de 9, con 23 ataques son 207 de daño
         for (int i = 0; i < 23; i++)

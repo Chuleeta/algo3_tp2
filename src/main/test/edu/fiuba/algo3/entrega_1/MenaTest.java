@@ -16,13 +16,14 @@ public class MenaTest {
     // Caso 16
     @Test
     public void noSePuedoConstruirEnMenaSiYaExisteUnNexoMineral () throws MenaOcupadaException {
-        Mena mena = new Mena(new Posicion(1,1));
+        Mena mena = new Mena(new Posicion(1,2));
         Mapa mapa = new Mapa();
-        NexoMineral nexo = new NexoMineral(new Posicion(1, 1), mena, mapa);
+        Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
+        NexoMineral nexo = new NexoMineral(new Posicion(1, 2), mena, mapa);
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
-        mapa.agregarConstruccion(nexo, mineral, gas);
-        assertThrows(MenaOcupadaException.class, ()->{ new NexoMineral(new Posicion(1, 1), mena, mapa); });
+        jugador.agregarConstruccion(nexo, mineral, gas);
+        assertThrows(MenaOcupadaException.class, ()->{ new NexoMineral(new Posicion(1, 2), mena, mapa); });
     }
     @Test
     public void noSePuedoConstruirNexoEnMenaSiYaHayUnZanganoMinando () throws MenaOcupadaException, RequerimientosInsuficientesException {
@@ -36,14 +37,15 @@ public class MenaTest {
 
     @Test
     public void zanganoNoPuedeMinarSiHayNexoMineralEnMena () throws MenaOcupadaException, RequerimientosInsuficientesException {
-        Mena mena = new Mena(new Posicion(1,1));
+        Mena mena = new Mena(new Posicion(1,2));
         Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Zangano zangano = new Zangano(new Mineral(25));
         zangano.pasarTiempo();
-        NexoMineral nexo = new NexoMineral(new Posicion(1, 1), mena, mapa);
+        NexoMineral nexo = new NexoMineral(new Posicion(1, 2), mena, mapa);
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
-        mapa.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo, mineral, gas);
         assertThrows(MenaOcupadaException.class, ()->{ zangano.ocuparMena(mena); });
     }
 

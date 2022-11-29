@@ -55,11 +55,11 @@ public class Mapa {
         return true;
     }
 
-    public boolean verificarEdificacionCorrelativa(Edificio edificioCorrelativo) {
-        return construcciones.stream().anyMatch(clase -> clase.getClass().isInstance(edificioCorrelativo));
+    public boolean verificarEdificacionCorrelativa(Jugador jugador, Edificio edificioCorrelativo) {
+        return jugador.construcciones.stream().anyMatch(clase -> clase.getClass().isInstance(edificioCorrelativo));
     }
 
-    public boolean agregarConstruccion(Construccion construccion, Mineral mineral, GasVespeno gas){
+    /*public boolean agregarConstruccion(Construccion construccion, Mineral mineral, GasVespeno gas){
         if(!verificarPosicionDisponible(construccion)){
             return false;
         }
@@ -82,9 +82,9 @@ public class Mapa {
         }
 
         this.filtrarConstrucciones();
-    }
+    }*/
 
-    private boolean verificarPosicionDisponible(Construccion construccion){
+    public boolean verificarPosicionDisponible(Construccion construccion){
         for (Zona zona:zonas)
         {
             if(zona.puedeHabitar(construccion))
@@ -115,7 +115,7 @@ public class Mapa {
         return this.zonas.get(0);
     }
 
-    public void agregarEnListaConstruccion(Construccion construccion) {
+    /*public void agregarEnListaConstruccion(Construccion construccion) {
         construcciones.add(construccion);
     }
 
@@ -140,14 +140,14 @@ public class Mapa {
     public void destruirConstruccionZerg(Construccion construccion)
     {
         construccionesZerg.remove(construccion);
-    }
+    }*/
 
     public void destruirZona(Zona zona)
     {
         zonas.remove(zona);
     }
 
-    public void filtrarConstrucciones()
+    public void filtrarConstrucciones(ArrayList<Construccion> construcciones)
     {
         ArrayList<Construccion> construcciones_a_destruir = new ArrayList<>();
         for (Construccion construccion:construcciones)
@@ -179,7 +179,7 @@ public class Mapa {
         return false;
     }
 
-    public boolean verificarConstruccionesVacias() {
+    /*public boolean verificarConstruccionesVacias() {
         return (!this.construccionesProtoss.isEmpty() && !this.construccionesZerg.isEmpty());
-    }
+    }*/
 }

@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
@@ -22,6 +23,12 @@ public class PuertoEstelar extends Edificio {
         this.mapa = mapa;
         tiempo = 0;
         this.vida = new VidaEscudoProtoss(600, 600);
+        crearJugadorPorDefecto();
+    }
+
+    public PuertoEstelar(Posicion posicion, Mapa mapa, Jugador jugador) {
+        this(posicion, mapa);
+        this.jugador = jugador;
     }
 
     @Override
@@ -35,7 +42,7 @@ public class PuertoEstelar extends Edificio {
 
     @Override
     public void construir() throws NoExisteEdificioCorrelativoException {
-        if (!this.mapa.verificarEdificacionCorrelativa(new Acceso(new Posicion(0,0), new Mapa()))){
+        if (!this.mapa.verificarEdificacionCorrelativa(jugador, new Acceso(new Posicion(0,0), new Mapa()))){
             throw new NoExisteEdificioCorrelativoException();
         }
         this.estado = new EstadoConstruido();
@@ -73,8 +80,9 @@ public class PuertoEstelar extends Edificio {
     public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
         if(mineral.invertir(150) && gas.invertir(150))
         {
-            this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionProtoss(this);
+            this.jugador.agregarEnListaConstruccion(this);
+            /*this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionProtoss(this);*/
             return true;
         }
         return false;
@@ -85,11 +93,11 @@ public class PuertoEstelar extends Edificio {
         this.vida.regenerar();
     }
 
-    public void destruir()
+    /*public void destruir()
     {
         this.mapa.destruirConstruccion(this);
         this.mapa.destruirConstruccionProtoss(this);
-    }
+    }*/
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {
     //     return this.posicion.equals(posicionDada);

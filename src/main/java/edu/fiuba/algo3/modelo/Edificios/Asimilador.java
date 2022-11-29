@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
@@ -28,7 +29,12 @@ public class Asimilador extends Edificio{
         this.mapa = mapa;
         this.vida = new VidaEscudoProtoss(450, 450);
         this.zona = new ZonaNeutral();
+        crearJugadorPorDefecto();
+    }
 
+    public Asimilador(Posicion posicion, Volcan volcan, Mapa mapa, Jugador jugador) throws VolcanOcupadoException {
+        this(posicion, volcan, mapa);
+        this.jugador = jugador;
     }
 
     @Override
@@ -82,8 +88,9 @@ public class Asimilador extends Edificio{
     public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
         if(mineral.invertir(100))
         {
-            this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionProtoss(this);
+            this.jugador.agregarEnListaConstruccion(this);
+            /*this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionProtoss(this);*/
             this.gas = gas;
             return true;
         }
@@ -96,11 +103,13 @@ public class Asimilador extends Edificio{
         this.gas.agregarGas(volcan.extraerGas(20));
     }
 
-    public void destruir()
+    /*public void destruir()
     {
-        this.mapa.destruirConstruccion(this);
-        this.mapa.destruirConstruccionProtoss(this);
-    }
+        this.jugador.destruirConstruccion(this);
+        //this.mapa.destruirConstruccion(this);
+        //this.mapa.destruirConstruccionProtoss(this);
+    }*/
+
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {
     //     return this.posicion.equals(posicionDada);

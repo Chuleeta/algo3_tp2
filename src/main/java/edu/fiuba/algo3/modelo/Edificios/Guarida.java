@@ -1,16 +1,13 @@
 package edu.fiuba.algo3.modelo.Edificios;
 
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Individuos.Hidralisco;
-import edu.fiuba.algo3.modelo.Larva;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
-import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
 import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
@@ -27,6 +24,12 @@ public class Guarida extends Edificio{
         this.zona = new ZonaMoho(this.posicion);
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
+        crearJugadorPorDefecto();
+    }
+
+    public Guarida(Posicion posicion, Mapa mapa, Jugador jugador) {
+        this(posicion, mapa);
+        this.jugador = jugador;
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
@@ -36,7 +39,7 @@ public class Guarida extends Edificio{
 
     @Override
     public void construir() throws NoExisteEdificioCorrelativoException {
-        if (!this.mapa.verificarEdificacionCorrelativa(new ReservaDeReproduccion(new Posicion(0,0), new Mapa()))){
+        if (!this.mapa.verificarEdificacionCorrelativa(jugador, new ReservaDeReproduccion(new Posicion(0,0), new Mapa()))){
             throw new NoExisteEdificioCorrelativoException();
         }
         estado = new EstadoConstruido();
@@ -57,9 +60,6 @@ public class Guarida extends Edificio{
         return false;
     }
 
-    // public void dañar(int daño){
-    //     this.vida.dañar(daño);
-    // }
 
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
@@ -69,8 +69,9 @@ public class Guarida extends Edificio{
     public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
         if(mineral.invertir(200)&& gas.invertir(100))
         {
-            this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionZerg(this);
+            this.jugador.agregarEnListaConstruccion(this);
+            /*this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionZerg(this);*/
             return true;
         }
         return false;
@@ -85,11 +86,11 @@ public class Guarida extends Edificio{
         return new Hidralisco(mineral, gas, new Posicion(3,3), this.mapa);
     }
 
-    public void destruir()
+    /*public void destruir()
     {
         this.mapa.destruirConstruccion(this);
         this.mapa.destruirConstruccionZerg(this);
-    }
+    }*/
 
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {

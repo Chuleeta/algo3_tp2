@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mena;
@@ -28,6 +29,12 @@ public class NexoMineral extends Edificio{
         this.zona = new ZonaNeutral();
         this.mapa = mapa;
         this.vida = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
+        crearJugadorPorDefecto();
+    }
+
+    public NexoMineral(Posicion posicion, Mena mena, Mapa mapa, Jugador jugador) throws MenaOcupadaException {
+        this(posicion, mena, mapa);
+        this.jugador = jugador;
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException
@@ -59,10 +66,6 @@ public class NexoMineral extends Edificio{
     }
 
 
-    // public void dañar(int daño){
-    //     this.vida.dañar(daño);
-    // }
-
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
     }
@@ -75,8 +78,9 @@ public class NexoMineral extends Edificio{
         this.mineral = mineral;
         if(mineral.invertir(50))
         {
-            this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionProtoss(this);
+            this.jugador.agregarEnListaConstruccion(this);
+            /*this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionProtoss(this);*/
             return true;
         }
         return false;
@@ -88,11 +92,11 @@ public class NexoMineral extends Edificio{
         this.vida.regenerar();
     }
 
-    public void destruir()
+    /*public void destruir()
     {
         this.mapa.destruirConstruccion(this);
         this.mapa.destruirConstruccionProtoss(this);
-    }
+    }*/
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {
     //     return this.posicion.equals(posicionDada);

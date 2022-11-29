@@ -39,32 +39,33 @@ public class ZerlingTest {
     @Test
     public void zerlingDañaNexoMineral50vecesYSon200UnidadesDeAtaque() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+        Jugador jugador= new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        NexoMineral nexo = new NexoMineral(new Posicion(2,2), new Mena(new Posicion(2,2)), mapa, jugador);
 
         // tiempo de construccion
         Mineral mineral = new Mineral(75);
         GasVespeno gas = new GasVespeno(0);
-        mapa.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo, mineral, gas);
 
-        Zerling zerling = new Zerling(mineral, new Posicion(1,2), new Mapa());
-        zerling.pasarTiempo();
-        zerling.pasarTiempo();
-        // Su unidad de ataque es de 10, con 20 ataques son 200 de daño
+        Zerling zerling = new Zerling(mineral, new Posicion(1,2), mapa);
+        jugador.agregarIndividuo(zerling);
+
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        // Su unidad de ataque es de 4, con 20 ataques son 200 de daño
         for (int i = 0; i < 50; i++)
             zerling.atacar(nexo);
 
 
         //SE CONSTRUYE EL NEXO PARA QUE SE PUEDA REGENERAR EL ESCUDO
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
+        jugador.pasarTiempo();
+
         //escudo dañado
         assertFalse(nexo.tieneEscudoCompleto());
-        mapa.pasarTiempo();
-        //sigue dañado
-        assertFalse(nexo.tieneEscudoCompleto());
-        mapa.pasarTiempo();
+
+        jugador.pasarTiempo();
         //escudo completo
         assertTrue(nexo.tieneEscudoCompleto());
 
@@ -74,16 +75,18 @@ public class ZerlingTest {
     @Test
     public void zerlingNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa);
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        NexoMineral nexo = new NexoMineral(new Posicion(2,2), new Mena(new Posicion(2,1)), mapa, jugador);
 
         // tiempo de construccion
         Mineral mineral = new Mineral(75);
         GasVespeno gas = new GasVespeno(0);
-        mapa.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo, mineral, gas);
 
-        Zerling zerling = new Zerling(mineral, new Posicion(3,3), new Mapa());
-        zerling.pasarTiempo();
-        zerling.pasarTiempo();
+        Zerling zerling = new Zerling(mineral, new Posicion(3,3), mapa);
+        jugador.agregarIndividuo(zerling);
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
         // Su unidad de ataque es de 10, con 20 ataques son 200 de daño
         for (int i = 0; i < 50; i++)
             zerling.atacar(nexo);

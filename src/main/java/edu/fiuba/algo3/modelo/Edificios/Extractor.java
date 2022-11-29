@@ -2,15 +2,13 @@ package edu.fiuba.algo3.modelo.Edificios;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
-import edu.fiuba.algo3.modelo.HabitanteMoho;
-import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import edu.fiuba.algo3.modelo.Individuos.Zangano;
@@ -36,6 +34,12 @@ public class Extractor extends Edificio implements HabitanteMoho {
         zanganos = new ArrayList<>();
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
+        crearJugadorPorDefecto();
+    }
+
+    public Extractor(Posicion posicion, Volcan volcan, Mapa mapa, Jugador jugador) throws VolcanOcupadoException {
+        this(posicion, volcan, mapa);
+        this.jugador = jugador;
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException
@@ -95,8 +99,9 @@ public class Extractor extends Edificio implements HabitanteMoho {
     public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
         if(mineral.invertir(100))
         {
-            this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionZerg(this);
+            this.jugador.agregarEnListaConstruccion(this);
+            /*this.mapa.agregarEnListaConstruccion(this);
+            this.mapa.agregarEnListaConstruccionZerg(this);*/
             this.gas = gas;
             return true;
         }
@@ -109,11 +114,11 @@ public class Extractor extends Edificio implements HabitanteMoho {
         extraerGas();
     }
 
-    public void destruir()
+    /*public void destruir()
     {
         this.mapa.destruirConstruccion(this);
         this.mapa.destruirConstruccionZerg(this);
-    }
+    }*/
 
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {

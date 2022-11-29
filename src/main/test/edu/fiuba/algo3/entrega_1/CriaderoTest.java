@@ -153,14 +153,15 @@ public class CriaderoTest {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
-        Criadero criadero = new Criadero(new Posicion(9, 9), mapa);
-        mapa.agregarConstruccion(criadero, mineral, gas);
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();              
-        mapa.pasarTiempo();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(9, 9), mapa, jugador);
+        jugador.agregarConstruccion(criadero, mineral, gas);
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
         criadero.dañar(550);
-        assertTrue(mapa.agregarConstruccion(new Extractor(new Posicion(9, 14), new Volcan(new Posicion(1, 1)), mapa), mineral, gas));
+        assertTrue(jugador.agregarConstruccion(new Extractor(new Posicion(9, 14), new Volcan(new Posicion(1, 2)), mapa), mineral, gas));
     }
 }
 

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
@@ -25,10 +26,18 @@ public class Dragon extends Individuo implements UnidadTierra {
         this.tiempo = 0;
         this.rangoDeAtaque = 4;
         this.posicion = posicion;
+        crearJugadorPorDefecto();
     }
+
+    public Dragon(Mineral mineral, GasVespeno gas, Posicion posicion, Mapa mapa, Jugador jugador) throws RequerimientosInsuficientesException {
+        this(mineral, gas, posicion, mapa);
+        this.jugador = jugador;
+    }
+
     private void construir() {
         this.estado = new EstadoConstruido();
     }
+
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();

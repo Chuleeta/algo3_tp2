@@ -3,11 +3,13 @@ package edu.fiuba.algo3.modelo.Individuos;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
+import javafx.geometry.Pos;
 
 public class Hidralisco extends Individuo implements UnidadTierra{
     private final int tiempoDeConstruccion;
@@ -26,9 +28,11 @@ public class Hidralisco extends Individuo implements UnidadTierra{
         posicion = posicionInicial;
         rangoDeAtaque = 4;
     }
+
     private void construir() {
         this.estado = new EstadoConstruido();
     }
+
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
@@ -46,6 +50,7 @@ public class Hidralisco extends Individuo implements UnidadTierra{
     private boolean estaHabilitadoParaAtacar(UnidadTierra unidad) {
         return unidad.estaHabilitado();
     }
+
     public boolean atacar(UnidadVoladora unidad)
     {
         if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {

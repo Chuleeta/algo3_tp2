@@ -16,8 +16,8 @@ public class BaseTest {
     @Test
     public void testSeCreaUnaBaseCercaDeUnJugadorYSeAgreganLosElementosDeEstaAlMapa(){
         Posicion posicionUno = new Posicion(1,1);
-        Jugador jugador = new Jugador("jugador", "azul", "zerg", posicionUno, 200);
         Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugador", "azul", "zerg", posicionUno, mapa, 200);
         Base base = new Base(jugador);
 
 
@@ -28,9 +28,9 @@ public class BaseTest {
     public void testSeCreaUnaBaseCercaDeCadaJugadorYSeAgreganLosElementosDeEstasAlMapa(){
         Posicion posicionUno = new Posicion(1,1);
         Posicion posicionDos = new Posicion(100,100);
-        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, 200);
-        Jugador jugadorDos = new Jugador("jugadorDos", "rojo", "protoss", posicionDos, 200);
         Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 200);
+        Jugador jugadorDos = new Jugador("jugadorDos", "rojo", "protoss", posicionDos, mapa, 200);
         Base baseJugadorUno = new Base(jugadorUno);
         Base baseJugadorDos = new Base(jugadorDos);
 

@@ -21,13 +21,14 @@ public class NexoMineralTest {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
-        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), mapa);
-        mapa.agregarConstruccion(nexito, mineral, gas);
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
+        NexoMineral nexito = new NexoMineral(new Posicion(2, 2), new Mena(new Posicion(2, 2)), mapa, jugador);
+        jugador.agregarConstruccion(nexito, mineral, gas);
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
         assertEquals(mineral.getCantidad(), 10050); 
     }
 
@@ -36,11 +37,12 @@ public class NexoMineralTest {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
-        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), mapa);
-        mapa.agregarConstruccion(nexito, mineral, gas);
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
+        NexoMineral nexito = new NexoMineral(new Posicion(2, 2), new Mena(new Posicion(2, 2)), mapa, jugador);
+        jugador.agregarConstruccion(nexito, mineral, gas);
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
 
         assertEquals(mineral.getCantidad(), 9950); 
     }
@@ -50,14 +52,15 @@ public class NexoMineralTest {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
-        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), mapa);
-        mapa.agregarConstruccion(nexito, mineral, gas);
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
+        Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);
+        NexoMineral nexito = new NexoMineral(new Posicion(2, 1), new Mena(new Posicion(2, 1)), mapa, jugador);
+        jugador.agregarConstruccion(nexito, mineral, gas);
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
         for(int i = 0; i<60; i+=1){
-            mapa.pasarTiempo();
+            jugador.pasarTiempo();
         }
         assertEquals(mineral.getCantidad(), 11950); //no tenemos la menor idea de como se mina ni cuanto devuelve
     }
@@ -69,17 +72,18 @@ public class NexoMineralTest {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
-        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), mapa);
-        mapa.agregarConstruccion(nexito, mineral, gas);
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
+        Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);
+        NexoMineral nexito = new NexoMineral(new Posicion(2, 1), new Mena(new Posicion(2, 1)), mapa, jugador);
+        jugador.agregarConstruccion(nexito, mineral, gas);
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
         nexito.dañar(200);
         assertFalse(nexito.tieneEscudoCompleto());
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
         assertTrue(nexito.tieneEscudoCompleto());
     }
 
@@ -90,17 +94,18 @@ public class NexoMineralTest {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
-        NexoMineral nexito = new NexoMineral(new Posicion(1, 1), new Mena(new Posicion(1, 1)), mapa);
-        mapa.agregarConstruccion(nexito, mineral, gas);
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
+        Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);
+        NexoMineral nexito = new NexoMineral(new Posicion(2, 1), new Mena(new Posicion(2, 1)), mapa, jugador);
+        jugador.agregarConstruccion(nexito, mineral, gas);
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
         nexito.dañar(300);
         assertFalse(nexito.tieneEscudoCompleto());
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
-        mapa.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
         assertTrue(nexito.tieneEscudoCompleto());
         assertFalse(nexito.tieneVidaCompleta());
     }
