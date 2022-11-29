@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.Extractor;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mena;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
@@ -23,11 +24,14 @@ public class Mapa {
     private ArrayList<AreaEspacial> areasEspaciales;
     private ArrayList<Ocupable> ocupables;
 
+    private ArrayList<Individuo> individuos;
+
     public Mapa()
     {
         this.construcciones = new ArrayList<>();
         this.construccionesZerg = new ArrayList<>();
         this.construccionesProtoss = new ArrayList<>();
+        this.individuos = new ArrayList<>();
         this.zonas = new ArrayList<>();
         this.areasEspaciales = new ArrayList<>();
         this.zonas.add(new ZonaNeutral());
@@ -62,11 +66,21 @@ public class Mapa {
         return construccion.agregarAlMapa(mineral, gas);
     }
 
+    public boolean agregarIndividuo(Individuo individuo){
+        return individuos.add(individuo);
+    }
+
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
         for (Construccion construccion:construcciones)
         {
             construccion.pasarTiempo();
         }
+
+        for (Individuo individuo:individuos)
+        {
+            individuo.pasarTiempo();
+        }
+
         this.filtrarConstrucciones();
     }
 

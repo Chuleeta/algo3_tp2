@@ -43,19 +43,27 @@ public class JuegoTest {
         Juego juego = new Juego(mapa);
 
         Dragon dragon = new Dragon(mineral, gas, new Posicion(9,18), mapa);
+        mapa.agregarIndividuo(dragon);
         
+        // assertTrue(juego.pasarTiempo());
+        // dragon.pasarTiempo();
+        // assertTrue(juego.pasarTiempo());
+        // dragon.pasarTiempo();
+        // assertTrue(juego.pasarTiempo());
+        // dragon.pasarTiempo();
+        // assertTrue(juego.pasarTiempo());
+        // dragon.pasarTiempo();
+        // assertTrue(juego.pasarTiempo());
+        // dragon.pasarTiempo();
+        // assertTrue(juego.pasarTiempo());
+        // dragon.pasarTiempo();
+
         assertTrue(juego.pasarTiempo());
-        dragon.pasarTiempo();
         assertTrue(juego.pasarTiempo());
-        dragon.pasarTiempo();
         assertTrue(juego.pasarTiempo());
-        dragon.pasarTiempo();
         assertTrue(juego.pasarTiempo());
-        dragon.pasarTiempo();
         assertTrue(juego.pasarTiempo());
-        dragon.pasarTiempo();
         assertTrue(juego.pasarTiempo());
-        dragon.pasarTiempo();
 
         //TO DO: INDIVIDUOS TIENEN Q PODER PASAR TIEMPO ADENTRO DE MAPA
 

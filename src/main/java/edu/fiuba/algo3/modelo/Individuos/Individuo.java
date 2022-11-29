@@ -56,4 +56,5 @@ public abstract class Individuo
         jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6,6), 200);
     }
 
+    public abstract void pasarTiempo();
 }
