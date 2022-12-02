@@ -27,7 +27,6 @@ public class App extends Application {
     Scene mapaDelJuego;
     Scene tablaDePosicionesHistorial;
 	
-	//private Image logoGpsChallenge;
 	String botonAntesDeSerPresionado = "-fx-border-width: 2px; -fx-border-color: #B4DBE2; -fx-background-color: rgba(243, 202, 76, 0.5); -fx-text-fill: #BDB69C; -fx-shape: \"M 100 350 A 50 50 0 1 1 100 250 L 300 250 A 50 50 0 1 1 300 350 Z\";";
     String botonNormal = "-fx-border-width: 2px; -fx-border-color: #B4DBE2; -fx-background-color: rgba(255, 255, 255, 0.2); -fx-text-fill: #42B0D3; -fx-shape: \"M 100 350 A 50 50 0 1 1 100 250 L 300 250 A 50 50 0 1 1 300 350 Z\";";
     String formatoTexto = "-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: transparent; -fx-text-fill: #42B0D3";
@@ -36,10 +35,6 @@ public class App extends Application {
     public void start(Stage stage) {
         stage.setTitle("AlgoStar");
         stage.setResizable(true);
-
-		// String pathLogo = this.getClass().getResource("/imagenes/logo-gps-challenge.png").toString();
-		// this.logoGpsChallenge = new Image(pathLogo);
-        // stage.getIcons().add(this.logoGpsChallenge);
 
         MenuPrincipal menuPrincipal = new MenuPrincipal(stage);
 
@@ -103,7 +98,6 @@ public class App extends Application {
 
         Scene escenaSalir = new Scene(menuSalir , 530 , 200);
         
-        //ventanaSalir.getIcons().add(this.logoGpsChallenge);
         ventanaSalir.setScene(escenaSalir);
         ventanaSalir.showAndWait();
         return(respuesta);

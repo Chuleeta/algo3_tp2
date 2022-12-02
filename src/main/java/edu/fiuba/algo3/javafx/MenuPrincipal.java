@@ -43,8 +43,6 @@ public class MenuPrincipal extends BorderPane{
 
 	private Image logo;
 	private Image logoTitulo;
-	//private Image logoJugar;
-	//private Image logoSalir;
 	private Image logoFondo;
 	private Image fondoJugar;
     private Image fondoSalir;
@@ -57,10 +55,8 @@ public class MenuPrincipal extends BorderPane{
         this.setMenu(stage);
         stage.setMaximized(true);
         stage.getIcons().add(this.logo);
-        //this.setOrientation(Orientation.VERTICAL);
         this.setStyle(" -fx-padding: 70 100 0 100");
         
-        //BackgroundImage imagenDeFondo = new BackgroundImage(this.logoFondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.);
         BackgroundImage imagenDeFondo = new BackgroundImage(this.logoFondo, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1.0, 1.0, true, true, false, false));
         this.setBackground(new Background(imagenDeFondo));
 	}
@@ -87,13 +83,6 @@ public class MenuPrincipal extends BorderPane{
 
         String pathLogo = this.getClass().getResource("/imagenes/icono.png").toString();
 		this.logo = new Image(pathLogo);
-        
-		
-	// 	String pathIconoTabla = this.getClass().getResource("/imagenes/icono-tabla.png").toString();
-	// 	this.logoTabla = new Image(pathIconoTabla);
-
-	// 	String pathLogoGpsChallenge = this.getClass().getResource("/imagenes/logo-gps-challenge.png").toString();
-	// 	this.logoGpsChallenge = new Image(pathLogoGpsChallenge);
 	}
 
 
@@ -110,8 +99,6 @@ public class MenuPrincipal extends BorderPane{
 
         HBox titulo = new HBox();
         ImageView nombreDelJuego = new ImageView(this.logoTitulo);
-        //nombreDelJuego.setFitHeight(210);
-        //nombreDelJuego.setFitWidth(400);
         nombreDelJuego.fitHeightProperty();
         nombreDelJuego.fitWidthProperty();
         titulo.getChildren().add(nombreDelJuego);
@@ -120,12 +107,9 @@ public class MenuPrincipal extends BorderPane{
         //BOTON DE SALIR
         Button salir = new Button("");
         salir.setGraphic(new ImageView(this.fondoSalir));
-        //salir.setGraphic(new ImageView(this.fondoJugar));
-        //salir.setFont(Font.font("Impact", FontWeight.SEMI_BOLD, 40));
         salir.setStyle(botonNormal);
         salir.setOnMouseEntered(e -> salir.setStyle(botonAntesDeSerPresionado));
         salir.setOnMouseExited(e -> salir.setStyle(botonNormal));
-        //salir.setGraphic(new ImageView(this.logoSalir));
 
         salir.setOnAction(e-> {
             String a = cerrarJuego(stage);
@@ -138,7 +122,6 @@ public class MenuPrincipal extends BorderPane{
         Button comoJugar = new Button("");
         comoJugar.setStyle(botonNormal);
         comoJugar.setGraphic(new ImageView(this.fondoComoJugar));
-        //comoJugar.setFont(Font.font("Impact", FontWeight.SEMI_BOLD, 40));
         comoJugar.setOnMouseEntered(e -> comoJugar.setStyle(botonAntesDeSerPresionado));
         comoJugar.setOnMouseExited(e -> comoJugar.setStyle(botonNormal));
         comoJugar.setOnAction(e -> comoJugar());
@@ -147,36 +130,22 @@ public class MenuPrincipal extends BorderPane{
         Button acercaDe = new Button("");
         acercaDe.setStyle(botonNormal);
         acercaDe.setGraphic(new ImageView(this.fondoAcercaDe));
-        //acercaDe.setFont(Font.font("Impact", FontWeight.SEMI_BOLD, 40));
         acercaDe.setOnMouseEntered(e -> acercaDe.setStyle(botonAntesDeSerPresionado));
         acercaDe.setOnMouseExited(e -> acercaDe.setStyle(botonNormal));
         acercaDe.setOnAction(e -> acercaDe());
 
         VBox botonesPrincipales = new VBox();
-        //botonesPrincipales.getChildren().add(nombreDelJuego);
         botonesPrincipales.getChildren().add(jugar);
         botonesPrincipales.getChildren().add(comoJugar);
         botonesPrincipales.getChildren().add(acercaDe);
         botonesPrincipales.getChildren().add(salir);
-        //botonesPrincipales.getChildren().add(parteInferior);
         botonesPrincipales.setAlignment(Pos.CENTER);
         botonesPrincipales.setSpacing(30);
-        //botonesPrincipales.setStyle("-fx-padding: 100;");
-        //botonesPrincipales.setStyle(" -fx-padding: 120 10 10 100");
         this.setCenter(botonesPrincipales);
         this.setTop(titulo);
-        //this.setLeft(botonesPrincipales);
-
-        //this.getChildren().add(tituloPrincipal);
-        //this.getChildren().add(botonesPrincipales);
 
         
         pantallaDeInicio = new Scene(this, screenSize.getWidth(), screenSize.getHeight(), Color.rgb(47, 52, 58));
-        //BOTON DE TABLA DE POSICIONES FUNCION
-        //TablaDePosiciones tablaDePosiciones = new TablaDePosiciones(stage, pantallaDeInicio);
-        // tablaPosiciones.setOnAction(e-> {
-        //     stage.setScene(tablaDePosiciones.getTablaDePosiciones());
-        // });
         
         //BOTON JUGAR FUNCION
         MenuPreguntas menuPreguntas = new MenuPreguntas(stage, pantallaDeInicio);

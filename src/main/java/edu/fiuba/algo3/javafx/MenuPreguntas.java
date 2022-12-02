@@ -32,15 +32,13 @@ public class MenuPreguntas extends BorderPane{
     static Scene preguntaDatos;
     static String respuesta;
     Boolean confirmacionDatos;
-    //String botonAntesDeSerPresionado = "-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: rgba(243, 202, 76, 0.5); -fx-text-fill: #42B0D3";
-    //String botonNormal = "-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: rgba(255, 255, 255, 0.2); -fx-text-fill: #42B0D3";
+
     String botonAntesDeSerPresionado = "-fx-border-width: 2px; -fx-border-color: #B4DBE2; -fx-background-color: rgba(243, 202, 76, 0.5); -fx-text-fill: #BDB69C; -fx-shape: \"M 100 350 A 50 50 0 1 1 100 250 L 300 250 A 50 50 0 1 1 300 350 Z\";";
     String botonNormal = "-fx-border-width: 2px; -fx-border-color: #B4DBE2; -fx-background-color: rgba(255, 255, 255, 0.2); -fx-text-fill: #42B0D3; -fx-shape: \"M 100 350 A 50 50 0 1 1 100 250 L 300 250 A 50 50 0 1 1 300 350 Z\";";
     String formatoTexto = "-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: transparent; -fx-text-fill: #42B0D3";
 
 	private Image logoFondo;
 	private Image icono;
-	//private Image iconoVolver;
 
 
     public MenuPreguntas(Stage stage, Scene pantallaDeInicio) {
@@ -59,9 +57,6 @@ public class MenuPreguntas extends BorderPane{
 		
 		String pathicono = this.getClass().getResource("/imagenes/icono.png").toString();
 		this.icono = new Image(pathicono); 
-		
-		// String pathIconoVolver = this.getClass().getResource("/imagenes/icono-volver.png").toString();
-		// this.iconoVolver = new Image(pathIconoVolver); 
 	}
 
     private void setMenuPreguntas(Stage stage, Scene pantallaDeInicio) {
@@ -163,9 +158,9 @@ public class MenuPreguntas extends BorderPane{
         
         siguiente.setOnAction(e-> {
             if(preguntarDatosCorrectos(nombreDelJugador1.getText(), seleccionRaza1.getValue(), nombreDelJugador2.getText(), seleccionRaza2.getValue())){
-                if(seleccionRaza1.getValue() != null && !(nombreDelJugador1.getText().isBlank())){
-                    //JuegoVista juegoVista = new JuegoVista(stage, pantallaDeInicio,20, 14, nombreDelJugador.getText(), seleccionVehiculo.getValue());
-                    //stage.setScene(juegoVista.getJuegoVista());
+                if(seleccionRaza1.getValue() != null && !(nombreDelJugador1.getText().isBlank()) && seleccionRaza2.getValue() != null && !(nombreDelJugador2.getText().isBlank())){
+                    JuegoVista juegoVista = new JuegoVista(stage, pantallaDeInicio,20, 14, nombreDelJugador1.getText(), seleccionRaza1.getValue(), nombreDelJugador2.getText(), seleccionRaza2.getValue());
+                    stage.setScene(juegoVista.getJuegoVista());
 				} else{
                     datosIncorrectos();
                 }
