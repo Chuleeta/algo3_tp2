@@ -7,6 +7,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
@@ -28,6 +29,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -206,12 +208,27 @@ public class MenuPrincipal extends BorderPane{
         + "\nEste es nuestro proyecto para el Trabajo Practico N2\n"+ "\n"
         + "\nSi queres ver el codigo de este proyecto podes ir a:\n"+ "\n"
         + "\nhttps://github.com/Chuleeta/algo3_tp2\n");
+
+        Button link = new Button("IR A REPOSITORIO");
+        link.setStyle(botonNormal);
+        link.setFont(fuente);
+        link.setOnMouseEntered(e -> link.setStyle(botonAntesDeSerPresionado));
+        link.setOnMouseExited(e -> link.setStyle(botonNormal));
+        link.setOnAction(e -> {
+            Runtime rt = Runtime.getRuntime();
+            String url = "https://github.com/Chuleeta/algo3_tp2";
+            try{
+                rt.exec("rundll32 url.dll, FileProtocolHandler " + url);
+            } catch(IOException r){
+                ((Throwable) r).printStackTrace();
+            }
+        });
         
         parrafoAcercaDe.setFont(fuente);
         parrafoAcercaDe.setFill(Color.rgb(66,176,211));
         parrafoAcercaDe.setTextAlignment(TextAlignment.CENTER);
         
-        menuSalir.getChildren().addAll(parrafoAcercaDe , botonOK);
+        menuSalir.getChildren().addAll(parrafoAcercaDe, link, botonOK);
         menuSalir.setAlignment(Pos.CENTER);
         menuSalir.setStyle("-fx-border-color: #131E28; -fx-background-color: #131E28");
         
