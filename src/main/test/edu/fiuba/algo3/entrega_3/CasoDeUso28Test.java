@@ -3,9 +3,7 @@ package edu.fiuba.algo3.entrega_3;
 import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
-import edu.fiuba.algo3.modelo.Individuos.AmoSupremo;
-import edu.fiuba.algo3.modelo.Individuos.Zealot;
-import edu.fiuba.algo3.modelo.Individuos.Zerling;
+import edu.fiuba.algo3.modelo.Individuos.*;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
@@ -16,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CasoDeUso28Test {
     @Test
-    public void testUnZealotSeVuelveInvisibleAlMatarTresUnidadesEnemigas() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void testUnZealotSeVuelveInvisibleAlMatarTresUnidadesEnemigas() throws RequerimientosInsuficientesException{
 
         Mineral mineral = new Mineral(1200);
         GasVespeno gas = new GasVespeno(300);
@@ -88,18 +86,17 @@ public class CasoDeUso28Test {
     }
 
     @Test
-    public void testUnZealotInvisibleNoRecibeDañoSiUnAmoSupremoNoLoDetecta() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void testUnZealotInvisibleNoRecibeDañoSiUnAmoSupremoNoLoDetectaYLosEnemigosEstanFueraDeSuRango() throws RequerimientosInsuficientesException{
 
         Mineral mineral = new Mineral(1200);
-        GasVespeno gas = new GasVespeno(300);
+        GasVespeno gas = new GasVespeno(1300);
         Mapa mapa = new Mapa();
         Posicion posi = new Posicion(2, 2);
-        Posicion posiDos = new Posicion(8, 8);
         Zealot zealot = new Zealot(mineral, posi, mapa);
         Zerling zerlingUno = new Zerling(mineral, new Posicion(2,3), mapa);
         Zerling zerlingDos = new Zerling(mineral, new Posicion(1,2), mapa);
         Zerling zerlingTres = new Zerling(mineral, new Posicion(3,2), mapa);
-        Zerling zerlingCuatro = new Zerling(mineral, new Posicion(2,1), mapa);
+        Hidralisco hidralisco = new Hidralisco(mineral, gas, new Posicion(4,4), mapa);
         AmoSupremo amoSupremo = new AmoSupremo(mineral, gas, new Posicion(8, 8), mapa);
 
         for (int i = 0; i < 5; i ++){
@@ -107,7 +104,7 @@ public class CasoDeUso28Test {
             zerlingUno.pasarTiempo();
             zerlingDos.pasarTiempo();
             zerlingTres.pasarTiempo();
-            zerlingCuatro.pasarTiempo();
+            hidralisco.pasarTiempo();
             amoSupremo.pasarTiempo();
         }
 
@@ -123,16 +120,55 @@ public class CasoDeUso28Test {
 
         assertTrue(zealot.invisible);
 
-        for (int i = 0; i < 16; i++){           //Itero 16 veces porque el daño es de 4 y el escudo del zealot es de 60
-            zerlingCuatro.atacar(zealot);       //Ataco para sacar escudo del Zealot
-        }
+        zealot.recibirDaño(60);         //Le quito el escudo
+        hidralisco.atacar(zealot);              //Hidralisco no esta en el rango de zealot.
 
-        assertTrue(zealot.tieneVidaCompleta()); //Zealot invisible y no hay amo supremo en rango, no recibio daño
+        assertTrue(zealot.tieneVidaCompleta()); //Zealot invisible, no hay amo supremo en rango y el hidralisco no esta en rango de zealot, no recibio daño
 
     }
 
     @Test
-    public void testUnZealotInvisibleRecibeDañoSiUnAmoSupremoLoDetectaParaSusUnidadesAliadas() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void testUnZealotInvisibleRecibeDañoAunqueNoHayaAmoSupremoPorqueSuEnemigoEstaEnSuRango() throws RequerimientosInsuficientesException{
+
+        Mineral mineral = new Mineral(1200);
+        GasVespeno gas = new GasVespeno(1300);
+        Mapa mapa = new Mapa();
+        Posicion posi = new Posicion(2, 2);
+        Zealot zealot = new Zealot(mineral, posi, mapa);
+        Zerling zerlingUno = new Zerling(mineral, new Posicion(2,3), mapa);
+        Zerling zerlingDos = new Zerling(mineral, new Posicion(1,2), mapa);
+        Zerling zerlingTres = new Zerling(mineral, new Posicion(3,2), mapa);
+        Hidralisco hidralisco = new Hidralisco(mineral, gas, new Posicion(2,1), mapa); //A rango del zealot
+
+        for (int i = 0; i < 5; i ++){
+            zealot.pasarTiempo();
+            zerlingUno.pasarTiempo();
+            zerlingDos.pasarTiempo();
+            zerlingTres.pasarTiempo();
+            hidralisco.pasarTiempo();
+        }
+
+        for (int i = 0; i < 5; i++){
+            zealot.atacar(zerlingUno);
+        }
+        for (int i = 0; i < 5; i++){
+            zealot.atacar(zerlingDos);
+        }
+        for (int i = 0; i < 5; i++){
+            zealot.atacar(zerlingTres);
+        }
+
+        assertTrue(zealot.invisible);
+
+        zealot.recibirDaño(60);         //Le quito el escudo
+        hidralisco.atacar(zealot);
+
+        assertFalse(zealot.tieneVidaCompleta()); //Hidralisco esta en rango de zealot y le quita vida aunque sea invisible. No hay vida completa
+
+    }
+
+    @Test
+    public void testUnZealotInvisibleRecibeDañoSiUnAmoSupremoLoDetectaParaSusUnidadesAliadas() throws RequerimientosInsuficientesException{
 
         Mineral mineral = new Mineral(1200);
         GasVespeno gas = new GasVespeno(300);
@@ -172,6 +208,5 @@ public class CasoDeUso28Test {
         assertFalse(zealot.tieneVidaCompleta()); //Zealot visible por amo supremo se quedo sin escudo y se debilito
 
     }
-
 
 }

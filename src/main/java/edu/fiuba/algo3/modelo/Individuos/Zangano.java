@@ -77,7 +77,12 @@ public class Zangano extends Individuo implements UnidadTierra{
     }
 
     @Override
-    public boolean estaHabilitado() {
+    public boolean estaHabilitado(UnidadTierra unidad) {
+        return true;
+    }
+
+    @Override
+    public boolean estaHabilitado(UnidadVoladora unidad) {
         return true;
     }
 
