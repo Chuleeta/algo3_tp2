@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.javafx;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -31,8 +32,10 @@ public class MenuPreguntas extends BorderPane{
     static Scene preguntaDatos;
     static String respuesta;
     Boolean confirmacionDatos;
-    String botonAntesDeSerPresionado = "-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: rgba(243, 202, 76, 0.5); -fx-text-fill: #42B0D3";
-    String botonNormal = "-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: rgba(255, 255, 255, 0.2); -fx-text-fill: #42B0D3";
+    //String botonAntesDeSerPresionado = "-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: rgba(243, 202, 76, 0.5); -fx-text-fill: #42B0D3";
+    //String botonNormal = "-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: rgba(255, 255, 255, 0.2); -fx-text-fill: #42B0D3";
+    String botonAntesDeSerPresionado = "-fx-border-width: 2px; -fx-border-color: #B4DBE2; -fx-background-color: rgba(243, 202, 76, 0.5); -fx-text-fill: #BDB69C; -fx-shape: \"M 100 350 A 50 50 0 1 1 100 250 L 300 250 A 50 50 0 1 1 300 350 Z\";";
+    String botonNormal = "-fx-border-width: 2px; -fx-border-color: #B4DBE2; -fx-background-color: rgba(255, 255, 255, 0.2); -fx-text-fill: #42B0D3; -fx-shape: \"M 100 350 A 50 50 0 1 1 100 250 L 300 250 A 50 50 0 1 1 300 350 Z\";";
     String formatoTexto = "-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: transparent; -fx-text-fill: #42B0D3";
 
 	private Image logoFondo;
@@ -159,7 +162,7 @@ public class MenuPreguntas extends BorderPane{
         siguiente.setOnMouseExited(e -> siguiente.setStyle(botonNormal));
         
         siguiente.setOnAction(e-> {
-            if(preguntarDatosCorrectos(nombreDelJugador1.getText(), seleccionRaza1.getValue())){
+            if(preguntarDatosCorrectos(nombreDelJugador1.getText(), seleccionRaza1.getValue(), nombreDelJugador2.getText(), seleccionRaza2.getValue())){
                 if(seleccionRaza1.getValue() != null && !(nombreDelJugador1.getText().isBlank())){
                     //JuegoVista juegoVista = new JuegoVista(stage, pantallaDeInicio,20, 14, nombreDelJugador.getText(), seleccionVehiculo.getValue());
                     //stage.setScene(juegoVista.getJuegoVista());
@@ -243,9 +246,11 @@ public class MenuPreguntas extends BorderPane{
     }
 
 
-    private boolean preguntarDatosCorrectos(String nombre, String vehiculoElejido){
+    private boolean preguntarDatosCorrectos(String nombre1, String razaElejida1, String nombre2, String razaElejida2){
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
-        Font fuente = Font.loadFont(is, 50);
+        InputStream is2 = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
+        Font fuente = Font.loadFont(is, 30);
+        Font fuente2 = Font.loadFont(is2, 50);
 
         Stage ventanaPreguntaDatos = new Stage();
         ventanaPreguntaDatos.setResizable(false);
@@ -265,24 +270,52 @@ public class MenuPreguntas extends BorderPane{
         
         VBox menuDatosIngresados = new VBox(20);
         
-        Label preguntaDatosCorrectos = new Label("¿Mantener Estos Datos?");
-        preguntaDatosCorrectos.setFont(fuente);
+        Label preguntaDatosCorrectos = new Label("Mantener Estos Datos?");
+        preguntaDatosCorrectos.setFont(fuente2);
         preguntaDatosCorrectos.setStyle(formatoTexto);
+
+        Label jugadorUno = new Label("Jugador 1");
+        jugadorUno.setFont(fuente);
+        jugadorUno.setStyle("-fx-border-width: 0px; -fx-border-color: transparent; -fx-background-color: transparent; -fx-text-fill: #BDB69C");
         
-        Label nombreDado = new Label("Nombre: " + nombre);
-        nombreDado.setFont(fuente);
-        nombreDado.setStyle("-fx-border-width: 0px; -fx-border-color: transparent; -fx-background-color: transparent; -fx-text-fill: #BDB69C");
+        Label nombreDado1 = new Label("Nombre: " + nombre1);
+        nombreDado1.setFont(fuente);
+        nombreDado1.setStyle("-fx-border-width: 0px; -fx-border-color: transparent; -fx-background-color: transparent; -fx-text-fill: #BDB69C");
 
-        Label vehiculoSeleccionado = new Label("Vehiculo Elejido: " + vehiculoElejido);
-        vehiculoSeleccionado.setFont(fuente);
-        vehiculoSeleccionado.setStyle("-fx-border-width: 0px; -fx-border-color: transparent; -fx-background-color: transparent; -fx-text-fill: #BDB69C");
+        Label razaSeleccionada1 = new Label("Raza: " + razaElejida1);
+        razaSeleccionada1.setFont(fuente);
+        razaSeleccionada1.setStyle("-fx-border-width: 0px; -fx-border-color: transparent; -fx-background-color: transparent; -fx-text-fill: #BDB69C");
 
-        ventanaPreguntaDatos.setMinWidth(280);
+        Label jugadorDos = new Label("Jugador 2");
+        jugadorDos.setFont(fuente);
+        jugadorDos.setStyle("-fx-border-width: 0px; -fx-border-color: transparent; -fx-background-color: transparent; -fx-text-fill: #BDB69C");
+
+        Label nombreDado2 = new Label("Nombre: " + nombre2);
+        nombreDado2.setFont(fuente);
+        nombreDado2.setStyle("-fx-border-width: 0px; -fx-border-color: transparent; -fx-background-color: transparent; -fx-text-fill: #BDB69C");
+
+        Label razaSeleccionada2 = new Label("Raza: " + razaElejida2);
+        razaSeleccionada2.setFont(fuente);
+        razaSeleccionada2.setStyle("-fx-border-width: 0px; -fx-border-color: transparent; -fx-background-color: transparent; -fx-text-fill: #BDB69C");
+
+        ventanaPreguntaDatos.setMinWidth(580);
         ventanaPreguntaDatos.initModality(Modality.APPLICATION_MODAL);
         
-        menuDatosIngresados.getChildren().addAll(preguntaDatosCorrectos, nombreDado, vehiculoSeleccionado, botonConfirmar, botonVolverAIngresarDatos);
+        VBox datosJ1 = new VBox();
+        datosJ1.getChildren().addAll(jugadorUno, nombreDado1, razaSeleccionada1);
+        datosJ1.setSpacing(20);
+        VBox datosJ2 = new VBox();
+        datosJ2.getChildren().addAll(jugadorDos, nombreDado2, razaSeleccionada2);
+        datosJ2.setSpacing(20);
+
+        HBox ambosDatos = new HBox();
+        ambosDatos.getChildren().addAll(datosJ1, datosJ2);
+        ambosDatos.setAlignment(Pos.CENTER);
+        ambosDatos.setSpacing(100);
+
+        menuDatosIngresados.getChildren().addAll(preguntaDatosCorrectos, ambosDatos, botonConfirmar, botonVolverAIngresarDatos);
         menuDatosIngresados.setAlignment(Pos.CENTER);
-        menuDatosIngresados.setStyle("-fx-border-color: #2F343A; -fx-background-color: #2F343A");
+        menuDatosIngresados.setStyle("-fx-border-color: #131E28; -fx-background-color: #131E28");
         
         botonConfirmar.setOnAction(e-> {
             confirmacionDatos = true;
@@ -294,7 +327,7 @@ public class MenuPreguntas extends BorderPane{
             ventanaPreguntaDatos.close();
         });
 
-        Scene  escenaDatosIngresados = new Scene(menuDatosIngresados , 480 , 400, Color.rgb(47, 52, 58));
+        Scene  escenaDatosIngresados = new Scene(menuDatosIngresados , 900 , 500, Color.rgb(47, 52, 58));
         ventanaPreguntaDatos.getIcons().add(this.icono);
         ventanaPreguntaDatos.setScene(escenaDatosIngresados);
         ventanaPreguntaDatos.showAndWait();
