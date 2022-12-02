@@ -29,7 +29,7 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seEngendraUnZanganoEnCriaderoYDisminuyeLarva() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+    public void seEngendraUnZanganoEnCriaderoYDisminuyeLarva() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -41,7 +41,7 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seRegeneraUnaLarvaLuegoDeUnTiempo() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+    public void seRegeneraUnaLarvaLuegoDeUnTiempo() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -54,7 +54,7 @@ public class CriaderoTest {
     }
 
     @Test
-    public void noSePuedeEngendrarMasDeTresZanganos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+    public void noSePuedeEngendrarMasDeTresZanganos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -71,7 +71,7 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seConsumenTodasLasLarvasYSeRegeneranDespsDeTresTurnos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+    public void seConsumenTodasLasLarvasYSeRegeneranDespsDeTresTurnos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
         criadero.pasarTiempo();
         criadero.pasarTiempo();

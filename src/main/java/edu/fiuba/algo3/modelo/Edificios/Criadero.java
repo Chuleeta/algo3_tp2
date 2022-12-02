@@ -5,14 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.*;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
-import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
-import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
-import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Individuos.Zangano;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
 import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
@@ -63,7 +60,7 @@ public class Criadero extends Edificio {
         return larvas.size() == 3;
     }
 
-    public Zangano engendrarZangano(Mineral mineral) throws CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+    public Zangano engendrarZangano(Mineral mineral) throws CriaderoNoDisponibleException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         if (larvas.size() == 0) {
             throw new CriaderoNoDisponibleException();
         }
@@ -73,7 +70,7 @@ public class Criadero extends Edificio {
             jugador.añadirUnidad();
             return larvas.remove(0).mutar(mineral);
         }
-        return null;
+        throw new maximaPoblacionAlcanzadaException();
     }
 
     // cree este metodo porque al leer el enunciado me parece que las larvas solo salen de aca, las necesitaremos para pasarla a otros edificios, despues lo vemos.
