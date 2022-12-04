@@ -84,7 +84,7 @@ public class JugadorTest {
     // caso 26 para los zergs
 
     @Test
-    public void seCreanUnidadesAlTenerCapacidadPorCriadero() throws  NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+    public void seCreanUnidadesAlTenerCapacidadPorCriadero() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         Posicion posicionUno = new Posicion(1,1);
         Mapa mapa = new Mapa();
         Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 0);
@@ -104,7 +104,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void seCreanUnidadesAlTenerCapacidadPorAmoSupremoYCriadero() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+    public void seCreanUnidadesAlTenerCapacidadPorAmoSupremoYCriadero() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         Posicion posicionUno = new Posicion(1,1);
         Mapa mapa = new Mapa();
         Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 0);
@@ -142,7 +142,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void alAlcanzarLaCapacidadMaximaNoSeCreaUnidadNueva() throws AtributoInvalidoException, NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+    public void alAlcanzarLaCapacidadMaximaNoSeCreaUnidadNueva() throws AtributoInvalidoException, NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         Posicion posicionUno = new Posicion(1,1);
         Mapa mapa = new Mapa();
         Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 0);
@@ -178,11 +178,11 @@ public class JugadorTest {
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         assertNotNull(criadero.engendrarZangano(mineral));
-        assertNull(criadero.engendrarZangano(mineral));
+        assertThrows(maximaPoblacionAlcanzadaException.class, () -> criadero.engendrarZangano(mineral));
     }
 
     @Test
-    public void seCreanUnidadesAlTenerCapacidadPorPilon() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+    public void seCreanUnidadesAlTenerCapacidadPorPilon() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         Posicion posicionUno = new Posicion(1,1);
         Mapa mapa = new Mapa();
         Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protos", posicionUno, mapa, 0);
@@ -211,7 +211,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void noSeCreanUnidadesAlAlcanzarElMaximoConPilon() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+    public void noSeCreanUnidadesAlAlcanzarElMaximoConPilon() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         Posicion posicionUno = new Posicion(1,1);
         Mapa mapa = new Mapa();
         Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protos", posicionUno, mapa, 0);
@@ -237,7 +237,7 @@ public class JugadorTest {
         assertNotNull(acceso.crearZealot(mineral));
         assertNotNull(acceso.crearZealot(mineral));
         assertNotNull(acceso.crearZealot(mineral));
-        assertNull(acceso.crearZealot(mineral));
+        assertThrows(maximaPoblacionAlcanzadaException.class, () -> acceso.crearZealot(mineral));
 
     }
     // caso 31
@@ -264,12 +264,12 @@ public class JugadorTest {
         acceso.pasarTiempo();
         acceso.pasarTiempo();
         pilon.destruir();
-        assertNull(acceso.crearZealot(mineral));
+        assertThrows(maximaPoblacionAlcanzadaException.class, () -> acceso.crearZealot(mineral));
 
     }
 
     @Test
-    public void seDestruyeCriaderoYLaCapacidadDisminuye() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+    public void seDestruyeCriaderoYLaCapacidadDisminuye() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         Posicion posicionUno = new Posicion(1,1);
         Mapa mapa = new Mapa();
         Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 0);
@@ -280,11 +280,11 @@ public class JugadorTest {
         criadero.pasarTiempo();
         Mineral mineral1 = new Mineral(25);
         criadero.destruir();
-        assertNull(criadero.engendrarZangano(mineral1));
+        assertThrows(maximaPoblacionAlcanzadaException.class, () -> criadero.engendrarZangano(mineral1));
     }
 
     @Test
-    public void seDestruyeAmoSupremoYLaCapacidadDisminuye() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+    public void seDestruyeAmoSupremoYLaCapacidadDisminuye() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         Posicion posicionUno = new Posicion(1,1);
         Mapa mapa = new Mapa();
         Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 0);
@@ -311,11 +311,11 @@ public class JugadorTest {
         criadero.pasarTiempo();
         assertNotNull(criadero.engendrarZangano(mineral));
         assertNotNull(criadero.engendrarZangano(mineral));
-        assertNull(criadero.engendrarZangano(mineral));
+        assertThrows(maximaPoblacionAlcanzadaException.class, () -> criadero.engendrarZangano(mineral));
     }
     // caso 29 y 30
     @Test
-    public void alAlcanzarCapacidadMaximaNoSeSumaMasCapacidadConEdificio() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException {
+    public void alAlcanzarCapacidadMaximaNoSeSumaMasCapacidadConEdificio() throws NoExisteEdificioCorrelativoException, CriaderoNoDisponibleException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         Posicion posicionUno = new Posicion(1,1);
         Mapa mapa = new Mapa();
         Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 200);
@@ -338,6 +338,7 @@ public class JugadorTest {
         criadero.engendrarZangano(mineral);
         criadero.engendrarZangano(mineral);
         // ya hay 200 unidades creadas y al intentar crear la 201 devuelve null
-        assertNull(criadero.engendrarZangano(mineral));
+        assertThrows(maximaPoblacionAlcanzadaException.class, () -> criadero.engendrarZangano(mineral));
+
     }
 }

@@ -48,7 +48,7 @@ public class Hidralisco extends Individuo implements UnidadTierra{
     }
 
     private boolean estaHabilitadoParaAtacar(UnidadTierra unidad) {
-        return unidad.estaHabilitado();
+        return unidad.estaHabilitado(this);
     }
 
     public boolean atacar(UnidadVoladora unidad)
@@ -69,7 +69,12 @@ public class Hidralisco extends Individuo implements UnidadTierra{
     }
 
     @Override
-    public boolean estaHabilitado() {
+    public boolean estaHabilitado(UnidadTierra unidad) {
+        return true;
+    }
+
+    @Override
+    public boolean estaHabilitado(UnidadVoladora unidad) {
         return true;
     }
 }

@@ -68,7 +68,7 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
     }
 
     private boolean estaHabilitadoParaAtacar(UnidadTierra unidad) {
-        return unidad.estaHabilitado();
+        return unidad.estaHabilitado(this);
     }
 
     public boolean mover(Posicion posicion)

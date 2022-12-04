@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Exceptions.maximaPoblacionAlcanzadaException;
 import edu.fiuba.algo3.modelo.Individuos.Zealot;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
@@ -88,12 +89,12 @@ public class Acceso extends Edificio{
     }
 
 
-    public Zealot crearZealot(Mineral mineral) throws RequerimientosInsuficientesException {
+    public Zealot crearZealot(Mineral mineral) throws RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         if (jugador.unidadesDisponibles()) {
             jugador.añadirUnidad();
             return new Zealot(mineral, posicion.clone(),this.mapa);
         }
-        return null;
+        throw new maximaPoblacionAlcanzadaException();
     }
 
     /*public void destruir()

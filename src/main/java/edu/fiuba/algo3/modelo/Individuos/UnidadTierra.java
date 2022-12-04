@@ -9,5 +9,6 @@ public interface UnidadTierra {
     boolean mover(Posicion posicion);
     Vida obtenerVida();
 
-    boolean estaHabilitado();
+    boolean estaHabilitado(UnidadTierra unidad);
+    boolean estaHabilitado(UnidadVoladora unidad);
 }
