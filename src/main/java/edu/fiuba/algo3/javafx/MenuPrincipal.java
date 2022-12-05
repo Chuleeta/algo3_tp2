@@ -98,6 +98,8 @@ public class MenuPrincipal extends BorderPane{
         jugar.setOnMouseExited(e -> jugar.setStyle(botonNormal));
 
         HBox titulo = new HBox();
+
+        //TITULO DEL JUEGO
         ImageView nombreDelJuego = new ImageView(this.logoTitulo);
         nombreDelJuego.fitHeightProperty();
         nombreDelJuego.fitWidthProperty();
@@ -157,6 +159,7 @@ public class MenuPrincipal extends BorderPane{
     }
 
     private void acercaDe(){
+        //BOTON ACERCA DE
         Stage ventanaAcercaDe = new Stage();
         ventanaAcercaDe.setResizable(false);
         ventanaAcercaDe.setTitle("Acerca De");
@@ -165,6 +168,7 @@ public class MenuPrincipal extends BorderPane{
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 20);
         
+        //BOTON OK
         Button botonOK = new Button("OK");
         botonOK.setStyle(botonNormal);
         botonOK.setFont(fuente);

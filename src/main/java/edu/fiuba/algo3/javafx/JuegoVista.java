@@ -3,6 +3,11 @@ package edu.fiuba.algo3.javafx;
 import java.io.IOException;
 import java.io.InputStream;
 
+import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -55,7 +60,7 @@ public class JuegoVista extends BorderPane {
 	private Image iconoNotaMusical;
 	private Image iconoNotaMusicalTachada;
 
-    public JuegoVista(Stage stage, Scene pantallaDeInicio, int ancho, int alto, String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2){
+    public JuegoVista(Stage stage, Scene pantallaDeInicio, int ancho, int alto, String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
         this.cargarImagenes();
 		this.setJuego(stage, pantallaDeInicio, ancho, alto, nombreJugador1, eleccionRaza1, nombreJugador2, eleccionRaza2);
         stage.setMaximized(true);
@@ -105,7 +110,7 @@ public class JuegoVista extends BorderPane {
 		// this.iconoSorpresa = new Image(pathIconoSorpresa);
 	}
 
-    private void setJuego(Stage stage, Scene pantallaDeInicio, int ancho, int alto, String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2){
+    private void setJuego(Stage stage, Scene pantallaDeInicio, int ancho, int alto, String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 25);
 
@@ -119,15 +124,10 @@ public class JuegoVista extends BorderPane {
         nombreDelJugador2.setFont(fuente);
         nombreDelJugador2.setStyle(formatoTexto);
 
-
-		switch (eleccionRaza1) {
-			case "Zerg":
-				//juego = new Juego(nombreJugador, new Moto());
-                break;
-			case "Protoss":
-				//juego = new Juego(nombreJugador, new Auto());
-                break;
-		}
+        Mapa mapa = new Mapa();
+        Jugador jugadorUno = new Jugador(nombreJugador1, "rojo", eleccionRaza1, new Posicion(0, 0), mapa, 0);
+        Jugador jugadorDos = new Jugador(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
+        Juego juego = new Juego(mapa, jugadorUno, jugadorDos);
         //juego.setDimensionesMapa(ancho, alto);
 
         //raza
@@ -141,12 +141,14 @@ public class JuegoVista extends BorderPane {
         razaJugador2.setStyle(formatoTexto);
 
 
-        //Tablero grilla = new Tablero(alto,ancho, juego);
         
-        //this.setCenter(grilla.getContenedor());
-
         Canvas canvasCentral = new Canvas(900, 650);
         //JugadorVista jugadorVista = new JugadorVista(juego, canvasCentral, grilla, stage, pantallaDeInicio, razaJugador1);
+        
+        //GET MAPA DEBE SER UN GROUP
+        Tablero grilla = new Tablero(alto,ancho, juego);
+        this.setCenter(grilla.getContenedor());
+        //this.setCenter(juego.getMapa());
 
 
 		// Menu bar

@@ -27,6 +27,8 @@ import javafx.stage.Stage;
 import java.io.InputStream;
 import java.lang.Runnable;
 
+import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+
 public class MenuPreguntas extends BorderPane{
 
     static Scene preguntaDatos;
@@ -159,8 +161,12 @@ public class MenuPreguntas extends BorderPane{
         siguiente.setOnAction(e-> {
             if(preguntarDatosCorrectos(nombreDelJugador1.getText(), seleccionRaza1.getValue(), nombreDelJugador2.getText(), seleccionRaza2.getValue())){
                 if(seleccionRaza1.getValue() != null && !(nombreDelJugador1.getText().isBlank()) && seleccionRaza2.getValue() != null && !(nombreDelJugador2.getText().isBlank())){
-                    JuegoVista juegoVista = new JuegoVista(stage, pantallaDeInicio,20, 14, nombreDelJugador1.getText(), seleccionRaza1.getValue(), nombreDelJugador2.getText(), seleccionRaza2.getValue());
-                    stage.setScene(juegoVista.getJuegoVista());
+                    try{
+                        JuegoVista juegoVista = new JuegoVista(stage, pantallaDeInicio,22, 18, nombreDelJugador1.getText(), seleccionRaza1.getValue(), nombreDelJugador2.getText(), seleccionRaza2.getValue());
+                        stage.setScene(juegoVista.getJuegoVista());
+                    }catch(RequerimientosInsuficientesException r){
+                        
+                    }
 				} else{
                     datosIncorrectos();
                 }
