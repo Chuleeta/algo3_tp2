@@ -27,6 +27,11 @@ import javafx.stage.Stage;
 import java.io.InputStream;
 import java.lang.Runnable;
 
+import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Exceptions.AtributoInvalidoException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 
 public class MenuPreguntas extends BorderPane{
@@ -159,14 +164,28 @@ public class MenuPreguntas extends BorderPane{
         siguiente.setOnMouseExited(e -> siguiente.setStyle(botonNormal));
         
         siguiente.setOnAction(e-> {
+            //CREO EL JUEGO
+            Mapa mapa = new Mapa();
+            Posicion posicionJugadorUno = new Posicion(0,0);
+            Posicion posicionJugadorDos = new Posicion(18, 22);
+            Jugador jugadorUno = new Jugador(nombreDelJugador1.getText(), "azul", seleccionRaza1.getValue(), posicionJugadorUno, mapa, 0);
+            Jugador jugadorDos = new Jugador(nombreDelJugador2.getText(), "rojo", seleccionRaza2.getValue(), posicionJugadorDos, mapa, 0);
             if(preguntarDatosCorrectos(nombreDelJugador1.getText(), seleccionRaza1.getValue(), nombreDelJugador2.getText(), seleccionRaza2.getValue())){
                 if(seleccionRaza1.getValue() != null && !(nombreDelJugador1.getText().isBlank()) && seleccionRaza2.getValue() != null && !(nombreDelJugador2.getText().isBlank())){
-                    try{
-                        JuegoVista juegoVista = new JuegoVista(stage, pantallaDeInicio,22, 18, nombreDelJugador1.getText(), seleccionRaza1.getValue(), nombreDelJugador2.getText(), seleccionRaza2.getValue());
-                        stage.setScene(juegoVista.getJuegoVista());
-                    }catch(RequerimientosInsuficientesException r){
-                        
+                    try {
+                        jugadorUno.validarAtributos(jugadorDos);
+                        jugadorDos.validarAtributos(jugadorUno);
+                        try{
+                            Juego juego = new Juego(mapa, jugadorUno, jugadorDos);
+                            JuegoVista juegoVista = new JuegoVista(stage, pantallaDeInicio,22, 18, juego,nombreDelJugador1.getText(), seleccionRaza1.getValue(), nombreDelJugador2.getText(), seleccionRaza2.getValue());
+                            stage.setScene(juegoVista.getJuegoVista());
+                        }catch(RequerimientosInsuficientesException r){
+                            datosIncorrectos();
+                        }
+                    } catch (AtributoInvalidoException r) {
+                        datosIncorrectos();
                     }
+                    
 				} else{
                     datosIncorrectos();
                 }
@@ -201,7 +220,7 @@ public class MenuPreguntas extends BorderPane{
 
     private void datosIncorrectos(){
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
-        Font fuente = Font.loadFont(is, 50);
+        Font fuente = Font.loadFont(is, 20);
 
         Stage ventanaDatosIncorrectos = new Stage();
         ventanaDatosIncorrectos.setResizable(false);
@@ -219,20 +238,20 @@ public class MenuPreguntas extends BorderPane{
         avisoDatos.setFont(fuente);
         avisoDatos.setStyle(formatoTexto);
         
-        Label avisoVehiculo = new Label("      -Si o si tenés que seleccionar un Vehículo\n");
+        Label avisoVehiculo = new Label("      -Los nombres deben tener por lo menos 6 \ncaracteres y deben ser diferentes entre si\n");
         avisoVehiculo.setFont(fuente);
-        avisoVehiculo.setStyle(formatoTexto);
+        avisoVehiculo.setStyle("-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: transparent; -fx-text-fill: #F3CA4C");
         
-        Label avisoNombre = new Label("      -Tu nombre tiene que tener por lo menos un caracter");
+        Label avisoNombre = new Label("      -Cada jugador debe elegir una raza diferente");
         avisoNombre.setFont(fuente);
-        avisoNombre.setStyle(formatoTexto);
+        avisoNombre.setStyle("-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: transparent; -fx-text-fill: #F3CA4C");
         
         ventanaDatosIncorrectos.setMinWidth(280);
         ventanaDatosIncorrectos.initModality(Modality.APPLICATION_MODAL);
         
         menuDatosIngresados.getChildren().addAll(avisoDatos, avisoVehiculo, avisoNombre, botonVolverAIngresarDatos);
         menuDatosIngresados.setAlignment(Pos.CENTER);
-        menuDatosIngresados.setStyle("-fx-border-color: #2F343A; -fx-background-color: #2F343A");
+        menuDatosIngresados.setStyle("-fx-border-color: #131E28; -fx-background-color: #131E28");
         
         
         botonVolverAIngresarDatos.setOnAction(e->{
@@ -240,7 +259,7 @@ public class MenuPreguntas extends BorderPane{
             ventanaDatosIncorrectos.close();
         });
 
-        Scene  escenaDatosIngresados = new Scene(menuDatosIngresados , 650 , 400, Color.rgb(47, 52, 58));
+        Scene  escenaDatosIngresados = new Scene(menuDatosIngresados , 750 , 350);
         ventanaDatosIncorrectos.getIcons().add(this.icono);
         ventanaDatosIncorrectos.setScene(escenaDatosIngresados);
         ventanaDatosIncorrectos.showAndWait();

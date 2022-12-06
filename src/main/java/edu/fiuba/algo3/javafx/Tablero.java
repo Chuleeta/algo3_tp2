@@ -66,7 +66,6 @@ public class Tablero {
 
         mapaVista.setPrefSize(880, 721);
         mapaVista.setStyle("-fx-background-color: #717D8C");
-        //mapaVista.getChildren().forEach(n -> hacerMovible(n));
 
         this.contenedor = new Group(mapaVista);
     }
@@ -109,12 +108,25 @@ public class Tablero {
                 n.setTranslateX(e.getSceneX() - startX);
                 n.setTranslateY(e.getSceneY() - startY);
             }
+            //PARA VER LA POSICION DEL NODO O CUADRADO
             //System.out.println("\nX: " + n.getTranslateX());
             //System.out.println("\nY: " + n.getTranslateY());
         });
         
         n.setOnMouseReleased(e ->{
-            ((Shape) n).setFill(Color.GREEN);
+            /*
+             * Aca lo que pasa es que se toma la posicion del mouse 
+             * se le aproxima un multiplo de 40
+             * una vez se consigue ese multiplo de 40 se le sumo 10 en ambos ejes
+             * y de esta forma queda centrado en el cuadrado
+             * 
+             * SI SE QUIERE CONSEGUIR LA POSICION DEL MAPA PARA EL MODELO:
+             * ej: tengo la posicion (453.4343, 300.32423)
+             * primero se encuentra el multiplo mas cercano osea: (440, 320)
+             * desp se divide por 40 ya que es lo q miden los lados de los cuadrados que hacen de mapa
+             * (440, 320) ---> (11, 8) ---> new Posicion(11,8)
+            */
+            ((Shape) n).setFill(Color.GREEN);// 458.12312039123 ---> 458.1--> 450---> 11.25 --> 11 13 --> posicion(11, 13)
             double resultadoX = new BigDecimal(n.getTranslateX()).setScale(1, RoundingMode.UP).doubleValue();
             double resultadoY = new BigDecimal(n.getTranslateY()).setScale(1, RoundingMode.UP).doubleValue();
             //double diferenciaX = resultadoX - (int)resultadoX;
@@ -129,7 +141,6 @@ public class Tablero {
     }
 
     private double encontrarMultiploDeMasCercanoA(int multiplicador, double coordenada) {
-        //System.out.println("\nFUNCION X: " + ((int)(coordenada/(double)multiplicador)));
         return multiplicador*(int)(coordenada/(double)multiplicador);
     }
 
@@ -138,7 +149,5 @@ public class Tablero {
     }
 
 	private void cargarImagenes() {
-		//String pathCasillaEsquina = this.getClass().getResource("/imagenes/casilla-esquina.png").toString();
-		//this.casillaEsquina = new Image(pathCasillaEsquina);
 	}
 }

@@ -43,7 +43,8 @@ public class Jugador {
     }
 
     public void compararPosicionConOtroJugador(Posicion posicionDada) throws AtributoInvalidoException{
-        if(this.posicion.adentro(99, posicionDada)) throw new AtributoInvalidoException();
+        //CAMBIE ACA EL 10
+        if(this.posicion.adentro(10, posicionDada)) throw new AtributoInvalidoException();
     }
 
     private void validarRaza(String race, String razaUno) throws AtributoInvalidoException {

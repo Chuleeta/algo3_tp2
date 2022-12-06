@@ -40,7 +40,6 @@ public class JuegoVista extends BorderPane {
     static String respuesta;
     static Scene juegoVista;
     static ToolBar barra;
-    //static Juego juego;
     static Group contenedorCentral;
 
     String botonAntesDeSerPresionado = "-fx-border-width: 2px; -fx-border-color: #B4DBE2; -fx-background-color: rgba(243, 202, 76, 0.5); -fx-text-fill: #BDB69C; -fx-shape: \"M 100 350 A 50 50 0 1 1 100 250 L 300 250 A 50 50 0 1 1 300 350 Z\";";
@@ -49,18 +48,10 @@ public class JuegoVista extends BorderPane {
 
 	private Image logo;
 	private Image fondo;
-	private Image iconoControlPolicial;
-	private Image iconoPozo;
-	private Image iconoPiquete;
-	private Image iconoSorpresa;
-	private Image iconoBotonArriba;
-	private Image iconoBotonAbajo;
-	private Image iconoBotonIzquierda;
-	private Image iconoBotonDerecha;
-	private Image iconoNotaMusical;
-	private Image iconoNotaMusicalTachada;
+    private Juego juego;
 
-    public JuegoVista(Stage stage, Scene pantallaDeInicio, int ancho, int alto, String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
+    public JuegoVista(Stage stage, Scene pantallaDeInicio, int ancho, int alto, Juego juego,String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
+        this.juego = juego;
         this.cargarImagenes();
 		this.setJuego(stage, pantallaDeInicio, ancho, alto, nombreJugador1, eleccionRaza1, nombreJugador2, eleccionRaza2);
         stage.setMaximized(true);
@@ -79,35 +70,6 @@ public class JuegoVista extends BorderPane {
 		String pathFondo = this.getClass().getResource("/imagenes/fondoDePantalla.jpg").toString();
 		this.fondo = new Image(pathFondo);
 		
-		// String pathIconoBotonArriba = this.getClass().getResource("/imagenes/icono-boton-arriba.png").toString();
-		// this.iconoBotonArriba = new Image(pathIconoBotonArriba);
-		
-		// String pathIconoBotonAbajo = this.getClass().getResource("/imagenes/icono-boton-abajo.png").toString();
-		// this.iconoBotonAbajo = new Image(pathIconoBotonAbajo);
-		
-		// String pathIconoBotonIzquierda = this.getClass().getResource("/imagenes/icono-boton-izquierda.png").toString();
-		// this.iconoBotonIzquierda = new Image(pathIconoBotonIzquierda);
-		
-		// String pathIconoBotonDerecha = this.getClass().getResource("/imagenes/icono-boton-derecha.png").toString();
-		// this.iconoBotonDerecha = new Image(pathIconoBotonDerecha);
-		
-		// String pathNotaMusical = this.getClass().getResource("/imagenes/nota-musical.png").toString();
-		// this.iconoNotaMusical = new Image(pathNotaMusical);
-		
-		// String pathNotaMusicalTachada = this.getClass().getResource("/imagenes/nota-musical-tachada.png").toString();
-		// this.iconoNotaMusicalTachada = new Image(pathNotaMusicalTachada);
-
-		// String pathIconoPiquete = this.getClass().getResource("/imagenes/icono-piquete.png").toString();
-		// this.iconoPiquete = new Image(pathIconoPiquete);
-
-		// String pathIconoPozo = this.getClass().getResource("/imagenes/icono-pozo.png").toString();
-		// this.iconoPozo = new Image(pathIconoPozo);
-
-		// String pathIconoControl = this.getClass().getResource("/imagenes/icono-control-policial.png").toString();
-		// this.iconoControlPolicial = new Image(pathIconoControl);
-		
-		// String pathIconoSorpresa = this.getClass().getResource("/imagenes/icono-sorpresa.png").toString();
-		// this.iconoSorpresa = new Image(pathIconoSorpresa);
 	}
 
     private void setJuego(Stage stage, Scene pantallaDeInicio, int ancho, int alto, String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
@@ -128,7 +90,6 @@ public class JuegoVista extends BorderPane {
         Jugador jugadorUno = new Jugador(nombreJugador1, "rojo", eleccionRaza1, new Posicion(0, 0), mapa, 0);
         Jugador jugadorDos = new Jugador(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
         Juego juego = new Juego(mapa, jugadorUno, jugadorDos);
-        //juego.setDimensionesMapa(ancho, alto);
 
         //raza
         Label razaJugador1 = new Label("Raza: " + eleccionRaza1);
@@ -139,17 +100,10 @@ public class JuegoVista extends BorderPane {
         Label razaJugador2 = new Label("Raza: " + eleccionRaza2);
         razaJugador2.setFont(fuente);
         razaJugador2.setStyle(formatoTexto);
-
-
-        
-        Canvas canvasCentral = new Canvas(900, 650);
-        //JugadorVista jugadorVista = new JugadorVista(juego, canvasCentral, grilla, stage, pantallaDeInicio, razaJugador1);
         
         //GET MAPA DEBE SER UN GROUP
         Tablero grilla = new Tablero(alto,ancho, juego);
         this.setCenter(grilla.getContenedor());
-        //this.setCenter(juego.getMapa());
-
 
 		// Menu bar
         MenuBar barraSuperior = new MenuBar();
@@ -170,7 +124,6 @@ public class JuegoVista extends BorderPane {
             String a = volverAlMenu(stage);
             if(a =="Volver"){
                 stage.setScene(pantallaDeInicio);
-				//jugadorVista.salirDelJuego();
             }
         });
         archivo.getItems().addAll(archivoSalir);
@@ -188,97 +141,6 @@ public class JuegoVista extends BorderPane {
         
         this.setTop(barraSuperior);
         
-        //Boton DERECHA
-        // Button moverseDerecha = new Button("");
-        // moverseDerecha.setFont(fuente);
-        // moverseDerecha.setGraphic(new ImageView(this.iconoBotonDerecha));
-        // moverseDerecha.setStyle(formatoTexto);
-        // moverseDerecha.setOnMouseEntered(e -> moverseDerecha.setStyle("-fx-background-color: #717D8C; -fx-text-fill: #BDB69C"));
-        // moverseDerecha.setOnMouseExited(e -> moverseDerecha.setStyle(formatoTexto));
-        
-        // Button moverseAbajo = new Button("");
-        // moverseAbajo.setFont(fuente);
-        // moverseAbajo.setGraphic(new ImageView(this.iconoBotonAbajo));
-        // moverseAbajo.setStyle(formatoTexto);
-        // moverseAbajo.setOnMouseEntered(e -> moverseAbajo.setStyle("-fx-background-color: #717D8C; -fx-text-fill: #BDB69C"));
-        // moverseAbajo.setOnMouseExited(e -> moverseAbajo.setStyle(formatoTexto));
-        
-        // Button moverseIzquierda = new Button("");
-        // moverseIzquierda.setFont(fuente);
-        // moverseIzquierda.setGraphic(new ImageView(this.iconoBotonIzquierda));
-        // moverseIzquierda.setStyle(formatoTexto);
-        // moverseIzquierda.setOnMouseEntered(e -> moverseIzquierda.setStyle("-fx-background-color: #717D8C; -fx-text-fill: #BDB69C"));
-        // moverseIzquierda.setOnMouseExited(e -> moverseIzquierda.setStyle(formatoTexto));
-        
-        // Button moverseArriba = new Button("");
-        // moverseArriba.setFont(fuente);
-        // moverseArriba.setGraphic(new ImageView(this.iconoBotonArriba));
-        // moverseArriba.setStyle(formatoTexto);
-        // moverseArriba.setOnMouseEntered(e -> moverseArriba.setStyle("-fx-background-color: #717D8C; -fx-text-fill: #BDB69C"));
-        // moverseArriba.setOnMouseExited(e -> moverseArriba.setStyle(formatoTexto));
-        
-        // VBox botonesMovimiento = new VBox();
-        HBox ContenedorBotonesSonidos = new HBox();
-
-        //StackPane stackSonidos = new StackPane();
-        // BotonMusica apagarMusica = new BotonMusica("",jugadorVista);
-        // apagarMusica.setOnAction(((BotonMusica) apagarMusica).silenciar());
-        // apagarMusica.setStyle(botonNormal);
-        // apagarMusica.setOnMouseEntered(e -> apagarMusica.setStyle(botonAntesDeSerPresionado));
-        // apagarMusica.setOnMouseExited(e -> apagarMusica.setStyle(botonNormal));
-        // apagarMusica.setGraphic(new ImageView(this.iconoNotaMusical));
-        // apagarMusica.setPrefSize(60, 60);
-        //stackSonidos.setAlignment(Pos.TOP_CENTER);
-
-        // BotonMusica encenderMusica = new BotonMusica("",jugadorVista);
-        // encenderMusica.setStyle(botonNormal);
-        // encenderMusica.setOnMouseEntered(e -> encenderMusica.setStyle(botonAntesDeSerPresionado));
-        // encenderMusica.setOnMouseExited(e -> encenderMusica.setStyle(botonNormal));
-        // encenderMusica.setGraphic(new ImageView(this.iconoNotaMusicalTachada));
-        // stackSonidos.getChildren().add(encenderMusica);
-        // stackSonidos.getChildren().add(apagarMusica);
-
-        // apagarMusica.setOnAction(actionEvent -> {
-        //     EventHandler<ActionEvent> evento = apagarMusica.silenciar();
-        //     evento.handle(actionEvent);
-        //     stackSonidos.getChildren().remove(apagarMusica);
-        // });
-
-        // encenderMusica.setOnAction(actionEvent -> {
-        //     EventHandler<ActionEvent> evento = encenderMusica.reproducir();
-        //     evento.handle(actionEvent);
-        //     stackSonidos.getChildren().add(apagarMusica);
-        // });
-
-        // stackSonidos.setAlignment(Pos.TOP_RIGHT);
-        // stackSonidos.setAlignment(Pos.TOP_CENTER);
-        // this.setTop(stackSonidos);
-
-        // MoverseALaDerechaEventHandler moverseDerechaHandler = new MoverseALaDerechaEventHandler(jugadorVista);
-        // moverseDerecha.setOnAction(moverseDerechaHandler);
-        
-        // MoverseALaIzquierdaEventHandler moverseIzquierdaHandler = new MoverseALaIzquierdaEventHandler(jugadorVista);
-        // moverseIzquierda.setOnAction(moverseIzquierdaHandler);
-        
-        // MoverseAbajoEventHandler moverseAbajoHandler = new MoverseAbajoEventHandler(jugadorVista);
-        // moverseAbajo.setOnAction(moverseAbajoHandler);
-        
-        // MoverseArribaEventHandler moverseArribaHandler = new MoverseArribaEventHandler(jugadorVista);
-        // moverseArriba.setOnAction(moverseArribaHandler);
-        
-        
-        // HBox botonesID = new HBox();
-        // botonesID.getChildren().add(moverseIzquierda);
-        // botonesID.getChildren().add(moverseDerecha);
-        // botonesID.setAlignment(Pos.CENTER);
-        // botonesID.setSpacing(5);
-        
-        // moverseArriba.setAlignment(Pos.CENTER);
-        // botonesMovimiento.getChildren().add(moverseArriba);
-        // botonesMovimiento.getChildren().add(botonesID);
-        // moverseAbajo.setAlignment(Pos.CENTER);
-        // botonesMovimiento.getChildren().add(moverseAbajo);
-        // botonesMovimiento.setAlignment(Pos.CENTER);
 
         //BORDE IZQUIERDO
         VBox bordeIzquierdo = new VBox();
@@ -297,47 +159,16 @@ public class JuegoVista extends BorderPane {
         this.setRight(bordeDerecho);
 
 
-        // Label controlPolical = new Label(":  Policial");
-        // controlPolical.setFont(fuente);
-        // controlPolical.setStyle("-fx-border-width: 0px; -fx-border-color: transparent; -fx-background-color: transparent; -fx-text-fill: #BDB69C");
-        // // controlPolical.setGraphic(new ImageView(this.iconoControlPolicial));
-
-        // Label pozo = new Label(": Pozo");
-        // pozo.setFont(fuente);
-        // pozo.setStyle("-fx-border-width: 0px; -fx-border-color: transparent; -fx-background-color: transparent; -fx-text-fill: #BDB69C");
-        // // pozo.setGraphic(new ImageView(this.iconoPozo));
-
-        // Label piquete = new Label(": Piquete");
-        // piquete.setFont(fuente);
-        // piquete.setStyle("-fx-border-width: 0px; -fx-border-color: transparent; -fx-background-color: transparent; -fx-text-fill: #BDB69C");
-        // // piquete.setGraphic(new ImageView(this.iconoPiquete));
-
-        // Label sorpresaFavorable = new Label(": Sorpresa");
-        // sorpresaFavorable.setFont(fuente);
-        // sorpresaFavorable.setStyle("-fx-border-width: 0px; -fx-border-color: transparent; -fx-background-color: transparent; -fx-text-fill: #BDB69C");
-        // // sorpresaFavorable.setGraphic(new ImageView(this.iconoSorpresa));
-
-        // VBox bordeDerecho = new VBox();
-        // bordeDerecho.getChildren().addAll(controlPolical, pozo, piquete, sorpresaFavorable);
-        // bordeDerecho.setSpacing(100);
-        // bordeDerecho.setPadding(new Insets(10, 0, 0, 30));
-        // this.setAlignment(bordeDerecho, Pos.CENTER_RIGHT);
-        // this.setRight(bordeDerecho);
-
-
         //CONSOLA INFERIOR
         VBox contenedorConsola = new VBox();
         contenedorConsola.setSpacing(10);
         contenedorConsola.setPadding(new Insets(15));
-        //contenedorConsola.setStyle("-fx-background-color: black;");
-        //contenedorConsola.getChildren().add(stackSonidos);
 
         this.setAlignment(contenedorConsola, Pos.TOP_LEFT);
         this.setBottom(contenedorConsola);
 
         Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
         juegoVista = new Scene(this,screenSize.getWidth(), screenSize.getHeight(), Color.rgb(47, 52, 58));
-        //juegoVista.setOnKeyPressed(new Controles(stage,jugadorVista));
     }
 
     private void acercaDe(){
