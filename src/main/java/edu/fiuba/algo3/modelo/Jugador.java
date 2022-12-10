@@ -10,16 +10,16 @@ import java.util.ArrayList;
 
 public class Jugador {
 
-    private int capacidad;
-    private String nombre;
-    private String color;
-    private String raza;
-    private Posicion posicion;
+    protected int capacidad;
+    protected String nombre;
+    protected String color;
+    protected String raza;
+    protected Posicion posicion;
     public Mineral mineral;
-    private int unidadesCreadas;
+    protected int unidadesCreadas;
     public Mapa mapa;
-    public ArrayList<Construccion> construcciones;
-    private ArrayList<Individuo> individuos;
+    protected ArrayList<Construccion> construcciones;
+    protected ArrayList<Individuo> individuos;
 
     public Jugador(String name, String color, String race, Posicion posicionJugador, Mapa mapa, int capacidad){
         this.nombre = name;

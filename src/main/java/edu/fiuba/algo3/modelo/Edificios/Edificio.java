@@ -57,4 +57,7 @@ public abstract class Edificio implements Construccion, Ocupable {
     public void crearJugadorPorDefecto() {
         jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6, 6), mapa, 200);
     }
+    public Posicion mostrarPosicion () {
+        return posicion;
+    }
 }

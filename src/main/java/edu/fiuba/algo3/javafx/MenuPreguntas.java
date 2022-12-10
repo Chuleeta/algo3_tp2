@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.javafx;
 
+import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -169,6 +170,7 @@ public class MenuPreguntas extends BorderPane{
             Posicion posicionJugadorUno = new Posicion(0,0);
             Posicion posicionJugadorDos = new Posicion(18, 22);
             Jugador jugadorUno = new Jugador(nombreDelJugador1.getText(), "azul", seleccionRaza1.getValue(), posicionJugadorUno, mapa, 0);
+            Criadero criaderoUno = new Criadero(new Posicion(1,1), mapa, jugadorUno);
             Jugador jugadorDos = new Jugador(nombreDelJugador2.getText(), "rojo", seleccionRaza2.getValue(), posicionJugadorDos, mapa, 0);
             if(preguntarDatosCorrectos(nombreDelJugador1.getText(), seleccionRaza1.getValue(), nombreDelJugador2.getText(), seleccionRaza2.getValue())){
                 if(seleccionRaza1.getValue() != null && !(nombreDelJugador1.getText().isBlank()) && seleccionRaza2.getValue() != null && !(nombreDelJugador2.getText().isBlank())){

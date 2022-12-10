@@ -3,13 +3,15 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 
+import java.util.ArrayList;
+
 public class Juego {
     private Mapa mapa;
     private Jugador jugadorUno;
     private Jugador jugadorDos;
 
     public Juego(Mapa mapa, Jugador jugadorUno, Jugador jugadorDos) throws RequerimientosInsuficientesException{
-        if(mapa == null || jugadorUno == null || jugadorDos == null) throw new RequerimientosInsuficientesException();
+        if (mapa == null || jugadorUno == null || jugadorDos == null) throw new RequerimientosInsuficientesException();
         this.mapa = mapa;
         this.jugadorUno = jugadorUno;
         this.jugadorDos = jugadorDos;
@@ -20,5 +22,9 @@ public class Juego {
         this.jugadorDos.pasarTiempo();
         
         return (this.jugadorDos.verificarConstruccionesVacias() && this.jugadorUno.verificarConstruccionesVacias());
+    }
+
+    public ArrayList<Construccion> mostrarConstrucciones() {
+        return mapa.mostrarConstrucciones();
     }
 }

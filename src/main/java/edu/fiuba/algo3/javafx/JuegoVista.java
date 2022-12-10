@@ -3,10 +3,11 @@ package edu.fiuba.algo3.javafx;
 import java.io.IOException;
 import java.io.InputStream;
 
-import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.javafx.Eventos.BotonAgregarConstruccionProtossHandler;
+import edu.fiuba.algo3.javafx.Eventos.BotonAgregarConstruccionZergHandler;
+import edu.fiuba.algo3.javafx.Eventos.BotonAgregarIndividuoProtossHandler;
+import edu.fiuba.algo3.javafx.Eventos.BotonAgregarIndividuoZergHandler;
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -35,6 +36,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class JuegoVista extends BorderPane {
     static String respuesta;
@@ -85,10 +87,17 @@ public class JuegoVista extends BorderPane {
         Label nombreDelJugador2 = new Label("Jugador 2: \n" + nombreJugador2);
         nombreDelJugador2.setFont(fuente);
         nombreDelJugador2.setStyle(formatoTexto);
-
         Mapa mapa = new Mapa();
-        Jugador jugadorUno = new Jugador(nombreJugador1, "rojo", eleccionRaza1, new Posicion(0, 0), mapa, 0);
-        Jugador jugadorDos = new Jugador(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
+        Jugador jugadorUno;
+        Jugador jugadorDos;
+        if (eleccionRaza1 == "Zerg") {
+            jugadorUno = new JugadorZerg(nombreJugador1, "rojo", eleccionRaza1, new Posicion(0, 0), mapa, 0);
+            jugadorDos = new JugadorProtoss(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
+        } else {
+            jugadorUno = new JugadorProtoss(nombreJugador1, "rojo", eleccionRaza1, new Posicion(0, 0), mapa, 0);
+            jugadorDos = new JugadorZerg(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
+        }
+
         Juego juego = new Juego(mapa, jugadorUno, jugadorDos);
 
         //raza
@@ -100,6 +109,71 @@ public class JuegoVista extends BorderPane {
         Label razaJugador2 = new Label("Raza: " + eleccionRaza2);
         razaJugador2.setFont(fuente);
         razaJugador2.setStyle(formatoTexto);
+
+        BotonAgregarConstruccionZergHandler agregarConstruccionZergHandler;
+        BotonAgregarIndividuoZergHandler agregarIndividuoZergHandler;
+        BotonAgregarConstruccionProtossHandler agregarConstruccionProtossHandler;
+        BotonAgregarIndividuoProtossHandler agregarIndividuoProtossHandler;
+
+        if (eleccionRaza1 == "Zerg") {
+            agregarConstruccionZergHandler = new BotonAgregarConstruccionZergHandler(this, (JugadorZerg) jugadorUno);
+            agregarIndividuoZergHandler = new BotonAgregarIndividuoZergHandler(this, (JugadorZerg) jugadorUno);
+            agregarConstruccionProtossHandler = new BotonAgregarConstruccionProtossHandler(this, (JugadorProtoss) jugadorDos);
+            agregarIndividuoProtossHandler = new BotonAgregarIndividuoProtossHandler(this, (JugadorZerg) jugadorDos);
+
+        } else {
+            agregarConstruccionZergHandler = new BotonAgregarConstruccionZergHandler(this, (JugadorZerg) jugadorDos);
+            agregarIndividuoZergHandler = new BotonAgregarIndividuoZergHandler(this, (JugadorZerg) jugadorDos);
+            agregarConstruccionProtossHandler = new BotonAgregarConstruccionProtossHandler(this, (JugadorProtoss) jugadorUno);
+            agregarIndividuoProtossHandler = new BotonAgregarIndividuoProtossHandler(this, (JugadorZerg) jugadorUno);
+        }
+
+        // creacion de botones
+        Button botonAgregarConstruccionZerg = new Button("Agregar\nconstruccion");
+        botonAgregarConstruccionZerg.setOnAction(agregarConstruccionZergHandler);
+        botonAgregarConstruccionZerg.setTranslateX(20);
+        botonAgregarConstruccionZerg.setTranslateY(-168);
+        botonAgregarConstruccionZerg.setFont(fuente);
+        botonAgregarConstruccionZerg.setStyle(botonNormal);
+        botonAgregarConstruccionZerg.setOnMouseEntered(e -> botonAgregarConstruccionZerg.setStyle(botonAntesDeSerPresionado));
+        botonAgregarConstruccionZerg.setOnMouseExited(e -> botonAgregarConstruccionZerg.setStyle(botonNormal));
+
+        Button botonAgregarConstruccionProtoss = new Button("Agregar\nconstruccion");
+        botonAgregarConstruccionProtoss.setOnAction(agregarConstruccionProtossHandler);
+        botonAgregarConstruccionProtoss.setTranslateX(20);
+        botonAgregarConstruccionProtoss.setTranslateY(-168);
+        botonAgregarConstruccionProtoss.setFont(fuente);
+        botonAgregarConstruccionProtoss.setStyle(botonNormal);
+        botonAgregarConstruccionProtoss.setOnMouseEntered(e -> botonAgregarConstruccionProtoss.setStyle(botonAntesDeSerPresionado));
+        botonAgregarConstruccionProtoss.setOnMouseExited(e -> botonAgregarConstruccionProtoss.setStyle(botonNormal));
+
+        Button botonAgregarIndividuoZerg = new Button("Agregar\nindividuo");
+        botonAgregarIndividuoZerg.setOnAction(agregarIndividuoZergHandler);
+        botonAgregarIndividuoZerg.setTranslateX(20);
+        botonAgregarIndividuoZerg.setTranslateY(-168);
+        botonAgregarIndividuoZerg.setFont(fuente);
+        botonAgregarIndividuoZerg.setStyle(botonNormal);
+        botonAgregarIndividuoZerg.setOnMouseEntered(e -> botonAgregarIndividuoZerg.setStyle(botonAntesDeSerPresionado));
+        botonAgregarIndividuoZerg.setOnMouseExited(e -> botonAgregarIndividuoZerg.setStyle(botonNormal));
+
+        Button botonAgregarIndividuoProtoss = new Button("Agregar\nindividuo");
+        botonAgregarIndividuoProtoss.setOnAction(agregarIndividuoProtossHandler);
+        botonAgregarIndividuoProtoss.setTranslateX(20);
+        botonAgregarIndividuoProtoss.setTranslateY(-168);
+        botonAgregarIndividuoProtoss.setFont(fuente);
+        botonAgregarIndividuoProtoss.setStyle(botonNormal);
+        botonAgregarIndividuoProtoss.setOnMouseEntered(e -> botonAgregarIndividuoProtoss.setStyle(botonAntesDeSerPresionado));
+        botonAgregarIndividuoProtoss.setOnMouseExited(e -> botonAgregarIndividuoProtoss.setStyle(botonNormal));
+
+
+        // label de minerales
+
+        Label mineralesJugadorUno = new Label("Minerales: \n" + "0");
+        Label mineralesJugadorDos = new Label("Minerales: \n" + "0");
+        mineralesJugadorUno.setFont(fuente);
+        mineralesJugadorUno.setStyle(formatoTexto);
+        mineralesJugadorDos.setFont(fuente);
+        mineralesJugadorDos.setStyle(formatoTexto);
         
         //GET MAPA DEBE SER UN GROUP
         Tablero grilla = new Tablero(alto,ancho, juego);
@@ -144,17 +218,18 @@ public class JuegoVista extends BorderPane {
 
         //BORDE IZQUIERDO
         VBox bordeIzquierdo = new VBox();
-        bordeIzquierdo.getChildren().addAll(nombreDelJugador1, razaJugador1);
-        bordeIzquierdo.setSpacing(70);
-        bordeIzquierdo.setPadding(new Insets(50, 0, 50, 80));
+        // VBox bordeIzquierdo = new VBox().prefWidthProperty().bind(stage.widthProperty().multiply(0.80));
+        bordeIzquierdo.getChildren().addAll(nombreDelJugador1, razaJugador1, eleccionRaza1 == "Zerg" ? botonAgregarIndividuoZerg : botonAgregarIndividuoProtoss, mineralesJugadorUno,eleccionRaza1 == "Zerg" ? botonAgregarConstruccionZerg : botonAgregarConstruccionProtoss, mineralesJugadorUno);
+        bordeIzquierdo.setSpacing(30);
+        bordeIzquierdo.setPadding(new Insets(50, 0, 50, 50));
         this.setAlignment(bordeIzquierdo, Pos.CENTER_LEFT);
         this.setLeft(bordeIzquierdo);
 
         //BORDE Derecho
         VBox bordeDerecho = new VBox();
-        bordeDerecho.getChildren().addAll(nombreDelJugador2, razaJugador2);
-        bordeDerecho.setSpacing(70);
-        bordeDerecho.setPadding(new Insets(50, 80, 50, 0));
+        bordeDerecho.getChildren().addAll(nombreDelJugador2, razaJugador2, eleccionRaza2 == "Zerg" ? botonAgregarIndividuoZerg : botonAgregarIndividuoProtoss, mineralesJugadorUno, eleccionRaza2 ==  "Zerg" ? botonAgregarConstruccionZerg : botonAgregarConstruccionProtoss, mineralesJugadorDos);
+        bordeDerecho.setSpacing(30);
+        bordeDerecho.setPadding(new Insets(50, 50, 50, 0));
         this.setAlignment(bordeDerecho, Pos.CENTER_RIGHT);
         this.setRight(bordeDerecho);
 

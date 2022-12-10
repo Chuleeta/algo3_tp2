@@ -17,4 +17,5 @@ public interface Construccion {
     boolean agregarAlMapa(Mineral mineral, GasVespeno gas);
     void desactivar();
     boolean estaOcupada(Posicion posicionDada);
+    public Posicion mostrarPosicion ();
 }

@@ -49,5 +49,11 @@ public class Posicion {
         z = 0; //Todos los aereos van a volar en el nivel 5 de altura
     }
 
+    public int coordenadaY() {
+        return y;
+    }
+    public int coordenadaX() {
+       return x;
+    }
 
 }

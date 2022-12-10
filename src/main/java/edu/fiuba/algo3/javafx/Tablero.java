@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+import edu.fiuba.algo3.modelo.Construccion;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Posicion;
 import javafx.beans.binding.Bindings;
@@ -25,6 +26,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class Tablero {
+    private Juego juego;
     private Group contenedor;
     private Rectangle[][] grilla;
     private int startX;
@@ -33,7 +35,7 @@ public class Tablero {
     public Tablero(int alto, int ancho, Juego juego){
         this.cargarImagenes();
         Pane mapaVista = new Pane();
-
+        this.juego = juego;
         grilla = new Rectangle[alto][ancho];
         int coordY = 0;
         int coordX = 0;
@@ -56,13 +58,22 @@ public class Tablero {
         J1.setTranslateY(10);
         hacerMovible(J1);
 
-        Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
-        J2.setTranslateX(850);
-        J2.setTranslateY(691);
-        hacerMovible(J2);
+        ArrayList<Construccion> construcciones = juego.mostrarConstrucciones();
+        for (Construccion construccion : construcciones) {
+            Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
+            J2.setTranslateX((construccion.mostrarPosicion().coordenadaX() * 40) + 10);
+            J2.setTranslateY((construccion.mostrarPosicion().coordenadaY() * 40) + 10);
+            hacerMovible(J2);
+            mapaVista.getChildren().add(J2);
+        }
+
+        // Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
+        // J2.setTranslateX(850);
+        // J2.setTranslateY(691);
+        // hacerMovible(J2);
 
         mapaVista.getChildren().add(J1);
-        mapaVista.getChildren().add(J2);
+        //mapaVista.getChildren().add(J2);
 
         mapaVista.setPrefSize(880, 721);
         mapaVista.setStyle("-fx-background-color: #717D8C");
