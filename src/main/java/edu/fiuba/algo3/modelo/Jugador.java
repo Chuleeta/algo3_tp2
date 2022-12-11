@@ -21,10 +21,10 @@ public class Jugador {
     protected ArrayList<Construccion> construcciones;
     protected ArrayList<Individuo> individuos;
 
-    public Jugador(String name, String color, String race, Posicion posicionJugador, Mapa mapa, int capacidad){
-        this.nombre = name;
+    public Jugador(String nombre, String color, String raza, Posicion posicionJugador, Mapa mapa, int capacidad){
+        this.nombre = nombre;
         this.color = color;
-        this.raza = race;
+        this.raza = raza;
         this.posicion = posicionJugador;
         this.mapa = mapa;
         this.construcciones = new ArrayList<>();
@@ -33,6 +33,16 @@ public class Jugador {
         this.capacidad = capacidad;
         unidadesCreadas = 0;
     }
+
+    /*public JugadorZerg definirZerg(){
+        JugadorZerg jugadorZerg = new JugadorZerg(nombre, raza, posicion, mapa, capacidad);
+        return jugadorZerg;
+    }
+
+    public JugadorProtoss definirProtoss(){
+        JugadorProtoss jugadorProtoss = new JugadorProtoss(nombre, raza, posicion, mapa, capacidad);
+        return jugadorProtoss;
+    }*/
 
     public void validarAtributos(Jugador jugadorDado) throws AtributoInvalidoException {
         if(jugadorDado == null) return;

@@ -10,4 +10,12 @@ public class JugadorZerg extends Jugador{
         super(name, color, race, posicionJugador, mapa, capacidad);
     }
 
+    /*public JugadorZerg(String nombre, String raza, Posicion posicionJugador, Mapa mapa, int capacidad){
+        this.nombre = nombre;
+        this.raza = raza;
+        this.posicion = posicionJugador;
+        this.mapa = mapa;
+        this.capacidad = capacidad;
+    }*/
+
 }
