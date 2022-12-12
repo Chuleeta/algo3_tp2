@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import java.util.ArrayList;
 
 public class Juego {
-    private Mapa mapa;
+    public Mapa mapa;
     private Jugador jugadorUno;
     private Jugador jugadorDos;
 

@@ -50,7 +50,7 @@ public class JuegoVista extends BorderPane {
 
 	private Image logo;
 	private Image fondo;
-    private Juego juego;
+    public Juego juego;
 
     public JuegoVista(Stage stage, Scene pantallaDeInicio, int ancho, int alto, Juego juego,String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
         this.juego = juego;
@@ -172,8 +172,8 @@ public class JuegoVista extends BorderPane {
 
         // label de minerales
 
-        Label mineralesJugadorUno = new Label("Minerales: \n" + "0");
-        Label mineralesJugadorDos = new Label("Minerales: \n" + "0");
+        Label mineralesJugadorUno = new Label("Minerales: \n" + jugadorUno.mineral.cantidad);
+        Label mineralesJugadorDos = new Label("Minerales: \n" + jugadorDos.mineral.cantidad);
         mineralesJugadorUno.setFont(fuente);
         mineralesJugadorUno.setStyle(formatoTexto);
         mineralesJugadorDos.setFont(fuente);
