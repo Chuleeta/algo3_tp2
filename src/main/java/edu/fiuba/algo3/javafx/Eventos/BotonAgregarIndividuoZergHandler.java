@@ -50,7 +50,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         this.icono = new Image(pathicono);
     }*/
 
-    private void cargarPosicion(){
+    private String cargarPosicion(){
         TilePane posicion = new TilePane();
         Button b = new Button("Insertar posicion");
         Label l = new Label("Ingrese la posicion:");
@@ -64,6 +64,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         Stage s = new Stage();
         s.setScene(sc);
         s.show();
+        return ingresarPosicion.devolverValor();
     }
 
     @Override
@@ -153,7 +154,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
             }
             jugador.agregarIndividuo(amo);
         }else if (result.get() == botonZangano) {
-            this.cargarPosicion();
+            String pos = cargarPosicion();
             //Zangano zangano = new Zangano();
         } else if (result.get() == botonZerling) {
             // Zerling zerling = new Zerling();

@@ -25,4 +25,8 @@ public class BotonIngresarPosicionHandler implements EventHandler<ActionEvent> {
         td.showAndWait();
         l.setText(td.getEditor().getText());
     }
+
+    public String devolverValor(){
+        return td.getResult();
+    }
 }
