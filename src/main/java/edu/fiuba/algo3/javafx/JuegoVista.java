@@ -51,6 +51,7 @@ public class JuegoVista extends BorderPane {
 	private Image logo;
 	private Image fondo;
     public Juego juego;
+    //public Stage stage;
 
     public JuegoVista(Stage stage, Scene pantallaDeInicio, int ancho, int alto, Juego juego,String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
         this.juego = juego;
@@ -59,6 +60,7 @@ public class JuegoVista extends BorderPane {
         stage.setMaximized(true);
         BackgroundImage imagenDeFondo = new BackgroundImage(this.fondo, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         this.setBackground(new Background(imagenDeFondo));
+        //this.stage = stage;
     }
 
     public Scene getJuegoVista(){

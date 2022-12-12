@@ -11,17 +11,25 @@ import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 import java.io.InputStream;
 import java.util.Optional;
 
-public class BotonAgregarIndividuoZergHandler  implements EventHandler<ActionEvent> {
+public class BotonAgregarIndividuoZergHandler extends BorderPane implements EventHandler<ActionEvent>{
 
     JuegoVista juegoVista;
+    static Scene preguntaDatos;
+    private Image logoFondo;
+    private Image icono;
     private final Jugador jugador;
     String botonAntesDeSerPresionado = "-fx-border-width: 2px; -fx-border-color: #B4DBE2; -fx-background-color: rgba(243, 202, 76, 0.5); -fx-text-fill: #BDB69C; -fx-shape: \"M 100 350 A 50 50 0 1 1 100 250 L 300 250 A 50 50 0 1 1 300 350 Z\";";
     String botonNormal = "-fx-border-width: 2px; -fx-border-color: #B4DBE2; -fx-background-color: rgba(255, 255, 255, 0.2); -fx-text-fill: #42B0D3; -fx-shape: \"M 100 350 A 50 50 0 1 1 100 250 L 300 250 A 50 50 0 1 1 300 350 Z\";";
@@ -33,15 +41,47 @@ public class BotonAgregarIndividuoZergHandler  implements EventHandler<ActionEve
         this.juegoVista = juegoVista;
         this.jugador = jugador;
     }
+
+    /*private void cargarImagenes() {
+        String pathLogoFondo = this.getClass().getResource("/imagenes/fondoDePantalla.jpg").toString();
+        this.logoFondo = new Image(pathLogoFondo);
+
+        String pathicono = this.getClass().getResource("/imagenes/icono.png").toString();
+        this.icono = new Image(pathicono);
+    }*/
+
+    private void cargarPosicion(){
+        TilePane posicion = new TilePane();
+        Button b = new Button("Insertar posicion");
+        Label l = new Label("Ingrese la posicion:");
+        BotonIngresarPosicionHandler ingresarPosicion = new BotonIngresarPosicionHandler(l);
+        b.setOnAction(ingresarPosicion);
+        posicion.getChildren().add(b);
+        posicion.getChildren().add(l);
+
+        Scene sc = new Scene(posicion, 500, 300);
+
+        Stage s = new Stage();
+        s.setScene(sc);
+        s.show();
+    }
+
     @Override
     public void handle(ActionEvent actionEvent) {
-        Label etiqueta = new Label();
-        etiqueta.setText("Agregar Unidad Zerg");
+
+        /*this.cargarImagenes();
+
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 30);
+        Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+        preguntaDatos = new Scene(this,screenSize.getWidth(), screenSize.getHeight(), Color.rgb(47, 52, 58));
+        BackgroundImage imagenDeFondo = new BackgroundImage(this.logoFondo, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1.0, 1.0, true, true, false, false));
+        this.setBackground(new Background(imagenDeFondo));
         // vista.agregarElementosAEjecutar(etiqueta);
         // tablero.agregarBloqueDobleRepeticion();
 
+        Label etiqueta = new Label();
+        etiqueta.setText("Agregar Unidad Zerg");
 
         VBox preguntasJugador1 = new VBox();
         preguntasJugador1.setAlignment(Pos.CENTER);
@@ -86,9 +126,9 @@ public class BotonAgregarIndividuoZergHandler  implements EventHandler<ActionEve
         overlayPreguntas.setAlignment(Pos.CENTER);
         overlayPreguntas.getChildren().add(preguntas);
 
-        //this.setCenter(overlayPreguntas);
+        this.setCenter(overlayPreguntas);*/
 
-        /*Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Unidades zerg");
         alert.setHeaderText("Seleccione la unidad que desea enjendrar");
 
@@ -101,7 +141,7 @@ public class BotonAgregarIndividuoZergHandler  implements EventHandler<ActionEve
         //ButtonType botonDevorador = new ButtonType("Devorador");
 
 
-        alert.getButtonTypes().setAll(botonAmo, botonZangano, botonZerling, botonHidralisco, botonMutaliscobotonGuardian, botonDevorador);
+        alert.getButtonTypes().setAll(botonAmo, botonZangano, botonZerling, botonHidralisco/*, botonMutaliscobotonGuardian, botonDevorador*/);
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == botonAmo){
@@ -113,6 +153,7 @@ public class BotonAgregarIndividuoZergHandler  implements EventHandler<ActionEve
             }
             jugador.agregarIndividuo(amo);
         }else if (result.get() == botonZangano) {
+            this.cargarPosicion();
             //Zangano zangano = new Zangano();
         } else if (result.get() == botonZerling) {
             // Zerling zerling = new Zerling();
@@ -122,7 +163,7 @@ public class BotonAgregarIndividuoZergHandler  implements EventHandler<ActionEve
             // Mutalisco mutalisco = new Mutalisco();
         } else {
             // ... user chose CANCEL or closed the dialog
-        }*/
+        }
     }
 
 }

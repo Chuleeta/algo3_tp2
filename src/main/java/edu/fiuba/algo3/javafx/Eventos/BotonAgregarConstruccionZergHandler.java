@@ -47,7 +47,7 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == botonCriadero){
-            // Criadero criadero = new Criadero;
+            // Criadero criadero = new Criadero();
         }else if (result.get() == botonReserva) {
             //ReservaDeReproduccion reserva = new ReservaDeReproduccion();
         } else if (result.get() == botonExtractor) {

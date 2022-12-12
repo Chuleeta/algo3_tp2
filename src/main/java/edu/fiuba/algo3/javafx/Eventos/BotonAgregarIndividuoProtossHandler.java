@@ -35,7 +35,7 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
         alert.setTitle("Unidades protoss");
         alert.setHeaderText("Seleccione la unidad que desea enjendrar");
 
-        ButtonType botonZealot = new ButtonType("Zealor");
+        ButtonType botonZealot = new ButtonType("Zealot");
         ButtonType botonScout = new ButtonType("Scout");
         ButtonType botonDragon = new ButtonType("Dragon");
 
