@@ -10,6 +10,7 @@ import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -33,138 +35,218 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
     private final Jugador jugador;
     String botonAntesDeSerPresionado = "-fx-border-width: 2px; -fx-border-color: #B4DBE2; -fx-background-color: rgba(243, 202, 76, 0.5); -fx-text-fill: #BDB69C; -fx-shape: \"M 100 350 A 50 50 0 1 1 100 250 L 300 250 A 50 50 0 1 1 300 350 Z\";";
     String botonNormal = "-fx-border-width: 2px; -fx-border-color: #B4DBE2; -fx-background-color: rgba(255, 255, 255, 0.2); -fx-text-fill: #42B0D3; -fx-shape: \"M 100 350 A 50 50 0 1 1 100 250 L 300 250 A 50 50 0 1 1 300 350 Z\";";
+    String formatoTexto = "-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: transparent; -fx-text-fill: #F3CA4C";
 
     public BotonAgregarIndividuoZergHandler(JuegoVista juegoVista, Jugador jugador) {
         //this.stage = stage;
         //this.escenaParaDobleRepeticion = escenaParaDobleRepeticion;
-
+        cargarImagenes();
         this.juegoVista = juegoVista;
         this.jugador = jugador;
     }
 
-    /*private void cargarImagenes() {
-        String pathLogoFondo = this.getClass().getResource("/imagenes/fondoDePantalla.jpg").toString();
-        this.logoFondo = new Image(pathLogoFondo);
+    private void cargarImagenes() {
+        // String pathLogoFondo = this.getClass().getResource("/imagenes/fondoDePantalla.jpg").toString();
+        // this.logoFondo = new Image(pathLogoFondo);
 
         String pathicono = this.getClass().getResource("/imagenes/icono.png").toString();
         this.icono = new Image(pathicono);
-    }*/
+    }
 
     private String cargarPosicion(){
-        TilePane posicion = new TilePane();
-        Button b = new Button("Insertar posicion");
-        Label l = new Label("Ingrese la posicion:");
-        BotonIngresarPosicionHandler ingresarPosicion = new BotonIngresarPosicionHandler(l);
-        b.setOnAction(ingresarPosicion);
-        posicion.getChildren().add(b);
-        posicion.getChildren().add(l);
+        InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
+        Font fuente = Font.loadFont(is, 25);
 
-        Scene sc = new Scene(posicion, 500, 300);
+        Label ingresarPosicion = new Label("Ingresar Posicion Deseada: \n");
+        ingresarPosicion.setFont(fuente);
+        ingresarPosicion.setStyle(formatoTexto);
 
+        TextField posicionDeseada = new TextField();
+        posicionDeseada.setAlignment(Pos.CENTER);
+        posicionDeseada.setPromptText("Ejemplo : 14 15");
+        posicionDeseada.setFont(fuente);
+        posicionDeseada.setStyle(botonNormal);
+        posicionDeseada.setOnMouseEntered(e -> posicionDeseada.setStyle(botonAntesDeSerPresionado));
+        posicionDeseada.setOnMouseExited(e -> posicionDeseada.setStyle(botonNormal));
+
+        Button botonConfirmar = new Button("Confirmar");
+        botonConfirmar.setFont(fuente);
+        botonConfirmar.setStyle(botonNormal);
+        botonConfirmar.setOnMouseEntered(e -> botonConfirmar.setStyle(botonAntesDeSerPresionado));
+        botonConfirmar.setOnMouseExited(e -> botonConfirmar.setStyle(botonNormal));
+        
+        
+        VBox inputPosicion = new VBox();
+        inputPosicion.getChildren().addAll(ingresarPosicion, posicionDeseada, botonConfirmar);
+        inputPosicion.setSpacing(30);
+        inputPosicion.setAlignment(Pos.CENTER);
+        inputPosicion.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
+        
+        Scene sc = new Scene(inputPosicion, 500, 300);
         Stage s = new Stage();
+        s.setResizable(false);
+        s.setTitle("Insertar Una Posicion");
+        s.getIcons().add(this.icono);
+        botonConfirmar.setOnAction(e-> {
+            s.close();
+        });
         s.setScene(sc);
-        s.show();
-        return ingresarPosicion.devolverValor();
+        //s.show();
+        s.showAndWait();
+        
+        return posicionDeseada.getText();
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
 
-        /*this.cargarImagenes();
-
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
-        Font fuente = Font.loadFont(is, 30);
-        Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-        preguntaDatos = new Scene(this,screenSize.getWidth(), screenSize.getHeight(), Color.rgb(47, 52, 58));
-        BackgroundImage imagenDeFondo = new BackgroundImage(this.logoFondo, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1.0, 1.0, true, true, false, false));
-        this.setBackground(new Background(imagenDeFondo));
-        // vista.agregarElementosAEjecutar(etiqueta);
-        // tablero.agregarBloqueDobleRepeticion();
+        Font fuente = Font.loadFont(is, 25);
 
-        Label etiqueta = new Label();
-        etiqueta.setText("Agregar Unidad Zerg");
+        InputStream is2 = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
+        Font fuente2 = Font.loadFont(is2, 25);
 
-        VBox preguntasJugador1 = new VBox();
-        preguntasJugador1.setAlignment(Pos.CENTER);
-        preguntasJugador1.setSpacing(30);
-        preguntasJugador1.setStyle("-fx-padding: 100;");
+        Label seleccionarIndividuo = new Label("Seleccionar Individuo\n");
+        seleccionarIndividuo.setFont(fuente);
+        seleccionarIndividuo.setStyle(formatoTexto);
+        
+        HBox opciones = new HBox();
+        
+        Button botonAmo = new Button("Amo Supremo");
+        botonAmo.setFont(fuente2);
+        botonAmo.setStyle(botonNormal);
+        botonAmo.setOnMouseEntered(e -> botonAmo.setStyle(botonAntesDeSerPresionado));
+        botonAmo.setOnMouseExited(e -> botonAmo.setStyle(botonNormal));
+        botonAmo.setOnAction(e-> {
+            String inputUsuario = this.cargarPosicion();
+            System.out.println("\n input usuario: "+ inputUsuario);
+        });
+        
+        Button botonZangano = new Button("Zangano");
+        botonZangano.setFont(fuente2);
+        botonZangano.setStyle(botonNormal);
+        botonZangano.setOnMouseEntered(e -> botonZangano.setStyle(botonAntesDeSerPresionado));
+        botonZangano.setOnMouseExited(e -> botonZangano.setStyle(botonNormal));
+        botonZangano.setOnAction(e-> {
+            String inputUsuario = this.cargarPosicion();
+            System.out.println("\n input usuario: "+ inputUsuario);
+        });
+        
+        Button botonZerling = new Button("Zerling");
+        botonZerling.setFont(fuente2);
+        botonZerling.setStyle(botonNormal);
+        botonZerling.setOnMouseEntered(e -> botonZerling.setStyle(botonAntesDeSerPresionado));
+        botonZerling.setOnMouseExited(e -> botonZerling.setStyle(botonNormal));
+        botonZerling.setOnAction(e-> {
+            String inputUsuario = this.cargarPosicion();
+            System.out.println("\n input usuario: "+ inputUsuario);
+        });
+        
+        Button botonHidralisco = new Button("Hidralisco");
+        botonHidralisco.setFont(fuente2);
+        botonHidralisco.setStyle(botonNormal);
+        botonHidralisco.setOnMouseEntered(e -> botonHidralisco.setStyle(botonAntesDeSerPresionado));
+        botonHidralisco.setOnMouseExited(e -> botonHidralisco.setStyle(botonNormal));
+        botonHidralisco.setOnAction(e-> {
+            String inputUsuario = this.cargarPosicion();
+            System.out.println("\n input usuario: "+ inputUsuario);
+        });
+        
+        Button botonMutalisco = new Button("Mutalisco");
+        botonMutalisco.setFont(fuente2);
+        botonMutalisco.setStyle(botonNormal);
+        botonMutalisco.setOnMouseEntered(e -> botonMutalisco.setStyle(botonAntesDeSerPresionado));
+        botonMutalisco.setOnMouseExited(e -> botonMutalisco.setStyle(botonNormal));
+        botonMutalisco.setOnAction(e-> {
+            String inputUsuario = this.cargarPosicion();
+            System.out.println("\n input usuario: "+ inputUsuario);
+        });
+        
+        Button botonGuardian = new Button("Guardian");
+        botonGuardian.setFont(fuente2);
+        botonGuardian.setStyle(botonNormal);
+        botonGuardian.setOnMouseEntered(e -> botonGuardian.setStyle(botonAntesDeSerPresionado));
+        botonGuardian.setOnMouseExited(e -> botonGuardian.setStyle(botonNormal));
+        botonGuardian.setOnAction(e-> {
+            String inputUsuario = this.cargarPosicion();
+            System.out.println("\n input usuario: "+ inputUsuario);
+        });
+        
+        Button botonDevorador = new Button("Devorador");
+        botonDevorador.setFont(fuente2);
+        botonDevorador.setStyle(botonNormal);
+        botonDevorador.setOnMouseEntered(e -> botonDevorador.setStyle(botonAntesDeSerPresionado));
+        botonDevorador.setOnMouseExited(e -> botonDevorador.setStyle(botonNormal));
+        botonDevorador.setOnAction(e-> {
+            String inputUsuario = this.cargarPosicion();
+            System.out.println("\n input usuario: "+ inputUsuario);
+        });
+        
+        
+        VBox inputPosicion = new VBox();
+        VBox opciones1 = new VBox();
+        VBox opciones2 = new VBox();
+        VBox opciones3 = new VBox();
+        opciones1.getChildren().addAll(botonAmo, botonZangano);
+        opciones1.setSpacing(10);
+        opciones1.setAlignment(Pos.CENTER);
+        opciones2.getChildren().addAll(botonZerling ,botonHidralisco);
+        opciones2.setSpacing(10);
+        opciones2.setAlignment(Pos.CENTER);
+        opciones3.getChildren().addAll(botonMutalisco, botonGuardian);
+        opciones3.setSpacing(10);
+        opciones3.setAlignment(Pos.CENTER);
+        opciones.getChildren().addAll(opciones1, opciones2, opciones3);
+        opciones.setSpacing(20);
+        opciones.setAlignment(Pos.CENTER);
+        inputPosicion.getChildren().addAll(seleccionarIndividuo, opciones, botonDevorador);
+        inputPosicion.setSpacing(30);
+        inputPosicion.setAlignment(Pos.CENTER);
+        inputPosicion.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
+        Scene sc = new Scene(inputPosicion, 800, 300, Color.rgb(47, 52, 58));
+        sc.setFill(Color.RED);
+        Stage s = new Stage();
+        s.initModality(Modality.APPLICATION_MODAL);
+        s.setTitle("Tienda Individuos Zerg");
+        s.getIcons().add(this.icono);
+        s.setResizable(false);
+        s.setScene(sc);
+        //s.show();
+        s.showAndWait();
 
-        TextField posicionX = new TextField();
-        posicionX.setAlignment(Pos.CENTER);
-        posicionX.setPromptText("Inserte un casillero horizontal");
-        posicionX.setFont(fuente);
-        posicionX.setStyle(botonNormal);
-        posicionX.setOnMouseEntered(e -> posicionX.setStyle(botonAntesDeSerPresionado));
-        posicionX.setOnMouseExited(e -> posicionX.setStyle(botonNormal));
-
-        TextField posicionY = new TextField();
-        posicionY.setAlignment(Pos.CENTER);
-        posicionY.setPromptText("Inserte un casillero horizontal");
-        posicionY.setFont(fuente);
-        posicionY.setStyle(botonNormal);
-        posicionY.setOnMouseEntered(e -> posicionY.setStyle(botonAntesDeSerPresionado));
-        posicionY.setOnMouseExited(e -> posicionY.setStyle(botonNormal));
-
-        ChoiceBox<String> seleccionRaza1 = new ChoiceBox();
-        seleccionRaza1.getItems().addAll("Zerg", "Protoss");
-        seleccionRaza1.setMinWidth(200);
-        seleccionRaza1.setMinHeight(100);
-        seleccionRaza1.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C");
-        seleccionRaza1.setOnMouseEntered(e -> seleccionRaza1.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C"));
-        seleccionRaza1.setOnMouseExited(e -> seleccionRaza1.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C"));
-
-        preguntasJugador1.getChildren().add(etiqueta);
-        preguntasJugador1.getChildren().add(posicionX);
-        preguntasJugador1.getChildren().add(posicionY);
-        preguntasJugador1.getChildren().add(seleccionRaza1);
-
-        HBox preguntas = new HBox();
-        preguntas.setAlignment(Pos.CENTER);
-        preguntas.setSpacing(0);
-        preguntas.getChildren().add(preguntasJugador1);
-
-        VBox overlayPreguntas = new VBox();
-        overlayPreguntas.setAlignment(Pos.CENTER);
-        overlayPreguntas.getChildren().add(preguntas);
-
-        this.setCenter(overlayPreguntas);*/
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Unidades zerg");
-        alert.setHeaderText("Seleccione la unidad que desea enjendrar");
-
-        ButtonType botonAmo = new ButtonType("Amo Supremo");
-        ButtonType botonZangano = new ButtonType("Zangano");
-        ButtonType botonZerling = new ButtonType("Zerling");
-        ButtonType botonHidralisco = new ButtonType("Hidralisco");
-        ButtonType botonMutalisco = new ButtonType("Mutalisco");
+        // ButtonType botonAmo = new ButtonType("Amo Supremo");
+        // ButtonType botonZangano = new ButtonType("Zangano");
+        // ButtonType botonZerling = new ButtonType("Zerling");
+        // ButtonType botonHidralisco = new ButtonType("Hidralisco");
+        // ButtonType botonMutalisco = new ButtonType("Mutalisco");
         //ButtonType botonGuardian = new ButtonType("Guardian");
         //ButtonType botonDevorador = new ButtonType("Devorador");
 
 
-        alert.getButtonTypes().setAll(botonAmo, botonZangano, botonZerling, botonHidralisco/*, botonMutaliscobotonGuardian, botonDevorador*/);
+        //alert.getButtonTypes().setAll(botonAmo, botonZangano, botonZerling, botonHidralisco/*, botonMutaliscobotonGuardian, botonDevorador*/);
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == botonAmo){
-            AmoSupremo amo = null;
-            try {
-                amo = new AmoSupremo(jugador.mineral, new GasVespeno(0), new Posicion(2, 2), juegoVista.juego.mapa);
-            } catch (RequerimientosInsuficientesException e) {
-                e.printStackTrace();
-            }
-            jugador.agregarIndividuo(amo);
-        }else if (result.get() == botonZangano) {
-            String pos = cargarPosicion();
-            //Zangano zangano = new Zangano();
-        } else if (result.get() == botonZerling) {
-            // Zerling zerling = new Zerling();
-        } else if (result.get() == botonHidralisco) {
-            // Hidralisco hidralisco = new Hidralisco();
-        }  else if (result.get() == botonMutalisco) {
-            // Mutalisco mutalisco = new Mutalisco();
-        } else {
-            // ... user chose CANCEL or closed the dialog
-        }
+        //Optional<ButtonType> result = alert.showAndWait();
+        // if (result.get() == botonAmo){
+        //     AmoSupremo amo = null;
+        //     try {
+        //         amo = new AmoSupremo(jugador.mineral, new GasVespeno(0), new Posicion(2, 2), juegoVista.juego.mapa);
+        //     } catch (RequerimientosInsuficientesException e) {
+        //         e.printStackTrace();
+        //     }
+        //     jugador.agregarIndividuo(amo);
+        // }else if (result.get() == botonZangano) {
+        //     String pos = cargarPosicion();
+        //     System.out.println("\nPOSICION: " + pos);
+        //     //Zangano zangano = new Zangano();
+        // } else if (result.get() == botonZerling) {
+        //     // Zerling zerling = new Zerling();
+        // } else if (result.get() == botonHidralisco) {
+        //     // Hidralisco hidralisco = new Hidralisco();
+        // }  else if (result.get() == botonMutalisco) {
+        //     // Mutalisco mutalisco = new Mutalisco();
+        // } else {
+        //     // ... user chose CANCEL or closed the dialog
+        // }
     }
 
 }

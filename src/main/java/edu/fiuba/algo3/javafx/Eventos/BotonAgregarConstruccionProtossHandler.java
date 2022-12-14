@@ -5,57 +5,224 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.JugadorProtoss;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.InputStream;
 import java.util.Optional;
 
 public class BotonAgregarConstruccionProtossHandler  implements EventHandler<ActionEvent> {
 
     JuegoVista juegoVista;
-        private final Jugador jugador;
+    private final Jugador jugador;
+    private Image icono;
+    String botonAntesDeSerPresionado = "-fx-border-width: 2px; -fx-border-color: #B4DBE2; -fx-background-color: rgba(243, 202, 76, 0.5); -fx-text-fill: #BDB69C; -fx-shape: \"M 100 350 A 50 50 0 1 1 100 250 L 300 250 A 50 50 0 1 1 300 350 Z\";";
+    String botonNormal = "-fx-border-width: 2px; -fx-border-color: #B4DBE2; -fx-background-color: rgba(255, 255, 255, 0.2); -fx-text-fill: #42B0D3; -fx-shape: \"M 100 350 A 50 50 0 1 1 100 250 L 300 250 A 50 50 0 1 1 300 350 Z\";";
+    String formatoTexto = "-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: transparent; -fx-text-fill: #F3CA4C";
 
-        public BotonAgregarConstruccionProtossHandler(JuegoVista juegoVista, Jugador jugador) {
-            //this.stage = stage;
-            //this.escenaParaDobleRepeticion = escenaParaDobleRepeticion;
+    public BotonAgregarConstruccionProtossHandler(JuegoVista juegoVista, Jugador jugador) {
+        //this.stage = stage;
+        //this.escenaParaDobleRepeticion = escenaParaDobleRepeticion;
+        cargarImagenes();
+        this.juegoVista = juegoVista;
+        this.jugador = jugador;
+    }
 
-            this.juegoVista = juegoVista;
-            this.jugador = jugador;
-        }
+    private void cargarImagenes() {
+
+        String pathicono = this.getClass().getResource("/imagenes/icono.png").toString();
+        this.icono = new Image(pathicono);
+    }
+
+    private String cargarPosicion(){
+        InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
+        Font fuente = Font.loadFont(is, 25);
+
+        Label ingresarPosicion = new Label("Ingresar Posicion Deseada: \n");
+        ingresarPosicion.setFont(fuente);
+        ingresarPosicion.setStyle(formatoTexto);
+
+        TextField posicionDeseada = new TextField();
+        posicionDeseada.setAlignment(Pos.CENTER);
+        posicionDeseada.setPromptText("Ejemplo : 14 15");
+        posicionDeseada.setFont(fuente);
+        posicionDeseada.setStyle(botonNormal);
+        posicionDeseada.setOnMouseEntered(e -> posicionDeseada.setStyle(botonAntesDeSerPresionado));
+        posicionDeseada.setOnMouseExited(e -> posicionDeseada.setStyle(botonNormal));
+
+        Button botonConfirmar = new Button("Confirmar");
+        botonConfirmar.setFont(fuente);
+        botonConfirmar.setStyle(botonNormal);
+        botonConfirmar.setOnMouseEntered(e -> botonConfirmar.setStyle(botonAntesDeSerPresionado));
+        botonConfirmar.setOnMouseExited(e -> botonConfirmar.setStyle(botonNormal));
+        
+        
+        VBox inputPosicion = new VBox();
+        inputPosicion.getChildren().addAll(ingresarPosicion, posicionDeseada, botonConfirmar);
+        inputPosicion.setSpacing(30);
+        inputPosicion.setAlignment(Pos.CENTER);
+        inputPosicion.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
+        
+        Scene sc = new Scene(inputPosicion, 500, 300);
+        Stage s = new Stage();
+        s.setResizable(false);
+        s.setTitle("Insertar Una Posicion");
+        s.getIcons().add(this.icono);
+        botonConfirmar.setOnAction(e-> {
+            s.close();
+        });
+        s.setScene(sc);
+        //s.show();
+        s.showAndWait();
+        
+        return posicionDeseada.getText();
+    }
+
+
     @Override
     public void handle(ActionEvent actionEvent) {
-        Label etiqueta = new Label();
-        etiqueta.setText("Agregar Construccion Protoss");
-        // vista.agregarElementosAEjecutar(etiqueta);
-        // tablero.agregarBloqueDobleRepeticion();
+        InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
+        Font fuente = Font.loadFont(is, 25);
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Construcciones protoss");
-        alert.setHeaderText("Seleccione la construccion que desea construir");
+        InputStream is2 = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
+        Font fuente2 = Font.loadFont(is2, 25);
 
-        ButtonType botonNexo = new ButtonType("Nexo Mineral");
-        ButtonType botonPilon = new ButtonType("Pilon");
-        ButtonType botonAsimilador = new ButtonType("Asimilador");
-        ButtonType botonAcceso = new ButtonType("Acceso");
-        ButtonType botonPuerto = new ButtonType("Puerto Estelar");
+        Label seleccionarIndividuo = new Label("Seleccionar Construccion\n");
+        seleccionarIndividuo.setFont(fuente);
+        seleccionarIndividuo.setStyle(formatoTexto);
+        
+        HBox opciones = new HBox();
+        
+        Button botonNexo = new Button("Nexo\nMineral");
+        botonNexo.setFont(fuente2);
+        botonNexo.setStyle(botonNormal);
+        botonNexo.setOnMouseEntered(e -> botonNexo.setStyle(botonAntesDeSerPresionado));
+        botonNexo.setOnMouseExited(e -> botonNexo.setStyle(botonNormal));
+        botonNexo.setOnAction(e-> {
+            String inputUsuario = this.cargarPosicion();
+            System.out.println("\n input usuario: "+ inputUsuario);
+        });
+        
+        Button botonPilon = new Button("Pilon");
+        botonPilon.setFont(fuente2);
+        botonPilon.setStyle(botonNormal);
+        botonPilon.setOnMouseEntered(e -> botonPilon.setStyle(botonAntesDeSerPresionado));
+        botonPilon.setOnMouseExited(e -> botonPilon.setStyle(botonNormal));
+        botonPilon.setOnAction(e-> {
+            String inputUsuario = this.cargarPosicion();
+            System.out.println("\n input usuario: "+ inputUsuario);
+        });
+        
+        Button botonAsimilador = new Button("Asimilador");
+        botonAsimilador.setFont(fuente2);
+        botonAsimilador.setStyle(botonNormal);
+        botonAsimilador.setOnMouseEntered(e -> botonAsimilador.setStyle(botonAntesDeSerPresionado));
+        botonAsimilador.setOnMouseExited(e -> botonAsimilador.setStyle(botonNormal));
+        botonAsimilador.setOnAction(e-> {
+            String inputUsuario = this.cargarPosicion();
+            System.out.println("\n input usuario: "+ inputUsuario);
+        });
+        
+        Button botonAcceso = new Button("Acceso");
+        botonAcceso.setFont(fuente2);
+        botonAcceso.setStyle(botonNormal);
+        botonAcceso.setOnMouseEntered(e -> botonAcceso.setStyle(botonAntesDeSerPresionado));
+        botonAcceso.setOnMouseExited(e -> botonAcceso.setStyle(botonNormal));
+        botonAcceso.setOnAction(e-> {
+            String inputUsuario = this.cargarPosicion();
+            System.out.println("\n input usuario: "+ inputUsuario);
+        });
+        
+        Button botonPuerto = new Button("Puerto\nEstelar");
+        botonPuerto.setFont(fuente2);
+        botonPuerto.setStyle(botonNormal);
+        botonPuerto.setOnMouseEntered(e -> botonPuerto.setStyle(botonAntesDeSerPresionado));
+        botonPuerto.setOnMouseExited(e -> botonPuerto.setStyle(botonNormal));
+        botonPuerto.setOnAction(e-> {
+            String inputUsuario = this.cargarPosicion();
+            System.out.println("\n input usuario: "+ inputUsuario);
+        });
+        
+        VBox eleccionUsuario = new VBox();
+        VBox opciones1 = new VBox();
+        VBox opciones2 = new VBox();
+        VBox opciones3 = new VBox();
+        opciones1.getChildren().addAll(botonNexo, botonPilon);
+        opciones1.setSpacing(10);
+        opciones1.setAlignment(Pos.CENTER);
+        opciones2.getChildren().addAll(botonAsimilador ,botonAcceso);
+        opciones2.setSpacing(10);
+        opciones2.setAlignment(Pos.CENTER);
+        opciones3.getChildren().addAll(botonPuerto);
+        opciones3.setSpacing(10);
+        opciones3.setAlignment(Pos.CENTER);
+        opciones.getChildren().addAll(opciones1, opciones2, opciones3);
+        opciones.setSpacing(20);
+        opciones.setAlignment(Pos.CENTER);
+        eleccionUsuario.getChildren().addAll(seleccionarIndividuo, opciones);
+        eleccionUsuario.setSpacing(30);
+        eleccionUsuario.setAlignment(Pos.CENTER);
+        eleccionUsuario.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
+        Scene sc = new Scene(eleccionUsuario, 800, 300, Color.rgb(47, 52, 58));
+        sc.setFill(Color.RED);
+        Stage s = new Stage();
+        s.initModality(Modality.APPLICATION_MODAL);
+        s.setTitle("Tienda Construcciones Zerg");
+        s.getIcons().add(this.icono);
+        s.setResizable(false);
+        s.setScene(sc);
+        //s.show();
+        s.showAndWait();
+        
+        
+        
+        // Label etiqueta = new Label();
+        // etiqueta.setText("Agregar Construccion Protoss");
+        // // vista.agregarElementosAEjecutar(etiqueta);
+        // // tablero.agregarBloqueDobleRepeticion();
+
+        // Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        // alert.setTitle("Construcciones protoss");
+        // alert.setHeaderText("Seleccione la construccion que desea construir");
+
+        // ButtonType botonNexo = new ButtonType("Nexo Mineral");
+        // ButtonType botonPilon = new ButtonType("Pilon");
+        // ButtonType botonAsimilador = new ButtonType("Asimilador");
+        // ButtonType botonAcceso = new ButtonType("Acceso");
+        // ButtonType botonPuerto = new ButtonType("Puerto Estelar");
 
 
-        alert.getButtonTypes().setAll(botonNexo, botonPilon, botonAsimilador, botonAcceso, botonPuerto);
+        // alert.getButtonTypes().setAll(botonNexo, botonPilon, botonAsimilador, botonAcceso, botonPuerto);
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == botonNexo){
-            // NexoMineral nexo = new NexoMineral();
-        }else if (result.get() == botonPilon) {
-            //Pilon pilon = new Pilon();
-        } else if (result.get() == botonAsimilador) {
-            // Asimilador asimilador = new Asimilador();
-        } else if (result.get() == botonAcceso) {
-            // Acceso acceso = new Acceso();
-        }  else if (result.get() == botonPuerto) {
-            // PuertoEstelar puerto = new PuertoEstelar();
-        } else {
-            // ... user chose CANCEL or closed the dialog
-        }
+        // Optional<ButtonType> result = alert.showAndWait();
+        // if (result.get() == botonNexo){
+        //     // NexoMineral nexo = new NexoMineral();
+        // }else if (result.get() == botonPilon) {
+        //     //Pilon pilon = new Pilon();
+        // } else if (result.get() == botonAsimilador) {
+        //     // Asimilador asimilador = new Asimilador();
+        // } else if (result.get() == botonAcceso) {
+        //     // Acceso acceso = new Acceso();
+        // }  else if (result.get() == botonPuerto) {
+        //     // PuertoEstelar puerto = new PuertoEstelar();
+        // } else {
+        //     // ... user chose CANCEL or closed the dialog
+        // }
     }
 }
