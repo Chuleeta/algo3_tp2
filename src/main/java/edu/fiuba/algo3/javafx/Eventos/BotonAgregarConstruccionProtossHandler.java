@@ -3,6 +3,7 @@ package edu.fiuba.algo3.javafx.Eventos;
 import edu.fiuba.algo3.javafx.JuegoVista;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.JugadorProtoss;
+import edu.fiuba.algo3.modelo.Posicion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -50,21 +52,37 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         this.icono = new Image(pathicono);
     }
 
-    private String cargarPosicion(){
+    private Posicion cargarPosicion(){
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 25);
 
-        Label ingresarPosicion = new Label("Ingresar Posicion Deseada: \n");
+        Label ingresarPosicion = new Label("Ingresar Posicion Deseada \n");
         ingresarPosicion.setFont(fuente);
         ingresarPosicion.setStyle(formatoTexto);
 
-        TextField posicionDeseada = new TextField();
-        posicionDeseada.setAlignment(Pos.CENTER);
-        posicionDeseada.setPromptText("Ejemplo : 14 15");
-        posicionDeseada.setFont(fuente);
-        posicionDeseada.setStyle(botonNormal);
-        posicionDeseada.setOnMouseEntered(e -> posicionDeseada.setStyle(botonAntesDeSerPresionado));
-        posicionDeseada.setOnMouseExited(e -> posicionDeseada.setStyle(botonNormal));
+        ChoiceBox<String> posicionDeseadaX = new ChoiceBox();
+        posicionDeseadaX.getItems().addAll("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22");
+        posicionDeseadaX.setMinWidth(200);
+        posicionDeseadaX.setMinHeight(100);
+        posicionDeseadaX.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C");
+        posicionDeseadaX.setOnMouseEntered(e -> posicionDeseadaX.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C"));
+        posicionDeseadaX.setOnMouseExited(e -> posicionDeseadaX.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C"));
+
+        ChoiceBox<String> posicionDeseadaY = new ChoiceBox();
+        posicionDeseadaY.getItems().addAll("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18");
+        posicionDeseadaY.setMinWidth(200);
+        posicionDeseadaY.setMinHeight(100);
+        posicionDeseadaY.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C");
+        posicionDeseadaY.setOnMouseEntered(e -> posicionDeseadaY.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C"));
+        posicionDeseadaY.setOnMouseExited(e -> posicionDeseadaY.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C"));
+
+        Label X = new Label("EN X: \n");
+        X.setFont(fuente);
+        X.setStyle(formatoTexto);
+
+        Label Y = new Label("EN Y: \n");
+        Y.setFont(fuente);
+        Y.setStyle(formatoTexto);
 
         Button botonConfirmar = new Button("Confirmar");
         botonConfirmar.setFont(fuente);
@@ -72,8 +90,21 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonConfirmar.setOnMouseEntered(e -> botonConfirmar.setStyle(botonAntesDeSerPresionado));
         botonConfirmar.setOnMouseExited(e -> botonConfirmar.setStyle(botonNormal));
         
+        VBox enX = new VBox();
+        VBox enY = new VBox();
+        enX.getChildren().addAll(X, posicionDeseadaX);
+        enX.setSpacing(20);
+        enX.setAlignment(Pos.CENTER);
+
+        enY.getChildren().addAll(Y, posicionDeseadaY);
+        enY.setSpacing(20);
+        enY.setAlignment(Pos.CENTER);
         
         VBox inputPosicion = new VBox();
+        HBox posicionDeseada = new HBox();
+        posicionDeseada.getChildren().addAll(enX, enY);
+        posicionDeseada.setSpacing(20);
+        posicionDeseada.setAlignment(Pos.CENTER);
         inputPosicion.getChildren().addAll(ingresarPosicion, posicionDeseada, botonConfirmar);
         inputPosicion.setSpacing(30);
         inputPosicion.setAlignment(Pos.CENTER);
@@ -88,10 +119,23 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
             s.close();
         });
         s.setScene(sc);
-        //s.show();
         s.showAndWait();
         
-        return posicionDeseada.getText();
+        int valorX = 0;
+        int valorY = 0;
+        if(posicionDeseadaX.getValue() != null){
+            valorX = Integer.valueOf(posicionDeseadaX.getValue());
+        }else{
+            return null;
+        }
+
+        if(posicionDeseadaY.getValue() != null){
+            valorY = Integer.valueOf(posicionDeseadaY.getValue());
+        }else{
+            return null;
+        }
+
+        return (new Posicion(valorX, valorY));
     }
 
 
@@ -115,7 +159,7 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonNexo.setOnMouseEntered(e -> botonNexo.setStyle(botonAntesDeSerPresionado));
         botonNexo.setOnMouseExited(e -> botonNexo.setStyle(botonNormal));
         botonNexo.setOnAction(e-> {
-            String inputUsuario = this.cargarPosicion();
+            Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
         });
         
@@ -125,7 +169,7 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonPilon.setOnMouseEntered(e -> botonPilon.setStyle(botonAntesDeSerPresionado));
         botonPilon.setOnMouseExited(e -> botonPilon.setStyle(botonNormal));
         botonPilon.setOnAction(e-> {
-            String inputUsuario = this.cargarPosicion();
+            Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
         });
         
@@ -135,7 +179,7 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonAsimilador.setOnMouseEntered(e -> botonAsimilador.setStyle(botonAntesDeSerPresionado));
         botonAsimilador.setOnMouseExited(e -> botonAsimilador.setStyle(botonNormal));
         botonAsimilador.setOnAction(e-> {
-            String inputUsuario = this.cargarPosicion();
+            Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
         });
         
@@ -145,7 +189,7 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonAcceso.setOnMouseEntered(e -> botonAcceso.setStyle(botonAntesDeSerPresionado));
         botonAcceso.setOnMouseExited(e -> botonAcceso.setStyle(botonNormal));
         botonAcceso.setOnAction(e-> {
-            String inputUsuario = this.cargarPosicion();
+            Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
         });
         
@@ -155,7 +199,7 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonPuerto.setOnMouseEntered(e -> botonPuerto.setStyle(botonAntesDeSerPresionado));
         botonPuerto.setOnMouseExited(e -> botonPuerto.setStyle(botonNormal));
         botonPuerto.setOnAction(e-> {
-            String inputUsuario = this.cargarPosicion();
+            Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
         });
         
@@ -183,7 +227,7 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         sc.setFill(Color.RED);
         Stage s = new Stage();
         s.initModality(Modality.APPLICATION_MODAL);
-        s.setTitle("Tienda Construcciones Zerg");
+        s.setTitle("Tienda Construcciones Protoss");
         s.getIcons().add(this.icono);
         s.setResizable(false);
         s.setScene(sc);

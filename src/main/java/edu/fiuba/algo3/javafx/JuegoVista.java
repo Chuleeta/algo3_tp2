@@ -52,6 +52,7 @@ public class JuegoVista extends BorderPane {
 	private Image fondo;
     private Image datosJugador;
     public Juego juego;
+    private String turnoJugadorActual;
     //public Stage stage;
 
     public JuegoVista(Stage stage, Scene pantallaDeInicio, int ancho, int alto, Juego juego,String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
@@ -83,6 +84,17 @@ public class JuegoVista extends BorderPane {
     private void setJuego(Stage stage, Scene pantallaDeInicio, int ancho, int alto, String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 25);
+
+        //JUGADOR Jugadndo
+        this.turnoJugadorActual = "1";
+        Label nombreDelJugador = new Label("Turno Jugador : " + turnoJugadorActual);
+        nombreDelJugador.setFont(fuente);
+        nombreDelJugador.setStyle(formatoTexto);
+        HBox turnoActual = new HBox();
+        turnoActual.getChildren().addAll(nombreDelJugador);
+        turnoActual.setAlignment(Pos.CENTER);
+        turnoActual.setBackground(new Background(new BackgroundFill(Color.rgb(63, 84, 99, 0.7), new CornerRadii(20), Insets.EMPTY)));
+
 
         //NOMBRE DEL JUGADOR 1
         Label nombreDelJugador1 = new Label("Jugador 1: \n" + nombreJugador1);
@@ -193,7 +205,10 @@ public class JuegoVista extends BorderPane {
         
         //GET MAPA DEBE SER UN GROUP
         Tablero grilla = new Tablero(alto,ancho, juego);
-        this.setCenter(grilla.getContenedor());
+        VBox cosasDelCentro = new VBox();
+        cosasDelCentro.getChildren().addAll(turnoActual, grilla.getContenedor());
+        cosasDelCentro.setAlignment(Pos.CENTER);
+        this.setCenter(cosasDelCentro);
 
 		// Menu bar
         MenuBar barraSuperior = new MenuBar();

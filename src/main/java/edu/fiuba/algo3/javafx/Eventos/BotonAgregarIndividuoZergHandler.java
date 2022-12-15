@@ -53,21 +53,37 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         this.icono = new Image(pathicono);
     }
 
-    private String cargarPosicion(){
+    private Posicion cargarPosicion(){
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 25);
 
-        Label ingresarPosicion = new Label("Ingresar Posicion Deseada: \n");
+        Label ingresarPosicion = new Label("Ingresar Posicion Deseada \n");
         ingresarPosicion.setFont(fuente);
         ingresarPosicion.setStyle(formatoTexto);
 
-        TextField posicionDeseada = new TextField();
-        posicionDeseada.setAlignment(Pos.CENTER);
-        posicionDeseada.setPromptText("Ejemplo : 14 15");
-        posicionDeseada.setFont(fuente);
-        posicionDeseada.setStyle(botonNormal);
-        posicionDeseada.setOnMouseEntered(e -> posicionDeseada.setStyle(botonAntesDeSerPresionado));
-        posicionDeseada.setOnMouseExited(e -> posicionDeseada.setStyle(botonNormal));
+        ChoiceBox<String> posicionDeseadaX = new ChoiceBox();
+        posicionDeseadaX.getItems().addAll("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22");
+        posicionDeseadaX.setMinWidth(200);
+        posicionDeseadaX.setMinHeight(100);
+        posicionDeseadaX.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C");
+        posicionDeseadaX.setOnMouseEntered(e -> posicionDeseadaX.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C"));
+        posicionDeseadaX.setOnMouseExited(e -> posicionDeseadaX.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C"));
+
+        ChoiceBox<String> posicionDeseadaY = new ChoiceBox();
+        posicionDeseadaY.getItems().addAll("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18");
+        posicionDeseadaY.setMinWidth(200);
+        posicionDeseadaY.setMinHeight(100);
+        posicionDeseadaY.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C");
+        posicionDeseadaY.setOnMouseEntered(e -> posicionDeseadaY.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C"));
+        posicionDeseadaY.setOnMouseExited(e -> posicionDeseadaY.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C"));
+
+        Label X = new Label("EN X: \n");
+        X.setFont(fuente);
+        X.setStyle(formatoTexto);
+
+        Label Y = new Label("EN Y: \n");
+        Y.setFont(fuente);
+        Y.setStyle(formatoTexto);
 
         Button botonConfirmar = new Button("Confirmar");
         botonConfirmar.setFont(fuente);
@@ -75,8 +91,21 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonConfirmar.setOnMouseEntered(e -> botonConfirmar.setStyle(botonAntesDeSerPresionado));
         botonConfirmar.setOnMouseExited(e -> botonConfirmar.setStyle(botonNormal));
         
+        VBox enX = new VBox();
+        VBox enY = new VBox();
+        enX.getChildren().addAll(X, posicionDeseadaX);
+        enX.setSpacing(20);
+        enX.setAlignment(Pos.CENTER);
+
+        enY.getChildren().addAll(Y, posicionDeseadaY);
+        enY.setSpacing(20);
+        enY.setAlignment(Pos.CENTER);
         
         VBox inputPosicion = new VBox();
+        HBox posicionDeseada = new HBox();
+        posicionDeseada.getChildren().addAll(enX, enY);
+        posicionDeseada.setSpacing(20);
+        posicionDeseada.setAlignment(Pos.CENTER);
         inputPosicion.getChildren().addAll(ingresarPosicion, posicionDeseada, botonConfirmar);
         inputPosicion.setSpacing(30);
         inputPosicion.setAlignment(Pos.CENTER);
@@ -91,10 +120,22 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
             s.close();
         });
         s.setScene(sc);
-        //s.show();
         s.showAndWait();
-        
-        return posicionDeseada.getText();
+        int valorX = 0;
+        int valorY = 0;
+        if(posicionDeseadaX.getValue() != null){
+            valorX = Integer.valueOf(posicionDeseadaX.getValue());
+        }else{
+            return null;
+        }
+
+        if(posicionDeseadaY.getValue() != null){
+            valorY = Integer.valueOf(posicionDeseadaY.getValue());
+        }else{
+            return null;
+        }
+
+        return (new Posicion(valorX, valorY));
     }
 
     @Override
@@ -118,7 +159,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonAmo.setOnMouseEntered(e -> botonAmo.setStyle(botonAntesDeSerPresionado));
         botonAmo.setOnMouseExited(e -> botonAmo.setStyle(botonNormal));
         botonAmo.setOnAction(e-> {
-            String inputUsuario = this.cargarPosicion();
+            Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
         });
         
@@ -128,7 +169,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZangano.setOnMouseEntered(e -> botonZangano.setStyle(botonAntesDeSerPresionado));
         botonZangano.setOnMouseExited(e -> botonZangano.setStyle(botonNormal));
         botonZangano.setOnAction(e-> {
-            String inputUsuario = this.cargarPosicion();
+            Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
         });
         
@@ -138,7 +179,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZerling.setOnMouseEntered(e -> botonZerling.setStyle(botonAntesDeSerPresionado));
         botonZerling.setOnMouseExited(e -> botonZerling.setStyle(botonNormal));
         botonZerling.setOnAction(e-> {
-            String inputUsuario = this.cargarPosicion();
+            Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
         });
         
@@ -148,7 +189,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonHidralisco.setOnMouseEntered(e -> botonHidralisco.setStyle(botonAntesDeSerPresionado));
         botonHidralisco.setOnMouseExited(e -> botonHidralisco.setStyle(botonNormal));
         botonHidralisco.setOnAction(e-> {
-            String inputUsuario = this.cargarPosicion();
+            Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
         });
         
@@ -158,7 +199,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonMutalisco.setOnMouseEntered(e -> botonMutalisco.setStyle(botonAntesDeSerPresionado));
         botonMutalisco.setOnMouseExited(e -> botonMutalisco.setStyle(botonNormal));
         botonMutalisco.setOnAction(e-> {
-            String inputUsuario = this.cargarPosicion();
+            Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
         });
         
@@ -168,7 +209,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonGuardian.setOnMouseEntered(e -> botonGuardian.setStyle(botonAntesDeSerPresionado));
         botonGuardian.setOnMouseExited(e -> botonGuardian.setStyle(botonNormal));
         botonGuardian.setOnAction(e-> {
-            String inputUsuario = this.cargarPosicion();
+            Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
         });
         
@@ -178,7 +219,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonDevorador.setOnMouseEntered(e -> botonDevorador.setStyle(botonAntesDeSerPresionado));
         botonDevorador.setOnMouseExited(e -> botonDevorador.setStyle(botonNormal));
         botonDevorador.setOnAction(e-> {
-            String inputUsuario = this.cargarPosicion();
+            Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
         });
         
