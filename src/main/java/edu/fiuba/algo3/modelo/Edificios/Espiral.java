@@ -14,7 +14,6 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Espiral extends Edificio{
     private static int VIDA_COMPLETA = 1250;
-    //private VidaZerg vida;
 
     public Espiral(Posicion posicion, Mapa mapa)
     {
@@ -61,10 +60,6 @@ public class Espiral extends Edificio{
         return false;
     }
 
-    // public void dañar(int daño){
-    //     this.vida.dañar(daño);
-    // }
-
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
     }
@@ -74,8 +69,6 @@ public class Espiral extends Edificio{
         if(mineral.invertir(150) && gas.invertir(100))
         {
             this.jugador.agregarEnListaConstruccion(this);
-            /*this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionZerg(this);*/
             return true;
         }
         return false;
@@ -89,15 +82,4 @@ public class Espiral extends Edificio{
     public Mutalisco generarMutalisco(Mineral mineral, GasVespeno gas, Larva larva) throws RequerimientosInsuficientesException {
         return new Mutalisco(mineral, gas, new Posicion(3, 3), this.mapa);
     }
-
-    /*public void destruir()
-    {
-        this.mapa.destruirConstruccion(this);
-        this.mapa.destruirConstruccionZerg(this);
-    }*/
-
-    // @Override
-    // public boolean estaOcupada(Posicion posicionDada) {
-    //     return this.posicion.equals(posicionDada);
-    // }
 }

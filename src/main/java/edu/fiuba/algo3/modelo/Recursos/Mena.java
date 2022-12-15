@@ -7,9 +7,7 @@ import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 
 public class Mena implements Ocupable{
     private Posicion posicion;
-    private EstadoConstruccion estado;
     private int minerales;
-    private Mena mena;
     private boolean estaOcupado;
 
     public Mena(Posicion posicion)

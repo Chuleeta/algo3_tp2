@@ -20,10 +20,8 @@ public class Criadero extends Edificio {
     private List<Larva> larvas;
     private static int COSTO_DE_CONSTRUCCION = 50;
     private static int VIDA_COMPLETA = 500;
-    //private VidaZerg vida;
 
     public Criadero(Posicion posicion, Mapa mapa) {
-        //validarMinerales(recursosDelJugador);
         this.posicion = posicion;
         this.estado = new EstadoNoConstruido();
         larvas = new ArrayList<>();
@@ -37,10 +35,6 @@ public class Criadero extends Edificio {
     public Criadero(Posicion posicion, Mapa mapa, Jugador jugador) {
         this(posicion, mapa);
         this.jugador = jugador;
-    }
-
-    public int getCostoDeConstruccion(){
-        return COSTO_DE_CONSTRUCCION;
     }
 
     private List<Larva> inicializarLarvas() {
@@ -64,21 +58,12 @@ public class Criadero extends Edificio {
         if (larvas.size() == 0) {
             throw new CriaderoNoDisponibleException();
         }
-        // esto lo debe hacer el zangano
 
         if (jugador.unidadesDisponibles()) {
             jugador.añadirUnidad();
             return larvas.remove(0).mutar(mineral);
         }
         throw new maximaPoblacionAlcanzadaException();
-    }
-
-    // cree este metodo porque al leer el enunciado me parece que las larvas solo salen de aca, las necesitaremos para pasarla a otros edificios, despues lo vemos.
-    public Larva engendrarLarva() throws CriaderoNoDisponibleException {
-        if (larvas.size() == 0) {
-            throw new CriaderoNoDisponibleException();
-        }
-        return larvas.remove(0);
     }
 
     @Override
@@ -128,24 +113,14 @@ public class Criadero extends Edificio {
         if(mineral.invertir(50))
         {
             this.jugador.agregarEnListaConstruccion(this);
-            /*this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionZerg(this);*/
             return true;
         }
         return false;
     }
 
-    //TO DO: CAMBIAR A PRIVATE Y CAMBIAR LOS TEST
     public void destruir()
     {
         this.jugador.decrementarCapacidadDePoblacion(5);
         this.jugador.destruirConstruccion(this);
-        //this.mapa.destruirConstruccion(this);
-        //this.mapa.destruirConstruccionZerg(this);
     }
-
-    // @Override
-    // public boolean estaOcupada(Posicion posicionDada) {
-    //     return this.posicion.equals(posicionDada);
-    // }
 }

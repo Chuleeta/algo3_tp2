@@ -13,20 +13,13 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 public class Mapa {
 
     private ArrayList<Construccion> construcciones;
-    private ArrayList<Construccion> construccionesZerg;
-    private ArrayList<Construccion> construccionesProtoss;
     private ArrayList<Zona> zonas;
     private ArrayList<AreaEspacial> areasEspaciales;
     private ArrayList<Ocupable> ocupables;
 
-    private ArrayList<Individuo> individuos;
-
     public Mapa()
     {
         this.construcciones = new ArrayList<>();
-        this.construccionesZerg = new ArrayList<>();
-        this.construccionesProtoss = new ArrayList<>();
-        this.individuos = new ArrayList<>();
         this.zonas = new ArrayList<>();
         this.areasEspaciales = new ArrayList<>();
         this.zonas.add(new ZonaNeutral());
@@ -53,31 +46,6 @@ public class Mapa {
     public boolean verificarEdificacionCorrelativa(Jugador jugador, Edificio edificioCorrelativo) {
         return jugador.construcciones.stream().anyMatch(clase -> clase.getClass().isInstance(edificioCorrelativo));
     }
-
-    /*public boolean agregarConstruccion(Construccion construccion, Mineral mineral, GasVespeno gas){
-        if(!verificarPosicionDisponible(construccion)){
-            return false;
-        }
-        return construccion.agregarAlMapa(mineral, gas);
-    }
-
-    public boolean agregarIndividuo(Individuo individuo){
-        return individuos.add(individuo);
-    }
-
-    public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
-        for (Construccion construccion:construcciones)
-        {
-            construccion.pasarTiempo();
-        }
-
-        for (Individuo individuo:individuos)
-        {
-            individuo.pasarTiempo();
-        }
-
-        this.filtrarConstrucciones();
-    }*/
 
     public boolean verificarPosicionDisponible(Construccion construccion){
         for (Zona zona:zonas)
@@ -109,33 +77,6 @@ public class Mapa {
     public Zona getZonaNeutral() {
         return this.zonas.get(0);
     }
-
-    /*public void agregarEnListaConstruccion(Construccion construccion) {
-        construcciones.add(construccion);
-    }
-
-    public void agregarEnListaConstruccionZerg(Construccion construccion) {
-        construccionesZerg.add(construccion);
-    }
-
-    public void agregarEnListaConstruccionProtoss(Construccion construccion) {
-        construccionesProtoss.add(construccion);
-    }
-
-    public void destruirConstruccion(Construccion construccion)
-    {
-        construcciones.remove(construccion);
-    }
-
-    public void destruirConstruccionProtoss(Construccion construccion)
-    {
-        construccionesProtoss.remove(construccion);
-    }
-
-    public void destruirConstruccionZerg(Construccion construccion)
-    {
-        construccionesZerg.remove(construccion);
-    }*/
 
     public void destruirZona(Zona zona)
     {
@@ -177,7 +118,4 @@ public class Mapa {
         return construcciones;
     }
 
-    /*public boolean verificarConstruccionesVacias() {
-        return (!this.construccionesProtoss.isEmpty() && !this.construccionesZerg.isEmpty());
-    }*/
 }

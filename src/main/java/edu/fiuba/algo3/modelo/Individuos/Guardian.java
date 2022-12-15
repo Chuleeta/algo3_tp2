@@ -3,13 +3,11 @@ package edu.fiuba.algo3.modelo.Individuos;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
-import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
-import javafx.geometry.Pos;
 
 public class Guardian extends Individuo implements UnidadVoladora{
     private final int tiempoDeConstruccion;
@@ -36,16 +34,6 @@ public class Guardian extends Individuo implements UnidadVoladora{
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
-    }
-
-    public void elevar()
-    {
-        this.posicion.ascender();
-    }
-
-    public void bajar()
-    {
-        this.posicion.descender();
     }
 
     public boolean atacar(UnidadTierra unidad)

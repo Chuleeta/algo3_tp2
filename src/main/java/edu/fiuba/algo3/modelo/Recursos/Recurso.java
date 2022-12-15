@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo.Recursos;
 
-import edu.fiuba.algo3.modelo.Colectable;
-
-public abstract class Recurso implements Colectable{
+public abstract class Recurso{
 
     public int cantidad;
 
@@ -17,10 +15,5 @@ public abstract class Recurso implements Colectable{
             return true;
         }
         return false;
-    }
-    
-    @Override
-    public void colectar(int cantidad) {
-
     }
 }

@@ -14,7 +14,6 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class PuertoEstelar extends Edificio {
-    //private VidaEscudoProtoss vidaYEscudo;
 
     public PuertoEstelar(Posicion posicion, Mapa mapa) {
         this.posicion = posicion;
@@ -34,8 +33,6 @@ public class PuertoEstelar extends Edificio {
     @Override
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
         tiempo += 1;
-        // this.vidaYEscudo.repararEscudo();
-        // if (estado.puedeConstruirse(10, tiempo)) construir();
         this.estado = this.estado.desarrollar(this, 10, tiempo);
     }
 
@@ -64,10 +61,6 @@ public class PuertoEstelar extends Edificio {
         return zona.abarca(posicion);
     }
 
-    // public void dañar(int daño){
-    //     this.vida.dañar(daño);
-    // }
-
     public boolean tieneVidaCompleta() {
         return this.vida.tieneVidaCompleta();
     }
@@ -81,8 +74,6 @@ public class PuertoEstelar extends Edificio {
         if(mineral.invertir(150) && gas.invertir(150))
         {
             this.jugador.agregarEnListaConstruccion(this);
-            /*this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionProtoss(this);*/
             return true;
         }
         return false;
@@ -92,15 +83,5 @@ public class PuertoEstelar extends Edificio {
     public void actualizar() {
         this.vida.regenerar();
     }
-
-    /*public void destruir()
-    {
-        this.mapa.destruirConstruccion(this);
-        this.mapa.destruirConstruccionProtoss(this);
-    }*/
-    // @Override
-    // public boolean estaOcupada(Posicion posicionDada) {
-    //     return this.posicion.equals(posicionDada);
-    // }
 
 }

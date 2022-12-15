@@ -19,7 +19,6 @@ public class NexoMineral extends Edificio{
     private Mineral mineral;
     private Mena mena;
     private static int VIDA_ESCUDO_COMPLETO = 250;
-    //private VidaEscudoProtoss vidaYEscudo;
 
     public NexoMineral(Posicion posicion, Mena mena, Mapa mapa) throws MenaOcupadaException {
         this.mena = mena;
@@ -79,8 +78,6 @@ public class NexoMineral extends Edificio{
         if(mineral.invertir(50))
         {
             this.jugador.agregarEnListaConstruccion(this);
-            /*this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionProtoss(this);*/
             return true;
         }
         return false;
@@ -91,14 +88,4 @@ public class NexoMineral extends Edificio{
         mineral.agregarMineral(mena.extraerMineral(100));
         this.vida.regenerar();
     }
-
-    /*public void destruir()
-    {
-        this.mapa.destruirConstruccion(this);
-        this.mapa.destruirConstruccionProtoss(this);
-    }*/
-    // @Override
-    // public boolean estaOcupada(Posicion posicionDada) {
-    //     return this.posicion.equals(posicionDada);
-    // }
 }

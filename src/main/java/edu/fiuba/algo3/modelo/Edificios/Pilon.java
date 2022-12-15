@@ -15,9 +15,6 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Pilon extends Edificio{
 
-
-    //private VidaEscudoProtoss vidaYEscudo;
-
     public Pilon (Posicion posicion, Mapa mapa) {
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
@@ -35,8 +32,6 @@ public class Pilon extends Edificio{
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
         tiempo += 1;
-        // if (estado.puedeConstruirse(5, tiempo)) construir();
-        // this.vidaYEscudo.repararEscudo();
         this.estado = this.estado.desarrollar(this, 5, tiempo);
     }
 
@@ -65,13 +60,6 @@ public class Pilon extends Edificio{
         return true;
     }
 
-    // public void dañar(int daño){
-    //    this.vida.dañar(daño);
-    //    if(this.vida.verificarSiEstaMuerto()){
-    //         destruir();
-    //     }
-    // }
-
     public boolean tieneVidaCompleta() {
         return this.vida.tieneVidaCompleta();
     }
@@ -85,8 +73,6 @@ public class Pilon extends Edificio{
         if(mineral.invertir(100))
         {
             this.jugador.agregarEnListaConstruccion(this);
-            /*this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionProtoss(this);*/
             return true;
         }
         return false;
@@ -97,15 +83,9 @@ public class Pilon extends Edificio{
         this.jugador.decrementarCapacidadDePoblacion(5);
         this.mapa.destruirZona(this.zona);
         this.jugador.destruirConstruccion(this);
-        /*this.mapa.destruirConstruccion(this);
-        this.mapa.destruirConstruccionProtoss(this);*/
     }
     @Override
     public void actualizar() {
         this.vida.regenerar();
     }
-    // @Override
-    // public boolean estaOcupada(Posicion posicionDada) {
-    //     return this.posicion.equals(posicionDada);
-    // }
 }

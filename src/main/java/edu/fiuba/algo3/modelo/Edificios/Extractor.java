@@ -16,12 +16,11 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
 import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
-public class Extractor extends Edificio implements HabitanteMoho {
+public class Extractor extends Edificio {
 
     private List<Zangano> zanganos;
     private static int VIDA_COMPLETA = 750;
     private GasVespeno gas;
-    //private VidaZerg vida;
     private Volcan volcan;
 
     public Extractor(Posicion posicion, Volcan volcan, Mapa mapa) throws VolcanOcupadoException {
@@ -87,10 +86,6 @@ public class Extractor extends Edificio implements HabitanteMoho {
         return false;
     }
 
-    // public void dañar(int daño){
-    //     this.vida.dañar(daño);
-    // }
-
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
     }
@@ -100,8 +95,6 @@ public class Extractor extends Edificio implements HabitanteMoho {
         if(mineral.invertir(100))
         {
             this.jugador.agregarEnListaConstruccion(this);
-            /*this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionZerg(this);*/
             this.gas = gas;
             return true;
         }
@@ -113,16 +106,4 @@ public class Extractor extends Edificio implements HabitanteMoho {
         this.vida.regenerar();
         extraerGas();
     }
-
-    /*public void destruir()
-    {
-        this.mapa.destruirConstruccion(this);
-        this.mapa.destruirConstruccionZerg(this);
-    }*/
-
-    // @Override
-    // public boolean estaOcupada(Posicion posicionDada) {
-    //     return this.posicion.equals(posicionDada);
-    // }
-
 }

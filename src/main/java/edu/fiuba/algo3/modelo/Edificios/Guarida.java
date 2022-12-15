@@ -14,7 +14,6 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Guarida extends Edificio{
     private static int VIDA_COMPLETA = 1250;
-    //private VidaZerg vida;
 
     public Guarida(Posicion posicion, Mapa mapa)
     {
@@ -70,8 +69,6 @@ public class Guarida extends Edificio{
         if(mineral.invertir(200)&& gas.invertir(100))
         {
             this.jugador.agregarEnListaConstruccion(this);
-            /*this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionZerg(this);*/
             return true;
         }
         return false;
@@ -85,16 +82,4 @@ public class Guarida extends Edificio{
     public Hidralisco generarHidralisco(Mineral mineral, GasVespeno gas, Larva larva) throws RequerimientosInsuficientesException {
         return new Hidralisco(mineral, gas, new Posicion(3,3), this.mapa);
     }
-
-    /*public void destruir()
-    {
-        this.mapa.destruirConstruccion(this);
-        this.mapa.destruirConstruccionZerg(this);
-    }*/
-
-    // @Override
-    // public boolean estaOcupada(Posicion posicionDada) {
-    //     return this.posicion.equals(posicionDada);
-    // }
-
 }
