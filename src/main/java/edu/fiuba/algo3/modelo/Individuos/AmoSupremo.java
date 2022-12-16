@@ -9,7 +9,6 @@ import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.VidaZerg;
-import edu.fiuba.algo3.modelo.Zonas.Zona;
 import edu.fiuba.algo3.modelo.Zonas.ZonaVigilada;
 
 public class AmoSupremo extends Individuo implements UnidadVoladora {
@@ -44,16 +43,6 @@ public class AmoSupremo extends Individuo implements UnidadVoladora {
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
-    }
-
-    public void bajar()
-    {
-        this.posicion.descender();
-    }
-
-    public void elevar()
-    {
-        this.posicion.ascender();
     }
 
     public boolean atacar(UnidadTierra unidad) { return false; }

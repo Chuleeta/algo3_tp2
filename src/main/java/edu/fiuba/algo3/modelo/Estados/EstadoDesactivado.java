@@ -13,10 +13,6 @@ public class EstadoDesactivado extends EstadoConstruccion {
         return false;
     }
 
-    public boolean estaActivado(){
-        return false;
-    }
-
     @Override
     public EstadoConstruccion desarrollar(Edificio edificio, int tiempoDeConstruccion, int turnosParaConstruirse)
             throws NoExisteEdificioCorrelativoException {

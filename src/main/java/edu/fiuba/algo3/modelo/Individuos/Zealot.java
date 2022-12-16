@@ -90,16 +90,12 @@ public class Zealot extends Individuo implements UnidadTierra{
 
     @Override
     public boolean estaHabilitado(UnidadTierra unidad) {
-        if(mapa.laZonaEstaVigilada(posicion) || estaDentroDelRango(unidad.posicion()))
-            return true;
-        return false;
+        return mapa.laZonaEstaVigilada(posicion) || estaDentroDelRango(unidad.posicion());
     }
 
     @Override
     public boolean estaHabilitado(UnidadVoladora unidad) {
-        if(mapa.laZonaEstaVigilada(posicion) || estaDentroDelRango(unidad.posicion()))
-            return true;
-        return false;
+        return mapa.laZonaEstaVigilada(posicion) || estaDentroDelRango(unidad.posicion());
     }
 
 }

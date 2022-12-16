@@ -37,16 +37,6 @@ public class Jugador {
         unidadesCreadas = 0;
     }
 
-    /*public JugadorZerg definirZerg(){
-        JugadorZerg jugadorZerg = new JugadorZerg(nombre, raza, posicion, mapa, capacidad);
-        return jugadorZerg;
-    }
-
-    public JugadorProtoss definirProtoss(){
-        JugadorProtoss jugadorProtoss = new JugadorProtoss(nombre, raza, posicion, mapa, capacidad);
-        return jugadorProtoss;
-    }*/
-
     public void validarAtributos(Jugador jugadorDado) throws AtributoInvalidoException {
         if(jugadorDado == null) return;
         validarNombre(this.nombre, jugadorDado.nombre);
@@ -92,10 +82,6 @@ public class Jugador {
 
     public void decrementarCapacidadDePoblacion(int nuevaCapacidad) {
         capacidad -= nuevaCapacidad;
-    }
-
-    public void eliminarUnidad() {
-        unidadesCreadas -= 1;
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException {

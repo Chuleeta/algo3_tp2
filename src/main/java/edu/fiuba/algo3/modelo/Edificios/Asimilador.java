@@ -20,7 +20,6 @@ public class Asimilador extends Edificio{
     private GasVespeno gas;
     private Volcan volcan;
 
-    //private VidaEscudoProtoss vidaYEscudo;
     public Asimilador(Posicion posicion, Volcan volcan, Mapa mapa) throws VolcanOcupadoException {
         this.volcan = volcan;
         this.volcan.ocupar();
@@ -71,13 +70,6 @@ public class Asimilador extends Edificio{
         return true;
     }
 
-    // public void dañar(int daño){
-    //     this.vida.dañar(daño);
-    //     if(this.vida.verificarSiEstaMuerto()){
-    //         destruir();
-    //     }
-    // }
-
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
     }
@@ -91,8 +83,6 @@ public class Asimilador extends Edificio{
         if(mineral.invertir(100))
         {
             this.jugador.agregarEnListaConstruccion(this);
-            /*this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionProtoss(this);*/
             this.gas = gas;
             return true;
         }
@@ -104,17 +94,4 @@ public class Asimilador extends Edificio{
         this.vida.regenerar();
         this.gas.agregarGas(volcan.extraerGas(20));
     }
-
-    /*public void destruir()
-    {
-        this.jugador.destruirConstruccion(this);
-        //this.mapa.destruirConstruccion(this);
-        //this.mapa.destruirConstruccionProtoss(this);
-    }*/
-
-    // @Override
-    // public boolean estaOcupada(Posicion posicionDada) {
-    //     return this.posicion.equals(posicionDada);
-    // }
-
 }

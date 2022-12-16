@@ -39,16 +39,6 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
     }
 
-    public void bajar()
-    {
-        this.posicion.descender();
-    }
-
-    public void elevar()
-    {
-        this.posicion.ascender();
-    }
-
     public boolean atacar(UnidadTierra unidad)
     {
         if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion()) && estaHabilitadoParaAtacar(unidad)) {
