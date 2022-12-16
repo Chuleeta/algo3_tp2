@@ -14,7 +14,6 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class ReservaDeReproduccion extends Edificio{
     private static int VIDA_COMPLETA = 1000;
-    //private VidaZerg vida;
 
     public ReservaDeReproduccion(Posicion posicion, Mapa mapa)
     {
@@ -37,11 +36,8 @@ public class ReservaDeReproduccion extends Edificio{
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException
     {
         tiempo += 1;
-        // this.vida.regenerarVida();
-        // if (estado.puedeConstruirse(12, tiempo)) construir();
         this.estado = this.estado.desarrollar(this, 12, tiempo);
     }
-
 
     @Override
     public void construir()
@@ -86,17 +82,5 @@ public class ReservaDeReproduccion extends Edificio{
     public void actualizar() {
         this.vida.regenerar();
     }
-
-    /*public void destruir()
-    {
-        this.mapa.destruirConstruccion(this);
-        this.mapa.destruirConstruccionZerg(this);
-    }*/
-
-    // @Override
-    // public boolean estaOcupada(Posicion posicionDada) {
-    //     return this.posicion.equals(posicionDada);
-    // }
-
 
 }

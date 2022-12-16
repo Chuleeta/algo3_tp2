@@ -2,6 +2,7 @@ package edu.fiuba.algo3.javafx;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import edu.fiuba.algo3.javafx.Eventos.BotonAgregarConstruccionProtossHandler;
 import edu.fiuba.algo3.javafx.Eventos.BotonAgregarConstruccionZergHandler;
@@ -478,7 +479,17 @@ public class JuegoVista extends BorderPane {
 
     public void actualizarTablero() {
         //this.tablero.actualizarConstrucciones();
-        this.jugadorUno.actualizarConstrucciones(this.tablero);
-        this.jugadorDos.actualizarConstrucciones(this.tablero);
+        ArrayList<Construccion> construccionesJ1 = this.jugadorUno.getConstrucciones();
+        if(construccionesJ1.size() != 0){
+            for (Construccion construccion : construccionesJ1) {
+                tablero.insertarConstruccion(construccion);
+            }
+        }
+        ArrayList<Construccion> construccionesJ2 = this.jugadorDos.getConstrucciones();
+        if(construccionesJ2.size() != 0){
+            for (Construccion construccion : construccionesJ2) {
+                tablero.insertarConstruccion(construccion);
+            }
+        }
     }
 }

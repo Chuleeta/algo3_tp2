@@ -18,8 +18,6 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class Acceso extends Edificio{
 
-    //private VidaEscudoProtoss vidaYEscudo;
-
     public Acceso(Posicion posicion, Mapa mapa)
     {
         this.posicion = posicion;
@@ -65,10 +63,10 @@ public class Acceso extends Edificio{
         return zona.abarca(posicion);
     }
 
-
     public boolean tieneVidaCompleta(){
         return this.vida.tieneVidaCompleta();
     }
+
     public boolean tieneEscudoCompleto(){
         return this.vida.tieneEscudoCompleto();
     }
@@ -78,8 +76,6 @@ public class Acceso extends Edificio{
         if(mineral.invertir(150))
         {
             this.jugador.agregarEnListaConstruccion(this);
-            /*this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionProtoss(this);*/
             return true;
         }
         return false;
@@ -90,7 +86,6 @@ public class Acceso extends Edificio{
         this.vida.regenerar();
     }
 
-
     public Zealot crearZealot(Mineral mineral) throws RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
         if (jugador.unidadesDisponibles()) {
             jugador.añadirUnidad();
@@ -98,12 +93,5 @@ public class Acceso extends Edificio{
         }
         throw new maximaPoblacionAlcanzadaException();
     }
-
-    /*public void destruir()
-    {
-        this.jugador.destruirConstruccion(this);
-        //this.mapa.destruirConstruccion(this);
-        //this.mapa.destruirConstruccionProtoss(this);
-    }*/
 
 }

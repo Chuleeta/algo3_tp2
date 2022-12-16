@@ -19,10 +19,4 @@ public class ZonaVigilada extends Zona{
     public boolean puedeAtacar(Posicion posicion) {
         return posicion.adentro(radio, centro);
     }
-
-    /*
-     public boolean puedeHabitar(Construccion construccion) {
-        return construccion.habita(this);
-    }
-     */
 }

@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
-import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
@@ -34,16 +33,6 @@ public class Scout extends Individuo implements UnidadVoladora{
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
-    }
-
-    public void bajar()
-    {
-        this.posicion.descender();
-    }
-
-    public void elevar()
-    {
-        this.posicion.ascender();
     }
 
     public boolean atacar(UnidadTierra unidad)
