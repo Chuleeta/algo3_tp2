@@ -29,7 +29,9 @@ public class Asimilador extends Edificio{
         this.mapa = mapa;
         this.vida = new VidaEscudoProtoss(450, 450);
         this.zona = new ZonaNeutral();
-        crearJugadorPorDefecto();
+        if(this.jugador == null){
+            crearJugadorPorDefecto();
+        }
     }
 
     public Asimilador(Posicion posicion, Volcan volcan, Mapa mapa, Jugador jugador) throws VolcanOcupadoException {

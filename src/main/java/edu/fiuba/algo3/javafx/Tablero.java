@@ -31,41 +31,31 @@ public class Tablero {
     private Rectangle[][] grilla;
     private int startX;
     private int startY;
+    private Pane mapaVista;
+    private int alto;
+    private int ancho;
     
     public Tablero(int alto, int ancho, Juego juego){
+        this.alto = alto;
+        this.ancho = ancho;
         this.cargarImagenes();
-        Pane mapaVista = new Pane();
+        this.mapaVista = new Pane();
         this.juego = juego;
-        grilla = new Rectangle[alto][ancho];
-        int coordY = 0;
-        int coordX = 0;
-        for (int i = 0; i < alto; i += 1) {
-            for (int j = 0; j < ancho; j += 1) {
-                Rectangle r = new Rectangle(i, j, 40, 40);
-                grilla[i][j] = r;
-                r.setFill(Color.WHITE);
-                r.setStroke(Color.BLACK);
-                r.setX(coordX);
-                r.setY(coordY);
-                mapaVista.getChildren().add(r);
-                coordX += 40;
-            }
-            coordY += 40;
-            coordX = 0;
-        }
+        crearGrilla();
         Rectangle J1 = new Rectangle(20, 20, Color.GREEN);
         J1.setTranslateX(10);
         J1.setTranslateY(10);
         hacerMovible(J1);
 
-        ArrayList<Construccion> construcciones = juego.mostrarConstrucciones();
-        for (Construccion construccion : construcciones) {
-            Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
-            J2.setTranslateX((construccion.mostrarPosicion().coordenadaX() * 40) + 10);
-            J2.setTranslateY((construccion.mostrarPosicion().coordenadaY() * 40) + 10);
-            hacerMovible(J2);
-            mapaVista.getChildren().add(J2);
-        }
+        actualizarConstrucciones();
+        // ArrayList<Construccion> construcciones = juego.mostrarConstrucciones();
+        // for (Construccion construccion : construcciones) {
+        //     Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
+        //     J2.setTranslateX((construccion.mostrarPosicion().coordenadaX() * 40) + 10);
+        //     J2.setTranslateY((construccion.mostrarPosicion().coordenadaY() * 40) + 10);
+        //     hacerMovible(J2);
+        //     mapaVista.getChildren().add(J2);
+        // }
 
         // Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
         // J2.setTranslateX(850);
@@ -79,6 +69,39 @@ public class Tablero {
         mapaVista.setStyle("-fx-background-color: #717D8C");
 
         this.contenedor = new Group(mapaVista);
+    }
+
+    private void crearGrilla() {
+        grilla = new Rectangle[this.alto][this.ancho];
+        int coordY = 0;
+        int coordX = 0;
+        for (int i = 0; i < this.alto; i += 1) {
+            for (int j = 0; j < this.ancho; j += 1) {
+                Rectangle r = new Rectangle(i, j, 40, 40);
+                grilla[i][j] = r;
+                r.setFill(Color.WHITE);
+                r.setStroke(Color.BLACK);
+                r.setX(coordX);
+                r.setY(coordY);
+                mapaVista.getChildren().add(r);
+                coordX += 40;
+            }
+            coordY += 40;
+            coordX = 0;
+        }
+    }
+
+    public void actualizarConstrucciones() {
+        ArrayList<Construccion> construcciones = juego.mostrarConstrucciones();
+        for (Construccion construccion : construcciones) {
+            System.out.println("\nRECORRE");
+            Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
+            J2.setTranslateX((construccion.mostrarPosicion().coordenadaX() * 40) + 10);
+            J2.setTranslateY((construccion.mostrarPosicion().coordenadaY() * 40) + 10);
+            hacerMovible(J2);
+            mapaVista.getChildren().add(J2);
+        }
+        System.out.println("\nNO RECORRE");
     }
 
     private void hacerMovible(Node n) {
@@ -161,4 +184,18 @@ public class Tablero {
 
 	private void cargarImagenes() {
 	}
+
+    public void insertarConstruccion(Construccion construccion) {
+        //crearGrilla();
+        if(construccion != null)
+            System.out.println("\n inserta construccion");
+        Rectangle nuevo = new Rectangle(20, 20, Color.GREEN);
+        nuevo.setTranslateX(((construccion.mostrarPosicion().coordenadaX() -1) * 40) + 10);
+        nuevo.setTranslateY(((construccion.mostrarPosicion().coordenadaY() - 1) * 40) + 10);
+        System.out.println("\n coordenada en X:" + construccion.mostrarPosicion().coordenadaX());
+        System.out.println("\n coordenada en Y:" + construccion.mostrarPosicion().coordenadaY());
+        hacerMovible(nuevo);
+        mapaVista.getChildren().add(nuevo);
+        //this.contenedor = new Group(mapaVista);
+    }
 }

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.javafx.Tablero;
 import edu.fiuba.algo3.modelo.Exceptions.AtributoInvalidoException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
@@ -16,6 +17,7 @@ public class Jugador {
     protected String raza;
     protected Posicion posicion;
     public Mineral mineral;
+    private GasVespeno gas;
     protected int unidadesCreadas;
     public Mapa mapa;
     protected ArrayList<Construccion> construcciones;
@@ -30,6 +32,7 @@ public class Jugador {
         this.construcciones = new ArrayList<>();
         this.individuos = new ArrayList<>();
         this.mineral = new Mineral(200);
+        this.gas = new GasVespeno(0);
         this.capacidad = capacidad;
         unidadesCreadas = 0;
     }
@@ -113,6 +116,13 @@ public class Jugador {
         return construccion.agregarAlMapa(mineral, gas);
     }
 
+    public boolean agregarConstruccion(Construccion construccion){
+        if(!mapa.verificarPosicionDisponible(construccion)){
+            return false;
+        }
+        return construccion.agregarAlMapa(this.mineral, new GasVespeno(0));
+    }//ACA EN VEZ DE new GasVespeno(0) TIENE Q IR THIS.GAS
+
     public boolean agregarIndividuo(Individuo individuo){
         return individuos.add(individuo);
     }
@@ -127,5 +137,15 @@ public class Jugador {
     }
     public boolean verificarConstruccionesVacias() {
         return (!this.construcciones.isEmpty());
+    }
+
+    public void actualizarConstrucciones(Tablero tablero) {
+        if(this.construcciones.size() == 0){
+            return;
+        }else{
+            for (Construccion construccion : this.construcciones) {
+                tablero.insertarConstruccion(construccion);
+            }  
+        }
     }
 }

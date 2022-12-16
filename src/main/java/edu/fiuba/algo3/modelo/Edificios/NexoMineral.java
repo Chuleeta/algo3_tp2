@@ -29,7 +29,9 @@ public class NexoMineral extends Edificio{
         this.zona = new ZonaNeutral();
         this.mapa = mapa;
         this.vida = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
-        crearJugadorPorDefecto();
+        if(this.jugador == null){
+            crearJugadorPorDefecto();
+        }
     }
 
     public NexoMineral(Posicion posicion, Mena mena, Mapa mapa, Jugador jugador) throws MenaOcupadaException {

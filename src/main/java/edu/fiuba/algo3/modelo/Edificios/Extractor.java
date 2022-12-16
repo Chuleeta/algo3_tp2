@@ -34,7 +34,10 @@ public class Extractor extends Edificio implements HabitanteMoho {
         zanganos = new ArrayList<>();
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
-        crearJugadorPorDefecto();
+        this.gas = new GasVespeno(0);
+        if(this.jugador == null){
+            crearJugadorPorDefecto();
+        }
     }
 
     public Extractor(Posicion posicion, Volcan volcan, Mapa mapa, Jugador jugador) throws VolcanOcupadoException {

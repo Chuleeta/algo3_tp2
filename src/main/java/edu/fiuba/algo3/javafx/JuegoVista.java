@@ -51,8 +51,12 @@ public class JuegoVista extends BorderPane {
 	private Image logo;
 	private Image fondo;
     private Image datosJugador;
-    public Juego juego;
     private String turnoJugadorActual;
+    
+    private Jugador jugadorUno;
+    private Jugador jugadorDos;
+    private Juego juego;
+    private Tablero tablero;
     //public Stage stage;
 
     public JuegoVista(Stage stage, Scene pantallaDeInicio, int ancho, int alto, Juego juego,String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
@@ -110,8 +114,8 @@ public class JuegoVista extends BorderPane {
         Mapa mapa = new Mapa();
 
 
-        Jugador jugadorUno = new Jugador(nombreJugador1, "rojo", eleccionRaza1, new Posicion(0, 0), mapa, 0);
-        Jugador jugadorDos = new Jugador(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
+        this.jugadorUno = new Jugador(nombreJugador1, "rojo", eleccionRaza1, new Posicion(0, 0), mapa, 0);
+        this.jugadorDos = new Jugador(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
         /*if (eleccionRaza1 == "Zerg") {
             jugadorUno = jugadorUno.definirZerg();
             jugadorDos = jugadorDos.definirProtoss();
@@ -122,7 +126,7 @@ public class JuegoVista extends BorderPane {
             jugadorDos = new JugadorZerg(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
         }*/
 
-        Juego juego = new Juego(mapa, jugadorUno, jugadorDos);
+        this.juego = new Juego(mapa, jugadorUno, jugadorDos);
 
         //raza
         Label razaJugador1 = new Label("Raza: \n" + eleccionRaza1);
@@ -204,9 +208,9 @@ public class JuegoVista extends BorderPane {
         mineralesJugadorDos.setPadding(new Insets(0, 0, 0, 20));
         
         //GET MAPA DEBE SER UN GROUP
-        Tablero grilla = new Tablero(alto,ancho, juego);
+        this.tablero = new Tablero(alto,ancho, juego);
         VBox cosasDelCentro = new VBox();
-        cosasDelCentro.getChildren().addAll(turnoActual, grilla.getContenedor());
+        cosasDelCentro.getChildren().addAll(turnoActual, tablero.getContenedor());
         cosasDelCentro.setAlignment(Pos.CENTER);
         this.setCenter(cosasDelCentro);
 
@@ -470,5 +474,11 @@ public class JuegoVista extends BorderPane {
         ventanaVolver.setScene(escenaVolver);
         ventanaVolver.showAndWait();
         return(respuesta);
+    }
+
+    public void actualizarTablero() {
+        //this.tablero.actualizarConstrucciones();
+        this.jugadorUno.actualizarConstrucciones(this.tablero);
+        this.jugadorDos.actualizarConstrucciones(this.tablero);
     }
 }

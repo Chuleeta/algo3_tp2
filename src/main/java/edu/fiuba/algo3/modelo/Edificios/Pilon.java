@@ -25,7 +25,9 @@ public class Pilon extends Edificio{
         tiempo = 0;
         this.zona = mapa.getZonaNeutral();
         this.vida = new VidaEscudoProtoss(300, 300);
-        crearJugadorPorDefecto();
+        if(this.jugador == null){
+            crearJugadorPorDefecto();
+        }
     }
 
     public Pilon(Posicion posicion, Mapa mapa, Jugador jugador) {

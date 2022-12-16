@@ -23,7 +23,9 @@ public class PuertoEstelar extends Edificio {
         this.mapa = mapa;
         tiempo = 0;
         this.vida = new VidaEscudoProtoss(600, 600);
-        crearJugadorPorDefecto();
+        if(this.jugador == null){
+            crearJugadorPorDefecto();
+        }
     }
 
     public PuertoEstelar(Posicion posicion, Mapa mapa, Jugador jugador) {

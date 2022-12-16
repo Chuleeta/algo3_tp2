@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.javafx.Eventos;
 
 import edu.fiuba.algo3.javafx.JuegoVista;
+import edu.fiuba.algo3.modelo.Edificios.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.Extractor;
 import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.JugadorProtoss;
@@ -140,14 +142,15 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         }else{
             return null;
         }
-
+        
         return (new Posicion(valorX, valorY));
     }
     
-
+    
     @Override
     public void handle(ActionEvent actionEvent) {
-
+        Stage s = new Stage();
+        
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 25);
 
@@ -167,7 +170,13 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonCriadero.setOnMouseExited(e -> botonCriadero.setStyle(botonNormal));
         botonCriadero.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            Criadero criadero = new Criadero(inputUsuario, this.jugador.mapa, this.jugador);
+            if(this.jugador.agregarConstruccion(criadero)){
+                juegoVista.actualizarTablero();
+            }else{
+                noSePuedeConstruir();
+            }
+            s.close();
         });
         
         Button botonReserva = new Button("Reserva de\nReproduccion");
@@ -177,7 +186,13 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonReserva.setOnMouseExited(e -> botonReserva.setStyle(botonNormal));
         botonReserva.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            ReservaDeReproduccion reserva = new ReservaDeReproduccion(inputUsuario, this.jugador.mapa, this.jugador);
+            if(this.jugador.agregarConstruccion(reserva)){
+                juegoVista.actualizarTablero();
+            }else{
+                noSePuedeConstruir();
+            }
+            s.close();
         });
         
         Button botonExtractor = new Button("Extractor");
@@ -187,7 +202,14 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonExtractor.setOnMouseExited(e -> botonExtractor.setStyle(botonNormal));
         botonExtractor.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            //ACA TIENE Q SELECCIONAR UN VOLCAN
+            //Extractor extractor = new Extractor(inputUsuario, this.jugador.mapa, this.jugador);
+            // if(this.jugador.agregarConstruccion(extractor)){
+            //     juegoVista.actualizarTablero();
+            // }else{
+            //     noSePuedeConstruir();
+            // }
+            s.close();
         });
         
         Button botonGuarida = new Button("Guarida");
@@ -197,7 +219,13 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonGuarida.setOnMouseExited(e -> botonGuarida.setStyle(botonNormal));
         botonGuarida.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            Criadero criadero = new Criadero(inputUsuario, this.jugador.mapa, this.jugador);
+            if(this.jugador.agregarConstruccion(criadero)){
+                juegoVista.actualizarTablero();
+            }else{
+                noSePuedeConstruir();
+            }
+            s.close();
         });
         
         Button botonEspiral = new Button("Espiral");
@@ -207,7 +235,13 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonEspiral.setOnMouseExited(e -> botonEspiral.setStyle(botonNormal));
         botonEspiral.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            Criadero criadero = new Criadero(inputUsuario, this.jugador.mapa, this.jugador);
+            if(this.jugador.agregarConstruccion(criadero)){
+                juegoVista.actualizarTablero();
+            }else{
+                noSePuedeConstruir();
+            }
+            s.close();
         });
         
         VBox eleccionUsuario = new VBox();
@@ -232,7 +266,6 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         eleccionUsuario.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
         Scene sc = new Scene(eleccionUsuario, 800, 300, Color.rgb(47, 52, 58));
         sc.setFill(Color.RED);
-        Stage s = new Stage();
         s.initModality(Modality.APPLICATION_MODAL);
         s.setTitle("Tienda Construcciones Zerg");
         s.getIcons().add(this.icono);
@@ -274,5 +307,39 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         // } else {
         //     // ... user chose CANCEL or closed the dialog
         // }
+    }
+
+    private void noSePuedeConstruir() {
+        InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
+        Font fuente = Font.loadFont(is, 20);
+
+        Label ingresarPosicion = new Label("Posicion Ingresada Invalida o\n\nRequerimientos Insuficientes!");
+        ingresarPosicion.setFont(fuente);
+        ingresarPosicion.setStyle(formatoTexto);
+        ingresarPosicion.setAlignment(Pos.CENTER);
+
+        Button botonConfirmar = new Button("Confirmar");
+        botonConfirmar.setFont(fuente);
+        botonConfirmar.setStyle(botonNormal);
+        botonConfirmar.setOnMouseEntered(e -> botonConfirmar.setStyle(botonAntesDeSerPresionado));
+        botonConfirmar.setOnMouseExited(e -> botonConfirmar.setStyle(botonNormal));
+        
+        
+        VBox inputPosicion = new VBox();
+        inputPosicion.getChildren().addAll(ingresarPosicion, botonConfirmar);
+        inputPosicion.setSpacing(30);
+        inputPosicion.setAlignment(Pos.CENTER);
+        inputPosicion.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
+        
+        Scene sc = new Scene(inputPosicion, 500, 300);
+        Stage s = new Stage();
+        s.setResizable(false);
+        s.setTitle("Fallo Al Construir Edificio");
+        s.getIcons().add(this.icono);
+        botonConfirmar.setOnAction(e-> {
+            s.close();
+        });
+        s.setScene(sc);
+        s.showAndWait();
     }
 }

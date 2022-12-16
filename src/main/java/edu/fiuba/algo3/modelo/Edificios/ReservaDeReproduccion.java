@@ -24,7 +24,9 @@ public class ReservaDeReproduccion extends Edificio{
         zona = new ZonaMoho(this.posicion);
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
-        crearJugadorPorDefecto();
+        if(this.jugador == null){
+            crearJugadorPorDefecto();
+        }
     }
 
     public ReservaDeReproduccion(Posicion posicion, Mapa mapa, Jugador jugador) {

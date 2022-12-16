@@ -31,7 +31,9 @@ public class Criadero extends Edificio {
         zona = mapa.getZonaNeutral();
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
-        crearJugadorPorDefecto();
+        if(this.jugador == null){
+            crearJugadorPorDefecto();
+        }
     }
 
     public Criadero(Posicion posicion, Mapa mapa, Jugador jugador) {
@@ -125,7 +127,7 @@ public class Criadero extends Edificio {
 
     @Override
     public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
-        if(mineral.invertir(50))
+        if(mineral.invertir(200))
         {
             this.jugador.agregarEnListaConstruccion(this);
             /*this.mapa.agregarEnListaConstruccion(this);

@@ -28,7 +28,9 @@ public class Acceso extends Edificio{
         tiempo = 0;
         this.zona = new ZonaEnergia(this.posicion);
         this.vida = new VidaEscudoProtoss(500, 500);
-        crearJugadorPorDefecto();
+        if(this.jugador == null){
+            crearJugadorPorDefecto();
+        }
     }
 
     public Acceso(Posicion posicion, Mapa mapa, Jugador jugador) {
