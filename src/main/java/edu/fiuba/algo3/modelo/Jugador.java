@@ -1,11 +1,11 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.javafx.Tablero;
 import edu.fiuba.algo3.modelo.Exceptions.AtributoInvalidoException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
+import edu.fiuba.algo3.javafx.Tablero;
 
 import java.util.ArrayList;
 
@@ -139,13 +139,7 @@ public class Jugador {
         return (!this.construcciones.isEmpty());
     }
 
-    public void actualizarConstrucciones(Tablero tablero) {
-        if(this.construcciones.size() == 0){
-            return;
-        }else{
-            for (Construccion construccion : this.construcciones) {
-                tablero.insertarConstruccion(construccion);
-            }  
-        }
+    public ArrayList<Construccion> getConstrucciones() {
+        return this.construcciones;
     }
 }
