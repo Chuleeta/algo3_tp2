@@ -95,13 +95,6 @@ public class Jugador {
         mapa.filtrarConstrucciones(construcciones);
     }
 
-    public boolean agregarConstruccion(Construccion construccion, Mineral mineral, GasVespeno gas){
-        if(!mapa.verificarPosicionDisponible(construccion)){
-            return false;
-        }
-        return construccion.agregarAlMapa(mineral, gas);
-    }
-
     public boolean agregarConstruccion(Construccion construccion){
         if(!mapa.verificarPosicionDisponible(construccion)){
             return false;

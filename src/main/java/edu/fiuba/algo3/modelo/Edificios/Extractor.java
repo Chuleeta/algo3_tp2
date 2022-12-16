@@ -16,7 +16,7 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
 import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
-public class Extractor extends Edificio implements HabitanteMoho {
+public class Extractor extends Edificio{
 
     private List<Zangano> zanganos;
     private static int VIDA_COMPLETA = 750;

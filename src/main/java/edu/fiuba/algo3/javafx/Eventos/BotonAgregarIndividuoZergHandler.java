@@ -4,8 +4,6 @@ import edu.fiuba.algo3.javafx.JuegoVista;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Individuos.AmoSupremo;
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.JugadorProtoss;
-import edu.fiuba.algo3.modelo.JugadorZerg;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import javafx.event.ActionEvent;

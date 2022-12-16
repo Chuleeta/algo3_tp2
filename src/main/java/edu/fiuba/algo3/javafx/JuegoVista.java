@@ -480,7 +480,7 @@ public class JuegoVista extends BorderPane {
     public void actualizarTablero() {
         //this.tablero.actualizarConstrucciones();
         ArrayList<Construccion> construccionesJ1 = this.jugadorUno.getConstrucciones();
-        if(construccionesJ1.size() != 0){
+        if(construccionesJ1.size() > 0){
             for (Construccion construccion : construccionesJ1) {
                 tablero.insertarConstruccion(construccion);
             }

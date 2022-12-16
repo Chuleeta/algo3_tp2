@@ -2,11 +2,11 @@ package edu.fiuba.algo3.javafx.Eventos;
 
 import edu.fiuba.algo3.javafx.JuegoVista;
 import edu.fiuba.algo3.modelo.Edificios.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.Espiral;
 import edu.fiuba.algo3.modelo.Edificios.Extractor;
+import edu.fiuba.algo3.modelo.Edificios.Guarida;
 import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.JugadorProtoss;
-import edu.fiuba.algo3.modelo.JugadorZerg;
 import edu.fiuba.algo3.modelo.Posicion;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -219,8 +219,8 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonGuarida.setOnMouseExited(e -> botonGuarida.setStyle(botonNormal));
         botonGuarida.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Criadero criadero = new Criadero(inputUsuario, this.jugador.mapa, this.jugador);
-            if(this.jugador.agregarConstruccion(criadero)){
+            Guarida guarida = new Guarida(inputUsuario, this.jugador.mapa, this.jugador);
+            if(this.jugador.agregarConstruccion(guarida)){
                 juegoVista.actualizarTablero();
             }else{
                 noSePuedeConstruir();
@@ -235,8 +235,8 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonEspiral.setOnMouseExited(e -> botonEspiral.setStyle(botonNormal));
         botonEspiral.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Criadero criadero = new Criadero(inputUsuario, this.jugador.mapa, this.jugador);
-            if(this.jugador.agregarConstruccion(criadero)){
+            Espiral espiral = new Espiral(inputUsuario, this.jugador.mapa, this.jugador);
+            if(this.jugador.agregarConstruccion(espiral)){
                 juegoVista.actualizarTablero();
             }else{
                 noSePuedeConstruir();

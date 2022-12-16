@@ -2,7 +2,6 @@ package edu.fiuba.algo3.javafx.Eventos;
 
 import edu.fiuba.algo3.javafx.JuegoVista;
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.JugadorProtoss;
 import edu.fiuba.algo3.modelo.Posicion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
