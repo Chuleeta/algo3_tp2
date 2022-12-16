@@ -20,12 +20,10 @@ public class AsimiladorTest {
     
     @Test
     public void asimiladorConsigueVeinteDeGasEnUnTurno() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Asimilador asimilador = new Asimilador(new Posicion(1, 2), new Volcan(new Posicion(1, 2)), mapa, jugador);
-        jugador.agregarConstruccion(asimilador, mineral, gas);
+        jugador.agregarConstruccion(asimilador);
 
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -43,20 +41,17 @@ public class AsimiladorTest {
     public void asimiladorEmpiezaSinGasRecolectado() throws VolcanOcupadoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
-        GasVespeno gas = new GasVespeno(0);
         Asimilador asimilador = new Asimilador(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), mapa);
-        jugador.agregarConstruccion(asimilador, new Mineral(10000), gas);
+        jugador.agregarConstruccion(asimilador);
         assertEquals(0, asimilador.obtenerGas());    
     }
 
     @Test
     public void asimiladorConsigueVeinteDeGasEnCadaTurno() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Asimilador asimilador = new Asimilador(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), mapa, jugador);
-        jugador.agregarConstruccion(asimilador, mineral, gas);
+        jugador.agregarConstruccion(asimilador);
 
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -83,7 +78,7 @@ public class AsimiladorTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Asimilador asimilador = new Asimilador(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), mapa, jugador);
-        jugador.agregarConstruccion(asimilador, new Mineral(10000), new GasVespeno(10000));
+        jugador.agregarConstruccion(asimilador);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -107,7 +102,7 @@ public class AsimiladorTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Asimilador asimilador = new Asimilador(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), mapa);
-        jugador.agregarConstruccion(asimilador, new Mineral(10000), new GasVespeno(10000));
+        jugador.agregarConstruccion(asimilador);
         asimilador.dañar(500);
         assertFalse(asimilador.tieneEscudoCompleto());
         asimilador.pasarTiempo();

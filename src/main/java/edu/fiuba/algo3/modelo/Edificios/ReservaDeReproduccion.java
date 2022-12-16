@@ -74,8 +74,6 @@ public class ReservaDeReproduccion extends Edificio{
         if(mineral.invertir(150))
         {
             this.jugador.agregarEnListaConstruccion(this);
-            /*this.mapa.agregarEnListaConstruccion(this);
-            this.mapa.agregarEnListaConstruccionZerg(this);*/
             return true;
         }
         return false;

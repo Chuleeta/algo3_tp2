@@ -48,7 +48,7 @@ public class HidraliscoTest {
         Mineral mineral = new Mineral(125);
         GasVespeno gas = new GasVespeno(25);
         Hidralisco hidralisco = new Hidralisco(mineral, gas, new Posicion(3,3), new Mapa());
-        jugador.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo);
         jugador.agregarIndividuo(hidralisco);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -80,7 +80,7 @@ public class HidraliscoTest {
         Mineral mineral = new Mineral(125);
         GasVespeno gas = new GasVespeno(25);
         Hidralisco hidralisco = new Hidralisco(mineral, gas, new Posicion(12,10), mapa);
-        jugador.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo);
         jugador.agregarIndividuo(hidralisco);
         jugador.pasarTiempo();
         jugador.pasarTiempo();

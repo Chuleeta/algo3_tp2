@@ -45,7 +45,7 @@ public class ZerlingTest {
         // tiempo de construccion
         Mineral mineral = new Mineral(75);
         GasVespeno gas = new GasVespeno(0);
-        jugador.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo);
 
         Zerling zerling = new Zerling(mineral, new Posicion(1,2), mapa);
         jugador.agregarIndividuo(zerling);
@@ -81,7 +81,7 @@ public class ZerlingTest {
         // tiempo de construccion
         Mineral mineral = new Mineral(75);
         GasVespeno gas = new GasVespeno(0);
-        jugador.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo);
 
         Zerling zerling = new Zerling(mineral, new Posicion(3,3), mapa);
         jugador.agregarIndividuo(zerling);

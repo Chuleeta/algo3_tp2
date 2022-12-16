@@ -19,9 +19,7 @@ public class VolcanTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Asimilador asimiladorUno = new Asimilador(new Posicion(1, 2), volcan, mapa, jugador);
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
-        jugador.agregarConstruccion(asimiladorUno, mineral, gas);
+        jugador.agregarConstruccion(asimiladorUno);
         assertThrows(VolcanOcupadoException.class, ()->{ new Asimilador(new Posicion(1, 2), volcan, mapa); });
     }
     @Test
@@ -30,9 +28,7 @@ public class VolcanTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Asimilador asimiladorUno = new Asimilador(new Posicion(1, 2), volcan, mapa, jugador);
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
-        jugador.agregarConstruccion(asimiladorUno, mineral, gas);
+        jugador.agregarConstruccion(asimiladorUno);
         assertThrows(VolcanOcupadoException.class, ()->{ new Extractor(new Posicion(1, 2), volcan, mapa); });
     }
 

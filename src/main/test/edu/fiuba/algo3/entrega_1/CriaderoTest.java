@@ -3,6 +3,7 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.Extractor;
+import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
 import edu.fiuba.algo3.modelo.Exceptions.*;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
@@ -150,18 +151,17 @@ public class CriaderoTest {
     //Caso de uso 13
     @Test
     public void seDestruyeUnCriaderoYSePuedeConstruirIgualArribaDelMoho() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9, 9), mapa, jugador);
-        jugador.agregarConstruccion(criadero, mineral, gas);
+        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         criadero.dañar(550);
-        assertTrue(jugador.agregarConstruccion(new Extractor(new Posicion(9, 14), new Volcan(new Posicion(1, 2)), mapa), mineral, gas));
+        jugador.incrementarMineral(150);    //Le agrego el mineral necesario para cpp¿onstruir
+        assertTrue(jugador.agregarConstruccion(new ReservaDeReproduccion(new Posicion(9, 14), mapa)));
     }
 }
 

@@ -31,69 +31,64 @@ public class MapaTest {
      
     @Test
     public void noSePuedeConstruirExtractorFueraDelMoho() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
-        
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(criadero, mineral, gas);
+        jugador.incrementarMineral(2000);
+        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertTrue(jugador.agregarConstruccion(new Extractor(new Posicion(8,8), new Volcan(new Posicion(8, 8)), mapa), mineral, gas));
-        assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(125,3), new Volcan(new Posicion(125, 3)), mapa), mineral, gas));
+        assertTrue(jugador.agregarConstruccion(new Extractor(new Posicion(8,8), new Volcan(new Posicion(8, 8)), mapa)));
+        assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(125,3), new Volcan(new Posicion(125, 3)), mapa)));
     }
 
     @Test
     public void noSePuedeConstruirAccesoFueraDeEnergia() throws NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(10,10), mapa, jugador);
-        jugador.agregarConstruccion(pilon, mineral, gas);
+        jugador.incrementarMineral(300);
+        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertTrue(jugador.agregarConstruccion(new Acceso(new Posicion(10, 9), mapa ), mineral, gas));
-        assertFalse(jugador.agregarConstruccion(new Acceso(new Posicion(2, 2), mapa), mineral, gas));
+        assertTrue(jugador.agregarConstruccion(new Acceso(new Posicion(10, 9), mapa )));
+        assertFalse(jugador.agregarConstruccion(new Acceso(new Posicion(2, 2), mapa)));
     }
 
     // Caso de uso 6
 
     @Test
     public void sePropagaElMohoAlConstruirse() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9, 9), mapa, jugador);
-        jugador.agregarConstruccion(criadero, mineral, gas);
+        jugador.incrementarMineral(200);
+        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(8, 8), new Volcan(new Posicion(8, 8)), mapa), mineral, gas));
+        assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(8, 8), new Volcan(new Posicion(8, 8)), mapa)));
         jugador.pasarTiempo();
-        assertTrue(jugador.agregarConstruccion(new Extractor(new Posicion(8, 8), new Volcan(new Posicion(8, 8)), mapa), mineral, gas));
+        assertTrue(jugador.agregarConstruccion(new Extractor(new Posicion(8, 8), new Volcan(new Posicion(8, 8)), mapa)));
     }
 
     @Test
     public void sePropagaElMohoLentamentePosteriorALaConstruccion() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9, 9), mapa, jugador);
-        jugador.agregarConstruccion(criadero, mineral, gas);
+        jugador.incrementarMineral(800);
+        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(9, 16), new Volcan(new Posicion(9, 16)), mapa), mineral, gas));
+        assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(9, 16), new Volcan(new Posicion(9, 16)), mapa)));
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -102,200 +97,184 @@ public class MapaTest {
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertTrue(jugador.agregarConstruccion(new Extractor(new Posicion(3, 15), new Volcan(new Posicion(3, 15)), mapa), mineral, gas));
+        assertTrue(jugador.agregarConstruccion(new Extractor(new Posicion(3, 15), new Volcan(new Posicion(3, 15)), mapa)));
     }
 
     @Test
     public void noSePuedeConstruirExtractorSinRecursos() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(0);
-        GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(criadero, mineral, gas);
+        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(9,8), new Volcan(new Posicion(9, 8)), mapa), mineral, gas));
+        assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(9,8), new Volcan(new Posicion(9, 8)), mapa)));
     }
 
     @Test
     public void noSePuedeConstruirCriaderoSinRecursos() throws NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(0);
-        GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(criadero, mineral, gas);
+        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Criadero(new Posicion(9,8), mapa), mineral, gas));
+        assertFalse(jugador.agregarConstruccion(new Criadero(new Posicion(9,8), mapa)));
     }
 
     @Test
     public void noSePuedeConstruirReservaSinRecursos() throws NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(0);
-        GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(criadero, mineral, gas);
+        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new ReservaDeReproduccion(new Posicion(9,8), mapa), mineral, gas));
+        assertFalse(jugador.agregarConstruccion(new ReservaDeReproduccion(new Posicion(9,8), mapa)));
     }
 
     @Test
     public void noSePuedeConstruirGuaridaSinRecursos() throws NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(0);
-        GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(criadero, mineral, gas);
+        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Guarida(new Posicion(9,8), mapa), mineral, gas));
+        assertFalse(jugador.agregarConstruccion(new Guarida(new Posicion(9,8), mapa)));
     }
 
     @Test
     public void noSePuedeConstruirEspiralSinRecursos() throws NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(0);
-        GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(criadero, mineral, gas);
+        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Espiral(new Posicion(9,8), mapa), mineral, gas));
+        assertFalse(jugador.agregarConstruccion(new Espiral(new Posicion(9,8), mapa)));
     }
 
     @Test
     public void noSePuedeConstruirNexoMineralSinRecursos() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(0);
-        GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(pilon, mineral, gas);
+        Pilon pilonDos = new Pilon(new Posicion(10, 9), mapa, jugador);
+        jugador.agregarConstruccion(pilonDos);
+        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new NexoMineral(new Posicion(9,8), new Mena(new Posicion(9, 8)), mapa), mineral, gas));
+        assertFalse(jugador.agregarConstruccion(new NexoMineral(new Posicion(9,8), new Mena(new Posicion(9, 8)), mapa)));
     }
 
     @Test
     public void noSePuedeConstruirPilonSinRecursos() throws NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(0);
-        GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(pilon, mineral, gas);
+        Pilon pilonDos = new Pilon(new Posicion(10, 9), mapa, jugador);
+        jugador.agregarConstruccion(pilonDos);
+        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Pilon(new Posicion(9,8), mapa), mineral, gas));
+        assertFalse(jugador.agregarConstruccion(new Pilon(new Posicion(9,8), mapa)));
     }
 
     @Test
     public void noSePuedeConstruirAsimiladorSinRecursos() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(0);
-        GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(pilon, mineral, gas);
+        Pilon pilonDos = new Pilon(new Posicion(10, 9), mapa, jugador);
+        jugador.agregarConstruccion(pilonDos);
+        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Asimilador(new Posicion(9,8), new Volcan(new Posicion(9, 8)), mapa), mineral, gas));
+        assertFalse(jugador.agregarConstruccion(new Asimilador(new Posicion(9,8), new Volcan(new Posicion(9, 8)), mapa)));
     }
 
     @Test
     public void noSePuedeConstruirAccesoSinRecursos() throws NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(0);
-        GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(pilon, mineral, gas);
+        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Acceso(new Posicion(9,8), mapa), mineral, gas));
+        assertFalse(jugador.agregarConstruccion(new Acceso(new Posicion(9,8), mapa)));
     }
 
     @Test
     public void noSePuedeConstruirPuertoEstelarSinRecursos() throws NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(0);
-        GasVespeno gas = new GasVespeno(0);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(pilon, mineral, gas);
+        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new PuertoEstelar(new Posicion(9,8), mapa), mineral, gas));
+        assertFalse(jugador.agregarConstruccion(new PuertoEstelar(new Posicion(9,8), mapa)));
     }
 
     @Test
     public void seDestruyeUnPilonYNoSePuedeConstruirCercaDeSuCadaver() throws NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(pilon, mineral, gas);
+        jugador.incrementarMineral(800);
+        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertTrue(jugador.agregarConstruccion(new Acceso(new Posicion(9,8), mapa), mineral, gas));
+        assertTrue(jugador.agregarConstruccion(new Acceso(new Posicion(9,8), mapa)));
         pilon.destruir();
-        assertFalse(jugador.agregarConstruccion(new Acceso(new Posicion(9,10), mapa), mineral, gas));
+        assertFalse(jugador.agregarConstruccion(new Acceso(new Posicion(9,10), mapa)));
     }
 
 
     @Test
     public void seDestruyeUnPilonPeroExistiendoOtroEnElAreaNoSeDesactiva() throws NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(pilon, mineral, gas);
+        jugador.incrementarMineral(800);
+        jugador.agregarConstruccion(pilon);
         Pilon pilon2 = new Pilon(new Posicion(9,7), mapa, jugador);
-        jugador.agregarConstruccion(pilon2, mineral, gas);
+        jugador.agregarConstruccion(pilon2);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         Acceso acceso = new Acceso(new Posicion(9,8), mapa, jugador);
-        assertTrue(jugador.agregarConstruccion(acceso, mineral, gas));
+        assertTrue(jugador.agregarConstruccion(acceso));
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -329,33 +308,31 @@ public class MapaTest {
     // Caso de uso 14
     @Test
     public void noSePuedeConstruirUnaEstructuraProtossSiHayMohoEnSuAreaEnergizada() throws NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(pilon, mineral, gas);
+        jugador.incrementarMineral(800);
+        jugador.agregarConstruccion(pilon);
         Criadero criadero = new Criadero(new Posicion(9,7), mapa, jugador);
-        jugador.agregarConstruccion(criadero, mineral, gas);
+        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         Construccion acceso = new Acceso(new Posicion(9,8), mapa, jugador);
-        assertFalse(jugador.agregarConstruccion(acceso, mineral, gas));
+        assertFalse(jugador.agregarConstruccion(acceso));
     }
 
     @Test
     public void elMohoSePuedeExpandirPorUnAreaEnergizada() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), mapa, jugador);
-        jugador.agregarConstruccion(pilon, mineral, gas);
+        jugador.incrementarMineral(800);
+        jugador.agregarConstruccion(pilon);
         Criadero criadero = new Criadero(new Posicion(9,20), mapa, jugador);
-        jugador.agregarConstruccion(criadero, mineral, gas);
+        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -366,7 +343,7 @@ public class MapaTest {
             jugador.pasarTiempo();
         }
         Construccion extractor = new Extractor(new Posicion(9,10), new Volcan(new Posicion(9, 10)), mapa);
-        assertTrue(jugador.agregarConstruccion(extractor, mineral, gas));
+        assertTrue(jugador.agregarConstruccion(extractor));
     }
 
 }

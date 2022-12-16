@@ -20,9 +20,7 @@ public class MenaTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(1, 2), mena, mapa);
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
-        jugador.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo);
         assertThrows(MenaOcupadaException.class, ()->{ new NexoMineral(new Posicion(1, 2), mena, mapa); });
     }
     @Test
@@ -43,9 +41,7 @@ public class MenaTest {
         Zangano zangano = new Zangano(new Mineral(25));
         zangano.pasarTiempo();
         NexoMineral nexo = new NexoMineral(new Posicion(1, 2), mena, mapa);
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(10000);
-        jugador.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo);
         assertThrows(MenaOcupadaException.class, ()->{ zangano.ocuparMena(mena); });
     }
 

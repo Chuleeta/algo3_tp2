@@ -60,6 +60,7 @@ public class Extractor extends Edificio implements HabitanteMoho {
         for(Zangano zangano: zanganos){
             this.gas.agregarGas(zangano.extraerGas(this.volcan));
         }
+        jugador.incrementarGas(this.gas.getCantidad());
     }
 
     public void agregarZangano(Zangano zangano)
@@ -105,7 +106,6 @@ public class Extractor extends Edificio implements HabitanteMoho {
             this.jugador.agregarEnListaConstruccion(this);
             /*this.mapa.agregarEnListaConstruccion(this);
             this.mapa.agregarEnListaConstruccionZerg(this);*/
-            this.gas = gas;
             return true;
         }
         return false;

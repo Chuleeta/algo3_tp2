@@ -31,7 +31,7 @@ public class MutaliscoTest {
         NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), mapa, jugador);
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
-        jugador.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo);
         Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(3, 3), mapa);
         jugador.agregarIndividuo(mutalisco);
         // EL tiempo de construccion es 4, con un solo tiempo no esta construido
@@ -55,7 +55,7 @@ public class MutaliscoTest {
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
         Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(3,1), mapa);
-        jugador.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo);
         jugador.agregarIndividuo(mutalisco);
         // tiempo de construccion
         jugador.pasarTiempo();
@@ -93,7 +93,7 @@ public class MutaliscoTest {
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
         Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(6,3),mapa);
-        jugador.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo);
         jugador.agregarIndividuo(mutalisco);
         // tiempo de construccion
         jugador.pasarTiempo();

@@ -25,26 +25,28 @@ public class EspiralTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(1,3), mapa, jugador);
-        jugador.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(10000));
-        criadero.pasarTiempo();
-        criadero.pasarTiempo();
-        criadero.pasarTiempo();
-        criadero.pasarTiempo();
-        criadero.pasarTiempo();
-        criadero.pasarTiempo();
+        jugador.agregarConstruccion(criadero);
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
         ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Posicion(1,2), mapa, jugador);
-        jugador.agregarConstruccion(reserva, new Mineral(10000), new GasVespeno(10000));
+        jugador.incrementarMineral(2000);
+        jugador.incrementarGas(2000);
+        jugador.agregarConstruccion(reserva);
         for(int i = 0; i < 13; i += 1){
             jugador.pasarTiempo();
         }
         Guarida guarida = new Guarida(new Posicion(2,1), mapa, jugador);
-        jugador.agregarConstruccion(guarida, new Mineral(10000), new GasVespeno(10000));
+        jugador.agregarConstruccion(guarida);
         for(int i = 0; i < 13; i += 1){
             jugador.pasarTiempo();
         }
 
         Espiral espiral = new Espiral(new Posicion(2,2), mapa, jugador);
-        jugador.agregarConstruccion(espiral, new Mineral(10000), new GasVespeno(10000));
+        jugador.agregarConstruccion(espiral);
         espiral.pasarTiempo();
         espiral.pasarTiempo();
         espiral.pasarTiempo();

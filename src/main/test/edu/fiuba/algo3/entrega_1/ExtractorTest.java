@@ -24,13 +24,14 @@ public class ExtractorTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(1 , 2), mapa, jugador);
-        jugador.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(0));
+        jugador.incrementarMineral(800);
+        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         Extractor extractor = new Extractor(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), mapa, jugador);
-        jugador.agregarConstruccion(extractor, new Mineral(10000), new GasVespeno(0));
+        jugador.agregarConstruccion(extractor);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -47,13 +48,14 @@ public class ExtractorTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(1 , 2), mapa, jugador);
-        jugador.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(0));
+        jugador.agregarConstruccion(criadero);
+        jugador.incrementarMineral(800);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         Extractor extractor = new Extractor(new Posicion(2, 2), new Volcan(new Posicion(2, 2)), mapa, jugador);
-        jugador.agregarConstruccion(extractor, new Mineral(10000), new GasVespeno(0));
+        jugador.agregarConstruccion(extractor);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -67,7 +69,7 @@ public class ExtractorTest {
         jugador.pasarTiempo();
 
         //then
-        assertEquals(10, extractor.obtenerGas());    
+        assertEquals(10, extractor.obtenerGas());
     }
 
     @Test
@@ -75,13 +77,14 @@ public class ExtractorTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(1 , 2), mapa, jugador);
-        jugador.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(0));
+        jugador.agregarConstruccion(criadero);
+        jugador.incrementarMineral(800);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         Extractor extractor = new Extractor(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), mapa, jugador);
-        jugador.agregarConstruccion(extractor, new Mineral(10000), new GasVespeno(0));
+        jugador.agregarConstruccion(extractor);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -101,13 +104,14 @@ public class ExtractorTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(1 , 2), mapa, jugador);
-        jugador.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(0));
+        jugador.agregarConstruccion(criadero);
+        jugador.incrementarMineral(800);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         Extractor extractor = new Extractor(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), mapa, jugador);
-        jugador.agregarConstruccion(extractor, new Mineral(10000), new GasVespeno(0));
+        jugador.agregarConstruccion(extractor);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -128,13 +132,14 @@ public class ExtractorTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(1 , 2), mapa, jugador);
-        jugador.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(0));
+        jugador.agregarConstruccion(criadero);
+        jugador.incrementarMineral(800);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         Extractor extractor = new Extractor(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), mapa, jugador);
-        jugador.agregarConstruccion(extractor, new Mineral(10000), new GasVespeno(0));
+        jugador.agregarConstruccion(extractor);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -156,13 +161,14 @@ public class ExtractorTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(1 , 2), mapa, jugador);
-        jugador.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(0));
+        jugador.agregarConstruccion(criadero);
+        jugador.incrementarMineral(800);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         Extractor extractor = new Extractor(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), mapa, jugador);
-        jugador.agregarConstruccion(extractor, new Mineral(10000), new GasVespeno(0));
+        jugador.agregarConstruccion(extractor);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         Zangano zangano = new Zangano(new Mineral(25));
@@ -224,19 +230,20 @@ public class ExtractorTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(1 , 2), mapa, jugador);
-        jugador.agregarConstruccion(criadero, new Mineral(10000), new GasVespeno(0));
+        jugador.incrementarMineral(800);
+        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         Extractor extractor = new Extractor(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), mapa, jugador);
-        jugador.agregarConstruccion(extractor, new Mineral(10000), gas);
+        jugador.agregarConstruccion(extractor);
         Zangano zangano = new Zangano(new Mineral(25));
         zangano.pasarTiempo();
         extractor.agregarZangano(zangano);
         extractor.agregarZangano(zangano);
         extractor.agregarZangano(zangano);
-        jugador.agregarConstruccion(extractor, mineral, gas);
+        jugador.agregarConstruccion(extractor);
 
         jugador.pasarTiempo();
         jugador.pasarTiempo();

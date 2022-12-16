@@ -120,8 +120,8 @@ public class Jugador {
         if(!mapa.verificarPosicionDisponible(construccion)){
             return false;
         }
-        return construccion.agregarAlMapa(this.mineral, new GasVespeno(0));
-    }//ACA EN VEZ DE new GasVespeno(0) TIENE Q IR THIS.GAS
+        return construccion.agregarAlMapa(this.mineral, this.gas);
+    }
 
     public boolean agregarIndividuo(Individuo individuo){
         return individuos.add(individuo);
@@ -147,5 +147,13 @@ public class Jugador {
                 tablero.insertarConstruccion(construccion);
             }  
         }
+    }
+
+    public void incrementarMineral(int cantidad){
+        this.mineral.agregarMineral(cantidad);
+    }
+
+    public void incrementarGas(int cantidad){
+        this.gas.agregarGas(cantidad);
     }
 }

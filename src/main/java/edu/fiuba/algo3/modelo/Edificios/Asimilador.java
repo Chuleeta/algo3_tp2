@@ -27,6 +27,7 @@ public class Asimilador extends Edificio{
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.mapa = mapa;
+        this.gas = new GasVespeno(0);
         this.vida = new VidaEscudoProtoss(450, 450);
         this.zona = new ZonaNeutral();
         if(this.jugador == null){
@@ -93,7 +94,7 @@ public class Asimilador extends Edificio{
             this.jugador.agregarEnListaConstruccion(this);
             /*this.mapa.agregarEnListaConstruccion(this);
             this.mapa.agregarEnListaConstruccionProtoss(this);*/
-            this.gas = gas;
+            //this.gas = gas;
             return true;
         }
         return false;
@@ -103,6 +104,7 @@ public class Asimilador extends Edificio{
     public void actualizar() {
         this.vida.regenerar();
         this.gas.agregarGas(volcan.extraerGas(20));
+        jugador.incrementarGas(this.gas.getCantidad());
     }
 
     /*public void destruir()

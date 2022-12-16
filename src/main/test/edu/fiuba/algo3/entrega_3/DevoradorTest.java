@@ -44,8 +44,7 @@ public class DevoradorTest {
         NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa, jugador);
         Mineral mineral = new Mineral(1000);
         GasVespeno gas = new GasVespeno(1000);
-        jugador.agregarConstruccion(nexo, mineral, gas);
-        //mapa.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo);
         Devorador devorador = new Devorador(mineral, gas, new Posicion(4, 1), new Mapa());
         devorador.pasarTiempo();
         devorador.pasarTiempo();
@@ -79,8 +78,7 @@ public class DevoradorTest {
         NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa, jugador);
         Mineral mineral = new Mineral(1000);
         GasVespeno gas = new GasVespeno(1000);
-        jugador.agregarConstruccion(nexo, mineral, gas);
-        //mapa.agregarConstruccion(nexo, mineral, gas);
+        jugador.agregarConstruccion(nexo);
         Devorador devorador = new Devorador(mineral, gas, new Posicion(1, 7), new Mapa());
         devorador.pasarTiempo();
         devorador.pasarTiempo();

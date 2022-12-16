@@ -39,10 +39,8 @@ public class GuardianTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(2,1)), mapa, jugador);
-        Mineral mineral = new Mineral(100);
-        GasVespeno gas = new GasVespeno(100);
-        jugador.agregarConstruccion(nexo, mineral, gas);
-        Guardian guardian = new Guardian(mineral, gas, new Posicion(8, 8), mapa);
+        jugador.agregarConstruccion(nexo);
+        Guardian guardian = new Guardian(new Mineral(200), new GasVespeno(200), new Posicion(8, 8), mapa);
         guardian.pasarTiempo();
         guardian.pasarTiempo();
         guardian.pasarTiempo();
@@ -73,10 +71,8 @@ public class GuardianTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(1,2), new Mena(new Posicion(1,2)), mapa, jugador);
-        Mineral mineral = new Mineral(100);
-        GasVespeno gas = new GasVespeno(100);
-        jugador.agregarConstruccion(nexo, mineral, gas);
-        Guardian guardian = new Guardian(mineral, gas, new Posicion(2, 13), new Mapa());
+        jugador.agregarConstruccion(nexo);
+        Guardian guardian = new Guardian(new Mineral(100), new GasVespeno(150), new Posicion(2, 13), new Mapa());
         guardian.pasarTiempo();
         guardian.pasarTiempo();
         guardian.pasarTiempo();
