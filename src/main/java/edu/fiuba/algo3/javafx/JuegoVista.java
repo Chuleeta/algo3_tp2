@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import edu.fiuba.algo3.javafx.Eventos.BotonAgregarConstruccionProtossHandler;
-import edu.fiuba.algo3.javafx.Eventos.BotonAgregarConstruccionZergHandler;
-import edu.fiuba.algo3.javafx.Eventos.BotonAgregarIndividuoProtossHandler;
-import edu.fiuba.algo3.javafx.Eventos.BotonAgregarIndividuoZergHandler;
+import edu.fiuba.algo3.javafx.Eventos.*;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import javafx.event.ActionEvent;
@@ -344,6 +341,24 @@ public class JuegoVista extends BorderPane {
 
         Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
         juegoVista = new Scene(this,screenSize.getWidth(), screenSize.getHeight(), Color.rgb(47, 52, 58));
+
+        BotonPasarTurnoHandler pasarTurnoHandler = new BotonPasarTurnoHandler(this, calcularTurnoDelJugador());
+        Button pasarTurno = new Button("Pasar\nturno");
+        pasarTurno.setOnAction(pasarTurnoHandler);
+        botonAgregarIndividuoZerg.setOnAction(agregarIndividuoZergHandler);
+        botonAgregarIndividuoZerg.setTranslateX(20);
+        botonAgregarIndividuoZerg.setTranslateY(-168);
+        botonAgregarIndividuoZerg.setFont(fuente);
+        botonAgregarIndividuoZerg.setStyle(botonNormal);
+        botonAgregarIndividuoZerg.setOnMouseEntered(e -> botonAgregarIndividuoZerg.setStyle(botonAntesDeSerPresionado));
+        botonAgregarIndividuoZerg.setOnMouseExited(e -> botonAgregarIndividuoZerg.setStyle(botonNormal));
+    }
+
+    private Jugador calcularTurnoDelJugador() {
+        if(Integer.parseInt(turnoJugadorActual) % 2 == 0){
+            return jugadorUno;
+        }
+        return jugadorDos;
     }
 
     private void acercaDe(){
