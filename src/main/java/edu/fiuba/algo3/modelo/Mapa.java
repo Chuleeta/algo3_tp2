@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.Edificios.Asimilador;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.Extractor;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
@@ -118,4 +119,7 @@ public class Mapa {
         return construcciones;
     }
 
+    public void destruirConstruccion(Construccion construccion) {
+        this.construcciones.remove(construccion);
+    }
 }

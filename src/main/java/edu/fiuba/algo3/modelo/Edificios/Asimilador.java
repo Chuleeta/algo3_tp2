@@ -107,12 +107,12 @@ public class Asimilador extends Edificio{
         jugador.incrementarGas(this.gas.getCantidad());
     }
 
-    /*public void destruir()
+    public void destruir()
     {
         this.jugador.destruirConstruccion(this);
-        //this.mapa.destruirConstruccion(this);
+        this.mapa.destruirConstruccion(this);
         //this.mapa.destruirConstruccionProtoss(this);
-    }*/
+    }
 
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {
