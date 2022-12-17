@@ -20,7 +20,7 @@ public class NexoMineralTest {
     public void SeMinaElMineralConUnNexoMineralYLoMinaExitosamente() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
-        NexoMineral nexito = new NexoMineral(new Posicion(2, 2), new Mena(new Posicion(2, 2)), mapa, jugador);
+        NexoMineral nexito = new NexoMineral(new Posicion(2, 2), new Mena(new Posicion(2, 2)), jugador);
         jugador.agregarConstruccion(nexito);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -34,7 +34,7 @@ public class NexoMineralTest {
     public void nexoMineralNoConstruidoNoMinaMineral() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
-        NexoMineral nexito = new NexoMineral(new Posicion(2, 2), new Mena(new Posicion(2, 2)), mapa, jugador);
+        NexoMineral nexito = new NexoMineral(new Posicion(2, 2), new Mena(new Posicion(2, 2)), jugador);
         jugador.agregarConstruccion(nexito);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -47,7 +47,7 @@ public class NexoMineralTest {
     public void nexoMineralNoMinaMenaAgotada() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);
-        NexoMineral nexito = new NexoMineral(new Posicion(2, 1), new Mena(new Posicion(2, 1)), mapa, jugador);
+        NexoMineral nexito = new NexoMineral(new Posicion(2, 1), new Mena(new Posicion(2, 1)), jugador);
         jugador.agregarConstruccion(nexito);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -65,7 +65,7 @@ public class NexoMineralTest {
 
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);
-        NexoMineral nexito = new NexoMineral(new Posicion(2, 1), new Mena(new Posicion(2, 1)), mapa, jugador);
+        NexoMineral nexito = new NexoMineral(new Posicion(2, 1), new Mena(new Posicion(2, 1)), jugador);
         jugador.agregarConstruccion(nexito);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -85,7 +85,7 @@ public class NexoMineralTest {
 
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);
-        NexoMineral nexito = new NexoMineral(new Posicion(2, 1), new Mena(new Posicion(2, 1)), mapa, jugador);
+        NexoMineral nexito = new NexoMineral(new Posicion(2, 1), new Mena(new Posicion(2, 1)), jugador);
         jugador.agregarConstruccion(nexito);
         jugador.pasarTiempo();
         jugador.pasarTiempo();

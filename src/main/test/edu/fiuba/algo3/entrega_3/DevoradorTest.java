@@ -41,7 +41,7 @@ public class DevoradorTest {
     public void devoradorAtacaNexoMineral14vecesYDaña210unidades() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa, jugador);
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), jugador);
         Mineral mineral = new Mineral(1000);
         GasVespeno gas = new GasVespeno(1000);
         jugador.agregarConstruccion(nexo);
@@ -75,7 +75,7 @@ public class DevoradorTest {
     public void devoradorNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), mapa, jugador);
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(1,1)), jugador);
         Mineral mineral = new Mineral(1000);
         GasVespeno gas = new GasVespeno(1000);
         jugador.agregarConstruccion(nexo);

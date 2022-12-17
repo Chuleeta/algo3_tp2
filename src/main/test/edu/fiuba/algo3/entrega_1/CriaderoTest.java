@@ -153,7 +153,7 @@ public class CriaderoTest {
     public void seDestruyeUnCriaderoYSePuedeConstruirIgualArribaDelMoho() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-        Criadero criadero = new Criadero(new Posicion(9, 9), mapa, jugador);
+        Criadero criadero = new Criadero(new Posicion(9, 9), jugador);
         jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();

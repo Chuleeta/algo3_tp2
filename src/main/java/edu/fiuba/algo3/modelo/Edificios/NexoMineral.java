@@ -33,8 +33,8 @@ public class NexoMineral extends Edificio{
         }
     }
 
-    public NexoMineral(Posicion posicion, Mena mena, Mapa mapa, Jugador jugador) throws MenaOcupadaException {
-        this(posicion, mena, mapa);
+    public NexoMineral(Posicion posicion, Mena mena, Jugador jugador) throws MenaOcupadaException {
+        this(posicion, mena, jugador.mapa);
         this.jugador = jugador;
     }
 

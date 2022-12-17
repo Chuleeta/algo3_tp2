@@ -32,12 +32,12 @@ public class GuaridaTest {
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Posicion(1,2), mapa, jugador);
+        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Posicion(1,2), jugador);
         jugador.agregarConstruccion(reserva);
         for(int i = 0; i < 13; i += 1){
             reserva.pasarTiempo();
         }
-        Guarida guarida = new Guarida(new Posicion(1,1), mapa, jugador);
+        Guarida guarida = new Guarida(new Posicion(1,1), jugador);
         jugador.agregarConstruccion(guarida);
         guarida.pasarTiempo();
         guarida.pasarTiempo();
@@ -105,9 +105,9 @@ public class GuaridaTest {
         jugador.incrementarGas(2000);
         jugador.incrementarMineral(2000);
         // es el edificio correlativo
-        ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(2,2), mapa, jugador);
+        ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(2,2), jugador);
         jugador.agregarConstruccion(reservaDeReproduccion);
-        Guarida guarida = new Guarida(new Posicion(1,2), mapa, jugador);
+        Guarida guarida = new Guarida(new Posicion(1,2), jugador);
         jugador.agregarConstruccion(guarida);
         for (int i = 0; i < 13; i++)
             jugador.pasarTiempo();

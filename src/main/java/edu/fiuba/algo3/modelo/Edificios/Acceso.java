@@ -31,8 +31,8 @@ public class Acceso extends Edificio{
         }
     }
 
-    public Acceso(Posicion posicion, Mapa mapa, Jugador jugador) {
-        this(posicion, mapa);
+    public Acceso(Posicion posicion, Jugador jugador) {
+        this(posicion, jugador.mapa);
         this.jugador = jugador;
     }
 

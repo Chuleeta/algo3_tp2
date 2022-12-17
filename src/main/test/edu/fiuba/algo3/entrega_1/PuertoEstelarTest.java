@@ -19,7 +19,7 @@ public class PuertoEstelarTest {
     public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() throws NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);
-        Pilon pilon = new Pilon(new Posicion(1, 3), mapa, jugador);
+        Pilon pilon = new Pilon(new Posicion(1, 3), jugador);
         jugador.incrementarMineral(800);
         jugador.incrementarGas(800);
         jugador.agregarConstruccion(pilon);
@@ -28,7 +28,7 @@ public class PuertoEstelarTest {
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        Acceso acceso = new Acceso(new Posicion(1, 2), mapa, jugador);
+        Acceso acceso = new Acceso(new Posicion(1, 2), jugador);
         jugador.agregarConstruccion(acceso);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -38,7 +38,7 @@ public class PuertoEstelarTest {
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        PuertoEstelar puertoEstelar = new PuertoEstelar(new Posicion(2, 1), mapa, jugador);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Posicion(2, 1), jugador);
         jugador.agregarConstruccion(puertoEstelar);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -64,7 +64,7 @@ public class PuertoEstelarTest {
         Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);
         jugador.incrementarMineral(800);
         jugador.incrementarGas(800);
-        Pilon pilon = new Pilon(new Posicion(2, 1), mapa, jugador);
+        Pilon pilon = new Pilon(new Posicion(2, 1), jugador);
         jugador.agregarConstruccion(pilon);
 
         jugador.pasarTiempo();
@@ -72,7 +72,7 @@ public class PuertoEstelarTest {
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        Acceso acceso = new Acceso(new Posicion(1,2), mapa, jugador);
+        Acceso acceso = new Acceso(new Posicion(1,2), jugador);
         jugador.agregarConstruccion(acceso);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -83,7 +83,7 @@ public class PuertoEstelarTest {
         jugador.pasarTiempo();
         jugador.pasarTiempo();
 
-        PuertoEstelar puertoEstelar = new PuertoEstelar(new Posicion(2, 2), mapa, jugador);
+        PuertoEstelar puertoEstelar = new PuertoEstelar(new Posicion(2, 2), jugador);
         jugador.agregarConstruccion(puertoEstelar);
         jugador.pasarTiempo();
         jugador.pasarTiempo();

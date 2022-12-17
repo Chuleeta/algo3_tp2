@@ -24,7 +24,7 @@ public class EspiralTest {
         //given
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-        Criadero criadero = new Criadero(new Posicion(1,3), mapa, jugador);
+        Criadero criadero = new Criadero(new Posicion(1,3), jugador);
         jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -32,20 +32,20 @@ public class EspiralTest {
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Posicion(1,2), mapa, jugador);
+        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Posicion(1,2), jugador);
         jugador.incrementarMineral(2000);
         jugador.incrementarGas(2000);
         jugador.agregarConstruccion(reserva);
         for(int i = 0; i < 13; i += 1){
             jugador.pasarTiempo();
         }
-        Guarida guarida = new Guarida(new Posicion(2,1), mapa, jugador);
+        Guarida guarida = new Guarida(new Posicion(2,1), jugador);
         jugador.agregarConstruccion(guarida);
         for(int i = 0; i < 13; i += 1){
             jugador.pasarTiempo();
         }
 
-        Espiral espiral = new Espiral(new Posicion(2,2), mapa, jugador);
+        Espiral espiral = new Espiral(new Posicion(2,2), jugador);
         jugador.agregarConstruccion(espiral);
         espiral.pasarTiempo();
         espiral.pasarTiempo();
@@ -109,11 +109,11 @@ public class EspiralTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         // es el edificio correlativo
-        ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(2,2), mapa, jugador);
+        ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(2,2), jugador);
         reservaDeReproduccion.agregarAlMapa(new Mineral(150), new GasVespeno(100));
-        Guarida guarida = new Guarida(new Posicion(2,1), mapa, jugador);
+        Guarida guarida = new Guarida(new Posicion(2,1), jugador);
         guarida.agregarAlMapa(new Mineral(200), new GasVespeno(100));
-        Espiral espiral = new Espiral(new Posicion(3,3), mapa, jugador);
+        Espiral espiral = new Espiral(new Posicion(3,3), jugador);
         espiral.agregarAlMapa(new Mineral(150), new GasVespeno(100));
         for (int i = 0; i < 10; i++)
             espiral.pasarTiempo();

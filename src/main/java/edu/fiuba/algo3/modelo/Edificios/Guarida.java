@@ -28,8 +28,8 @@ public class Guarida extends Edificio{
         }
     }
 
-    public Guarida(Posicion posicion, Mapa mapa, Jugador jugador) {
-        this(posicion, mapa);
+    public Guarida(Posicion posicion, Jugador jugador) {
+        this(posicion, jugador.mapa);
         this.jugador = jugador;
     }
 

@@ -27,8 +27,8 @@ public class Pilon extends Edificio{
         }
     }
 
-    public Pilon(Posicion posicion, Mapa mapa, Jugador jugador) {
-        this(posicion, mapa);
+    public Pilon(Posicion posicion, Jugador jugador) {
+        this(posicion, jugador.mapa);
         this.jugador = jugador;
     }
 

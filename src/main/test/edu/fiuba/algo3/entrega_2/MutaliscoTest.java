@@ -28,7 +28,7 @@ public class MutaliscoTest {
     public void mutaliscoNoGeneraDañoPorNoEstarConstruidoAun() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-        NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), mapa, jugador);
+        NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), jugador);
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
         jugador.agregarConstruccion(nexo);
@@ -51,7 +51,7 @@ public class MutaliscoTest {
     public void mutaliscoAtacaNexoMineral23VecesYGenera207UnidadesDeDaño() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-        NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), mapa, jugador);
+        NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), jugador);
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
         Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(3,1), mapa);
@@ -89,7 +89,7 @@ public class MutaliscoTest {
     public void mutaliscoNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-        NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), mapa, jugador);
+        NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), jugador);
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
         Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(6,3),mapa);

@@ -22,7 +22,7 @@ public class AsimiladorTest {
     public void asimiladorConsigueVeinteDeGasEnUnTurno() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
-        Asimilador asimilador = new Asimilador(new Posicion(1, 2), new Volcan(new Posicion(1, 2)), mapa, jugador);
+        Asimilador asimilador = new Asimilador(new Posicion(1, 2), new Volcan(new Posicion(1, 2)), jugador);
         jugador.agregarConstruccion(asimilador);
 
         jugador.pasarTiempo();
@@ -50,7 +50,7 @@ public class AsimiladorTest {
     public void asimiladorConsigueVeinteDeGasEnCadaTurno() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
-        Asimilador asimilador = new Asimilador(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), mapa, jugador);
+        Asimilador asimilador = new Asimilador(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), jugador);
         jugador.agregarConstruccion(asimilador);
 
         jugador.pasarTiempo();
@@ -77,7 +77,7 @@ public class AsimiladorTest {
     public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
-        Asimilador asimilador = new Asimilador(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), mapa, jugador);
+        Asimilador asimilador = new Asimilador(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), jugador);
         jugador.agregarConstruccion(asimilador);
         jugador.pasarTiempo();
         jugador.pasarTiempo();

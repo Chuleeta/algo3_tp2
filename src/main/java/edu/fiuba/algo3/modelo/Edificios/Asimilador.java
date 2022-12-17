@@ -35,8 +35,8 @@ public class Asimilador extends Edificio{
         }
     }
 
-    public Asimilador(Posicion posicion, Volcan volcan, Mapa mapa, Jugador jugador) throws VolcanOcupadoException {
-        this(posicion, volcan, mapa);
+    public Asimilador(Posicion posicion, Volcan volcan, Jugador jugador) throws VolcanOcupadoException {
+        this(posicion, volcan, jugador.mapa);
         this.jugador = jugador;
     }
 

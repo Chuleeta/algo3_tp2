@@ -38,7 +38,7 @@ public class GuardianTest {
     public void guardianAtacaNexoMineral8vecesYDaña200unidades() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(2,1)), mapa, jugador);
+        NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(2,1)), jugador);
         jugador.agregarConstruccion(nexo);
         Guardian guardian = new Guardian(new Mineral(200), new GasVespeno(200), new Posicion(8, 8), mapa);
         guardian.pasarTiempo();
@@ -70,7 +70,7 @@ public class GuardianTest {
     public void guardianNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-        NexoMineral nexo = new NexoMineral(new Posicion(1,2), new Mena(new Posicion(1,2)), mapa, jugador);
+        NexoMineral nexo = new NexoMineral(new Posicion(1,2), new Mena(new Posicion(1,2)), jugador);
         jugador.agregarConstruccion(nexo);
         Guardian guardian = new Guardian(new Mineral(100), new GasVespeno(150), new Posicion(2, 13), new Mapa());
         guardian.pasarTiempo();

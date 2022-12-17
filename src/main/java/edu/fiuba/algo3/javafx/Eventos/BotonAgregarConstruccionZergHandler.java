@@ -170,7 +170,7 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonCriadero.setOnMouseExited(e -> botonCriadero.setStyle(botonNormal));
         botonCriadero.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Criadero criadero = new Criadero(inputUsuario, this.jugador.mapa, this.jugador);
+            Criadero criadero = new Criadero(inputUsuario, this.jugador);
             if(this.jugador.agregarConstruccion(criadero)){
                 juegoVista.actualizarTablero();
             }else{
@@ -186,7 +186,7 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonReserva.setOnMouseExited(e -> botonReserva.setStyle(botonNormal));
         botonReserva.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            ReservaDeReproduccion reserva = new ReservaDeReproduccion(inputUsuario, this.jugador.mapa, this.jugador);
+            ReservaDeReproduccion reserva = new ReservaDeReproduccion(inputUsuario, this.jugador);
             if(this.jugador.agregarConstruccion(reserva)){
                 juegoVista.actualizarTablero();
             }else{
@@ -219,7 +219,7 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonGuarida.setOnMouseExited(e -> botonGuarida.setStyle(botonNormal));
         botonGuarida.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Guarida guarida = new Guarida(inputUsuario, this.jugador.mapa, this.jugador);
+            Guarida guarida = new Guarida(inputUsuario, this.jugador);
             if(this.jugador.agregarConstruccion(guarida)){
                 juegoVista.actualizarTablero();
             }else{
@@ -235,7 +235,7 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonEspiral.setOnMouseExited(e -> botonEspiral.setStyle(botonNormal));
         botonEspiral.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Espiral espiral = new Espiral(inputUsuario, this.jugador.mapa, this.jugador);
+            Espiral espiral = new Espiral(inputUsuario, this.jugador);
             if(this.jugador.agregarConstruccion(espiral)){
                 juegoVista.actualizarTablero();
             }else{

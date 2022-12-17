@@ -18,7 +18,7 @@ public class VolcanTest {
         Volcan volcan = new Volcan(new Posicion(1,2));
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
-        Asimilador asimiladorUno = new Asimilador(new Posicion(1, 2), volcan, mapa, jugador);
+        Asimilador asimiladorUno = new Asimilador(new Posicion(1, 2), volcan, jugador);
         jugador.agregarConstruccion(asimiladorUno);
         assertThrows(VolcanOcupadoException.class, ()->{ new Asimilador(new Posicion(1, 2), volcan, mapa); });
     }
@@ -27,7 +27,7 @@ public class VolcanTest {
         Volcan volcan = new Volcan(new Posicion(1,2));
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
-        Asimilador asimiladorUno = new Asimilador(new Posicion(1, 2), volcan, mapa, jugador);
+        Asimilador asimiladorUno = new Asimilador(new Posicion(1, 2), volcan, jugador);
         jugador.agregarConstruccion(asimiladorUno);
         assertThrows(VolcanOcupadoException.class, ()->{ new Extractor(new Posicion(1, 2), volcan, mapa); });
     }

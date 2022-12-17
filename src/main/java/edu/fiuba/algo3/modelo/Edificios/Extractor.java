@@ -40,8 +40,8 @@ public class Extractor extends Edificio{
         }
     }
 
-    public Extractor(Posicion posicion, Volcan volcan, Mapa mapa, Jugador jugador) throws VolcanOcupadoException {
-        this(posicion, volcan, mapa);
+    public Extractor(Posicion posicion, Volcan volcan, Jugador jugador) throws VolcanOcupadoException {
+        this(posicion, volcan, jugador.mapa);
         this.jugador = jugador;
     }
 

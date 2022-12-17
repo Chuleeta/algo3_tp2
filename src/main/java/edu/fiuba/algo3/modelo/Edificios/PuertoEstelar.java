@@ -27,8 +27,8 @@ public class PuertoEstelar extends Edificio {
         }
     }
 
-    public PuertoEstelar(Posicion posicion, Mapa mapa, Jugador jugador) {
-        this(posicion, mapa);
+    public PuertoEstelar(Posicion posicion, Jugador jugador) {
+        this(posicion, jugador.mapa);
         this.jugador = jugador;
     }
 

@@ -43,7 +43,7 @@ public class HidraliscoTest {
     public void HidraliscoAtacaNexoMineral20VecesYGenera200UnidadesDeDaño() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-        NexoMineral nexo = new NexoMineral(new Posicion(1,2), new Mena(new Posicion(1,2)), mapa, jugador);
+        NexoMineral nexo = new NexoMineral(new Posicion(1,2), new Mena(new Posicion(1,2)), jugador);
         // tiempo de construccion
         Mineral mineral = new Mineral(125);
         GasVespeno gas = new GasVespeno(25);
@@ -75,7 +75,7 @@ public class HidraliscoTest {
     public void hidraliscoNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-        NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), mapa, jugador);
+        NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), jugador);
         // tiempo de construccion
         Mineral mineral = new Mineral(125);
         GasVespeno gas = new GasVespeno(25);

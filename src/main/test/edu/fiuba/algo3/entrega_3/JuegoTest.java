@@ -31,9 +31,9 @@ public class JuegoTest {
         Mapa mapa = new Mapa();
         Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Jugador jugadorDos = new Jugador("jugadorDos", "rojo", "zerg", new Posicion(100,100), mapa, 200);
-        Pilon pilon = new Pilon(new Posicion(9,9), mapa, jugadorUno);
+        Pilon pilon = new Pilon(new Posicion(9,9), jugadorUno);
         jugadorUno.agregarConstruccion(pilon);
-        Criadero criadero = new Criadero(new Posicion(9,20), mapa, jugadorDos);
+        Criadero criadero = new Criadero(new Posicion(9,20), jugadorDos);
         jugadorDos.agregarConstruccion(criadero);
 
         jugadorUno.pasarTiempo();

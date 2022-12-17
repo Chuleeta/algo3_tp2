@@ -28,8 +28,8 @@ public class Espiral extends Edificio{
         }
     }
 
-    public Espiral(Posicion posicion, Mapa mapa, Jugador jugador) {
-        this(posicion, mapa);
+    public Espiral(Posicion posicion, Jugador jugador) {
+        this(posicion, jugador.mapa);
         this.jugador = jugador;
     }
 
