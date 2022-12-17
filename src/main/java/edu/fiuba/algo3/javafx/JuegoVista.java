@@ -58,9 +58,15 @@ public class JuegoVista extends BorderPane {
     private Jugador jugadorDos;
     private Juego juego;
     private Tablero tablero;
+    private int pisicionSeleccionadaX;
+    private int pisicionSeleccionadaY;
+    private Label posicionSeleccionada;
     //public Stage stage;
-
+    
     public JuegoVista(Stage stage, Scene pantallaDeInicio, int ancho, int alto, Juego juego,String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
+        this.pisicionSeleccionadaX = 1;
+        this.pisicionSeleccionadaY = 1;
+        
         this.juego = juego;
         this.cargarImagenes();
 		this.setJuego(stage, pantallaDeInicio, ancho, alto, nombreJugador1, eleccionRaza1, nombreJugador2, eleccionRaza2);
@@ -86,6 +92,12 @@ public class JuegoVista extends BorderPane {
 		
 	}
 
+    public void  setPosicionSeleccionada(int X, int Y){
+       this.pisicionSeleccionadaX = X;
+       this.pisicionSeleccionadaY = Y;
+       this.posicionSeleccionada.setText(String.format("Posicion Seleccionada - En X: " + this.pisicionSeleccionadaX + " | En Y: " + this.pisicionSeleccionadaY));
+    }
+
     private void setJuego(Stage stage, Scene pantallaDeInicio, int ancho, int alto, String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 25);
@@ -95,8 +107,11 @@ public class JuegoVista extends BorderPane {
         Label nombreDelJugador = new Label("Turno Jugador : " + turnoJugadorActual);
         nombreDelJugador.setFont(fuente);
         nombreDelJugador.setStyle(formatoTexto);
-        HBox turnoActual = new HBox();
-        turnoActual.getChildren().addAll(nombreDelJugador);
+        this.posicionSeleccionada = new Label("Posicion Seleccionada - En X: " + this.pisicionSeleccionadaX + " | En Y: " + this.pisicionSeleccionadaY);
+        this.posicionSeleccionada.setFont(fuente);
+        this.posicionSeleccionada.setStyle(formatoTexto);
+        VBox turnoActual = new VBox();
+        turnoActual.getChildren().addAll(nombreDelJugador, this.posicionSeleccionada);
         turnoActual.setAlignment(Pos.CENTER);
         turnoActual.setBackground(new Background(new BackgroundFill(Color.rgb(63, 84, 99, 0.7), new CornerRadii(20), Insets.EMPTY)));
 
@@ -209,7 +224,7 @@ public class JuegoVista extends BorderPane {
         mineralesJugadorDos.setPadding(new Insets(0, 0, 0, 20));
         
         //GET MAPA DEBE SER UN GROUP
-        this.tablero = new Tablero(alto,ancho, juego);
+        this.tablero = new Tablero(alto,ancho, juego, this);
         VBox cosasDelCentro = new VBox();
         cosasDelCentro.getChildren().addAll(turnoActual, tablero.getContenedor());
         cosasDelCentro.setAlignment(Pos.CENTER);

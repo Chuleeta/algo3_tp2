@@ -34,8 +34,10 @@ public class Tablero {
     private Pane mapaVista;
     private int alto;
     private int ancho;
+    private JuegoVista juegoVista;
     
-    public Tablero(int alto, int ancho, Juego juego){
+    public Tablero(int alto, int ancho, Juego juego, JuegoVista juegoVista){
+        this.juegoVista = juegoVista;
         this.alto = alto;
         this.ancho = ancho;
         this.cargarImagenes();
@@ -165,12 +167,19 @@ public class Tablero {
             double resultadoY = new BigDecimal(n.getTranslateY()).setScale(1, RoundingMode.UP).doubleValue();
             //double diferenciaX = resultadoX - (int)resultadoX;
             //double diferenciaY = resultadoY - (int)resultadoY;
+            // System.out.println("\nvalor aprox X: " + resultadoX);
+            // System.out.println("\nvalor aprox Y: " + resultadoY);
             n.setTranslateX(encontrarMultiploDeMasCercanoA(40, (int)resultadoX) + 10);
             n.setTranslateY(encontrarMultiploDeMasCercanoA(40, (int)resultadoY) + 10);
-            //System.out.println("\nvalor aprox X: " + resultadoX);
-            //System.out.println("\nvalor aprox Y: " + resultadoY);
-            //System.out.println("\nvalor aprox INT X: " + encontrarMultiploDeMasCercanoA(40, (int)resultadoY) + 10);
-            //System.out.println("\nvalor aprox INT Y: " + encontrarMultiploDeMasCercanoA(40, (int)resultadoY) + 10);
+            double xDouble = encontrarMultiploDeMasCercanoA(40, (int)resultadoX);
+            double yDouble = encontrarMultiploDeMasCercanoA(40, (int)resultadoY);
+            // System.out.println("\nvalor aprox DOUBLE X: " + encontrarMultiploDeMasCercanoA(40, (int)resultadoX) + 10);
+            // System.out.println("\nvalor aprox DOUBLE Y: " + encontrarMultiploDeMasCercanoA(40, (int)resultadoY) + 10);
+            int x = (Math.round((float)xDouble) / 40) + 1;
+            int y = (Math.round((float)yDouble) / 40) + 1;
+            this.juegoVista.setPosicionSeleccionada(x, y);
+            // System.out.println("\nvalor aprox int X: " + x);
+            // System.out.println("\nvalor aprox int Y: " + y); 
         });
     }
 
