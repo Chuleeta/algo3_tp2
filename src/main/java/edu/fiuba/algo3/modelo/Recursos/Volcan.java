@@ -2,9 +2,13 @@ package edu.fiuba.algo3.modelo.Recursos;
 
 import edu.fiuba.algo3.modelo.Ocupable;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Edificios.Asimilador;
+import edu.fiuba.algo3.modelo.Edificios.Extractor;
+import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Individuos.Zangano;
 
-public class Volcan implements Ocupable{
+public class Volcan implements RecursoInyectable{
     private Posicion posicion;
     private int gas;
     private boolean estaOcupado;
@@ -23,6 +27,7 @@ public class Volcan implements Ocupable{
         this.estaOcupado = true;
     }
 
+
     public int extraerGas(int cantidad) {
         if (this.gas >= cantidad)
         {
@@ -38,5 +43,45 @@ public class Volcan implements Ocupable{
 
     public boolean estaOcupada(Posicion posicionDada) {
         return this.posicion.equals(posicionDada);
+    }
+
+    @Override
+    public boolean inyectarRecurso(Extractor extractor) throws VolcanOcupadoException {
+        if(estaOcupada(extractor.posicion) && !estaOcupado){
+            extractor.setVolcan(this);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean inyectarRecurso(Asimilador asimilador) throws VolcanOcupadoException {
+        if(estaOcupada(asimilador.posicion) && !estaOcupado){
+            asimilador.setVolcan(this);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean inyectarRecurso(NexoMineral nexoMineral) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean inyectarRecurso(Zangano zangano) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public String getSpray(){
+        return "rojo";
+    }
+
+    @Override
+    public Posicion mostrarPosicion() {
+        return this.posicion;
     }
 }

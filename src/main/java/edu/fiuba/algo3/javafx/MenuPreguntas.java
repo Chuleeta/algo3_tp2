@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 import java.io.InputStream;
 import java.lang.Runnable;
 
+import edu.fiuba.algo3.modelo.Base;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
@@ -167,11 +168,14 @@ public class MenuPreguntas extends BorderPane{
         siguiente.setOnAction(e-> {
             //CREO EL JUEGO
             Mapa mapa = new Mapa();
-            Posicion posicionJugadorUno = new Posicion(0,0);
+            Posicion posicionJugadorUno = new Posicion(1,1);
             Posicion posicionJugadorDos = new Posicion(18, 22);
             Jugador jugadorUno = new Jugador(nombreDelJugador1.getText(), "azul", seleccionRaza1.getValue(), posicionJugadorUno, mapa, 0);
-            Criadero criaderoUno = new Criadero(new Posicion(1,1), jugadorUno);
+            Base baseJ1 = new Base(jugadorUno);
+            baseJ1.agregarAlMapaElementos(mapa);
             Jugador jugadorDos = new Jugador(nombreDelJugador2.getText(), "rojo", seleccionRaza2.getValue(), posicionJugadorDos, mapa, 0);
+            Base baseJ2 = new Base(jugadorDos);
+            baseJ2.agregarAlMapaElementos(mapa);
             if(preguntarDatosCorrectos(nombreDelJugador1.getText(), seleccionRaza1.getValue(), nombreDelJugador2.getText(), seleccionRaza2.getValue())){
                 if(seleccionRaza1.getValue() != null && !(nombreDelJugador1.getText().isBlank()) && seleccionRaza2.getValue() != null && !(nombreDelJugador2.getText().isBlank())){
                     try {

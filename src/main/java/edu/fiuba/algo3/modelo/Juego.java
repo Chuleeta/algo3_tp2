@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
 
 import java.util.ArrayList;
 
@@ -26,5 +27,9 @@ public class Juego {
 
     public ArrayList<Construccion> mostrarConstrucciones() {
         return mapa.mostrarConstrucciones();
+    }
+
+    public ArrayList<RecursoInyectable> mostrarRecursos() {
+        return mapa.mostrarRecursos();
     }
 }

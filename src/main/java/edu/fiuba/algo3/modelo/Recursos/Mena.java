@@ -2,10 +2,15 @@ package edu.fiuba.algo3.modelo.Recursos;
 
 import edu.fiuba.algo3.modelo.Ocupable;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Edificios.Asimilador;
+import edu.fiuba.algo3.modelo.Edificios.Extractor;
+import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
+import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Individuos.Zangano;
 
-public class Mena implements Ocupable{
+public class Mena implements RecursoInyectable{
     private Posicion posicion;
     private int minerales;
     private boolean estaOcupado;
@@ -39,6 +44,40 @@ public class Mena implements Ocupable{
     }
 
     public Posicion getPosicion() {
+        return this.posicion;
+    }
+
+    @Override
+    public boolean inyectarRecurso(Extractor extractor) throws VolcanOcupadoException {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean inyectarRecurso(Asimilador asimilador) throws VolcanOcupadoException {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean inyectarRecurso(NexoMineral nexoMineral) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean inyectarRecurso(Zangano zangano) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+    
+    @Override
+    public String getSpray(){
+        return "azul";
+    }
+
+    @Override
+    public Posicion mostrarPosicion() {
         return this.posicion;
     }
 }

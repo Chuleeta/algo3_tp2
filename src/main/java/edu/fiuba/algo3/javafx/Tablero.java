@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import edu.fiuba.algo3.modelo.Construccion;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -96,14 +97,32 @@ public class Tablero {
     public void actualizarConstrucciones() {
         ArrayList<Construccion> construcciones = juego.mostrarConstrucciones();
         for (Construccion construccion : construcciones) {
-            System.out.println("\nRECORRE");
+            // System.out.println("\nRECORRE");
             Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
             J2.setTranslateX((construccion.mostrarPosicion().coordenadaX() * 40) + 10);
             J2.setTranslateY((construccion.mostrarPosicion().coordenadaY() * 40) + 10);
             hacerMovible(J2);
             mapaVista.getChildren().add(J2);
         }
-        System.out.println("\nNO RECORRE");
+
+        ArrayList<RecursoInyectable> recursos = juego.mostrarRecursos();
+        //NO ESTA RECORRIENDO EL ARRAY
+        if(recursos.size() == 0)
+            System.out.println("\nTAMAÑO ES 0");
+        
+        for (RecursoInyectable recurso : recursos) {
+            System.out.println("\nRECORRE");
+            Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
+            if(recurso.getSpray() == "rojo"){
+                J2 = new Rectangle(20, 20, Color.RED);
+            }else{
+                J2 = new Rectangle(20, 20, Color.BLUE);
+            }
+            J2.setTranslateX((recurso.mostrarPosicion().coordenadaX() * 40) + 10);
+            J2.setTranslateY((recurso.mostrarPosicion().coordenadaY() * 40) + 10);
+            hacerMovible(J2);
+            mapaVista.getChildren().add(J2);
+        }
     }
 
     private void hacerMovible(Node n) {

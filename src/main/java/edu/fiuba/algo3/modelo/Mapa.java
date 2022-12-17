@@ -2,10 +2,12 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.modelo.Edificios.Asimilador;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.Extractor;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
+import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 import edu.fiuba.algo3.modelo.Zonas.Zona;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
@@ -16,6 +18,7 @@ public class Mapa {
     private ArrayList<Zona> zonas;
     private ArrayList<AreaEspacial> areasEspaciales;
     private ArrayList<Ocupable> ocupables;
+    private ArrayList<RecursoInyectable> recursosInyectables;
 
     public Mapa()
     {
@@ -24,7 +27,7 @@ public class Mapa {
         this.areasEspaciales = new ArrayList<>();
         this.zonas.add(new ZonaNeutral());
         this.ocupables = new ArrayList<>();
-
+        this.recursosInyectables = new ArrayList<>();
     }
 
     public boolean agregarOcupable(Ocupable ocupable, Posicion posicion){
@@ -33,6 +36,30 @@ public class Mapa {
         
         this.ocupables.add(ocupable);
         return true;
+    }
+
+    public boolean agregarRecursoInyectable(RecursoInyectable recursoInyectable, Posicion posicion){
+        if(recursoInyectable == null)
+            return false;
+        this.recursosInyectables.add(recursoInyectable);
+        System.out.println("\nSE AGREGA");
+        return true;
+    }
+
+    public boolean inyectarRecurso(Extractor extractor) throws VolcanOcupadoException{
+        for (RecursoInyectable recurso:recursosInyectables){
+            if(recurso.inyectarRecurso(extractor))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean inyectarRecurso(Asimilador asimilador) throws VolcanOcupadoException{
+        for (RecursoInyectable recurso:recursosInyectables){
+            if(recurso.inyectarRecurso(asimilador))
+                return true;
+        }
+        return false;
     }
 
     private boolean verificarPosicion(Posicion posicionDada){
@@ -116,6 +143,10 @@ public class Mapa {
     }
     public ArrayList<Construccion> mostrarConstrucciones() {
         return construcciones;
+    }
+
+    public ArrayList<RecursoInyectable> mostrarRecursos() {
+        return this.recursosInyectables;
     }
 
 }

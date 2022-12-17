@@ -107,6 +107,11 @@ public class Asimilador extends Edificio{
         jugador.incrementarGas(this.gas.getCantidad());
     }
 
+    public void setVolcan(Volcan volcan) throws VolcanOcupadoException {
+        volcan.ocupar();
+        this.volcan = volcan;
+    }
+
     /*public void destruir()
     {
         this.jugador.destruirConstruccion(this);

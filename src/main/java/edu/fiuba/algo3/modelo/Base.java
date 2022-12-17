@@ -31,13 +31,16 @@ public class Base {
 
         while(!seAgregoAlMapa){
             // Se obtiene un numero entre [0 - 20].
-            int x = rand.nextInt(100);
-            int y = rand.nextInt(100);
+            int x = rand.nextInt(23);
+            int y = rand.nextInt(23);
             posiblePosicion = new Posicion(x, y);
             posibleMena = new Mena(posiblePosicion);
     
-            if(this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion) && mapa.agregarOcupable(posibleMena, posiblePosicion))
+            if(this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion) && mapa.agregarOcupable(posibleMena, posiblePosicion)){
+                System.out.println("\nENTRA AL IF DE MENA");
+                mapa.agregarRecursoInyectable(posibleMena, posiblePosicion);
                 seAgregoAlMapa = true;
+            }
         }
     }
 
@@ -49,13 +52,16 @@ public class Base {
 
         while(!seAgregoAlMapa){
             // Se obtiene un numero entre [0 - 20].
-            int x = rand.nextInt(100);
-            int y = rand.nextInt(100);
+            int x = rand.nextInt(23);
+            int y = rand.nextInt(23);
             posiblePosicion = new Posicion(x, y);
             posibleVolcan = new Volcan(posiblePosicion);
     
-            if(this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion) && mapa.agregarOcupable(posibleVolcan, posiblePosicion))
+            if(this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion) && mapa.agregarOcupable(posibleVolcan, posiblePosicion)){
+                System.out.println("\nENTRA AL IF DE VOLCAN");
+                mapa.agregarRecursoInyectable(posibleVolcan, posiblePosicion);
                 seAgregoAlMapa = true;
+            }
         }
     }
 

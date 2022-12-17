@@ -6,6 +6,8 @@ import edu.fiuba.algo3.modelo.Edificios.Espiral;
 import edu.fiuba.algo3.modelo.Edificios.Extractor;
 import edu.fiuba.algo3.modelo.Edificios.Guarida;
 import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
+import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Recursos.Volcan;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import javafx.beans.value.ObservableValue;
@@ -203,6 +205,13 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonExtractor.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
             //ACA TIENE Q SELECCIONAR UN VOLCAN
+            //Volcan volcan = new Volcan(inputUsuario);
+            //this.jugador.mapa.agregarRecursoInyectable(volcan, inputUsuario);
+            try {
+                Extractor extractor = new Extractor(inputUsuario, jugador.getMapa());
+            } catch (VolcanOcupadoException e1) {
+                noSePuedeConstruir();
+            }
             //Extractor extractor = new Extractor(inputUsuario, this.jugador.mapa, this.jugador);
             // if(this.jugador.agregarConstruccion(extractor)){
             //     juegoVista.actualizarTablero();

@@ -45,6 +45,21 @@ public class Extractor extends Edificio{
         this.jugador = jugador;
     }
 
+    public Extractor(Posicion posicion, Mapa mapa) throws VolcanOcupadoException {
+        this.posicion = posicion;
+        estado = new EstadoNoConstruido();
+        this.mapa = mapa;
+        zona = new ZonaMoho(this.posicion);
+        zanganos = new ArrayList<>();
+        tiempo = 0;
+        this.vida = new VidaZerg(VIDA_COMPLETA);
+        this.gas = new GasVespeno(0);
+        mapa.inyectarRecurso(this);
+        if(this.jugador == null){
+            crearJugadorPorDefecto();
+        }
+    }
+
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException
     {
         tiempo += 1;
@@ -115,6 +130,11 @@ public class Extractor extends Edificio{
     public void actualizar(){
         this.vida.regenerar();
         extraerGas();
+    }
+
+    public void setVolcan(Volcan volcan) throws VolcanOcupadoException{
+        volcan.ocupar();
+        this.volcan = volcan;
     }
 
     /*public void destruir()
