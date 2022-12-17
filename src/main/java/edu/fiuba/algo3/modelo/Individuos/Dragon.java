@@ -30,7 +30,7 @@ public class Dragon extends Individuo implements UnidadTierra {
     }
 
     public Dragon(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException {
-        this(mineral, gas, posicion, jugador.mapa);
+        this(mineral, gas, posicion, jugador.getMapa());
         this.jugador = jugador;
     }
 

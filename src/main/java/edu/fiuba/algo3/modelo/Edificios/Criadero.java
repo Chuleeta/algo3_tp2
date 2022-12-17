@@ -35,7 +35,7 @@ public class Criadero extends Edificio {
     }
 
     public Criadero(Posicion posicion, Jugador jugador) {
-        this(posicion, jugador.mapa);
+        this(posicion, jugador.getMapa());
         this.jugador = jugador;
     }
 

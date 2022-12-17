@@ -32,7 +32,7 @@ public class Acceso extends Edificio{
     }
 
     public Acceso(Posicion posicion, Jugador jugador) {
-        this(posicion, jugador.mapa);
+        this(posicion, jugador.getMapa());
         this.jugador = jugador;
     }
 

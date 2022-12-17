@@ -129,4 +129,8 @@ public class Jugador {
     public void incrementarGas(int cantidad){
         this.gas.agregarGas(cantidad);
     }
+
+    public Mapa getMapa() {
+        return mapa;
+    }
 }

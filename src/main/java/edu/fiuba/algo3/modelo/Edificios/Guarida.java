@@ -29,7 +29,7 @@ public class Guarida extends Edificio{
     }
 
     public Guarida(Posicion posicion, Jugador jugador) {
-        this(posicion, jugador.mapa);
+        this(posicion, jugador.getMapa());
         this.jugador = jugador;
     }
 
