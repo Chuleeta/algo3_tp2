@@ -29,8 +29,8 @@ public class Dragon extends Individuo implements UnidadTierra {
         crearJugadorPorDefecto();
     }
 
-    public Dragon(Mineral mineral, GasVespeno gas, Posicion posicion, Mapa mapa, Jugador jugador) throws RequerimientosInsuficientesException {
-        this(mineral, gas, posicion, mapa);
+    public Dragon(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException {
+        this(mineral, gas, posicion, jugador.mapa);
         this.jugador = jugador;
     }
 

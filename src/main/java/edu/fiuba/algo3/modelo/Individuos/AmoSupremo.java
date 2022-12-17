@@ -30,8 +30,8 @@ public class AmoSupremo extends Individuo implements UnidadVoladora {
         crearJugadorPorDefecto();
     }
 
-    public AmoSupremo(Mineral mineral, GasVespeno gas, Posicion posicion, Mapa mapa, Jugador jugador) throws RequerimientosInsuficientesException {
-        this(mineral, gas, posicion, mapa);
+    public AmoSupremo(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException {
+        this(mineral, gas, posicion, jugador.mapa);
         this.jugador = jugador;
     }
 
