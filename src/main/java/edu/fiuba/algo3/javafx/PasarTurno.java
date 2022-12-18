@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.javafx;
 
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Jugador;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -48,7 +49,15 @@ public class PasarTurno extends Button implements Notificador{
             turnoActual = jugadorDos;
         }
         for(Notificable suscriptor : this.suscriptores) {
-            suscriptor.actualizar(turnoActual);
+            if (suscriptor != null) {
+                suscriptor.actualizar(turnoActual);
+            }
+        }
+        try {
+            jugadorUno.pasarTiempo();
+            jugadorDos.pasarTiempo();
+        } catch (NoExisteEdificioCorrelativoException e) {
+
         }
     }
     public void cambiarTurno() {

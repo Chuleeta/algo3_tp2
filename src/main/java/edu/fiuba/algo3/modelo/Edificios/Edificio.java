@@ -60,4 +60,8 @@ public abstract class Edificio implements Construccion, Ocupable {
         return posicion;
     }
 
+    public Jugador mostrarJugador() {
+        return jugador;
+    }
+
 }

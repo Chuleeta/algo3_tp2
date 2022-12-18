@@ -17,4 +17,5 @@ public interface Construccion {
     void desactivar();
     boolean estaOcupada(Posicion posicionDada);
     Posicion mostrarPosicion ();
+    Jugador mostrarJugador();
 }

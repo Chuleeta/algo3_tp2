@@ -60,6 +60,7 @@ public class JuegoVista extends BorderPane {
     private int pisicionSeleccionadaX;
     private int pisicionSeleccionadaY;
     private Label posicionSeleccionada;
+    private PasarTurno pasarTurno;
     //public Stage stage;
     
     public JuegoVista(Stage stage, Scene pantallaDeInicio, int ancho, int alto, Juego juego,String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
@@ -145,6 +146,7 @@ public class JuegoVista extends BorderPane {
         BotonAgregarConstruccionProtossHandler agregarConstruccionProtossHandler;
         BotonAgregarIndividuoProtossHandler agregarIndividuoProtossHandler;
         PasarTurno pasarturno = new PasarTurno("Pasar turno", jugadorUno, jugadorDos);
+        this.pasarTurno = pasarturno;
         if (eleccionRaza1 == "Zerg") {
             agregarConstruccionZergHandler = new BotonAgregarConstruccionZergHandler(this, jugadorUno);
             agregarIndividuoZergHandler = new BotonAgregarIndividuoZergHandler(this, jugadorUno);
@@ -461,5 +463,9 @@ public class JuegoVista extends BorderPane {
                 tablero.insertarConstruccion(construccion);
             }
         }
+    }
+
+    public void agregarSuscriptorPasarTurno(UnidadMovible unidad) {
+        this.pasarTurno.añadirSuscriptor(unidad);
     }
 }
