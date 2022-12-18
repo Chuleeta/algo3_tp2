@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -120,7 +121,12 @@ public class Tablero {
         }
     }
 
+    private void seleccionarVerPosicion(Node n){
+        
+    }
+
     private void hacerMovible(Node n) {
+        Paint colorOriginal = ((Shape) n).getFill();;
         n.setOnMousePressed(e ->{
             this.startX = (int)(e.getSceneX() - n.getTranslateX());
             this.startY = (int)(e.getSceneY() - n.getTranslateY());
@@ -176,7 +182,7 @@ public class Tablero {
              * desp se divide por 40 ya que es lo q miden los lados de los cuadrados que hacen de mapa
              * (440, 320) ---> (11, 8) ---> new Posicion(11,8)
             */
-            ((Shape) n).setFill(Color.GREEN);// 458.12312039123 ---> 458.1--> 450---> 11.25 --> 11 13 --> posicion(11, 13)
+            ((Shape) n).setFill(colorOriginal);// 458.12312039123 ---> 458.1--> 450---> 11.25 --> 11 13 --> posicion(11, 13)
             double resultadoX = new BigDecimal(n.getTranslateX()).setScale(1, RoundingMode.UP).doubleValue();
             double resultadoY = new BigDecimal(n.getTranslateY()).setScale(1, RoundingMode.UP).doubleValue();
             //double diferenciaX = resultadoX - (int)resultadoX;
