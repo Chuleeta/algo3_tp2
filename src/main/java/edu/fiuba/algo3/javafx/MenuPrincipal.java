@@ -6,10 +6,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -222,14 +219,68 @@ public class MenuPrincipal extends BorderPane{
         ventanaComoSalir.setResizable(false);
         ventanaComoSalir.setTitle("Como se Juega");
         
-        VBox menuSalir = new VBox(20);
-        
-        Text parrafoComoJugar = new Text("ACA VA COMO JUGAR");
+        ScrollPane scroll = new ScrollPane();
+        VBox menuSalir = new VBox( );
+
+        Text parrafoComoJugar = new Text(
+                "Este juego consiste en la confrontacion entre 2 razas\n"+
+                "que luchan para sobrevivir. En esta lucha es clave la\n"+
+                "obtencion de recursos que se deben recolectar para la\n"+
+                "supervivencia. Los nodos minerales y los volcanes de\n" +
+                "gas vespeno estarán distribuidos por el mapa.\n"+
+                "\n"+
+                "ZERG\n"+
+                "Insectoides alienigenas que buscan la perfeccion\n"+
+                "y la asimilacion de otras razas.Estos seres recuperan\n"+
+                "su vida con el paso del tiempo. Todas las unidades se\n"+
+                "crean a partir de larvas. Las larvas en los criaderos\n"+
+                "evolucionan en zanganos que mutan en forma de\n"+
+                "construccion. Los edificios habilitan a larvas a\n"+
+                "tranformarse en nuevas unidades segun cada edificio\n"+
+                "Las construcciones se crean sobre el moho que se\n"+
+                "expande progresivamente desde los criaderos. Este\n"+
+                "tiene un radio de moho de 5 que se exparse en 1 cada\n"+
+                "2 turnos. Al destruirse el criadero NO desaparece el\n"+
+                "moho que dejo en su rango previo a la destruccion.\n"+
+                "\n"+
+                "PROTOSS\n"+
+                "Humanoides con alta tecnologia y habilidades\n"+
+                "psionicas para preservar su civilizacion. Sus edificios\n"+
+                "tienen vida y escudo. El escudo se regenera de forma\n"+
+                "automatica hasta completarse. La vida atacada\n"+
+                "no se recupera y queda debilitada, solo se recupera el\n"+
+                "escudo. Construyen en el radio de un pilon, su rango\n"+
+                "es de 3 y al ser destruido deja sin energia su zona.\n"+
+                "\n"+
+                "JUGADORES\n"+
+                "Se juega con dos jugadores en simultaneo. Iniciando\n"+
+                "se consulta los datos y la raza de cada jugador.\n"+
+                "\n"+
+                "TURNOS\n"+
+                "El juego es por turnos, cada jugador elige sus\n"+
+                "acciones y luego pasa el turno al contrincante.\n"+
+                "\n"+
+                "COMIENZO Y FIN\n"+
+                "Cada uno empieza en su base con 200 de mineral y en\n"+
+                "lados opuestos del mapa. Para ganar, un jugdaor debe\n"+
+                "destruirle todos los edificios al jugador contrario.\n"+
+                "\n"+
+                "MAPA\n"+
+                "Los mapas deben tener areas de tierra y areas\n"+
+                "especiales, solo las unidades voladores circulan\n"+
+                "libremente por cualquier tipo de superficie.\n"+
+                "\n"+
+                "POBLACION\n"+
+                "La capacidad de poblacion es de 200. Esta capacidad se\n"+
+                "ve afectada de forma distinta para cada raza. Para los\n"+
+                "Protoss un pilon contruido aumenta en 5 la capacidad, y\n"+
+                "la disminuye al ser destruido. Los Zerg poseen la misma\n"+
+                "ventaja pero con criaderos y su unidad Amo Supremo.\n");
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 20);
         parrafoComoJugar.setFont(fuente);
         parrafoComoJugar.setFill(Color.rgb(66,176,211));
-        parrafoComoJugar.setTextAlignment(TextAlignment.CENTER);
+        parrafoComoJugar.setTextAlignment(TextAlignment.LEFT);
         
         Button botonOK = new Button("OK");
         botonOK.setStyle(botonNormal);
@@ -244,8 +295,9 @@ public class MenuPrincipal extends BorderPane{
         botonOK.setOnAction(e-> {
             ventanaComoSalir.close();
         });
-        
-        Scene  escenaSalir = new Scene(menuSalir , 800 , 700);
+
+        scroll.setContent(menuSalir);
+        Scene  escenaSalir = new Scene(scroll , 830 , 700);
 
         ventanaComoSalir.setScene(escenaSalir);
         ventanaComoSalir.showAndWait();
