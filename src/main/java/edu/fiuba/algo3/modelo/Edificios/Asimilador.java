@@ -115,13 +115,13 @@ public class Asimilador extends Edificio{
     /*public void destruir()
     {
         this.jugador.destruirConstruccion(this);
-        //this.mapa.destruirConstruccion(this);
+        this.mapa.destruirConstruccion(this);
         //this.mapa.destruirConstruccionProtoss(this);
-    }*/
+    }
 
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {
     //     return this.posicion.equals(posicionDada);
-    // }
+    // }*/
 
 }

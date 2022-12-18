@@ -33,6 +33,7 @@ public abstract class Edificio implements Construccion, Ocupable {
 
     public void destruir() {
         this.jugador.destruirConstruccion(this);
+        this.mapa.destruirConstruccion(this);
     }
 
     public void desactivar() {
@@ -58,4 +59,9 @@ public abstract class Edificio implements Construccion, Ocupable {
     public Posicion mostrarPosicion () {
         return posicion;
     }
+
+    public Jugador mostrarJugador() {
+        return jugador;
+    }
+
 }

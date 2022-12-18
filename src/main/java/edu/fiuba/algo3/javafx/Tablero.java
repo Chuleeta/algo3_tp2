@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
 import java.util.stream.IntStream;
 
 import edu.fiuba.algo3.modelo.Construccion;
@@ -95,15 +96,20 @@ public class Tablero {
         }
     }
 
+    public UnidadMovible crearUnidadMovible(Construccion construccion) {
+        int coordenadaX = (construccion.mostrarPosicion().coordenadaX() * 40) + 10;
+        int coordenadaY = (construccion.mostrarPosicion().coordenadaY() * 40) + 10;
+        UnidadMovible unidad = new UnidadMovible(construccion, coordenadaX, coordenadaY);
+        hacerMovible(unidad);
+        this.juegoVista.agregarSuscriptorPasarTurno(unidad);
+        return unidad;
+    }
+
     public void actualizarConstrucciones() {
         ArrayList<Construccion> construcciones = juego.mostrarConstrucciones();
         for (Construccion construccion : construcciones) {
-            // System.out.println("\nRECORRE");
-            Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
-            J2.setTranslateX((construccion.mostrarPosicion().coordenadaX() * 40) + 10);
-            J2.setTranslateY((construccion.mostrarPosicion().coordenadaY() * 40) + 10);
-            hacerMovible(J2);
-            mapaVista.getChildren().add(J2);
+            UnidadMovible unidad = crearUnidadMovible(construccion);
+            mapaVista.getChildren().add(unidad);
         }
 
         ArrayList<RecursoInyectable> recursos = juego.mostrarRecursos();
@@ -216,14 +222,9 @@ public class Tablero {
 
     public void insertarConstruccion(Construccion construccion) {
         //crearGrilla();
-        //if(construccion != null)
-        //    System.out.println("\n inserta construccion");
-        Rectangle nuevo = new Rectangle(20, 20, Color.GREEN);
-        nuevo.setTranslateX(((construccion.mostrarPosicion().coordenadaX() -1) * 40) + 10);
-        nuevo.setTranslateY(((construccion.mostrarPosicion().coordenadaY() - 1) * 40) + 10);
-        //System.out.println("\n coordenada en X:" + construccion.mostrarPosicion().coordenadaX());
-        //System.out.println("\n coordenada en Y:" + construccion.mostrarPosicion().coordenadaY());
-        hacerMovible(nuevo);
+        if(construccion != null)
+            System.out.println("\n inserta construccion");
+        UnidadMovible nuevo = crearUnidadMovible(construccion);
         mapaVista.getChildren().add(nuevo);
         //this.contenedor = new Group(mapaVista);
     }

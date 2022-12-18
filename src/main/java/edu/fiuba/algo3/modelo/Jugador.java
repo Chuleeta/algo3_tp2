@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class Jugador {
 
+    private int construccionesDestruidas;
     protected int capacidad;
     protected String nombre;
     protected String color;
@@ -27,6 +28,7 @@ public class Jugador {
         this.nombre = nombre;
         this.color = color;
         this.raza = raza;
+        this.construccionesDestruidas = 0;
         this.posicion = posicionJugador;
         this.mapa = mapa;
         this.construcciones = new ArrayList<>();
@@ -111,9 +113,9 @@ public class Jugador {
         construcciones.add(construccion);
     }
 
-    public void destruirConstruccion(Construccion construccion)
-    {
+    public void destruirConstruccion(Construccion construccion) {
         construcciones.remove(construccion);
+        construccionesDestruidas += 1;
     }
     public boolean verificarConstruccionesVacias() {
         return (!this.construcciones.isEmpty());

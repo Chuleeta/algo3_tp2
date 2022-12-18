@@ -159,4 +159,7 @@ public class Mapa {
         return this.recursosInyectables;
     }
 
+    public void destruirConstruccion(Construccion construccion) {
+        this.construcciones.remove(construccion);
+    }
 }
