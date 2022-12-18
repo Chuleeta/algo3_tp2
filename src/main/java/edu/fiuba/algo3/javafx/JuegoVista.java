@@ -192,7 +192,7 @@ public class JuegoVista extends BorderPane {
         botonAgregarConstruccionZerg.setOnMouseEntered(e -> botonAgregarConstruccionZerg.setStyle(botonAntesDeSerPresionado));
         botonAgregarConstruccionZerg.setOnMouseExited(e -> botonAgregarConstruccionZerg.setStyle(botonNormal));
         */
-        BotonGenerico botonAgregarConstruccionZerg = new BotonGenerico("Agregar\nconstruccion", 1, agregarConstruccionZergHandler, 20, -168);
+        /*
         Button botonAgregarConstruccionProtoss = new Button("Agregar\nconstruccion");
         botonAgregarConstruccionProtoss.setOnAction(agregarConstruccionProtossHandler);
         botonAgregarConstruccionProtoss.setTranslateX(20);
@@ -200,18 +200,18 @@ public class JuegoVista extends BorderPane {
         botonAgregarConstruccionProtoss.setFont(fuente);
         botonAgregarConstruccionProtoss.setStyle(botonNormal);
         botonAgregarConstruccionProtoss.setOnMouseEntered(e -> botonAgregarConstruccionProtoss.setStyle(botonAntesDeSerPresionado));
-        botonAgregarConstruccionProtoss.setOnMouseExited(e -> botonAgregarConstruccionProtoss.setStyle(botonNormal));
+        botonAgregarConstruccionProtoss.setOnMouseExited(e -> botonAgregarConstruccionProtoss.setStyle(botonNormal));*/
 
-        Button botonAgregarIndividuoZerg = new Button("Agregar\nindividuo");
+        /*Button botonAgregarIndividuoZerg = new Button("Agregar\nindividuo");
         botonAgregarIndividuoZerg.setOnAction(agregarIndividuoZergHandler);
         botonAgregarIndividuoZerg.setTranslateX(20);
         botonAgregarIndividuoZerg.setTranslateY(-168);
         botonAgregarIndividuoZerg.setFont(fuente);
         botonAgregarIndividuoZerg.setStyle(botonNormal);
         botonAgregarIndividuoZerg.setOnMouseEntered(e -> botonAgregarIndividuoZerg.setStyle(botonAntesDeSerPresionado));
-        botonAgregarIndividuoZerg.setOnMouseExited(e -> botonAgregarIndividuoZerg.setStyle(botonNormal));
+        botonAgregarIndividuoZerg.setOnMouseExited(e -> botonAgregarIndividuoZerg.setStyle(botonNormal));*/
 
-        Button botonAgregarIndividuoProtoss = new Button("Agregar\nindividuo");
+       /* Button botonAgregarIndividuoProtoss = new Button("Agregar\nindividuo");
         botonAgregarIndividuoProtoss.setOnAction(agregarIndividuoProtossHandler);
         botonAgregarIndividuoProtoss.setTranslateX(20);
         botonAgregarIndividuoProtoss.setTranslateY(-168);
@@ -220,6 +220,16 @@ public class JuegoVista extends BorderPane {
         botonAgregarIndividuoProtoss.setOnMouseEntered(e -> botonAgregarIndividuoProtoss.setStyle(botonAntesDeSerPresionado));
         botonAgregarIndividuoProtoss.setOnMouseExited(e -> botonAgregarIndividuoProtoss.setStyle(botonNormal));
 
+        */
+
+        BotonGenerico botonAgregarIndividuoZerg = new BotonGenerico("Agregar\nindividuo", agregarIndividuoZergHandler);
+        BotonGenerico botonAgregarIndividuoProtoss = new BotonGenerico("Agregar\nindividuo", agregarIndividuoProtossHandler);
+        BotonGenerico botonAgregarConstruccionZerg = new BotonGenerico("Agregar\nconstruccion", agregarConstruccionZergHandler);
+        BotonGenerico botonAgregarConstruccionProtoss = new BotonGenerico("Agregar\nconstruccion", agregarConstruccionProtossHandler);
+        pasarturno.añadirSuscriptor(botonAgregarConstruccionZerg);
+        pasarturno.añadirSuscriptor(botonAgregarConstruccionProtoss);
+        pasarturno.añadirSuscriptor(botonAgregarIndividuoProtoss);
+        pasarturno.añadirSuscriptor(botonAgregarIndividuoZerg);
 
         // label de minerales
 
@@ -231,7 +241,7 @@ public class JuegoVista extends BorderPane {
         mineralesJugadorDos.setFont(fuente);
         mineralesJugadorDos.setStyle(formatoTexto);
         mineralesJugadorDos.setPadding(new Insets(0, 0, 0, 20));
-        pasarturno.añadirSuscriptor(botonAgregarConstruccionZerg);
+
         VBox turnoActual = new VBox();
 
         turnoActual.getChildren().addAll(nombreDelJugador, pasarturno, this.posicionSeleccionada);
@@ -284,11 +294,15 @@ public class JuegoVista extends BorderPane {
         this.setTop(barraSuperior);
         //BORDE IZQUIERDO
         VBox bordeIzquierdo = new VBox();
+        VBox bordeDerecho = new VBox();
 
         // VBox bordeIzquierdo = new VBox().prefWidthProperty().bind(stage.widthProperty().multiply(0.80));
         if (eleccionRaza1 == "Zerg") {
             VBox botonesBordeIzquierdoZerg = new VBox();
             botonAgregarConstruccionZerg.setearJugador(1);
+            botonAgregarIndividuoZerg.setearJugador(1);
+            botonAgregarIndividuoProtoss.setearJugador(2);
+            botonAgregarConstruccionProtoss.setearJugador(2);
             botonesBordeIzquierdoZerg.getChildren().addAll(botonAgregarConstruccionZerg, botonAgregarIndividuoZerg);
             botonesBordeIzquierdoZerg.setSpacing(50);
             VBox datosJugador1 = new VBox();
@@ -300,6 +314,10 @@ public class JuegoVista extends BorderPane {
             //bordeIzquierdo.getChildren().addAll(nombreDelJugador1, razaJugador1,  botonAgregarIndividuoZerg, botonAgregarConstruccionZerg, mineralesJugadorUno);
         } else {
             VBox botonesBordeIzquierdoProtoss = new VBox();
+            botonAgregarIndividuoProtoss.setearJugador(1);
+            botonAgregarConstruccionProtoss.setearJugador(1);
+            botonAgregarConstruccionZerg.setearJugador(2);
+            botonAgregarIndividuoZerg.setearJugador(2);
             botonesBordeIzquierdoProtoss.getChildren().addAll(botonAgregarConstruccionProtoss, botonAgregarIndividuoProtoss);
             botonesBordeIzquierdoProtoss.setSpacing(50);
             VBox datosJugador1 = new VBox();
@@ -317,9 +335,9 @@ public class JuegoVista extends BorderPane {
         this.setLeft(bordeIzquierdo);
 
         //BORDE Derecho
-        VBox bordeDerecho = new VBox();
 
-        
+
+
         if (eleccionRaza2 == "Zerg") {
             //bordeDerecho.getChildren().addAll(nombreDelJugador2, razaJugador2,  botonAgregarIndividuoZerg, botonAgregarConstruccionZerg, mineralesJugadorDos);
             VBox botonesBordeDerechoZerg = new VBox();
