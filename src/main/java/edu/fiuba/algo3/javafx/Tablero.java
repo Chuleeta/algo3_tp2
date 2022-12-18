@@ -97,7 +97,6 @@ public class Tablero {
     public void actualizarConstrucciones() {
         ArrayList<Construccion> construcciones = juego.mostrarConstrucciones();
         for (Construccion construccion : construcciones) {
-            System.out.println("\nRECORRE");
             Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
             J2.setTranslateX((construccion.mostrarPosicion().coordenadaX() * 40) + 10);
             J2.setTranslateY((construccion.mostrarPosicion().coordenadaY() * 40) + 10);
