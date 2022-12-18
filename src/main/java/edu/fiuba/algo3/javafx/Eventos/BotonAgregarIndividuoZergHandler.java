@@ -3,9 +3,11 @@ package edu.fiuba.algo3.javafx.Eventos;
 import edu.fiuba.algo3.javafx.JuegoVista;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Individuos.AmoSupremo;
+import edu.fiuba.algo3.modelo.Individuos.Zangano;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
+import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -168,7 +170,11 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZangano.setOnMouseExited(e -> botonZangano.setStyle(botonNormal));
         botonZangano.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                Zangano zangano = new Zangano(new Mineral(1000), inputUsuario);
+                this.jugador.agregarIndividuo(zangano);
+            } catch (RequerimientosInsuficientesException ex) {
+            }
         });
         
         Button botonZerling = new Button("Zerling");

@@ -57,4 +57,8 @@ public abstract class Individuo
     }
 
     public abstract void pasarTiempo();
+
+    public Jugador mostrarJugador(){
+        return this.jugador;
+    }
 }

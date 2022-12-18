@@ -25,6 +25,10 @@ public class Zangano extends Individuo implements UnidadTierra{
         this.tiempoDeConstruccion = 1;
         this.tiempo = 0;
     }
+    public Zangano(Mineral mineral, Posicion posicion) throws RequerimientosInsuficientesException {
+        this(mineral);
+        this.posicion = posicion;
+    }
 
     private void construir() {
         this.estado = new EstadoConstruido();

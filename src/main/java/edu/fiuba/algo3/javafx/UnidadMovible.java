@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.javafx;
 import edu.fiuba.algo3.javafx.Eventos.AtacarHandler;
 import edu.fiuba.algo3.modelo.Construccion;
+import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Jugador;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,10 +19,10 @@ import javafx.stage.Stage;
 
 public class UnidadMovible extends Rectangle implements Notificable {
     private final BotonModal botonAtacar;
-    private Construccion construccion;
-    public UnidadMovible(Construccion construccion, int coordenadaX, int coordenadaY) {
-        super(20, 20, Color.GREEN);
-        this.construccion = construccion;
+    private Individuo individuo;
+    public UnidadMovible(Individuo individuo, int coordenadaX, int coordenadaY) {
+        super(20, 20, Color.BLACK);
+        this.individuo = individuo;
         this.setTranslateX(coordenadaX);
         this.setTranslateY(coordenadaY);
         this.botonAtacar = new BotonModal("Atacar");
@@ -60,6 +61,6 @@ public class UnidadMovible extends Rectangle implements Notificable {
     }
     @Override
     public void actualizar(Jugador jugadorDeTurno) {
-        this.setDisable(jugadorDeTurno != this.construccion.mostrarJugador());
+        this.setDisable(jugadorDeTurno != this.individuo.mostrarJugador());
     }
 }
