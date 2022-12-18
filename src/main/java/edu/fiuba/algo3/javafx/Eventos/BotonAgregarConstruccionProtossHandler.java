@@ -139,7 +139,7 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
             return null;
         }
         
-        return (new Posicion(valorX, valorY));
+        return (new Posicion(valorX-1, valorY-1));
     }
     
     
@@ -174,8 +174,7 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
                     noSePuedeConstruir();
                 }
             } catch (MenaOcupadaException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+                noSePuedeConstruir();
             }
             s.close();
         });

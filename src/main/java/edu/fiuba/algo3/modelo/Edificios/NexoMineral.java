@@ -48,7 +48,7 @@ public class NexoMineral extends Edificio{
         this.jugador = jugador;
         this.mapa = jugador.getMapa();
         this.vida = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
-        this.mapa.inyectarRecurso(this);
+        if(!this.mapa.inyectarRecurso(this))  throw new MenaOcupadaException();
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException
@@ -92,12 +92,6 @@ public class NexoMineral extends Edificio{
         this.mineral = mineral;
         if(mineral.invertir(50))
         {
-            if(mineral == null)
-                System.out.println("\nES NULL EL MINERAL");
-            if(gas == null)
-                System.out.println("\nES NULL EL GAS");
-            if(this.jugador == null)
-                System.out.println("\nES NULL EL JUGADOR");
             this.jugador.agregarEnListaConstruccion(this);
             return true;
         }

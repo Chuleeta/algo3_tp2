@@ -55,7 +55,7 @@ public class Extractor extends Edificio{
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
         this.gas = new GasVespeno(0);
-        this.mapa.inyectarRecurso(this);
+        if(!this.mapa.inyectarRecurso(this)) throw new VolcanOcupadoException();
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException

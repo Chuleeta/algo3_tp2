@@ -133,7 +133,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
             return null;
         }
 
-        return (new Posicion(valorX, valorY));
+        return (new Posicion(valorX-1, valorY-1));
     }
 
     @Override

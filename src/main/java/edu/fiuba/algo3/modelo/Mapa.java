@@ -58,8 +58,9 @@ public class Mapa {
 
     public boolean inyectarRecurso(NexoMineral nexo) throws MenaOcupadaException{
         for (RecursoInyectable recurso:recursosInyectables){
-            if(recurso.inyectarRecurso(nexo))
+            if(recurso.inyectarRecurso(nexo)){
                 return true;
+            }
         }
         return false;
     }
