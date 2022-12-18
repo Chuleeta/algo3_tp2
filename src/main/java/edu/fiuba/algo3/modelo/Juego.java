@@ -32,4 +32,12 @@ public class Juego {
     public ArrayList<RecursoInyectable> mostrarRecursos() {
         return mapa.mostrarRecursos();
     }
+
+    public Jugador getJugadorUno(){
+        return jugadorUno;
+    }
+
+    public Jugador getJugadorDos(){
+        return jugadorDos;
+    }
 }

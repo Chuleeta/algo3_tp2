@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.Recursos.Mena;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
@@ -36,6 +37,18 @@ public class NexoMineral extends Edificio{
     public NexoMineral(Posicion posicion, Mena mena, Jugador jugador) throws MenaOcupadaException {
         this(posicion, mena, jugador.getMapa());
         this.jugador = jugador;
+    }
+
+    public NexoMineral(Posicion posicion, Jugador jugador) throws MenaOcupadaException {
+        // this.mena = mena;
+        // this.mena.ocupar();
+        this.posicion = posicion;
+        estado = new EstadoNoConstruido();
+        this.zona = new ZonaNeutral();
+        this.jugador = jugador;
+        this.mapa = jugador.getMapa();
+        this.vida = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
+        this.mapa.inyectarRecurso(this);
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException
@@ -79,6 +92,12 @@ public class NexoMineral extends Edificio{
         this.mineral = mineral;
         if(mineral.invertir(50))
         {
+            if(mineral == null)
+                System.out.println("\nES NULL EL MINERAL");
+            if(gas == null)
+                System.out.println("\nES NULL EL GAS");
+            if(this.jugador == null)
+                System.out.println("\nES NULL EL JUGADOR");
             this.jugador.agregarEnListaConstruccion(this);
             return true;
         }
@@ -89,5 +108,10 @@ public class NexoMineral extends Edificio{
     public void actualizar() {
         mineral.agregarMineral(mena.extraerMineral(100));
         this.vida.regenerar();
+    }
+
+    public void setMena(Mena mena) throws MenaOcupadaException{
+        mena.ocupar();
+        this.mena = mena;
     }
 }

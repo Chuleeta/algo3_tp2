@@ -66,7 +66,8 @@ public class JuegoVista extends BorderPane {
     public JuegoVista(Stage stage, Scene pantallaDeInicio, int ancho, int alto, Juego juego,String nombreJugador1, String eleccionRaza1, String nombreJugador2, String eleccionRaza2) throws RequerimientosInsuficientesException{
         this.pisicionSeleccionadaX = 1;
         this.pisicionSeleccionadaY = 1;
-        
+        this.jugadorUno = juego.getJugadorUno();
+        this.jugadorDos = juego.getJugadorDos();
         this.juego = juego;
         this.cargarImagenes();
 		this.setJuego(stage, pantallaDeInicio, ancho, alto, nombreJugador1, eleccionRaza1, nombreJugador2, eleccionRaza2);
@@ -127,11 +128,6 @@ public class JuegoVista extends BorderPane {
         nombreDelJugador2.setFont(fuente);
         nombreDelJugador2.setStyle(formatoTexto);
         nombreDelJugador2.setPadding(new Insets(0, 0, 0, 25));
-        Mapa mapa = new Mapa();
-
-
-        this.jugadorUno = new Jugador(nombreJugador1, "rojo", eleccionRaza1, new Posicion(0, 0), mapa, 0);
-        this.jugadorDos = new Jugador(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
         /*if (eleccionRaza1 == "Zerg") {
             jugadorUno = jugadorUno.definirZerg();
             jugadorDos = jugadorDos.definirProtoss();
@@ -141,8 +137,6 @@ public class JuegoVista extends BorderPane {
             jugadorUno = new JugadorProtoss(nombreJugador1, "rojo", eleccionRaza1, new Posicion(0, 0), mapa, 0);
             jugadorDos = new JugadorZerg(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
         }*/
-
-        this.juego = new Juego(mapa, jugadorUno, jugadorDos);
 
         //raza
         Label razaJugador1 = new Label("Raza: \n" + eleccionRaza1);

@@ -60,8 +60,11 @@ public class Mena implements RecursoInyectable{
     }
 
     @Override
-    public boolean inyectarRecurso(NexoMineral nexoMineral) {
-        // TODO Auto-generated method stub
+    public boolean inyectarRecurso(NexoMineral nexoMineral) throws MenaOcupadaException {
+        if(estaOcupada(nexoMineral.posicion) && !estaOcupado){
+            nexoMineral.setMena(this);
+            return true;
+        }
         return false;
     }
 
@@ -70,7 +73,7 @@ public class Mena implements RecursoInyectable{
         // TODO Auto-generated method stub
         return false;
     }
-    
+
     @Override
     public String getSpray(){
         return "azul";

@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Edificios.Espiral;
 import edu.fiuba.algo3.modelo.Edificios.Extractor;
 import edu.fiuba.algo3.modelo.Edificios.Guarida;
 import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 import edu.fiuba.algo3.modelo.Jugador;
@@ -72,7 +73,7 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         ingresarPosicion.setStyle(formatoTexto);
 
         ChoiceBox<String> posicionDeseadaX = new ChoiceBox();
-        posicionDeseadaX.getItems().addAll("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22");
+        posicionDeseadaX.getItems().addAll("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22");
         posicionDeseadaX.setMinWidth(200);
         posicionDeseadaX.setMinHeight(100);
         posicionDeseadaX.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C");
@@ -208,7 +209,12 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
             //Volcan volcan = new Volcan(inputUsuario);
             //this.jugador.mapa.agregarRecursoInyectable(volcan, inputUsuario);
             try {
-                Extractor extractor = new Extractor(inputUsuario, jugador.getMapa());
+                Extractor extractor = new Extractor(inputUsuario, jugador);
+                if(this.jugador.agregarConstruccion(extractor)){
+                    juegoVista.actualizarTablero();
+                }else{
+                    noSePuedeConstruir();
+                }
             } catch (VolcanOcupadoException e1) {
                 noSePuedeConstruir();
             }

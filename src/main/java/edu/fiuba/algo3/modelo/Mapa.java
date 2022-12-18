@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import edu.fiuba.algo3.modelo.Edificios.Asimilador;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Edificios.Extractor;
+import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
+import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
@@ -42,13 +44,21 @@ public class Mapa {
         if(recursoInyectable == null)
             return false;
         this.recursosInyectables.add(recursoInyectable);
-        System.out.println("\nSE AGREGA");
+        //System.out.println("\nSE AGREGA");
         return true;
     }
 
     public boolean inyectarRecurso(Extractor extractor) throws VolcanOcupadoException{
         for (RecursoInyectable recurso:recursosInyectables){
             if(recurso.inyectarRecurso(extractor))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean inyectarRecurso(NexoMineral nexo) throws MenaOcupadaException{
+        for (RecursoInyectable recurso:recursosInyectables){
+            if(recurso.inyectarRecurso(nexo))
                 return true;
         }
         return false;

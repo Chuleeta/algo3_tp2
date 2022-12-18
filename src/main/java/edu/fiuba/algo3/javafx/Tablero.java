@@ -106,12 +106,7 @@ public class Tablero {
         }
 
         ArrayList<RecursoInyectable> recursos = juego.mostrarRecursos();
-        //NO ESTA RECORRIENDO EL ARRAY
-        if(recursos.size() == 0)
-            System.out.println("\nTAMAÑO ES 0");
-        
         for (RecursoInyectable recurso : recursos) {
-            System.out.println("\nRECORRE");
             Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
             if(recurso.getSpray() == "rojo"){
                 J2 = new Rectangle(20, 20, Color.RED);
@@ -215,13 +210,13 @@ public class Tablero {
 
     public void insertarConstruccion(Construccion construccion) {
         //crearGrilla();
-        if(construccion != null)
-            System.out.println("\n inserta construccion");
+        //if(construccion != null)
+        //    System.out.println("\n inserta construccion");
         Rectangle nuevo = new Rectangle(20, 20, Color.GREEN);
         nuevo.setTranslateX(((construccion.mostrarPosicion().coordenadaX() -1) * 40) + 10);
         nuevo.setTranslateY(((construccion.mostrarPosicion().coordenadaY() - 1) * 40) + 10);
-        System.out.println("\n coordenada en X:" + construccion.mostrarPosicion().coordenadaX());
-        System.out.println("\n coordenada en Y:" + construccion.mostrarPosicion().coordenadaY());
+        //System.out.println("\n coordenada en X:" + construccion.mostrarPosicion().coordenadaX());
+        //System.out.println("\n coordenada en Y:" + construccion.mostrarPosicion().coordenadaY());
         hacerMovible(nuevo);
         mapaVista.getChildren().add(nuevo);
         //this.contenedor = new Group(mapaVista);

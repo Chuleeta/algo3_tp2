@@ -99,6 +99,7 @@ public class Jugador {
         if(!mapa.verificarPosicionDisponible(construccion)){
             return false;
         }
+        
         return construccion.agregarAlMapa(this.mineral, this.gas);
     }
 

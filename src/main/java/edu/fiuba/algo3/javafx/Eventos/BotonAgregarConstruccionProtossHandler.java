@@ -3,6 +3,11 @@ package edu.fiuba.algo3.javafx.Eventos;
 import edu.fiuba.algo3.javafx.JuegoVista;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
+import edu.fiuba.algo3.modelo.Edificios.Pilon;
+import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -60,7 +65,7 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         ingresarPosicion.setStyle(formatoTexto);
 
         ChoiceBox<String> posicionDeseadaX = new ChoiceBox();
-        posicionDeseadaX.getItems().addAll("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22");
+        posicionDeseadaX.getItems().addAll("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22");
         posicionDeseadaX.setMinWidth(200);
         posicionDeseadaX.setMinHeight(100);
         posicionDeseadaX.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C");
@@ -133,16 +138,17 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         }else{
             return null;
         }
-
+        
         return (new Posicion(valorX, valorY));
     }
-
-
+    
+    
     @Override
     public void handle(ActionEvent actionEvent) {
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 25);
-
+        Stage s = new Stage();
+        
         InputStream is2 = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente2 = Font.loadFont(is2, 25);
 
@@ -159,7 +165,19 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonNexo.setOnMouseExited(e -> botonNexo.setStyle(botonNormal));
         botonNexo.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                NexoMineral nexo = new NexoMineral(inputUsuario, this.jugador);
+                
+                if(this.jugador.agregarConstruccion(nexo)){
+                    juegoVista.actualizarTablero();
+                }else{
+                    noSePuedeConstruir();
+                }
+            } catch (MenaOcupadaException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            s.close();
         });
         
         Button botonPilon = new Button("Pilon");
@@ -169,7 +187,13 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonPilon.setOnMouseExited(e -> botonPilon.setStyle(botonNormal));
         botonPilon.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            Pilon pilon = new Pilon(inputUsuario, this.jugador);
+            if(this.jugador.agregarConstruccion(pilon)){
+                juegoVista.actualizarTablero();
+            }else{
+                noSePuedeConstruir();
+            }
+            s.close();
         });
         
         Button botonAsimilador = new Button("Asimilador");
@@ -224,7 +248,6 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         eleccionUsuario.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
         Scene sc = new Scene(eleccionUsuario, 800, 300, Color.rgb(47, 52, 58));
         sc.setFill(Color.RED);
-        Stage s = new Stage();
         s.initModality(Modality.APPLICATION_MODAL);
         s.setTitle("Tienda Construcciones Protoss");
         s.getIcons().add(this.icono);
@@ -267,5 +290,40 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         // } else {
         //     // ... user chose CANCEL or closed the dialog
         // }
+    }
+
+
+    private void noSePuedeConstruir() {
+        InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
+        Font fuente = Font.loadFont(is, 20);
+
+        Label ingresarPosicion = new Label("Posicion Ingresada Invalida o\n\nRequerimientos Insuficientes!");
+        ingresarPosicion.setFont(fuente);
+        ingresarPosicion.setStyle(formatoTexto);
+        ingresarPosicion.setAlignment(Pos.CENTER);
+
+        Button botonConfirmar = new Button("Confirmar");
+        botonConfirmar.setFont(fuente);
+        botonConfirmar.setStyle(botonNormal);
+        botonConfirmar.setOnMouseEntered(e -> botonConfirmar.setStyle(botonAntesDeSerPresionado));
+        botonConfirmar.setOnMouseExited(e -> botonConfirmar.setStyle(botonNormal));
+        
+        
+        VBox inputPosicion = new VBox();
+        inputPosicion.getChildren().addAll(ingresarPosicion, botonConfirmar);
+        inputPosicion.setSpacing(30);
+        inputPosicion.setAlignment(Pos.CENTER);
+        inputPosicion.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
+        
+        Scene sc = new Scene(inputPosicion, 500, 300);
+        Stage s = new Stage();
+        s.setResizable(false);
+        s.setTitle("Fallo Al Construir Edificio");
+        s.getIcons().add(this.icono);
+        botonConfirmar.setOnAction(e-> {
+            s.close();
+        });
+        s.setScene(sc);
+        s.showAndWait();
     }
 }

@@ -18,7 +18,7 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 public class Criadero extends Edificio {
 
     private List<Larva> larvas;
-    private static int COSTO_DE_CONSTRUCCION = 50;
+    private static int COSTO_DE_CONSTRUCCION = 200;
     private static int VIDA_COMPLETA = 500;
 
     public Criadero(Posicion posicion, Mapa mapa) {
@@ -112,7 +112,7 @@ public class Criadero extends Edificio {
 
     @Override
     public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
-        if(mineral.invertir(200))
+        if(mineral.invertir(COSTO_DE_CONSTRUCCION))
         {
             this.jugador.agregarEnListaConstruccion(this);
             return true;

@@ -63,7 +63,7 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
         ingresarPosicion.setStyle(formatoTexto);
 
         ChoiceBox<String> posicionDeseadaX = new ChoiceBox();
-        posicionDeseadaX.getItems().addAll("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22");
+        posicionDeseadaX.getItems().addAll("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22");
         posicionDeseadaX.setMinWidth(200);
         posicionDeseadaX.setMinHeight(100);
         posicionDeseadaX.setStyle("-fx-border-width: 0px; -fx-border-color: #2F343A; -fx-background-color: #717D8C; -fx-text-fill: #BDB69C; -fx-font-family: Impact; -fx-font-size: 40; -fx-color: #BDB69C");
