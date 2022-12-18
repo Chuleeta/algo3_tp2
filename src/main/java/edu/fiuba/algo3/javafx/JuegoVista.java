@@ -123,7 +123,6 @@ public class JuegoVista extends BorderPane {
         nombreDelJugador2.setFont(fuente);
         nombreDelJugador2.setStyle(formatoTexto);
         nombreDelJugador2.setPadding(new Insets(0, 0, 0, 25));
-<<<<<<< HEAD
         /*if (eleccionRaza1 == "Zerg") {
             jugadorUno = jugadorUno.definirZerg();
             jugadorDos = jugadorDos.definirProtoss();
@@ -133,14 +132,6 @@ public class JuegoVista extends BorderPane {
             jugadorUno = new JugadorProtoss(nombreJugador1, "rojo", eleccionRaza1, new Posicion(0, 0), mapa, 0);
             jugadorDos = new JugadorZerg(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
         }*/
-=======
-        Mapa mapa = new Mapa();
-
-
-        this.jugadorUno = new Jugador(nombreJugador1, "rojo", eleccionRaza1, new Posicion(0, 0), mapa, 0);
-        this.jugadorDos = new Jugador(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
-        this.juego = new Juego(mapa, jugadorUno, jugadorDos);
->>>>>>> origin/probar_merge_con_limpieza
 
         //raza
         Label razaJugador1 = new Label("Raza: \n" + eleccionRaza1);
