@@ -48,6 +48,8 @@ public class JuegoVista extends BorderPane {
 
 	private Image logo;
 	private Image fondo;
+
+    private Label nombreDelJugador;
     private Image datosJugador;
     private String turnoJugadorActual;
     
@@ -101,16 +103,24 @@ public class JuegoVista extends BorderPane {
 
         //JUGADOR Jugadndo
         this.turnoJugadorActual = "1";
-        Label nombreDelJugador = new Label("Turno Jugador : " + turnoJugadorActual);
+        this.nombreDelJugador = new Label("Turno Jugador : " + turnoJugadorActual);
         nombreDelJugador.setFont(fuente);
         nombreDelJugador.setStyle(formatoTexto);
         this.posicionSeleccionada = new Label("Posicion Seleccionada - En X: " + this.pisicionSeleccionadaX + " | En Y: " + this.pisicionSeleccionadaY);
         this.posicionSeleccionada.setFont(fuente);
         this.posicionSeleccionada.setStyle(formatoTexto);
-        VBox turnoActual = new VBox();
-        turnoActual.getChildren().addAll(nombreDelJugador, this.posicionSeleccionada);
-        turnoActual.setAlignment(Pos.CENTER);
-        turnoActual.setBackground(new Background(new BackgroundFill(Color.rgb(63, 84, 99, 0.7), new CornerRadii(20), Insets.EMPTY)));
+       /* BotonPasarTurnoHandler pasarTurnoHandler = new BotonPasarTurnoHandler(this, calcularTurnoDelJugador());
+        Button pasarTurno = new Button("Pasar turno");
+        InputStream is2 = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
+        Font fuente2 = Font.loadFont(is2, 15);
+        pasarTurno.setOnAction(pasarTurnoHandler);
+        pasarTurno.setOnAction(pasarTurnoHandler);
+        pasarTurno.setFont(fuente2);
+        pasarTurno.setStyle(botonNormal);
+        pasarTurno.setOnMouseEntered(e -> pasarTurno.setStyle(botonAntesDeSerPresionado));
+        pasarTurno.setOnMouseExited(e -> pasarTurno.setStyle(botonNormal));*/
+
+        PasarTurno pasarturno = new PasarTurno("Pasar turno");
 
 
         //NOMBRE DEL JUGADOR 1
@@ -172,6 +182,7 @@ public class JuegoVista extends BorderPane {
         }
 
         // creacion de botones
+        /*
         Button botonAgregarConstruccionZerg = new Button("Agregar\nconstruccion");
         botonAgregarConstruccionZerg.setOnAction(agregarConstruccionZergHandler);
         botonAgregarConstruccionZerg.setTranslateX(20);
@@ -180,7 +191,8 @@ public class JuegoVista extends BorderPane {
         botonAgregarConstruccionZerg.setStyle(botonNormal);
         botonAgregarConstruccionZerg.setOnMouseEntered(e -> botonAgregarConstruccionZerg.setStyle(botonAntesDeSerPresionado));
         botonAgregarConstruccionZerg.setOnMouseExited(e -> botonAgregarConstruccionZerg.setStyle(botonNormal));
-
+        */
+        BotonGenerico botonAgregarConstruccionZerg = new BotonGenerico("Agregar\nconstruccion", 1, agregarConstruccionZergHandler, 20, -168);
         Button botonAgregarConstruccionProtoss = new Button("Agregar\nconstruccion");
         botonAgregarConstruccionProtoss.setOnAction(agregarConstruccionProtossHandler);
         botonAgregarConstruccionProtoss.setTranslateX(20);
@@ -219,7 +231,15 @@ public class JuegoVista extends BorderPane {
         mineralesJugadorDos.setFont(fuente);
         mineralesJugadorDos.setStyle(formatoTexto);
         mineralesJugadorDos.setPadding(new Insets(0, 0, 0, 20));
-        
+        pasarturno.añadirSuscriptor(botonAgregarConstruccionZerg);
+        VBox turnoActual = new VBox();
+
+        turnoActual.getChildren().addAll(nombreDelJugador, pasarturno, this.posicionSeleccionada);
+        // turnoActual.getChildren().addAll(pasarTurno);
+        turnoActual.setAlignment(Pos.CENTER);
+        turnoActual.setBackground(new Background(new BackgroundFill(Color.rgb(63, 84, 99, 0.7), new CornerRadii(20), Insets.EMPTY)));
+
+
         //GET MAPA DEBE SER UN GROUP
         this.tablero = new Tablero(alto,ancho, juego, this);
         VBox cosasDelCentro = new VBox();
@@ -262,15 +282,13 @@ public class JuegoVista extends BorderPane {
         ver.getItems().addAll(pantallaCompleta);
         
         this.setTop(barraSuperior);
-        
-
         //BORDE IZQUIERDO
         VBox bordeIzquierdo = new VBox();
-        
-        
+
         // VBox bordeIzquierdo = new VBox().prefWidthProperty().bind(stage.widthProperty().multiply(0.80));
         if (eleccionRaza1 == "Zerg") {
             VBox botonesBordeIzquierdoZerg = new VBox();
+            botonAgregarConstruccionZerg.setearJugador(1);
             botonesBordeIzquierdoZerg.getChildren().addAll(botonAgregarConstruccionZerg, botonAgregarIndividuoZerg);
             botonesBordeIzquierdoZerg.setSpacing(50);
             VBox datosJugador1 = new VBox();
@@ -305,6 +323,7 @@ public class JuegoVista extends BorderPane {
         if (eleccionRaza2 == "Zerg") {
             //bordeDerecho.getChildren().addAll(nombreDelJugador2, razaJugador2,  botonAgregarIndividuoZerg, botonAgregarConstruccionZerg, mineralesJugadorDos);
             VBox botonesBordeDerechoZerg = new VBox();
+            botonAgregarConstruccionZerg.setearJugador(2);
             botonesBordeDerechoZerg.getChildren().addAll(botonAgregarConstruccionZerg, botonAgregarIndividuoZerg);
             botonesBordeDerechoZerg.setSpacing(50);
             VBox datosJugador2 = new VBox();
@@ -342,23 +361,13 @@ public class JuegoVista extends BorderPane {
         Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
         juegoVista = new Scene(this,screenSize.getWidth(), screenSize.getHeight(), Color.rgb(47, 52, 58));
 
-        BotonPasarTurnoHandler pasarTurnoHandler = new BotonPasarTurnoHandler(this, calcularTurnoDelJugador());
-        Button pasarTurno = new Button("Pasar\nturno");
-        pasarTurno.setOnAction(pasarTurnoHandler);
-        botonAgregarIndividuoZerg.setOnAction(agregarIndividuoZergHandler);
-        botonAgregarIndividuoZerg.setTranslateX(20);
-        botonAgregarIndividuoZerg.setTranslateY(-168);
-        botonAgregarIndividuoZerg.setFont(fuente);
-        botonAgregarIndividuoZerg.setStyle(botonNormal);
-        botonAgregarIndividuoZerg.setOnMouseEntered(e -> botonAgregarIndividuoZerg.setStyle(botonAntesDeSerPresionado));
-        botonAgregarIndividuoZerg.setOnMouseExited(e -> botonAgregarIndividuoZerg.setStyle(botonNormal));
     }
 
     private Jugador calcularTurnoDelJugador() {
         if(Integer.parseInt(turnoJugadorActual) % 2 == 0){
-            return jugadorUno;
+            return jugadorDos;
         }
-        return jugadorDos;
+        return jugadorUno;
     }
 
     private void acercaDe(){
@@ -369,7 +378,6 @@ public class JuegoVista extends BorderPane {
 
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 20);
-        
         Button botonOK = new Button("OK");
         botonOK.setStyle(botonNormal);
         botonOK.setFont(fuente);
