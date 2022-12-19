@@ -61,4 +61,10 @@ public abstract class Individuo
     public Jugador mostrarJugador(){
         return this.jugador;
     }
+
+    public boolean moverUnidad(Posicion nuevaPosicion) {
+        System.out.println(nuevaPosicion.coordenadaX());
+        this.posicion = nuevaPosicion;
+        return true;
+    }
 }

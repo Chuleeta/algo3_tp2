@@ -3,6 +3,7 @@ import edu.fiuba.algo3.javafx.Eventos.AtacarHandler;
 import edu.fiuba.algo3.modelo.Construccion;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Posicion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -62,5 +63,9 @@ public class UnidadMovible extends Rectangle implements Notificable {
     @Override
     public void actualizar(Jugador jugadorDeTurno) {
         this.setDisable(jugadorDeTurno != this.individuo.mostrarJugador());
+    }
+
+    public boolean moverUnidad(Posicion nuevaPosicion) {
+        return this.individuo.moverUnidad(nuevaPosicion);
     }
 }

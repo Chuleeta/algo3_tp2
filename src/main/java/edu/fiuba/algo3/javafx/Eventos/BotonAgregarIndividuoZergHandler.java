@@ -234,7 +234,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
             } catch (RequerimientosInsuficientesException ex) {
                 noSePuedeConstruir("\nRequerimientosInsuficientesException");
             } catch (ReservaDeReproduccionNoDisponibleException ex) {
-                throw new RuntimeException(ex);
+                noSePuedeConstruir("\nReservaDeReproduccionNoDisponibleException");
             }
             s.close();
         });
@@ -252,7 +252,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
             } catch (RequerimientosInsuficientesException ex) {
                 noSePuedeConstruir("\nRequerimientosInsuficientesException");
             } catch (GuaridaNoDisponibleException ex) {
-                throw new RuntimeException(ex);
+                noSePuedeConstruir("\nGuaridaNoDisponibleException");
             }
             s.close();
         });
@@ -270,7 +270,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
             } catch (RequerimientosInsuficientesException ex) {
                 noSePuedeConstruir("\nRequerimientosInsuficientesException");
             } catch (EspiralNoDisponibleException ex) {
-                throw new RuntimeException(ex);
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
             }
             s.close();
         });

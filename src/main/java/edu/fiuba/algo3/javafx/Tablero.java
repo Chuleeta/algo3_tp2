@@ -48,11 +48,11 @@ public class Tablero {
         this.mapaVista = new Pane();
         this.juego = juego;
         crearGrilla();
-        Rectangle J1 = new Rectangle(20, 20, Color.GREEN);
+        /*¨Rectangle J1 = new Rectangle(20, 20, Color.GREEN);
         J1.setTranslateX(10);
         J1.setTranslateY(10);
         hacerMovible(J1);
-
+        */
         actualizarConstrucciones();
         // ArrayList<Construccion> construcciones = juego.mostrarConstrucciones();
         // for (Construccion construccion : construcciones) {
@@ -68,7 +68,7 @@ public class Tablero {
         // J2.setTranslateY(691);
         // hacerMovible(J2);
 
-        mapaVista.getChildren().add(J1);
+        // mapaVista.getChildren().add(J1);
         //mapaVista.getChildren().add(J2);
 
         mapaVista.setPrefSize(880, 721);
@@ -135,7 +135,6 @@ public class Tablero {
             }
             J2.setTranslateX((recurso.mostrarPosicion().coordenadaX() * 40) + 10);
             J2.setTranslateY((recurso.mostrarPosicion().coordenadaY() * 40) + 10);
-            hacerMovible(J2);
             mapaVista.getChildren().add(J2);
         }
     }
@@ -144,7 +143,7 @@ public class Tablero {
         
     }
 
-    private void hacerMovible(Node n) {
+    private void hacerMovible(UnidadMovible n) {
         Paint colorOriginal = ((Shape) n).getFill();;
         n.setOnMousePressed(e ->{
             this.startX = (int)(e.getSceneX() - n.getTranslateX());
@@ -155,33 +154,51 @@ public class Tablero {
         n.setOnMouseDragged(e ->{
             //EVITA QUE SE VAYA EN LOS BORDES
             if(e.getSceneX() - startX < 0 && e.getSceneY() - startY <= 0){
-                n.setTranslateX(0);
-                n.setTranslateY(0);
+                if (n.moverUnidad(calcularPosicion(n))){
+                    n.setTranslateX(0);
+                    n.setTranslateY(0);
+                }
             }else if(e.getSceneX() - startX > 860 && e.getSceneY() - startY < 0){
-                n.setTranslateX(860);
-                n.setTranslateY(0);
+                if (n.moverUnidad(calcularPosicion(n))){
+                    n.setTranslateX(860);
+                    n.setTranslateY(0);
+                }
             }else if(e.getSceneX() - startX < 0 && e.getSceneY() - startY >= 701){
-                n.setTranslateX(0);
-                n.setTranslateY(701);
+                if (n.moverUnidad(calcularPosicion(n))){
+                    n.setTranslateX(0);
+                    n.setTranslateY(701);
+                }
             }else if(e.getSceneX() - startX > 860 && e.getSceneY() - startY >= 701){
-                n.setTranslateX(860);
-                n.setTranslateY(701);
+                if (n.moverUnidad(calcularPosicion(n))){
+                    n.setTranslateX(860);
+                    n.setTranslateY(701);
+                }
             }else if(e.getSceneX() - startX < 0){
-                n.setTranslateX(0);
-                n.setTranslateY(e.getSceneY() - startY);
+                if (n.moverUnidad(calcularPosicion(n))){
+                    n.setTranslateX(0);
+                    n.setTranslateY(e.getSceneY() - startY);
+                }
             }else if(e.getSceneY() - startY < 0){
-                n.setTranslateX(e.getSceneX() - startX);
-                n.setTranslateY(0);
+                if (n.moverUnidad(calcularPosicion(n))){
+                    n.setTranslateX(e.getSceneX() - startX);
+                    n.setTranslateY(0);
+                }
             }else if(e.getSceneX() - startX > 860){
-                n.setTranslateX(860);
-                n.setTranslateY(e.getSceneY() - startY);
+                if (n.moverUnidad(calcularPosicion(n))){
+                    n.setTranslateX(860);
+                    n.setTranslateY(e.getSceneY() - startY);
+                }
             }else if(e.getSceneY() - startY > 701){
-                n.setTranslateX(e.getSceneX() - startX);
-                n.setTranslateY(701);
+                if (n.moverUnidad(calcularPosicion(n))){
+                    n.setTranslateX(e.getSceneX() - startX);
+                    n.setTranslateY(701);
+                }
             }else{
                 //MOVIMIENTO LIBRE
-                n.setTranslateX(e.getSceneX() - startX);
-                n.setTranslateY(e.getSceneY() - startY);
+                if (n.moverUnidad(calcularPosicion(n))){
+                    n.setTranslateX(e.getSceneX() - startX);
+                    n.setTranslateY(e.getSceneY() - startY);
+                }
             }
             //PARA VER LA POSICION DEL NODO O CUADRADO
             //System.out.println("\nX: " + n.getTranslateX());
@@ -202,17 +219,21 @@ public class Tablero {
              * (440, 320) ---> (11, 8) ---> new Posicion(11,8)
             */
             ((Shape) n).setFill(colorOriginal);// 458.12312039123 ---> 458.1--> 450---> 11.25 --> 11 13 --> posicion(11, 13)
-            double resultadoX = new BigDecimal(n.getTranslateX()).setScale(1, RoundingMode.UP).doubleValue();
-            double resultadoY = new BigDecimal(n.getTranslateY()).setScale(1, RoundingMode.UP).doubleValue();
-            n.setTranslateX(encontrarMultiploDeMasCercanoA(40, (int)resultadoX) + 10);
-            n.setTranslateY(encontrarMultiploDeMasCercanoA(40, (int)resultadoY) + 10);
-            double xDouble = encontrarMultiploDeMasCercanoA(40, (int)resultadoX);
-            double yDouble = encontrarMultiploDeMasCercanoA(40, (int)resultadoY);
-            int x = (Math.round((float)xDouble) / 40) + 1;
-            int y = (Math.round((float)yDouble) / 40) + 1;
-            this.juegoVista.setPosicionSeleccionada(x, y);
+            this.juegoVista.setPosicionSeleccionada(calcularPosicion(n));
 
         });
+    }
+
+    private Posicion calcularPosicion(UnidadMovible n) {
+        double resultadoX = new BigDecimal(n.getTranslateX()).setScale(1, RoundingMode.UP).doubleValue();
+        double resultadoY = new BigDecimal(n.getTranslateY()).setScale(1, RoundingMode.UP).doubleValue();
+        n.setTranslateX(encontrarMultiploDeMasCercanoA(40, (int)resultadoX) + 10);
+        n.setTranslateY(encontrarMultiploDeMasCercanoA(40, (int)resultadoY) + 10);
+        double xDouble = encontrarMultiploDeMasCercanoA(40, (int)resultadoX);
+        double yDouble = encontrarMultiploDeMasCercanoA(40, (int)resultadoY);
+        int x = (Math.round((float)xDouble) / 40) + 1;
+        int y = (Math.round((float)yDouble) / 40) + 1;
+        return new Posicion(x, y);
     }
 
     private double encontrarMultiploDeMasCercanoA(int multiplicador, double coordenada) {

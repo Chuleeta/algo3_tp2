@@ -94,9 +94,9 @@ public class JuegoVista extends BorderPane {
 		
 	}
 
-    public void  setPosicionSeleccionada(int X, int Y){
-       this.pisicionSeleccionadaX = X;
-       this.pisicionSeleccionadaY = Y;
+    public void  setPosicionSeleccionada(Posicion posicion){
+       this.pisicionSeleccionadaX = posicion.coordenadaX();
+       this.pisicionSeleccionadaY = posicion.coordenadaY();
        this.posicionSeleccionada.setText(String.format("Posicion Seleccionada - En X: " + this.pisicionSeleccionadaX + " | En Y: " + this.pisicionSeleccionadaY));
     }
 
