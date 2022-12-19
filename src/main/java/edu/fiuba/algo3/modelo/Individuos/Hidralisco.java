@@ -2,7 +2,9 @@ package edu.fiuba.algo3.modelo.Individuos;
 
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Exceptions.GuaridaNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Exceptions.ReservaDeReproduccionNoDisponibleException;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
@@ -27,6 +29,14 @@ public class Hidralisco extends Individuo implements UnidadTierra{
         this.tiempo = 0;
         posicion = posicionInicial;
         rangoDeAtaque = 4;
+    }
+
+    public Hidralisco(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, GuaridaNoDisponibleException {
+        this(mineral, gas, posicion, jugador.getMapa());
+        this.jugador = jugador;
+        if(this.jugador.validarCorrelativaGuarida()){
+            throw new GuaridaNoDisponibleException();
+        }
     }
 
     private void construir() {

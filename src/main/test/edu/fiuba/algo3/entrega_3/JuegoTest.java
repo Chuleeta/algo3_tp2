@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_3;
 
+import edu.fiuba.algo3.modelo.Exceptions.AccesoNoDisponibleException;
 import edu.fiuba.algo3.modelo.Jugador;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +26,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void elJuegoTerminaCuandoSeDestruyenTodosLosEdificiosDeUnJugador() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException{
+    public void elJuegoTerminaCuandoSeDestruyenTodosLosEdificiosDeUnJugador() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, AccesoNoDisponibleException {
         Mineral mineral = new Mineral(10000);
         GasVespeno gas = new GasVespeno(10000);
         Mapa mapa = new Mapa();

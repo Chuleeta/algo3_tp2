@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
+import edu.fiuba.algo3.modelo.Exceptions.AccesoNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.PuertoEstelarNoDisponibleException;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
@@ -24,6 +27,14 @@ public class Scout extends Individuo implements UnidadVoladora{
         this.rangoDeAtaque = 4;
         this.posicion = posicion;
         this.mapa = mapa;
+    }
+
+    public Scout(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, PuertoEstelarNoDisponibleException {
+        this(mineral, gas, posicion, jugador.getMapa());
+        this.jugador = jugador;
+        if(this.jugador.validarCorrelativaAcceso()){
+            throw new PuertoEstelarNoDisponibleException();
+        }
     }
 
     private void construir() {

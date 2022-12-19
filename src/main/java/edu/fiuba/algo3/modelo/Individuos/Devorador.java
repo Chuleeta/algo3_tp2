@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
+import edu.fiuba.algo3.modelo.Exceptions.GuaridaNoDisponibleException;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaZerg;
@@ -26,6 +28,11 @@ public class Devorador extends Individuo implements UnidadVoladora{
         this.tiempoDeConstruccion = 4;
         this.tiempo = 0;
         this.posicion = posicion;
+    }
+
+    public Devorador(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException{
+        this(mineral, gas, posicion, jugador.getMapa());
+        this.jugador = jugador;
     }
 
     private void construir() {

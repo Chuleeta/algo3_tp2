@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Edificios.*;
 import edu.fiuba.algo3.modelo.Exceptions.AtributoInvalidoException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
@@ -147,5 +148,59 @@ public class Jugador {
 
     public Mapa mostrarMapa() {
         return this.mapa;
+    }
+
+    public boolean validarCorrelativaPuertoEstelar(){
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.getClass() == PuertoEstelar.class) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validarCorrelativaAcceso(){
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.getClass() == Acceso.class) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validarCorrelativaCriadero() {
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.getClass() == Criadero.class) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validarCorrelativaReserva() {
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.getClass() == ReservaDeReproduccion.class) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validarCorrelativaEspiral() {
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.getClass() == Espiral.class) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validarCorrelativaGuarida() {
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.getClass() == Guarida.class) {
+                return true;
+            }
+        }
+        return false;
     }
 }
