@@ -2,8 +2,10 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Edificios.*;
 import edu.fiuba.algo3.modelo.Exceptions.AtributoInvalidoException;
+import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
+import edu.fiuba.algo3.modelo.Individuos.Mutalisco;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.javafx.Tablero;
@@ -171,13 +173,23 @@ public class Jugador {
     public boolean validarCorrelativaCriadero() {
         for (Construccion construccion : this.construcciones) {
             if (construccion.getClass() == Criadero.class) {
-                return true;
+                try {
+                    Larva larva = ((Criadero) construccion).getLarva();
+                    if (larva != null) {
+                        return true;
+                    }
+                } catch (CriaderoNoDisponibleException e) {
+                    return false;
+                }
             }
         }
         return false;
     }
 
     public boolean validarCorrelativaReserva() {
+        if (!validarCorrelativaCriadero()) {
+            return false;
+        }
         for (Construccion construccion : this.construcciones) {
             if (construccion.getClass() == ReservaDeReproduccion.class) {
                 return true;
@@ -187,6 +199,9 @@ public class Jugador {
     }
 
     public boolean validarCorrelativaEspiral() {
+        if (!validarCorrelativaCriadero()) {
+            return false;
+        }
         for (Construccion construccion : this.construcciones) {
             if (construccion.getClass() == Espiral.class) {
                 return true;
@@ -196,11 +211,23 @@ public class Jugador {
     }
 
     public boolean validarCorrelativaGuarida() {
+        if (!validarCorrelativaCriadero()) {
+            return false;
+        }
         for (Construccion construccion : this.construcciones) {
             if (construccion.getClass() == Guarida.class) {
                 return true;
             }
         }
         return false;
+    }
+
+    public Individuo validarCorrelativaGuardian(Posicion posicion) {
+        for (Individuo individuo : this.individuos) {
+            if ((individuo.getClass() == Mutalisco.class) && (individuo.posicion().posicionesIguales(posicion))) {
+                return individuo;
+            }
+        }
+        return null;
     }
 }

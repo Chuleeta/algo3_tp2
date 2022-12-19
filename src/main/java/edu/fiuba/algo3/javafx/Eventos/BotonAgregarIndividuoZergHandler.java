@@ -6,9 +6,7 @@ import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.Espiral;
 import edu.fiuba.algo3.modelo.Edificios.Guarida;
 import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
-import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
-import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
-import edu.fiuba.algo3.modelo.Exceptions.maximaPoblacionAlcanzadaException;
+import edu.fiuba.algo3.modelo.Exceptions.*;
 import edu.fiuba.algo3.modelo.Individuos.*;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Larva;
@@ -212,25 +210,14 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZangano.setOnMouseExited(e -> botonZangano.setStyle(botonNormal));
         botonZangano.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            for (Construccion construccion : this.jugador.getConstrucciones()) {
-                if (construccion.getClass() == Criadero.class) {
-                    try {
-                        Zangano zangano = ((Criadero) construccion).engendrarZangano(new Mineral(100), inputUsuario);
-                    } catch (CriaderoNoDisponibleException ex) {
-                        noSePuedeConstruir("\nCriaderoNoDisponibleException");
-
-                    } catch (RequerimientosInsuficientesException ex) {
-                        noSePuedeConstruir("\nRequerimientosInsuficientesException");
-
-                    } catch (maximaPoblacionAlcanzadaException ex) {
-                        noSePuedeConstruir("\nmaximaPoblacionAlcanzadaException");
-
-                    }
-
-                }
+            try {
+                new Zangano(new Mineral(1000), inputUsuario, jugador);
+                juegoVista.actualizarTablero();
+            } catch (RequerimientosInsuficientesException ex) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            } catch (CriaderoNoDisponibleException ex) {
+                noSePuedeConstruir("\nCriaderoNoDisponibleException");
             }
-
-            juegoVista.actualizarTablero();
             s.close();
         });
         
@@ -241,32 +228,14 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZerling.setOnMouseExited(e -> botonZerling.setStyle(botonNormal));
         botonZerling.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Construccion criadero = null;
-            Construccion reserva = null;
-            for (Construccion construccion : this.jugador.getConstrucciones()) {
-                if (construccion.getClass() == Criadero.class) {
-                    criadero = construccion;
-                }
-                if (construccion.getClass() == ReservaDeReproduccion.class) {
-                    reserva = construccion;
-                }
+            try {
+                new Zerling(new Mineral(1000), inputUsuario, jugador);
+                juegoVista.actualizarTablero();
+            } catch (RequerimientosInsuficientesException ex) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            } catch (ReservaDeReproduccionNoDisponibleException ex) {
+                throw new RuntimeException(ex);
             }
-            if (criadero != null && reserva != null) {
-                try {
-                    Larva larva = ((Criadero) criadero).getLarva();
-                    Zerling zerling = ((ReservaDeReproduccion) reserva).generarZerling(new Mineral(100), larva,inputUsuario);
-                } catch (CriaderoNoDisponibleException ex) {
-                    noSePuedeConstruir("\nCriaderoNoDisponibleException");
-
-                } catch (RequerimientosInsuficientesException ex) {
-                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
-
-                } catch (maximaPoblacionAlcanzadaException ex) {
-                    noSePuedeConstruir("\nmaximaPoblacionAlcanzadaException");
-
-                }
-            }
-            juegoVista.actualizarTablero();
             s.close();
         });
         
@@ -277,32 +246,14 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonHidralisco.setOnMouseExited(e -> botonHidralisco.setStyle(botonNormal));
         botonHidralisco.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Construccion criadero = null;
-            Construccion guarida = null;
-            for (Construccion construccion : this.jugador.getConstrucciones()) {
-                if (construccion.getClass() == Criadero.class) {
-                    criadero = construccion;
-                }
-                if (construccion.getClass() == Guarida.class) {
-                    guarida = construccion;
-                }
+            try {
+                new Hidralisco(new Mineral(1000), new GasVespeno(1000), inputUsuario, jugador);
+                juegoVista.actualizarTablero();
+            } catch (RequerimientosInsuficientesException ex) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            } catch (GuaridaNoDisponibleException ex) {
+                throw new RuntimeException(ex);
             }
-            if (criadero != null && guarida != null) {
-                try {
-                    Larva larva = ((Criadero) criadero).getLarva();
-                    Hidralisco hidralisco = ((Guarida) guarida).generarHidralisco(new Mineral(100), new GasVespeno(1000), larva, inputUsuario);
-                } catch (CriaderoNoDisponibleException ex) {
-                    noSePuedeConstruir("\nCriaderoNoDisponibleException");
-
-                } catch (RequerimientosInsuficientesException ex) {
-                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
-
-                } catch (maximaPoblacionAlcanzadaException ex) {
-                    noSePuedeConstruir("\nmaximaPoblacionAlcanzadaException");
-
-                }
-            }
-            juegoVista.actualizarTablero();
             s.close();
         });
         
@@ -313,32 +264,14 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonMutalisco.setOnMouseExited(e -> botonMutalisco.setStyle(botonNormal));
         botonMutalisco.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Construccion criadero = null;
-            Construccion espiral = null;
-            for (Construccion construccion : this.jugador.getConstrucciones()) {
-                if (construccion.getClass() == Criadero.class) {
-                    criadero = construccion;
-                }
-                if (construccion.getClass() == Espiral.class) {
-                    espiral = construccion;
-                }
+            try {
+                new Mutalisco(new Mineral(1000), new GasVespeno(1000), inputUsuario, jugador);
+                juegoVista.actualizarTablero();
+            } catch (RequerimientosInsuficientesException ex) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            } catch (EspiralNoDisponibleException ex) {
+                throw new RuntimeException(ex);
             }
-            if (criadero != null && espiral != null) {
-                try {
-                    Larva larva = ((Criadero) criadero).getLarva();
-                    Mutalisco mutalisco = ((Espiral) espiral).generarMutalisco(new Mineral(300), new GasVespeno(1000), larva, inputUsuario);
-                } catch (CriaderoNoDisponibleException ex) {
-                    noSePuedeConstruir("\nCriaderoNoDisponibleException");
-
-                } catch (RequerimientosInsuficientesException ex) {
-                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
-
-                } catch (maximaPoblacionAlcanzadaException ex) {
-                    noSePuedeConstruir("\nmaximaPoblacionAlcanzadaException");
-
-                }
-            }
-            juegoVista.actualizarTablero();
             s.close();
         });
         
@@ -349,34 +282,14 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonGuardian.setOnMouseExited(e -> botonGuardian.setStyle(botonNormal));
         botonGuardian.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Construccion criadero = null;
-            Construccion espiral = null;
-            for (Individuo individuo : this.jugador.mostrarIndividuos()) {
-                if (individuo.posicion().posicionesIguales(inputUsuario)) {
-                    if (individuo.getClass() == Mutalisco.class){
-                        if (jugador.eliminarIndividuo(individuo)){
-                            try {
-                                Larva larva = ((Criadero) criadero).getLarva();
-                                Guardian guardian = new Guardian(new Mineral(500), new GasVespeno(500), inputUsuario,jugador.mostrarMapa());
-                                jugador.agregarIndividuo(guardian);
-                                jugador.añadirUnidad();
-                            } catch (CriaderoNoDisponibleException ex) {
-                                jugador.agregarIndividuo(individuo);
-                                noSePuedeConstruir("\nCriaderoNoDisponibleException");
-                            } catch (RequerimientosInsuficientesException ex) {
-                                jugador.agregarIndividuo(individuo);
-                                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-                            }
-                        }
-                    } else {
-                        noSePuedeConstruir("No existe mutalisco en esta posicion");
-                    }
-                } else {
-                    noSePuedeConstruir("No existe individuo en esta posicion");
-                }
+            try {
+                new Guardian(new Mineral(1000), new GasVespeno(1000), inputUsuario, jugador);
+                juegoVista.actualizarTablero();
+            } catch (RequerimientosInsuficientesException ex) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            } catch (EspiralNoDisponibleException ex) {
+                noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
             }
-
-            juegoVista.actualizarTablero();
             s.close();
         });
         
@@ -387,33 +300,14 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonDevorador.setOnMouseExited(e -> botonDevorador.setStyle(botonNormal));
         botonDevorador.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Construccion criadero = null;
-            for (Individuo individuo : this.jugador.mostrarIndividuos()) {
-                if (individuo.posicion().posicionesIguales(inputUsuario)) {
-                    if (individuo.getClass() == Mutalisco.class){
-                        if (jugador.eliminarIndividuo(individuo)){
-                            try {
-                                Larva larva = ((Criadero) criadero).getLarva();
-                                Devorador devorador = new Devorador(new Mineral(500), new GasVespeno(500), inputUsuario,jugador.mostrarMapa());
-                                jugador.agregarIndividuo(devorador);
-                                jugador.añadirUnidad();
-                            } catch (CriaderoNoDisponibleException ex) {
-                                jugador.agregarIndividuo(individuo);
-                                noSePuedeConstruir("\nCriaderoNoDisponibleException");
-                            } catch (RequerimientosInsuficientesException ex) {
-                                jugador.agregarIndividuo(individuo);
-                                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-                            }
-                        }
-                    } else {
-                        noSePuedeConstruir("No existe mutalisco en esta posicion");
-                    }
-                } else {
-                    noSePuedeConstruir("No existe individuo en esta posicion");
-                }
+            try {
+                new Devorador(new Mineral(1000), new GasVespeno(1000), inputUsuario, jugador);
+                juegoVista.actualizarTablero();
+            } catch (RequerimientosInsuficientesException ex) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            } catch (EspiralNoDisponibleException ex) {
+                noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
             }
-
-            juegoVista.actualizarTablero();
             s.close();
         });
         

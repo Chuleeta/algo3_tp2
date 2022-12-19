@@ -35,9 +35,11 @@ public class Zerling extends Individuo implements UnidadTierra{
     public Zerling(Mineral mineral, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, ReservaDeReproduccionNoDisponibleException {
         this(mineral, posicion, jugador.getMapa());
         this.jugador = jugador;
-        if(this.jugador.validarCorrelativaReserva()){
+        if(!this.jugador.validarCorrelativaReserva()){
             throw new ReservaDeReproduccionNoDisponibleException();
         }
+        jugador.añadirUnidad();
+        jugador.agregarIndividuo(this);
     }
 
     public void pasarTiempo() {
