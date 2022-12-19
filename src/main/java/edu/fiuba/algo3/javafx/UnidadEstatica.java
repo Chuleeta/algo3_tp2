@@ -24,14 +24,14 @@ public class UnidadEstatica extends Rectangle implements Notificable {
         this.construccion = construccion;
         this.setTranslateX(coordenadaX);
         this.setTranslateY(coordenadaY);
-        this.botonAtacar = new BotonModal("Atacar");
+        this.botonAtacar = new BotonModal(this.construccion.obtenerVida().vidaRestante());
         this.setOnMouseClicked(e -> {
             if(e.getButton().equals(MouseButton.PRIMARY)){
                 if(e.getClickCount() == 2){
                     VBox eleccionUsuario = new VBox();
                     HBox opciones = new HBox();
                     VBox opciones1 = new VBox();
-                    Label seleccionarAccion = new Label("Seleccionar accion\n");
+                    Label seleccionarAccion = new Label("Propiedades\n");
                     String pathicono = this.getClass().getResource("/imagenes/icono.png").toString();
                     Image icono = new Image(pathicono);
                     opciones1.getChildren().addAll(this.botonAtacar);
@@ -48,7 +48,7 @@ public class UnidadEstatica extends Rectangle implements Notificable {
                     sc.setFill(Color.RED);
                     Stage s = new Stage();
                     s.initModality(Modality.APPLICATION_MODAL);
-                    s.setTitle("Opciones de la unidad");
+                    s.setTitle("Propuedades de la unidad");
                     s.getIcons().add(icono);
                     s.setResizable(false);
                     s.setScene(sc);

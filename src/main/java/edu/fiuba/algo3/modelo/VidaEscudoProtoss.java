@@ -37,6 +37,8 @@ public class VidaEscudoProtoss extends Vida{
         dañarEscudo(daño);
     }
 
-    
-
+    @Override
+    public String vidaRestante() {
+        return String.valueOf("Vida:" + this.vida + "," + " Escudo:" + this.escudo);
+    }
 }
