@@ -54,7 +54,7 @@ public class Zangano extends Individuo implements UnidadTierra{
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
-        this.jugador.añadirMineral(minarMena());
+        if (this.jugador != null) this.jugador.añadirMineral(minarMena());
     }
     public void ocuparMena(Mena mena) throws MenaOcupadaException {
         if (this.estado.estaConstruido()) {
