@@ -98,6 +98,7 @@ public class Jugador {
             individuo.pasarTiempo();
         }
         mapa.filtrarConstrucciones(construcciones);
+        System.out.println(this.mineral.getCantidad());
     }
 
     public boolean agregarConstruccion(Construccion construccion){
@@ -236,5 +237,9 @@ public class Jugador {
     }
     public GasVespeno invertirGas() {
         return this.gas;
+    }
+
+    public void añadirMineral(int cantidad) {
+        this.mineral.agregarMineral(cantidad);
     }
 }

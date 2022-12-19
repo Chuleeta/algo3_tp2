@@ -69,8 +69,11 @@ public class Mena implements RecursoInyectable{
     }
 
     @Override
-    public boolean inyectarRecurso(Zangano zangano) {
-        // TODO Auto-generated method stub
+    public boolean inyectarRecurso(Zangano zangano) throws MenaOcupadaException {
+        if(!estaOcupado){
+            zangano.ocuparMena(this);
+            return true;
+        }
         return false;
     }
 

@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
+import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
 import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
@@ -41,6 +42,7 @@ public class Zangano extends Individuo implements UnidadTierra{
         if(!this.jugador.validarCorrelativaCriadero()){
             throw new CriaderoNoDisponibleException();
         }
+        mapa = jugador.getMapa();
         jugador.añadirUnidad();
         jugador.agregarIndividuo(this);
     }
@@ -52,6 +54,7 @@ public class Zangano extends Individuo implements UnidadTierra{
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
+        this.jugador.añadirMineral(minarMena());
     }
     public void ocuparMena(Mena mena) throws MenaOcupadaException {
         if (this.estado.estaConstruido()) {
@@ -101,4 +104,17 @@ public class Zangano extends Individuo implements UnidadTierra{
         return true;
     }
 
+
+    @Override
+    public boolean moverUnidad(Posicion nuevaPosicion) {
+        if(super.moverUnidad(nuevaPosicion)){
+            try {
+                mapa.inyectarRecurso(this);
+                return true;
+            } catch (MenaOcupadaException e) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
