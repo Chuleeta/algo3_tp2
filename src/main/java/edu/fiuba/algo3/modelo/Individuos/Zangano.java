@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
+import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.PuertoEstelarNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.VidaZerg;
@@ -24,6 +27,22 @@ public class Zangano extends Individuo implements UnidadTierra{
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 1;
         this.tiempo = 0;
+    }
+
+    public Zangano(Mineral mineral, Posicion posicion) throws RequerimientosInsuficientesException {
+        this(mineral);
+        this.posicion = posicion;
+    }
+
+    public Zangano(Mineral mineral, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, CriaderoNoDisponibleException {
+        this(mineral);
+        this.posicion = posicion;
+        this.jugador = jugador;
+        if(!this.jugador.validarCorrelativaCriadero()){
+            throw new CriaderoNoDisponibleException();
+        }
+        jugador.añadirUnidad();
+        jugador.agregarIndividuo(this);
     }
 
     private void construir() {

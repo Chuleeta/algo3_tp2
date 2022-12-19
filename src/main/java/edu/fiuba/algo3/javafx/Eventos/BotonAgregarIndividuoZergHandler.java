@@ -1,11 +1,18 @@
 package edu.fiuba.algo3.javafx.Eventos;
 
 import edu.fiuba.algo3.javafx.JuegoVista;
-import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
-import edu.fiuba.algo3.modelo.Individuos.AmoSupremo;
+import edu.fiuba.algo3.modelo.Construccion;
+import edu.fiuba.algo3.modelo.Edificios.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.Espiral;
+import edu.fiuba.algo3.modelo.Edificios.Guarida;
+import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
+import edu.fiuba.algo3.modelo.Exceptions.*;
+import edu.fiuba.algo3.modelo.Individuos.*;
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Larva;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
+import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -136,8 +143,43 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         return (new Posicion(valorX-1, valorY-1));
     }
 
+    private void noSePuedeConstruir(String text) {
+        InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
+        Font fuente = Font.loadFont(is, 20);
+
+        Label ingresarPosicion = new Label(text);
+        ingresarPosicion.setFont(fuente);
+        ingresarPosicion.setStyle(formatoTexto);
+        ingresarPosicion.setAlignment(Pos.CENTER);
+
+        Button botonConfirmar = new Button("Confirmar");
+        botonConfirmar.setFont(fuente);
+        botonConfirmar.setStyle(botonNormal);
+        botonConfirmar.setOnMouseEntered(e -> botonConfirmar.setStyle(botonAntesDeSerPresionado));
+        botonConfirmar.setOnMouseExited(e -> botonConfirmar.setStyle(botonNormal));
+
+
+        VBox inputPosicion = new VBox();
+        inputPosicion.getChildren().addAll(ingresarPosicion, botonConfirmar);
+        inputPosicion.setSpacing(30);
+        inputPosicion.setAlignment(Pos.CENTER);
+        inputPosicion.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
+
+        Scene sc = new Scene(inputPosicion, 500, 300);
+        Stage s = new Stage();
+        s.setResizable(false);
+        s.setTitle("Fallo Al Construir la unidad");
+        s.getIcons().add(this.icono);
+        botonConfirmar.setOnAction(e-> {
+            s.close();
+        });
+        s.setScene(sc);
+        s.showAndWait();
+    }
+
     @Override
     public void handle(ActionEvent actionEvent) {
+        Stage s = new Stage();
 
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 25);
@@ -168,7 +210,15 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZangano.setOnMouseExited(e -> botonZangano.setStyle(botonNormal));
         botonZangano.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                new Zangano(new Mineral(1000), inputUsuario, jugador);
+                juegoVista.actualizarTablero();
+            } catch (RequerimientosInsuficientesException ex) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            } catch (CriaderoNoDisponibleException ex) {
+                noSePuedeConstruir("\nCriaderoNoDisponibleException");
+            }
+            s.close();
         });
         
         Button botonZerling = new Button("Zerling");
@@ -178,7 +228,15 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZerling.setOnMouseExited(e -> botonZerling.setStyle(botonNormal));
         botonZerling.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                new Zerling(new Mineral(1000), inputUsuario, jugador);
+                juegoVista.actualizarTablero();
+            } catch (RequerimientosInsuficientesException ex) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            } catch (ReservaDeReproduccionNoDisponibleException ex) {
+                throw new RuntimeException(ex);
+            }
+            s.close();
         });
         
         Button botonHidralisco = new Button("Hidralisco");
@@ -188,7 +246,15 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonHidralisco.setOnMouseExited(e -> botonHidralisco.setStyle(botonNormal));
         botonHidralisco.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                new Hidralisco(new Mineral(1000), new GasVespeno(1000), inputUsuario, jugador);
+                juegoVista.actualizarTablero();
+            } catch (RequerimientosInsuficientesException ex) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            } catch (GuaridaNoDisponibleException ex) {
+                throw new RuntimeException(ex);
+            }
+            s.close();
         });
         
         Button botonMutalisco = new Button("Mutalisco");
@@ -198,7 +264,15 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonMutalisco.setOnMouseExited(e -> botonMutalisco.setStyle(botonNormal));
         botonMutalisco.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                new Mutalisco(new Mineral(1000), new GasVespeno(1000), inputUsuario, jugador);
+                juegoVista.actualizarTablero();
+            } catch (RequerimientosInsuficientesException ex) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            } catch (EspiralNoDisponibleException ex) {
+                throw new RuntimeException(ex);
+            }
+            s.close();
         });
         
         Button botonGuardian = new Button("Guardian");
@@ -208,7 +282,15 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonGuardian.setOnMouseExited(e -> botonGuardian.setStyle(botonNormal));
         botonGuardian.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                new Guardian(new Mineral(1000), new GasVespeno(1000), inputUsuario, jugador);
+                juegoVista.actualizarTablero();
+            } catch (RequerimientosInsuficientesException ex) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            } catch (EspiralNoDisponibleException ex) {
+                noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
+            }
+            s.close();
         });
         
         Button botonDevorador = new Button("Devorador");
@@ -218,7 +300,15 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonDevorador.setOnMouseExited(e -> botonDevorador.setStyle(botonNormal));
         botonDevorador.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                new Devorador(new Mineral(1000), new GasVespeno(1000), inputUsuario, jugador);
+                juegoVista.actualizarTablero();
+            } catch (RequerimientosInsuficientesException ex) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            } catch (EspiralNoDisponibleException ex) {
+                noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
+            }
+            s.close();
         });
         
         
@@ -244,7 +334,6 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         inputPosicion.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
         Scene sc = new Scene(inputPosicion, 800, 300, Color.rgb(47, 52, 58));
         sc.setFill(Color.RED);
-        Stage s = new Stage();
         s.initModality(Modality.APPLICATION_MODAL);
         s.setTitle("Tienda Individuos Zerg");
         s.getIcons().add(this.icono);

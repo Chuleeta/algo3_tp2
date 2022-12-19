@@ -2,6 +2,9 @@ package edu.fiuba.algo3.modelo.Individuos;
 
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Exceptions.AccesoNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.EspiralNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.PuertoEstelarNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
@@ -29,6 +32,15 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
         this.posicion = posicion;
     }
 
+    public Mutalisco(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, EspiralNoDisponibleException {
+        this(mineral, gas, posicion, jugador.getMapa());
+        this.jugador = jugador;
+        if(!this.jugador.validarCorrelativaEspiral()){
+            throw new EspiralNoDisponibleException();
+        }
+        jugador.agregarIndividuo(this);
+        jugador.añadirUnidad();
+    }
 
     private void construir() {
         this.estado = new EstadoConstruido();

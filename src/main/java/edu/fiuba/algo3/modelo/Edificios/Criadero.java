@@ -52,6 +52,13 @@ public class Criadero extends Edificio {
         return larvas;
     }
 
+    public Larva getLarva() throws CriaderoNoDisponibleException {
+        if (larvas.size() == 0) {
+            throw new CriaderoNoDisponibleException();
+        }
+        return larvas.remove(0);
+    }
+
     public boolean llenoDeLarvas() {
         return larvas.size() == 3;
     }
@@ -64,6 +71,19 @@ public class Criadero extends Edificio {
         if (jugador.unidadesDisponibles()) {
             jugador.añadirUnidad();
             return larvas.remove(0).mutar(mineral);
+        }
+        throw new maximaPoblacionAlcanzadaException();
+    }
+    public Zangano engendrarZangano(Mineral mineral, Posicion posicion) throws CriaderoNoDisponibleException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
+        if (larvas.size() == 0) {
+            throw new CriaderoNoDisponibleException();
+        }
+
+        if (jugador.unidadesDisponibles()) {
+            jugador.añadirUnidad();
+            Zangano zangano = larvas.remove(0).mutar(mineral, posicion);
+            this.jugador.agregarIndividuo(zangano);
+            return zangano;
         }
         throw new maximaPoblacionAlcanzadaException();
     }

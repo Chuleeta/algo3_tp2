@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Exceptions.AccesoNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
@@ -31,7 +33,14 @@ public class Zealot extends Individuo implements UnidadTierra{
         invisible = false;
         this.posicion = posicion;
         this.mapa = mapa;
-        crearJugadorPorDefecto();
+    }
+
+    public Zealot(Mineral mineral, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, AccesoNoDisponibleException {
+        this(mineral, posicion, jugador.getMapa());
+        this.jugador = jugador;
+        if(this.jugador.validarCorrelativaAcceso()){
+            throw new AccesoNoDisponibleException();
+        }
     }
 
     private void construir() {

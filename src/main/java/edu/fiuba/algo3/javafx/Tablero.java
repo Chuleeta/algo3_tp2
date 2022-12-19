@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.stream.IntStream;
 
 import edu.fiuba.algo3.modelo.Construccion;
+import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
@@ -96,19 +97,31 @@ public class Tablero {
         }
     }
 
-    public UnidadMovible crearUnidadMovible(Construccion construccion) {
+    public UnidadMovible crearUnidadMovible(Individuo individuo) {
+        int coordenadaX = (individuo.posicion().coordenadaX() * 40) + 10;
+        int coordenadaY = (individuo.posicion().coordenadaY() * 40) + 10;
+        UnidadMovible unidad = new UnidadMovible(individuo, coordenadaX, coordenadaY);
+        hacerMovible(unidad);
+        this.juegoVista.agregarSuscriptorPasarTurno(unidad);
+        return unidad;
+    }
+    public UnidadEstatica crearUnidadEstatica(Construccion construccion) {
         int coordenadaX = (construccion.mostrarPosicion().coordenadaX() * 40) + 10;
         int coordenadaY = (construccion.mostrarPosicion().coordenadaY() * 40) + 10;
-        UnidadMovible unidad = new UnidadMovible(construccion, coordenadaX, coordenadaY);
-        hacerMovible(unidad);
+        UnidadEstatica unidad = new UnidadEstatica(construccion, coordenadaX, coordenadaY);
         this.juegoVista.agregarSuscriptorPasarTurno(unidad);
         return unidad;
     }
 
     public void actualizarConstrucciones() {
         ArrayList<Construccion> construcciones = juego.mostrarConstrucciones();
+        ArrayList<Individuo> unidades = juego.mostrarUnidades();
         for (Construccion construccion : construcciones) {
-            UnidadMovible unidad = crearUnidadMovible(construccion);
+            UnidadEstatica unidad = crearUnidadEstatica(construccion);
+            mapaVista.getChildren().add(unidad);
+        }
+        for (Individuo individuo : unidades) {
+            UnidadMovible unidad = crearUnidadMovible(individuo);
             mapaVista.getChildren().add(unidad);
         }
 
@@ -191,21 +204,14 @@ public class Tablero {
             ((Shape) n).setFill(colorOriginal);// 458.12312039123 ---> 458.1--> 450---> 11.25 --> 11 13 --> posicion(11, 13)
             double resultadoX = new BigDecimal(n.getTranslateX()).setScale(1, RoundingMode.UP).doubleValue();
             double resultadoY = new BigDecimal(n.getTranslateY()).setScale(1, RoundingMode.UP).doubleValue();
-            //double diferenciaX = resultadoX - (int)resultadoX;
-            //double diferenciaY = resultadoY - (int)resultadoY;
-            // System.out.println("\nvalor aprox X: " + resultadoX);
-            // System.out.println("\nvalor aprox Y: " + resultadoY);
             n.setTranslateX(encontrarMultiploDeMasCercanoA(40, (int)resultadoX) + 10);
             n.setTranslateY(encontrarMultiploDeMasCercanoA(40, (int)resultadoY) + 10);
             double xDouble = encontrarMultiploDeMasCercanoA(40, (int)resultadoX);
             double yDouble = encontrarMultiploDeMasCercanoA(40, (int)resultadoY);
-            // System.out.println("\nvalor aprox DOUBLE X: " + encontrarMultiploDeMasCercanoA(40, (int)resultadoX) + 10);
-            // System.out.println("\nvalor aprox DOUBLE Y: " + encontrarMultiploDeMasCercanoA(40, (int)resultadoY) + 10);
             int x = (Math.round((float)xDouble) / 40) + 1;
             int y = (Math.round((float)yDouble) / 40) + 1;
             this.juegoVista.setPosicionSeleccionada(x, y);
-            // System.out.println("\nvalor aprox int X: " + x);
-            // System.out.println("\nvalor aprox int Y: " + y); 
+
         });
     }
 
@@ -221,11 +227,15 @@ public class Tablero {
 	}
 
     public void insertarConstruccion(Construccion construccion) {
-        //crearGrilla();
-        if(construccion != null)
+        if(construccion == null)
             System.out.println("\n inserta construccion");
-        UnidadMovible nuevo = crearUnidadMovible(construccion);
+        UnidadEstatica nuevo = crearUnidadEstatica(construccion);
         mapaVista.getChildren().add(nuevo);
-        //this.contenedor = new Group(mapaVista);
+    }
+    public void insertarUnidad(Individuo unidad) {
+        if(unidad == null)
+            System.out.println("\n inserta construccion");
+        UnidadMovible nuevo = crearUnidadMovible(unidad);
+        mapaVista.getChildren().add(nuevo);
     }
 }

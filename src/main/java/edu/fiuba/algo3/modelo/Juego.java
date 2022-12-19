@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
 
 import java.util.ArrayList;
@@ -39,5 +40,14 @@ public class Juego {
 
     public Jugador getJugadorDos(){
         return jugadorDos;
+    }
+
+    public ArrayList<Individuo> mostrarUnidades() {
+        ArrayList<Individuo> unidades = new ArrayList<>();
+        for (Individuo individuo : jugadorUno.mostrarIndividuos())
+            unidades.add(individuo);
+        for (Individuo individuo : jugadorDos.mostrarIndividuos())
+            unidades.add(individuo);
+        return unidades;
     }
 }

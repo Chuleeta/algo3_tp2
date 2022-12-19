@@ -1,8 +1,11 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Edificios.*;
 import edu.fiuba.algo3.modelo.Exceptions.AtributoInvalidoException;
+import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
+import edu.fiuba.algo3.modelo.Individuos.Mutalisco;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.javafx.Tablero;
@@ -33,8 +36,8 @@ public class Jugador {
         this.mapa = mapa;
         this.construcciones = new ArrayList<>();
         this.individuos = new ArrayList<>();
-        this.mineral = new Mineral(200);
-        this.gas = new GasVespeno(0);
+        this.mineral = new Mineral(2000);
+        this.gas = new GasVespeno(2000);
         this.capacidad = capacidad;
         unidadesCreadas = 0;
     }
@@ -109,6 +112,10 @@ public class Jugador {
         return individuos.add(individuo);
     }
 
+    public boolean eliminarIndividuo(Individuo individuo){
+        return individuos.remove(individuo);
+    }
+
     public void agregarEnListaConstruccion(Construccion construccion) {
         construcciones.add(construccion);
     }
@@ -135,5 +142,92 @@ public class Jugador {
 
     public Mapa getMapa() {
         return mapa;
+    }
+
+    public ArrayList<Individuo> mostrarIndividuos() {
+        return this.individuos;
+    }
+
+    public Mapa mostrarMapa() {
+        return this.mapa;
+    }
+
+    public boolean validarCorrelativaPuertoEstelar(){
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.getClass() == PuertoEstelar.class) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validarCorrelativaAcceso(){
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.getClass() == Acceso.class) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validarCorrelativaCriadero() {
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.getClass() == Criadero.class) {
+                try {
+                    Larva larva = ((Criadero) construccion).getLarva();
+                    if (larva != null) {
+                        return true;
+                    }
+                } catch (CriaderoNoDisponibleException e) {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean validarCorrelativaReserva() {
+        if (!validarCorrelativaCriadero()) {
+            return false;
+        }
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.getClass() == ReservaDeReproduccion.class) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validarCorrelativaEspiral() {
+        if (!validarCorrelativaCriadero()) {
+            return false;
+        }
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.getClass() == Espiral.class) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validarCorrelativaGuarida() {
+        if (!validarCorrelativaCriadero()) {
+            return false;
+        }
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.getClass() == Guarida.class) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Individuo validarCorrelativaGuardian(Posicion posicion) {
+        for (Individuo individuo : this.individuos) {
+            if ((individuo.getClass() == Mutalisco.class) && (individuo.posicion().posicionesIguales(posicion))) {
+                return individuo;
+            }
+        }
+        return null;
     }
 }

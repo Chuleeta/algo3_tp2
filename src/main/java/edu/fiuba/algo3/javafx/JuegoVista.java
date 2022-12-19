@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import edu.fiuba.algo3.javafx.Eventos.*;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -467,9 +468,15 @@ public class JuegoVista extends BorderPane {
                 tablero.insertarConstruccion(construccion);
             }
         }
+        ArrayList<Individuo> individuos = this.juego.mostrarUnidades();
+        if(individuos.size() != 0){
+            for (Individuo individuo : individuos) {
+                tablero.insertarUnidad(individuo);
+            }
+        }
     }
 
-    public void agregarSuscriptorPasarTurno(UnidadMovible unidad) {
-        this.pasarTurno.añadirSuscriptor(unidad);
+    public void agregarSuscriptorPasarTurno(Notificable notificable) {
+        this.pasarTurno.añadirSuscriptor(notificable);
     }
 }

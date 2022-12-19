@@ -2,9 +2,14 @@ package edu.fiuba.algo3.modelo.Individuos;
 
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Exceptions.AccesoNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.PuertoEstelarNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Exceptions.ReservaDeReproduccionNoDisponibleException;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
@@ -25,6 +30,16 @@ public class Zerling extends Individuo implements UnidadTierra{
         this.tiempo = 0;
         rangoDeAtaque = 1;
         this.mapa = mapa;
+    }
+
+    public Zerling(Mineral mineral, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, ReservaDeReproduccionNoDisponibleException {
+        this(mineral, posicion, jugador.getMapa());
+        this.jugador = jugador;
+        if(!this.jugador.validarCorrelativaReserva()){
+            throw new ReservaDeReproduccionNoDisponibleException();
+        }
+        jugador.añadirUnidad();
+        jugador.agregarIndividuo(this);
     }
 
     public void pasarTiempo() {

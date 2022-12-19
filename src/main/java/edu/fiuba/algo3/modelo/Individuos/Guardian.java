@@ -2,7 +2,10 @@ package edu.fiuba.algo3.modelo.Individuos;
 
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Exceptions.EspiralNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.GuaridaNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaZerg;
@@ -25,6 +28,18 @@ public class Guardian extends Individuo implements UnidadVoladora{
         this.tiempoDeConstruccion = 4;
         this.tiempo = 0;
         this.posicion = posicion;
+    }
+
+    public Guardian(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, EspiralNoDisponibleException {
+        this(mineral, gas, posicion, jugador.getMapa());
+        this.jugador = jugador;
+        Individuo correlativo = this.jugador.validarCorrelativaGuardian(posicion);
+        if(correlativo == null){
+            throw new EspiralNoDisponibleException();
+        }
+        this.jugador.eliminarIndividuo(correlativo);
+        jugador.añadirUnidad();
+        jugador.agregarIndividuo(this);
     }
 
     private void construir() {
