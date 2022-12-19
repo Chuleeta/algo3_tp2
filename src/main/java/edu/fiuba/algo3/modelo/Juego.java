@@ -44,9 +44,9 @@ public class Juego {
 
     public ArrayList<Individuo> mostrarUnidades() {
         ArrayList<Individuo> unidades = new ArrayList<>();
-        for (Individuo individuo : jugadorUno.individuos)
+        for (Individuo individuo : jugadorUno.mostrarIndividuos())
             unidades.add(individuo);
-        for (Individuo individuo : jugadorDos.individuos)
+        for (Individuo individuo : jugadorDos.mostrarIndividuos())
             unidades.add(individuo);
         return unidades;
     }

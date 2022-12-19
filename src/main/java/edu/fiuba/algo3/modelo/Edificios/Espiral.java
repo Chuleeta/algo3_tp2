@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Exceptions.maximaPoblacionAlcanzadaException;
+import edu.fiuba.algo3.modelo.Individuos.Hidralisco;
 import edu.fiuba.algo3.modelo.Individuos.Mutalisco;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
@@ -40,6 +42,7 @@ public class Espiral extends Edificio{
 
     @Override
     public void construir() throws NoExisteEdificioCorrelativoException {
+        // revisar correlativa
         if (!this.mapa.verificarEdificacionCorrelativa(jugador, new Guarida(new Posicion(0,0), new Mapa()))){
             throw new NoExisteEdificioCorrelativoException();
         }
@@ -83,5 +86,16 @@ public class Espiral extends Edificio{
 
     public Mutalisco generarMutalisco(Mineral mineral, GasVespeno gas, Larva larva) throws RequerimientosInsuficientesException {
         return new Mutalisco(mineral, gas, new Posicion(3, 3), this.mapa);
+    }
+
+    public Mutalisco generarMutalisco(Mineral mineral, GasVespeno gasVespeno, Larva larva, Posicion inputUsuario) throws maximaPoblacionAlcanzadaException, RequerimientosInsuficientesException {
+        if (jugador.unidadesDisponibles()) {
+            Mutalisco mutalisco =  new Mutalisco(mineral, gasVespeno, inputUsuario, this.mapa);
+            this.jugador.agregarIndividuo(mutalisco);
+            jugador.añadirUnidad();
+            return mutalisco;
+        }
+        throw new maximaPoblacionAlcanzadaException();
+
     }
 }

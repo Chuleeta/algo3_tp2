@@ -9,4 +9,8 @@ public class Larva {
     public Zangano mutar(Mineral mineral) throws RequerimientosInsuficientesException {
         return new Zangano(mineral);
     }
+
+    public Zangano mutar(Mineral mineral, Posicion posicion) throws RequerimientosInsuficientesException {
+        return new Zangano(mineral, posicion);
+    }
 }

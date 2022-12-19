@@ -1,10 +1,17 @@
 package edu.fiuba.algo3.javafx.Eventos;
 
 import edu.fiuba.algo3.javafx.JuegoVista;
+import edu.fiuba.algo3.modelo.Construccion;
+import edu.fiuba.algo3.modelo.Edificios.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.Espiral;
+import edu.fiuba.algo3.modelo.Edificios.Guarida;
+import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
+import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
-import edu.fiuba.algo3.modelo.Individuos.AmoSupremo;
-import edu.fiuba.algo3.modelo.Individuos.Zangano;
+import edu.fiuba.algo3.modelo.Exceptions.maximaPoblacionAlcanzadaException;
+import edu.fiuba.algo3.modelo.Individuos.*;
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Larva;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
@@ -138,8 +145,43 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         return (new Posicion(valorX, valorY));
     }
 
+    private void noSePuedeConstruir(String text) {
+        InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
+        Font fuente = Font.loadFont(is, 20);
+
+        Label ingresarPosicion = new Label(text);
+        ingresarPosicion.setFont(fuente);
+        ingresarPosicion.setStyle(formatoTexto);
+        ingresarPosicion.setAlignment(Pos.CENTER);
+
+        Button botonConfirmar = new Button("Confirmar");
+        botonConfirmar.setFont(fuente);
+        botonConfirmar.setStyle(botonNormal);
+        botonConfirmar.setOnMouseEntered(e -> botonConfirmar.setStyle(botonAntesDeSerPresionado));
+        botonConfirmar.setOnMouseExited(e -> botonConfirmar.setStyle(botonNormal));
+
+
+        VBox inputPosicion = new VBox();
+        inputPosicion.getChildren().addAll(ingresarPosicion, botonConfirmar);
+        inputPosicion.setSpacing(30);
+        inputPosicion.setAlignment(Pos.CENTER);
+        inputPosicion.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
+
+        Scene sc = new Scene(inputPosicion, 500, 300);
+        Stage s = new Stage();
+        s.setResizable(false);
+        s.setTitle("Fallo Al Construir la unidad");
+        s.getIcons().add(this.icono);
+        botonConfirmar.setOnAction(e-> {
+            s.close();
+        });
+        s.setScene(sc);
+        s.showAndWait();
+    }
+
     @Override
     public void handle(ActionEvent actionEvent) {
+        Stage s = new Stage();
 
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 25);
@@ -170,11 +212,26 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZangano.setOnMouseExited(e -> botonZangano.setStyle(botonNormal));
         botonZangano.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                Zangano zangano = new Zangano(new Mineral(1000), inputUsuario);
-                this.jugador.agregarIndividuo(zangano);
-            } catch (RequerimientosInsuficientesException ex) {
+            for (Construccion construccion : this.jugador.getConstrucciones()) {
+                if (construccion.getClass() == Criadero.class) {
+                    try {
+                        Zangano zangano = ((Criadero) construccion).engendrarZangano(new Mineral(100), inputUsuario);
+                    } catch (CriaderoNoDisponibleException ex) {
+                        noSePuedeConstruir("\nCriaderoNoDisponibleException");
+
+                    } catch (RequerimientosInsuficientesException ex) {
+                        noSePuedeConstruir("\nRequerimientosInsuficientesException");
+
+                    } catch (maximaPoblacionAlcanzadaException ex) {
+                        noSePuedeConstruir("\nmaximaPoblacionAlcanzadaException");
+
+                    }
+
+                }
             }
+
+            juegoVista.actualizarTablero();
+            s.close();
         });
         
         Button botonZerling = new Button("Zerling");
@@ -184,7 +241,33 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZerling.setOnMouseExited(e -> botonZerling.setStyle(botonNormal));
         botonZerling.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            Construccion criadero = null;
+            Construccion reserva = null;
+            for (Construccion construccion : this.jugador.getConstrucciones()) {
+                if (construccion.getClass() == Criadero.class) {
+                    criadero = construccion;
+                }
+                if (construccion.getClass() == ReservaDeReproduccion.class) {
+                    reserva = construccion;
+                }
+            }
+            if (criadero != null && reserva != null) {
+                try {
+                    Larva larva = ((Criadero) criadero).getLarva();
+                    Zerling zerling = ((ReservaDeReproduccion) reserva).generarZerling(new Mineral(100), larva,inputUsuario);
+                } catch (CriaderoNoDisponibleException ex) {
+                    noSePuedeConstruir("\nCriaderoNoDisponibleException");
+
+                } catch (RequerimientosInsuficientesException ex) {
+                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+
+                } catch (maximaPoblacionAlcanzadaException ex) {
+                    noSePuedeConstruir("\nmaximaPoblacionAlcanzadaException");
+
+                }
+            }
+            juegoVista.actualizarTablero();
+            s.close();
         });
         
         Button botonHidralisco = new Button("Hidralisco");
@@ -194,7 +277,33 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonHidralisco.setOnMouseExited(e -> botonHidralisco.setStyle(botonNormal));
         botonHidralisco.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            Construccion criadero = null;
+            Construccion guarida = null;
+            for (Construccion construccion : this.jugador.getConstrucciones()) {
+                if (construccion.getClass() == Criadero.class) {
+                    criadero = construccion;
+                }
+                if (construccion.getClass() == Guarida.class) {
+                    guarida = construccion;
+                }
+            }
+            if (criadero != null && guarida != null) {
+                try {
+                    Larva larva = ((Criadero) criadero).getLarva();
+                    Hidralisco hidralisco = ((Guarida) guarida).generarHidralisco(new Mineral(100), new GasVespeno(1000), larva, inputUsuario);
+                } catch (CriaderoNoDisponibleException ex) {
+                    noSePuedeConstruir("\nCriaderoNoDisponibleException");
+
+                } catch (RequerimientosInsuficientesException ex) {
+                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+
+                } catch (maximaPoblacionAlcanzadaException ex) {
+                    noSePuedeConstruir("\nmaximaPoblacionAlcanzadaException");
+
+                }
+            }
+            juegoVista.actualizarTablero();
+            s.close();
         });
         
         Button botonMutalisco = new Button("Mutalisco");
@@ -204,7 +313,33 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonMutalisco.setOnMouseExited(e -> botonMutalisco.setStyle(botonNormal));
         botonMutalisco.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            Construccion criadero = null;
+            Construccion espiral = null;
+            for (Construccion construccion : this.jugador.getConstrucciones()) {
+                if (construccion.getClass() == Criadero.class) {
+                    criadero = construccion;
+                }
+                if (construccion.getClass() == Espiral.class) {
+                    espiral = construccion;
+                }
+            }
+            if (criadero != null && espiral != null) {
+                try {
+                    Larva larva = ((Criadero) criadero).getLarva();
+                    Mutalisco mutalisco = ((Espiral) espiral).generarMutalisco(new Mineral(300), new GasVespeno(1000), larva, inputUsuario);
+                } catch (CriaderoNoDisponibleException ex) {
+                    noSePuedeConstruir("\nCriaderoNoDisponibleException");
+
+                } catch (RequerimientosInsuficientesException ex) {
+                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+
+                } catch (maximaPoblacionAlcanzadaException ex) {
+                    noSePuedeConstruir("\nmaximaPoblacionAlcanzadaException");
+
+                }
+            }
+            juegoVista.actualizarTablero();
+            s.close();
         });
         
         Button botonGuardian = new Button("Guardian");
@@ -214,7 +349,35 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonGuardian.setOnMouseExited(e -> botonGuardian.setStyle(botonNormal));
         botonGuardian.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            Construccion criadero = null;
+            Construccion espiral = null;
+            for (Individuo individuo : this.jugador.mostrarIndividuos()) {
+                if (individuo.posicion().posicionesIguales(inputUsuario)) {
+                    if (individuo.getClass() == Mutalisco.class){
+                        if (jugador.eliminarIndividuo(individuo)){
+                            try {
+                                Larva larva = ((Criadero) criadero).getLarva();
+                                Guardian guardian = new Guardian(new Mineral(500), new GasVespeno(500), inputUsuario,jugador.mostrarMapa());
+                                jugador.agregarIndividuo(guardian);
+                                jugador.añadirUnidad();
+                            } catch (CriaderoNoDisponibleException ex) {
+                                jugador.agregarIndividuo(individuo);
+                                noSePuedeConstruir("\nCriaderoNoDisponibleException");
+                            } catch (RequerimientosInsuficientesException ex) {
+                                jugador.agregarIndividuo(individuo);
+                                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                            }
+                        }
+                    } else {
+                        noSePuedeConstruir("No existe mutalisco en esta posicion");
+                    }
+                } else {
+                    noSePuedeConstruir("No existe individuo en esta posicion");
+                }
+            }
+
+            juegoVista.actualizarTablero();
+            s.close();
         });
         
         Button botonDevorador = new Button("Devorador");
@@ -224,7 +387,34 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonDevorador.setOnMouseExited(e -> botonDevorador.setStyle(botonNormal));
         botonDevorador.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            Construccion criadero = null;
+            for (Individuo individuo : this.jugador.mostrarIndividuos()) {
+                if (individuo.posicion().posicionesIguales(inputUsuario)) {
+                    if (individuo.getClass() == Mutalisco.class){
+                        if (jugador.eliminarIndividuo(individuo)){
+                            try {
+                                Larva larva = ((Criadero) criadero).getLarva();
+                                Devorador devorador = new Devorador(new Mineral(500), new GasVespeno(500), inputUsuario,jugador.mostrarMapa());
+                                jugador.agregarIndividuo(devorador);
+                                jugador.añadirUnidad();
+                            } catch (CriaderoNoDisponibleException ex) {
+                                jugador.agregarIndividuo(individuo);
+                                noSePuedeConstruir("\nCriaderoNoDisponibleException");
+                            } catch (RequerimientosInsuficientesException ex) {
+                                jugador.agregarIndividuo(individuo);
+                                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                            }
+                        }
+                    } else {
+                        noSePuedeConstruir("No existe mutalisco en esta posicion");
+                    }
+                } else {
+                    noSePuedeConstruir("No existe individuo en esta posicion");
+                }
+            }
+
+            juegoVista.actualizarTablero();
+            s.close();
         });
         
         
@@ -250,7 +440,6 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         inputPosicion.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
         Scene sc = new Scene(inputPosicion, 800, 300, Color.rgb(47, 52, 58));
         sc.setFill(Color.RED);
-        Stage s = new Stage();
         s.initModality(Modality.APPLICATION_MODAL);
         s.setTitle("Tienda Individuos Zerg");
         s.getIcons().add(this.icono);

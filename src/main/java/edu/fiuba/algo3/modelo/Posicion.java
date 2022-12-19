@@ -38,4 +38,8 @@ public class Posicion {
         return x;
     }
 
+    public boolean posicionesIguales(Posicion posicion) {
+        return (posicion.coordenadaX() == x) && (posicion.coordenadaY() == y);
+    }
+
 }

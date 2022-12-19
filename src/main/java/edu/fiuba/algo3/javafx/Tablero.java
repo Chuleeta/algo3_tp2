@@ -227,13 +227,13 @@ public class Tablero {
 	}
 
     public void insertarConstruccion(Construccion construccion) {
-        if(construccion != null)
+        if(construccion == null)
             System.out.println("\n inserta construccion");
         UnidadEstatica nuevo = crearUnidadEstatica(construccion);
         mapaVista.getChildren().add(nuevo);
     }
     public void insertarUnidad(Individuo unidad) {
-        if(unidad != null)
+        if(unidad == null)
             System.out.println("\n inserta construccion");
         UnidadMovible nuevo = crearUnidadMovible(unidad);
         mapaVista.getChildren().add(nuevo);

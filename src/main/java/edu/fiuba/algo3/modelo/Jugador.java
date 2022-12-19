@@ -33,8 +33,8 @@ public class Jugador {
         this.mapa = mapa;
         this.construcciones = new ArrayList<>();
         this.individuos = new ArrayList<>();
-        this.mineral = new Mineral(200);
-        this.gas = new GasVespeno(0);
+        this.mineral = new Mineral(2000);
+        this.gas = new GasVespeno(2000);
         this.capacidad = capacidad;
         unidadesCreadas = 0;
     }
@@ -109,6 +109,10 @@ public class Jugador {
         return individuos.add(individuo);
     }
 
+    public boolean eliminarIndividuo(Individuo individuo){
+        return individuos.remove(individuo);
+    }
+
     public void agregarEnListaConstruccion(Construccion construccion) {
         construcciones.add(construccion);
     }
@@ -135,5 +139,13 @@ public class Jugador {
 
     public Mapa getMapa() {
         return mapa;
+    }
+
+    public ArrayList<Individuo> mostrarIndividuos() {
+        return this.individuos;
+    }
+
+    public Mapa mostrarMapa() {
+        return this.mapa;
     }
 }

@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
+import edu.fiuba.algo3.modelo.Exceptions.maximaPoblacionAlcanzadaException;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
@@ -76,6 +77,15 @@ public class ReservaDeReproduccion extends Edificio{
     }
     public Zerling generarZerling(Mineral mineral, Larva larva) throws RequerimientosInsuficientesException {
             return new Zerling(mineral, this.posicion.clone(), this.mapa);
+    }
+    public Zerling generarZerling(Mineral mineral, Larva larva, Posicion posicion) throws RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
+        if (jugador.unidadesDisponibles()) {
+            Zerling zerling = new Zerling(mineral, posicion, this.mapa);
+            this.jugador.agregarIndividuo(zerling);
+            jugador.añadirUnidad();
+            return zerling;
+        }
+        throw new maximaPoblacionAlcanzadaException();
     }
 
     @Override
