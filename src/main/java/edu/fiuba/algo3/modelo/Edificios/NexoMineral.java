@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.Recursos.Mena;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
@@ -38,8 +39,8 @@ public class NexoMineral extends Edificio{
         this(posicion, mena, jugador.getMapa());
         this.jugador = jugador;
     }
-
-    public NexoMineral(Posicion posicion, Jugador jugador) throws MenaOcupadaException {
+    
+    public NexoMineral(Posicion posicion, Jugador jugador) throws MenaOcupadaException, RecursosInsuficientesException {
         // this.mena = mena;
         // this.mena.ocupar();
         this.posicion = posicion;
@@ -49,6 +50,9 @@ public class NexoMineral extends Edificio{
         this.mapa = jugador.getMapa();
         this.vida = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
         if(!this.mapa.inyectarRecurso(this))  throw new MenaOcupadaException();
+        if(this.jugador.agregarConstruccion(this)){
+            throw new RecursosInsuficientesException();
+        }
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException
@@ -107,5 +111,23 @@ public class NexoMineral extends Edificio{
     public void setMena(Mena mena) throws MenaOcupadaException{
         mena.ocupar();
         this.mena = mena;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Espiral espiral) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Guarida guarida) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(PuertoEstelar puertoEstelar) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
@@ -27,9 +28,12 @@ public class Pilon extends Edificio{
         }
     }
 
-    public Pilon(Posicion posicion, Jugador jugador) {
+    public Pilon(Posicion posicion, Jugador jugador) throws RecursosInsuficientesException {
         this(posicion, jugador.getMapa());
         this.jugador = jugador;
+        if(this.jugador.agregarConstruccion(this)){
+            throw new RecursosInsuficientesException();
+        }
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
@@ -89,5 +93,23 @@ public class Pilon extends Edificio{
     @Override
     public void actualizar() {
         this.vida.regenerar();
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Espiral espiral) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Guarida guarida) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(PuertoEstelar puertoEstelar) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

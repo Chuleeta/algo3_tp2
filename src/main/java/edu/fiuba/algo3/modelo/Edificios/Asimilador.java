@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Edificios;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
@@ -35,9 +36,26 @@ public class Asimilador extends Edificio{
         }
     }
 
-    public Asimilador(Posicion posicion, Volcan volcan, Jugador jugador) throws VolcanOcupadoException {
+    public Asimilador(Posicion posicion, Volcan volcan, Jugador jugador) throws VolcanOcupadoException, RecursosInsuficientesException {
         this(posicion, volcan, jugador.getMapa());
         this.jugador = jugador;
+        if(this.jugador.agregarConstruccion(this)){
+            throw new RecursosInsuficientesException();
+        }
+    }
+
+    public Asimilador(Posicion posicion, Jugador jugador) throws VolcanOcupadoException, RecursosInsuficientesException {
+        this.posicion = posicion;
+        estado = new EstadoNoConstruido();
+        this.mapa = jugador.getMapa();
+        this.gas = new GasVespeno(0);
+        this.vida = new VidaEscudoProtoss(450, 450);
+        this.zona = new ZonaNeutral();
+        this.jugador = jugador;
+        if(!this.mapa.inyectarRecurso(this)) throw new VolcanOcupadoException();
+        if(this.jugador.agregarConstruccion(this)){
+            throw new RecursosInsuficientesException();
+        }
     }
 
     @Override
@@ -110,6 +128,21 @@ public class Asimilador extends Edificio{
     public void setVolcan(Volcan volcan) throws VolcanOcupadoException {
         volcan.ocupar();
         this.volcan = volcan;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Espiral espiral) {
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Guarida guarida) {
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(PuertoEstelar puertoEstelar) {
+        return false;
     }
 
     /*public void destruir()

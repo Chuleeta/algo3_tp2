@@ -13,6 +13,7 @@ import edu.fiuba.algo3.modelo.Edificios.PuertoEstelar;
 import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mena;
@@ -30,7 +31,7 @@ public class MapaTest {
 
      
     @Test
-    public void noSePuedeConstruirExtractorFueraDelMoho() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirExtractorFueraDelMoho() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), jugador);
@@ -45,7 +46,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirAccesoFueraDeEnergia() throws NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirAccesoFueraDeEnergia() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(10,10), jugador);
@@ -63,7 +64,7 @@ public class MapaTest {
     // Caso de uso 6
 
     @Test
-    public void sePropagaElMohoAlConstruirse() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
+    public void sePropagaElMohoAlConstruirse() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9, 9), jugador);
@@ -78,7 +79,7 @@ public class MapaTest {
     }
 
     @Test
-    public void sePropagaElMohoLentamentePosteriorALaConstruccion() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
+    public void sePropagaElMohoLentamentePosteriorALaConstruccion() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9, 9), jugador);
@@ -101,7 +102,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirExtractorSinRecursos() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirExtractorSinRecursos() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), jugador);
@@ -114,7 +115,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirCriaderoSinRecursos() throws NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirCriaderoSinRecursos() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), jugador);
@@ -127,7 +128,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirReservaSinRecursos() throws NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirReservaSinRecursos() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), jugador);
@@ -140,7 +141,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirGuaridaSinRecursos() throws NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirGuaridaSinRecursos() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), jugador);
@@ -153,7 +154,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirEspiralSinRecursos() throws NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirEspiralSinRecursos() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), jugador);
@@ -166,7 +167,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirNexoMineralSinRecursos() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirNexoMineralSinRecursos() throws MenaOcupadaException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
@@ -182,7 +183,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirPilonSinRecursos() throws NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirPilonSinRecursos() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
@@ -198,7 +199,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirAsimiladorSinRecursos() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirAsimiladorSinRecursos() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
@@ -214,7 +215,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirAccesoSinRecursos() throws NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirAccesoSinRecursos() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
@@ -228,7 +229,7 @@ public class MapaTest {
     }
 
     @Test
-    public void noSePuedeConstruirPuertoEstelarSinRecursos() throws NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirPuertoEstelarSinRecursos() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
@@ -242,7 +243,7 @@ public class MapaTest {
     }
 
     @Test
-    public void seDestruyeUnPilonYNoSePuedeConstruirCercaDeSuCadaver() throws NoExisteEdificioCorrelativoException {
+    public void seDestruyeUnPilonYNoSePuedeConstruirCercaDeSuCadaver() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
@@ -260,7 +261,7 @@ public class MapaTest {
 
 
     @Test
-    public void seDestruyeUnPilonPeroExistiendoOtroEnElAreaNoSeDesactiva() throws NoExisteEdificioCorrelativoException {
+    public void seDestruyeUnPilonPeroExistiendoOtroEnElAreaNoSeDesactiva() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
@@ -307,7 +308,7 @@ public class MapaTest {
 
     // Caso de uso 14
     @Test
-    public void noSePuedeConstruirUnaEstructuraProtossSiHayMohoEnSuAreaEnergizada() throws NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirUnaEstructuraProtossSiHayMohoEnSuAreaEnergizada() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
@@ -325,7 +326,7 @@ public class MapaTest {
     }
 
     @Test
-    public void elMohoSePuedeExpandirPorUnAreaEnergizada() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException {
+    public void elMohoSePuedeExpandirPorUnAreaEnergizada() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);

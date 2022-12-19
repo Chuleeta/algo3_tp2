@@ -15,7 +15,7 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
 import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
-public class Criadero extends Edificio {
+public class Criadero extends Edificio{
 
     private List<Larva> larvas;
     private static int COSTO_DE_CONSTRUCCION = 200;
@@ -34,9 +34,12 @@ public class Criadero extends Edificio {
         }
     }
 
-    public Criadero(Posicion posicion, Jugador jugador) {
+    public Criadero(Posicion posicion, Jugador jugador) throws RecursosInsuficientesException {
         this(posicion, jugador.getMapa());
         this.jugador = jugador;
+        if(this.jugador.agregarConstruccion(this)){
+            throw new RecursosInsuficientesException();
+        }
     }
 
     private List<Larva> inicializarLarvas() {
@@ -144,5 +147,23 @@ public class Criadero extends Edificio {
     {
         this.jugador.decrementarCapacidadDePoblacion(5);
         this.jugador.destruirConstruccion(this);
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Espiral espiral) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Guarida guarida) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(PuertoEstelar puertoEstelar) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

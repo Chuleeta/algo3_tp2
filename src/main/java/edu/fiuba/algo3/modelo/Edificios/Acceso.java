@@ -10,6 +10,7 @@ import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
@@ -31,9 +32,12 @@ public class Acceso extends Edificio{
         }
     }
 
-    public Acceso(Posicion posicion, Jugador jugador) {
+    public Acceso(Posicion posicion, Jugador jugador) throws RecursosInsuficientesException {
         this(posicion, jugador.getMapa());
         this.jugador = jugador;
+        if(this.jugador.agregarConstruccion(this)){
+            throw new RecursosInsuficientesException();
+        }
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException {
@@ -92,6 +96,21 @@ public class Acceso extends Edificio{
             return new Zealot(mineral, posicion.clone(),this.mapa);
         }
         throw new maximaPoblacionAlcanzadaException();
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Espiral espiral) {
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Guarida guarida) {
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(PuertoEstelar puertoEstelar) {
+        return true;
     }
 
 }

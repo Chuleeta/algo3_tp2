@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Exceptions.maximaPoblacionAlcanzadaException;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Individuos.Zerling;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
@@ -29,9 +30,12 @@ public class ReservaDeReproduccion extends Edificio{
         }
     }
 
-    public ReservaDeReproduccion(Posicion posicion, Jugador jugador) {
+    public ReservaDeReproduccion(Posicion posicion, Jugador jugador) throws RecursosInsuficientesException {
         this(posicion, jugador.getMapa());
         this.jugador = jugador;
+        if(this.jugador.agregarConstruccion(this)){
+            throw new RecursosInsuficientesException();
+        }
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException
@@ -91,6 +95,24 @@ public class ReservaDeReproduccion extends Edificio{
     @Override
     public void actualizar() {
         this.vida.regenerar();
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Espiral espiral) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Guarida guarida) {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(PuertoEstelar puertoEstelar) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

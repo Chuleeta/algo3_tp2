@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Edificios.Espiral;
 import edu.fiuba.algo3.modelo.Edificios.Guarida;
 import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Individuos.Hidralisco;
 import edu.fiuba.algo3.modelo.Individuos.Mutalisco;
@@ -20,7 +21,7 @@ public class EspiralTest {
     //caso de uso 10
 
     @Test
-    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos() throws NoExisteEdificioCorrelativoException {
+    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         //given
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
@@ -104,7 +105,7 @@ public class EspiralTest {
 
     // caso 22
     @Test
-    public void seEngendraMutaliscoExitosamente() throws NoExisteEdificioCorrelativoException, RequerimientosInsuficientesException {
+    public void seEngendraMutaliscoExitosamente() throws NoExisteEdificioCorrelativoException, RequerimientosInsuficientesException, RecursosInsuficientesException {
         //given
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);

@@ -230,4 +230,31 @@ public class Jugador {
         }
         return null;
     }
+
+    public void verificarEdificacionCorrelativa(Guarida guarida) throws NoExisteEdificioCorrelativoException {
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.verificarCorrelativa(guarida)) {
+                return;
+            }
+        }
+        throw new NoExisteEdificioCorrelativoException();
+    }
+
+    public void verificarEdificacionCorrelativa(Espiral espiral) throws NoExisteEdificioCorrelativoException {
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.verificarCorrelativa(espiral)) {
+                return;
+            }
+        }
+        throw new NoExisteEdificioCorrelativoException();
+    }
+
+    public void verificarEdificacionCorrelativa(PuertoEstelar puertoEstelar) throws NoExisteEdificioCorrelativoException {
+        for (Construccion construccion : this.construcciones) {
+            if (construccion.verificarCorrelativa(puertoEstelar)) {
+                return;
+            }
+        }
+        throw new NoExisteEdificioCorrelativoException();
+    }
 }
