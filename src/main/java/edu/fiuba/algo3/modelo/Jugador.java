@@ -230,4 +230,11 @@ public class Jugador {
         }
         return null;
     }
+
+    public Mineral invertirMineral() {
+        return this.mineral;
+    }
+    public GasVespeno invertirGas() {
+        return this.gas;
+    }
 }

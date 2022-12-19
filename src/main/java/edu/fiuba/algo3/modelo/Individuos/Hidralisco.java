@@ -31,8 +31,8 @@ public class Hidralisco extends Individuo implements UnidadTierra{
         rangoDeAtaque = 4;
     }
 
-    public Hidralisco(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, GuaridaNoDisponibleException {
-        this(mineral, gas, posicion, jugador.getMapa());
+    public Hidralisco(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, GuaridaNoDisponibleException {
+        this(jugador.invertirMineral(), jugador.invertirGas(), posicion, jugador.getMapa());
         this.jugador = jugador;
         if(!this.jugador.validarCorrelativaGuarida()){
             throw new GuaridaNoDisponibleException();

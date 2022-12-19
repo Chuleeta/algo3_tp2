@@ -32,8 +32,8 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
         this.posicion = posicion;
     }
 
-    public Mutalisco(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, EspiralNoDisponibleException {
-        this(mineral, gas, posicion, jugador.getMapa());
+    public Mutalisco(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, EspiralNoDisponibleException {
+        this(jugador.invertirMineral(), jugador.invertirGas(), posicion, jugador.getMapa());
         this.jugador = jugador;
         if(!this.jugador.validarCorrelativaEspiral()){
             throw new EspiralNoDisponibleException();

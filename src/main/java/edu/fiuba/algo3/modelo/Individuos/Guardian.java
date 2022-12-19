@@ -30,8 +30,8 @@ public class Guardian extends Individuo implements UnidadVoladora{
         this.posicion = posicion;
     }
 
-    public Guardian(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, EspiralNoDisponibleException {
-        this(mineral, gas, posicion, jugador.getMapa());
+    public Guardian(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, EspiralNoDisponibleException {
+        this(jugador.invertirMineral(), jugador.invertirGas(), posicion, jugador.getMapa());
         this.jugador = jugador;
         Individuo correlativo = this.jugador.validarCorrelativaGuardian(posicion);
         if(correlativo == null){

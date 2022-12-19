@@ -34,8 +34,8 @@ public class Zangano extends Individuo implements UnidadTierra{
         this.posicion = posicion;
     }
 
-    public Zangano(Mineral mineral, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, CriaderoNoDisponibleException {
-        this(mineral);
+    public Zangano(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, CriaderoNoDisponibleException {
+        this(jugador.invertirMineral());
         this.posicion = posicion;
         this.jugador = jugador;
         if(!this.jugador.validarCorrelativaCriadero()){
