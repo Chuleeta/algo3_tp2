@@ -230,13 +230,15 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZerling.setOnMouseExited(e -> botonZerling.setStyle(botonNormal));
         botonZerling.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                new Zerling(inputUsuario, jugador);
-                juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (ReservaDeReproduccionNoDisponibleException ex) {
-                noSePuedeConstruir("\nReservaDeReproduccionNoDisponibleException");
+            if (inputUsuario != null) {
+                try {
+                    new Zerling(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RequerimientosInsuficientesException ex) {
+                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                } catch (ReservaDeReproduccionNoDisponibleException ex) {
+                    noSePuedeConstruir("\nReservaDeReproduccionNoDisponibleException");
+                }
             }
             s.close();
         });
@@ -248,15 +250,17 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonHidralisco.setOnMouseExited(e -> botonHidralisco.setStyle(botonNormal));
         botonHidralisco.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                new Hidralisco(inputUsuario, jugador);
-                juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (GuaridaNoDisponibleException ex) {
-                noSePuedeConstruir("\nGuaridaNoDisponibleException");
+            if (inputUsuario != null) {
+                try {
+                    new Hidralisco(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RequerimientosInsuficientesException ex) {
+                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                } catch (GuaridaNoDisponibleException ex) {
+                    noSePuedeConstruir("\nGuaridaNoDisponibleException");
+                }
+                s.close();
             }
-            s.close();
         });
         
         Button botonMutalisco = new Button("Mutalisco");
@@ -266,13 +270,15 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonMutalisco.setOnMouseExited(e -> botonMutalisco.setStyle(botonNormal));
         botonMutalisco.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                new Mutalisco(inputUsuario, jugador);
-                juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (EspiralNoDisponibleException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            if (inputUsuario != null) {
+                try {
+                    new Mutalisco(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RequerimientosInsuficientesException ex) {
+                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                } catch (EspiralNoDisponibleException ex) {
+                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                }
             }
             s.close();
         });
@@ -284,13 +290,15 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonGuardian.setOnMouseExited(e -> botonGuardian.setStyle(botonNormal));
         botonGuardian.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                new Guardian(inputUsuario, jugador);
-                juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (EspiralNoDisponibleException ex) {
-                noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
+            if (inputUsuario != null) {
+                try {
+                    new Guardian(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RequerimientosInsuficientesException ex) {
+                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                } catch (EspiralNoDisponibleException ex) {
+                    noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
+                }
             }
             s.close();
         });
@@ -302,13 +310,15 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonDevorador.setOnMouseExited(e -> botonDevorador.setStyle(botonNormal));
         botonDevorador.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                new Devorador(inputUsuario, jugador);
-                juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (EspiralNoDisponibleException ex) {
-                noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
+            if (inputUsuario != null) {
+                try {
+                    new Devorador(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RequerimientosInsuficientesException ex) {
+                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                } catch (EspiralNoDisponibleException ex) {
+                    noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
+                }
             }
             s.close();
         });

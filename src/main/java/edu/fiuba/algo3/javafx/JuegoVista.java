@@ -449,28 +449,6 @@ public class JuegoVista extends BorderPane {
     }
 
     public void actualizarTablero() {
-      /*
-        //this.tablero.actualizarConstrucciones();
-        ArrayList<Construccion> construccionesJ1 = this.jugadorUno.getConstrucciones();
-        if(construccionesJ1.size() > 0){
-            for (Construccion construccion : construccionesJ1) {
-                tablero.insertarConstruccion(construccion);
-            }
-        }
-        ArrayList<Construccion> construccionesJ2 = this.jugadorDos.getConstrucciones();
-        if(construccionesJ2.size() != 0){
-            for (Construccion construccion : construccionesJ2) {
-                tablero.insertarConstruccion(construccion);
-            }
-        }
-        ArrayList<Individuo> individuos = this.juego.mostrarUnidades();
-        if(individuos.size() != 0){
-            for (Individuo individuo : individuos) {
-                tablero.insertarUnidad(individuo);
-            }
-        }
-        */
-
         tablero.actualizar();
     }
 

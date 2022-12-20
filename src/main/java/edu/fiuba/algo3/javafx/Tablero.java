@@ -48,29 +48,7 @@ public class Tablero {
         this.mapaVista = new Pane();
         this.juego = juego;
         crearGrilla();
-        /*¨Rectangle J1 = new Rectangle(20, 20, Color.GREEN);
-        J1.setTranslateX(10);
-        J1.setTranslateY(10);
-        hacerMovible(J1);
-        */
-        actualizarConstrucciones();
-        // ArrayList<Construccion> construcciones = juego.mostrarConstrucciones();
-        // for (Construccion construccion : construcciones) {
-        //     Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
-        //     J2.setTranslateX((construccion.mostrarPosicion().coordenadaX() * 40) + 10);
-        //     J2.setTranslateY((construccion.mostrarPosicion().coordenadaY() * 40) + 10);
-        //     hacerMovible(J2);
-        //     mapaVista.getChildren().add(J2);
-        // }
-
-        // Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
-        // J2.setTranslateX(850);
-        // J2.setTranslateY(691);
-        // hacerMovible(J2);
-
-        // mapaVista.getChildren().add(J1);
-        //mapaVista.getChildren().add(J2);
-
+        actualizar();
         mapaVista.setPrefSize(880, 721);
         mapaVista.setStyle("-fx-background-color: #717D8C");
 
@@ -114,17 +92,15 @@ public class Tablero {
     }
 
     public void actualizarConstrucciones() {
-        ArrayList<Construccion> construcciones = juego.mostrarConstrucciones();
-        ArrayList<Individuo> unidades = juego.mostrarUnidades();
-        for (Construccion construccion : construcciones) {
-            UnidadEstatica unidad = crearUnidadEstatica(construccion);
-            mapaVista.getChildren().add(unidad);
+        ArrayList<Construccion> construcciones = this.juego.mostrarConstrucciones();
+        if(construcciones.size() > 0){
+            for (Construccion construccion : construcciones) {
+                this.insertarConstruccion(construccion);
+            }
         }
-        for (Individuo individuo : unidades) {
-            UnidadMovible unidad = crearUnidadMovible(individuo);
-            mapaVista.getChildren().add(unidad);
-        }
+    }
 
+    public void actualizarRecursos() {
         ArrayList<RecursoInyectable> recursos = juego.mostrarRecursos();
         for (RecursoInyectable recurso : recursos) {
             Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
@@ -137,6 +113,16 @@ public class Tablero {
             J2.setTranslateY((recurso.mostrarPosicion().coordenadaY() * 40) + 10);
             mapaVista.getChildren().add(J2);
         }
+    }
+    public void actualizarUnidades() {
+        ArrayList<Individuo> individuos = this.juego.mostrarUnidades();
+        System.out.println(individuos.size());
+        if(individuos.size() != 0){
+            for (Individuo individuo : individuos) {
+                this.insertarUnidad(individuo);
+            }
+        }
+
     }
 
     private void seleccionarVerPosicion(Node n){
@@ -200,9 +186,6 @@ public class Tablero {
                     n.setTranslateY(e.getSceneY() - startY);
                 }
             }
-            //PARA VER LA POSICION DEL NODO O CUADRADO
-            //System.out.println("\nX: " + n.getTranslateX());
-            //System.out.println("\nY: " + n.getTranslateY());
         });
         
         n.setOnMouseReleased(e ->{
@@ -264,20 +247,10 @@ public class Tablero {
     }
 
     public void actualizar() {
-        ArrayList<Construccion> construcciones = this.juego.mostrarConstrucciones();
-        if(construcciones.size() > 0){
-            for (Construccion construccion : construcciones) {
-                mapaVista.getChildren().remove(construccion);
-                this.insertarConstruccion(construccion);
-            }
-        }
-        ArrayList<Individuo> individuos = this.juego.mostrarUnidades();
-        System.out.println(individuos.size());
-        if(individuos.size() != 0){
-            for (Individuo individuo : individuos) {
-                mapaVista.getChildren().remove(individuo);
-                this.insertarUnidad(individuo);
-            }
-        }
+        mapaVista.getChildren().clear();
+        crearGrilla();
+        actualizarConstrucciones();
+        actualizarRecursos();
+        actualizarUnidades();
     }
 }
