@@ -96,7 +96,7 @@ public class CasoDeUso28Test {
         Zerling zerlingUno = new Zerling(mineral, new Posicion(2,3), mapa);
         Zerling zerlingDos = new Zerling(mineral, new Posicion(1,2), mapa);
         Zerling zerlingTres = new Zerling(mineral, new Posicion(3,2), mapa);
-        Hidralisco hidralisco = new Hidralisco(mineral, gas, new Posicion(4,4), mapa);
+        Hidralisco hidralisco = new Hidralisco(mineral, gas, new Posicion(6,7), mapa);
         AmoSupremo amoSupremo = new AmoSupremo(mineral, gas, new Posicion(8, 8), mapa);
 
         for (int i = 0; i < 5; i ++){

@@ -11,7 +11,8 @@ public abstract class Individuo
 {
     protected EstadoConstruccion estado;
     protected Vida vida;
-    protected int unidadesDeDaño;
+    protected int unidadesDeDañoTerrestre;
+    protected int unidadesDeDañoAereo;
     protected float rangoDeAtaque;
     protected Posicion posicion;
     protected Mapa mapa;
@@ -38,7 +39,7 @@ public abstract class Individuo
     public boolean atacar(Edificio edificio) {
         if (estado.estaConstruido()) {
             if (estaDentroDelRango(edificio.posicion())) {
-                edificio.dañar(unidadesDeDaño);
+                edificio.dañar(unidadesDeDañoTerrestre);
                 return true;
             }
         }
@@ -50,8 +51,12 @@ public abstract class Individuo
         return vida.tieneVidaCompleta();
     }
 
-    public abstract boolean atacar(UnidadTierra unidad);
-    public abstract boolean atacar(UnidadVoladora unidad);
+    public abstract boolean atacar(Individuo individuo);
+
+    public abstract boolean recibirAtaqueAereo(int unidades);
+
+    public abstract boolean recibirAtaqueTerrestre(int unidades);
+
     public void crearJugadorPorDefecto() {
         jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6,6), new Mapa(), 200);
     }

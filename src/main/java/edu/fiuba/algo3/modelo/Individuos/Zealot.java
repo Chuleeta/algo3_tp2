@@ -11,7 +11,7 @@ import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
 import java.util.HashMap;
 
-public class Zealot extends Individuo implements UnidadTierra{
+public class Zealot extends Individuo{
     private final int tiempoDeConstruccion;
     private int tiempo;
     private int asesinatos;
@@ -24,7 +24,8 @@ public class Zealot extends Individuo implements UnidadTierra{
         }
         atacados = new HashMap<>();
         asesinatos = 0;
-        this.unidadesDeDaño = 8;
+        this.unidadesDeDañoTerrestre = 8;
+        this.unidadesDeDañoAereo = 0;
         this.vida = new VidaEscudoProtoss(100, 60);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 4;
@@ -52,16 +53,17 @@ public class Zealot extends Individuo implements UnidadTierra{
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
     }
 
-    public boolean atacar(UnidadTierra unidad)
+    public boolean atacar(Individuo unidad)
     {
         if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
-            unidad.recibirDaño(this.unidadesDeDaño);
-            atacados.put(unidad, unidad.obtenerVida());
-            if (atacados.get(unidad).vida <= 0){
-                atacados.remove(unidad);
-                contarAsesinato();
+            if (unidad.recibirAtaqueTerrestre(unidadesDeDañoTerrestre)){
+                atacados.put(unidad, unidad.obtenerVida());
+                if(atacados.get(unidad).vida <= 0) {
+                    atacados.remove(unidad);
+                    contarAsesinato();
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }
@@ -73,7 +75,7 @@ public class Zealot extends Individuo implements UnidadTierra{
 
     public boolean atacar(Edificio edificio){
         if (estado.estaConstruido() && estaDentroDelRango(edificio.posicion())) {
-            edificio.dañar(this.unidadesDeDaño);
+            edificio.dañar(unidadesDeDañoTerrestre);
             atacados.put(edificio, edificio.obtenerVida());
             if(atacados.get(edificio).vida <= 0) {
                 atacados.remove(edificio);
@@ -84,9 +86,16 @@ public class Zealot extends Individuo implements UnidadTierra{
         return false;
     }
 
-    public boolean atacar(UnidadVoladora unidad)
-    {
+    @Override
+    public boolean recibirAtaqueAereo(int unidades) {
         return false;
+    }
+
+    @Override
+    public boolean recibirAtaqueTerrestre(int unidades) {
+        if(!mapa.laZonaEstaVigilada(posicion) && invisible) return false;
+        vida.dañar(unidades);
+        return true;
     }
 
     public boolean mover(Posicion posicion)
@@ -95,16 +104,6 @@ public class Zealot extends Individuo implements UnidadTierra{
             return false;
         this.posicion = posicion;
         return true;
-    }
-
-    @Override
-    public boolean estaHabilitado(UnidadTierra unidad) {
-        return mapa.laZonaEstaVigilada(posicion) || estaDentroDelRango(unidad.posicion());
-    }
-
-    @Override
-    public boolean estaHabilitado(UnidadVoladora unidad) {
-        return mapa.laZonaEstaVigilada(posicion) || estaDentroDelRango(unidad.posicion());
     }
 
 }

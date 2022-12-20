@@ -24,7 +24,8 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
         }
         this.vida = new VidaZerg(120);
         this.mapa = mapa;
-        this.unidadesDeDaño = 9;
+        this.unidadesDeDañoAereo = 9;
+        this.unidadesDeDañoTerrestre = 9;
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 7;
         this.tiempo = 0;
@@ -46,32 +47,33 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
         this.estado = new EstadoConstruido();
     }
 
+    @Override
+    public boolean recibirAtaqueAereo(int unidades) {
+        vida.dañar(unidades);
+        return true;
+    }
+
+    @Override
+    public boolean recibirAtaqueTerrestre(int unidades) {
+        return false;
+    }
+
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
     }
 
-    public boolean atacar(UnidadTierra unidad)
+    public boolean atacar(Individuo individuo)
     {
-        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion()) && estaHabilitadoParaAtacar(unidad)) {
-            unidad.recibirDaño(this.unidadesDeDaño);
-            return true;
+        if (estado.estaConstruido() && estaDentroDelRango(individuo.posicion())) {
+            if(individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre)){
+                return true;
+            }
+            return individuo.recibirAtaqueAereo(unidadesDeDañoAereo);
         }
         return false;
     }
 
-    public boolean atacar(UnidadVoladora unidad)
-    {
-        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
-            unidad.recibirDaño(this.unidadesDeDaño);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean estaHabilitadoParaAtacar(UnidadTierra unidad) {
-        return unidad.estaHabilitado(this);
-    }
 
     public boolean mover(Posicion posicion)
     {

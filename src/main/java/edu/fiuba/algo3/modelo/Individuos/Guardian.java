@@ -22,7 +22,8 @@ public class Guardian extends Individuo implements UnidadVoladora{
         }
         this.mapa = mapa;
         this.vida = new VidaZerg(100);
-        this.unidadesDeDaño = 25;
+        this.unidadesDeDañoTerrestre = 25;
+        this.unidadesDeDañoAereo = 0;
         this.rangoDeAtaque = 10;
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 4;
@@ -46,25 +47,27 @@ public class Guardian extends Individuo implements UnidadVoladora{
         this.estado = new EstadoConstruido();
     }
 
+    @Override
+    public boolean recibirAtaqueAereo(int unidades) {
+        vida.dañar(unidades);
+        return true;
+    }
+
+    @Override
+    public boolean recibirAtaqueTerrestre(int unidades) {
+        return false;
+    }
+
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
     }
 
-    public boolean atacar(UnidadTierra unidad)
+    public boolean atacar(Individuo individuo)
     {
-        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion()) && estaHabilitadoParaAtacar(unidad)) {
-            unidad.recibirDaño(this.unidadesDeDaño);
-            return true;
+        if (estado.estaConstruido() && estaDentroDelRango(individuo.posicion())) {
+            return individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre);
         }
-        return false;
-    }
-
-    private boolean estaHabilitadoParaAtacar(UnidadTierra unidad) {
-        return unidad.estaHabilitado(this);
-    }
-    public boolean atacar(UnidadVoladora unidad)
-    {
         return false;
     }
     

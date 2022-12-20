@@ -14,7 +14,7 @@ import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Recursos.Mena;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 
-public class Zangano extends Individuo implements UnidadTierra{
+public class Zangano extends Individuo{
 
     private int tiempoDeConstruccion;
     private int tiempo;
@@ -27,6 +27,8 @@ public class Zangano extends Individuo implements UnidadTierra{
         this.vida = new VidaZerg(25);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 1;
+        this.unidadesDeDañoAereo = 0;
+        this.unidadesDeDañoTerrestre = 0;
         this.tiempo = 0;
     }
 
@@ -49,6 +51,17 @@ public class Zangano extends Individuo implements UnidadTierra{
 
     private void construir() {
         this.estado = new EstadoConstruido();
+    }
+
+    @Override
+    public boolean recibirAtaqueAereo(int unidades) {
+        return false;
+    }
+
+    @Override
+    public boolean recibirAtaqueTerrestre(int unidades) {
+        vida.dañar(unidades);
+        return true;
     }
 
     public void pasarTiempo() {
@@ -76,12 +89,7 @@ public class Zangano extends Individuo implements UnidadTierra{
         return 0;
     }
 
-    public boolean atacar(UnidadTierra unidad)
-    {
-        return false;
-    }
-
-    public boolean atacar(UnidadVoladora unidad)
+    public boolean atacar(Individuo individuo)
     {
         return false;
     }
@@ -93,17 +101,6 @@ public class Zangano extends Individuo implements UnidadTierra{
         this.posicion = posicion;
         return true;
     }
-
-    @Override
-    public boolean estaHabilitado(UnidadTierra unidad) {
-        return true;
-    }
-
-    @Override
-    public boolean estaHabilitado(UnidadVoladora unidad) {
-        return true;
-    }
-
 
     @Override
     public boolean moverUnidad(Posicion nuevaPosicion) {

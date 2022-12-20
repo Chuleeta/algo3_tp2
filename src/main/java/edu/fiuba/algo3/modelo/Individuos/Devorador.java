@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
+import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Exceptions.EspiralNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.GuaridaNoDisponibleException;
 import edu.fiuba.algo3.modelo.Jugador;
@@ -23,7 +24,8 @@ public class Devorador extends Individuo implements UnidadVoladora{
         }
         this.mapa = mapa;
         this.vida = new VidaZerg(100);
-        this.unidadesDeDaño = 15;
+        this.unidadesDeDañoAereo = 15;
+        this.unidadesDeDañoTerrestre = 0;
         this.rangoDeAtaque = 5;
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 4;
@@ -47,6 +49,17 @@ public class Devorador extends Individuo implements UnidadVoladora{
         this.estado = new EstadoConstruido();
     }
 
+    @Override
+    public boolean recibirAtaqueAereo(int unidades) {
+        vida.dañar(unidades);
+        return true;
+    }
+
+    @Override
+    public boolean recibirAtaqueTerrestre(int unidades) {
+        return false;
+    }
+
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
@@ -59,15 +72,19 @@ public class Devorador extends Individuo implements UnidadVoladora{
     }
 
     @Override
-    public boolean atacar(UnidadTierra unidad) {
+    public boolean atacar(Individuo individuo) {
+        if (estado.estaConstruido() && estaDentroDelRango(individuo.posicion())) {
+            return individuo.recibirAtaqueAereo(unidadesDeDañoAereo);
+        }
         return false;
     }
 
-    @Override
-    public boolean atacar(UnidadVoladora unidad) {
-        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
-            unidad.recibirDaño(this.unidadesDeDaño);
-            return true;
+    public boolean atacar(Edificio edificio) {
+        if (estado.estaConstruido()) {
+            if (estaDentroDelRango(edificio.posicion())) {
+                edificio.dañar(unidadesDeDañoAereo);
+                return true;
+            }
         }
         return false;
     }

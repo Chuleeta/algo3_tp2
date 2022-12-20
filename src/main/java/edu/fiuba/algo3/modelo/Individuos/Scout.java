@@ -19,7 +19,8 @@ public class Scout extends Individuo implements UnidadVoladora{
         if (!mineral.invertir(300) | !gas.invertir(150)) {
             throw new RequerimientosInsuficientesException();
         }
-        this.unidadesDeDaño = 8;
+        this.unidadesDeDañoTerrestre = 8;
+        this.unidadesDeDañoAereo = 14;
         this.vida = new VidaEscudoProtoss(100, 80);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 9;
@@ -41,25 +42,29 @@ public class Scout extends Individuo implements UnidadVoladora{
         this.estado = new EstadoConstruido();
     }
 
+    @Override
+    public boolean recibirAtaqueAereo(int unidades) {
+        vida.dañar(unidades);
+        return true;
+    }
+
+    @Override
+    public boolean recibirAtaqueTerrestre(int unidades) {
+        return false;
+    }
+
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
     }
 
-    public boolean atacar(UnidadTierra unidad)
+    public boolean atacar(Individuo individuo)
     {
-        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
-            unidad.recibirDaño(8);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean atacar(UnidadVoladora unidad)
-    {
-        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
-            unidad.recibirDaño(14);
-            return true;
+        if (estado.estaConstruido() && estaDentroDelRango(individuo.posicion())) {
+            if (individuo.recibirAtaqueAereo(unidadesDeDañoAereo)){
+                return true;
+            }
+            return individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre);
         }
         return false;
     }

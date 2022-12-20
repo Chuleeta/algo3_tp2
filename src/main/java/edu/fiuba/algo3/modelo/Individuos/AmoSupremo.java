@@ -11,7 +11,7 @@ import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Zonas.ZonaVigilada;
 
-public class AmoSupremo extends Individuo implements UnidadVoladora {
+public class AmoSupremo extends Individuo {
     private final int tiempoDeConstruccion;
     private int tiempo;
 
@@ -21,7 +21,8 @@ public class AmoSupremo extends Individuo implements UnidadVoladora {
         }
         this.vida = new VidaZerg(200);
         this.mapa = mapa;
-        this.unidadesDeDaño = 0;
+        this.unidadesDeDañoTerrestre = 0;
+        this.unidadesDeDañoAereo = 0;
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 5;
         this.tiempo = 0;
@@ -40,14 +41,23 @@ public class AmoSupremo extends Individuo implements UnidadVoladora {
         mapa.agregarZona(new ZonaVigilada(posicion));
         jugador.incrementarCapacidadDePoblacion(5);
     }
+
+    @Override
+    public boolean recibirAtaqueAereo(int unidades) {
+        return false;
+    }
+
+    @Override
+    public boolean recibirAtaqueTerrestre(int unidades) {
+        return false;
+    }
+
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
     }
 
-    public boolean atacar(UnidadTierra unidad) { return false; }
-
-    public boolean atacar(UnidadVoladora unidad) { return false; }
+    public boolean atacar(Individuo individuo) { return false; }
 
     public boolean mover(Posicion posicion)
     {

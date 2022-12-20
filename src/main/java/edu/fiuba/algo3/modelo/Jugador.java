@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Edificios.*;
 import edu.fiuba.algo3.modelo.Exceptions.AtributoInvalidoException;
 import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.NoSeEncuentraAlIndividuoException;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Individuos.Mutalisco;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
@@ -241,5 +242,15 @@ public class Jugador {
 
     public void añadirMineral(int cantidad) {
         this.mineral.agregarMineral(cantidad);
+    }
+
+    public void atacarUnidad(Posicion posicion, Individuo individuoAtacante) throws NoSeEncuentraAlIndividuoException {
+        Individuo individuoAtacado = encontrarIndividuo(posicion);
+        if(individuoAtacado != null) individuoAtacante.atacar(individuoAtacado);
+        else throw new NoSeEncuentraAlIndividuoException();
+    }
+
+    private Individuo encontrarIndividuo(Posicion posicion) {
+        return individuos.stream().filter(individuo -> individuo.posicion().posicionesIguales(posicion)).findFirst().orElse(null);
     }
 }
