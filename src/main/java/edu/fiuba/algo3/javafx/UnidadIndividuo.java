@@ -1,11 +1,7 @@
 package edu.fiuba.algo3.javafx;
-import edu.fiuba.algo3.javafx.Eventos.AtacarHandler;
-import edu.fiuba.algo3.modelo.Construccion;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,10 +14,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class UnidadMovible extends Rectangle implements Notificable {
+public class UnidadIndividuo extends Rectangle implements Notificable {
     private final BotonModal botonAtacar;
     private Individuo individuo;
-    public UnidadMovible(Individuo individuo, int coordenadaX, int coordenadaY) {
+    public UnidadIndividuo(Individuo individuo, int coordenadaX, int coordenadaY) {
         super(20, 20, Color.BLACK);
         this.individuo = individuo;
         this.setTranslateX(coordenadaX);

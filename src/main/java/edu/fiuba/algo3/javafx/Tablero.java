@@ -3,29 +3,17 @@ package edu.fiuba.algo3.javafx;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Timer;
-import java.util.stream.IntStream;
 
 import edu.fiuba.algo3.modelo.Construccion;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
-import javafx.beans.binding.Bindings;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -75,18 +63,18 @@ public class Tablero {
         }
     }
 
-    public UnidadMovible crearUnidadMovible(Individuo individuo) {
+    public UnidadIndividuo crearUnidadMovible(Individuo individuo) {
         int coordenadaX = (individuo.posicion().coordenadaX() * 40) + 10;
         int coordenadaY = (individuo.posicion().coordenadaY() * 40) + 10;
-        UnidadMovible unidad = new UnidadMovible(individuo, coordenadaX, coordenadaY);
+        UnidadIndividuo unidad = new UnidadIndividuo(individuo, coordenadaX, coordenadaY);
         hacerMovible(unidad);
         this.juegoVista.agregarSuscriptorPasarTurno(unidad);
         return unidad;
     }
-    public UnidadEstatica crearUnidadEstatica(Construccion construccion) {
+    public UnidadEdificio crearUnidadEstatica(Construccion construccion) {
         int coordenadaX = (construccion.mostrarPosicion().coordenadaX() * 40) + 10;
         int coordenadaY = (construccion.mostrarPosicion().coordenadaY() * 40) + 10;
-        UnidadEstatica unidad = new UnidadEstatica(construccion, coordenadaX, coordenadaY);
+        UnidadEdificio unidad = new UnidadEdificio(construccion, coordenadaX, coordenadaY);
         this.juegoVista.agregarSuscriptorPasarTurno(unidad);
         return unidad;
     }
@@ -103,15 +91,10 @@ public class Tablero {
     public void actualizarRecursos() {
         ArrayList<RecursoInyectable> recursos = juego.mostrarRecursos();
         for (RecursoInyectable recurso : recursos) {
-            Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
-            if(recurso.getSpray() == "rojo"){
-                J2 = new Rectangle(20, 20, Color.RED);
-            }else{
-                J2 = new Rectangle(20, 20, Color.BLUE);
-            }
-            J2.setTranslateX((recurso.mostrarPosicion().coordenadaX() * 40) + 10);
-            J2.setTranslateY((recurso.mostrarPosicion().coordenadaY() * 40) + 10);
-            mapaVista.getChildren().add(J2);
+            int coordenadaX = (recurso.mostrarPosicion().coordenadaX() * 40) + 10;
+            int coordenadaY = (recurso.mostrarPosicion().coordenadaY() * 40) + 10;
+            UnidadRecurso unidad = new UnidadRecurso(recurso, coordenadaX, coordenadaY);
+            mapaVista.getChildren().add(unidad);
         }
     }
     public void actualizarUnidades() {
@@ -129,7 +112,7 @@ public class Tablero {
         
     }
 
-    private void hacerMovible(UnidadMovible n) {
+    private void hacerMovible(UnidadIndividuo n) {
         Paint colorOriginal = ((Shape) n).getFill();;
         n.setOnMousePressed(e ->{
             this.startX = (int)(e.getSceneX() - n.getTranslateX());
@@ -233,7 +216,7 @@ public class Tablero {
     public void insertarConstruccion(Construccion construccion) {
         if(construccion == null)
             System.out.println("\n inserta construccion");
-        UnidadEstatica nuevo = crearUnidadEstatica(construccion);
+        UnidadEdificio nuevo = crearUnidadEstatica(construccion);
         mapaVista.getChildren().add(nuevo);
     }
     public void insertarUnidad(Individuo unidad) {
@@ -241,7 +224,7 @@ public class Tablero {
         System.out.println(unidad.posicion().coordenadaY());
         if(unidad == null)
             System.out.println("\n inserta construccion");
-        UnidadMovible nuevo = crearUnidadMovible(unidad);
+        UnidadIndividuo nuevo = crearUnidadMovible(unidad);
 
         mapaVista.getChildren().add(nuevo);
     }
