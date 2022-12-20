@@ -53,9 +53,9 @@ public abstract class Edificio implements Construccion, Ocupable {
         return this.posicion.equals(posicionDada);
     }
 
-    public void crearJugadorPorDefecto() {
-        jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6, 6), mapa, 200);
-    }
+    // public void crearJugadorPorDefecto() {
+    //     jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6, 6), mapa, 200);
+    // }
     public Posicion mostrarPosicion () {
         return posicion;
     }

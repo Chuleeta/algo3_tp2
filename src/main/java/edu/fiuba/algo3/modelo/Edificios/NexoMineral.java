@@ -30,14 +30,17 @@ public class NexoMineral extends Edificio{
         this.zona = new ZonaNeutral();
         this.mapa = mapa;
         this.vida = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
-        if(this.jugador == null){
-            crearJugadorPorDefecto();
-        }
+        // if(this.jugador == null){
+        //     crearJugadorPorDefecto();
+        // }
     }
 
-    public NexoMineral(Posicion posicion, Mena mena, Jugador jugador) throws MenaOcupadaException {
+    public NexoMineral(Posicion posicion, Mena mena, Jugador jugador) throws MenaOcupadaException, RecursosInsuficientesException {
         this(posicion, mena, jugador.getMapa());
         this.jugador = jugador;
+        if(!this.jugador.agregarConstruccion(this)){
+            throw new RecursosInsuficientesException();
+        }
     }
     
     public NexoMineral(Posicion posicion, Jugador jugador) throws MenaOcupadaException, RecursosInsuficientesException {
@@ -50,7 +53,7 @@ public class NexoMineral extends Edificio{
         this.mapa = jugador.getMapa();
         this.vida = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
         if(!this.mapa.inyectarRecurso(this))  throw new MenaOcupadaException();
-        if(this.jugador.agregarConstruccion(this)){
+        if(!this.jugador.agregarConstruccion(this)){
             throw new RecursosInsuficientesException();
         }
     }

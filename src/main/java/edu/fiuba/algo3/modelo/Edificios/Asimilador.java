@@ -22,7 +22,7 @@ public class Asimilador extends Edificio{
     private Volcan volcan;
 
     //private VidaEscudoProtoss vidaYEscudo;
-    public Asimilador(Posicion posicion, Volcan volcan, Mapa mapa) throws VolcanOcupadoException {
+    public Asimilador(Posicion posicion, Volcan volcan, Mapa mapa) throws VolcanOcupadoException, RecursosInsuficientesException {
         this.volcan = volcan;
         this.volcan.ocupar();
         this.posicion = posicion;
@@ -31,15 +31,15 @@ public class Asimilador extends Edificio{
         this.gas = new GasVespeno(0);
         this.vida = new VidaEscudoProtoss(450, 450);
         this.zona = new ZonaNeutral();
-        if(this.jugador == null){
-            crearJugadorPorDefecto();
-        }
+        // if(this.jugador == null){
+        //     crearJugadorPorDefecto();
+        // }
     }
 
     public Asimilador(Posicion posicion, Volcan volcan, Jugador jugador) throws VolcanOcupadoException, RecursosInsuficientesException {
         this(posicion, volcan, jugador.getMapa());
         this.jugador = jugador;
-        if(this.jugador.agregarConstruccion(this)){
+        if(!this.jugador.agregarConstruccion(this)){
             throw new RecursosInsuficientesException();
         }
     }
@@ -53,7 +53,7 @@ public class Asimilador extends Edificio{
         this.zona = new ZonaNeutral();
         this.jugador = jugador;
         if(!this.mapa.inyectarRecurso(this)) throw new VolcanOcupadoException();
-        if(this.jugador.agregarConstruccion(this)){
+        if(!this.jugador.agregarConstruccion(this)){
             throw new RecursosInsuficientesException();
         }
     }

@@ -36,15 +36,15 @@ public class Extractor extends Edificio{
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
         this.gas = new GasVespeno(0);
-        if(this.jugador == null){
-            crearJugadorPorDefecto();
-        }
+        // if(this.jugador == null){
+        //     crearJugadorPorDefecto();
+        // }
     }
 
     public Extractor(Posicion posicion, Volcan volcan, Jugador jugador) throws VolcanOcupadoException, RecursosInsuficientesException {
         this(posicion, volcan, jugador.getMapa());
         this.jugador = jugador;
-        if(this.jugador.agregarConstruccion(this)){
+        if(!this.jugador.agregarConstruccion(this)){
             throw new RecursosInsuficientesException();
         }
     }
@@ -60,7 +60,7 @@ public class Extractor extends Edificio{
         this.vida = new VidaZerg(VIDA_COMPLETA);
         this.gas = new GasVespeno(0);
         if(!this.mapa.inyectarRecurso(this)) throw new VolcanOcupadoException();
-        if(this.jugador.agregarConstruccion(this)){
+        if(!this.jugador.agregarConstruccion(this)){
             throw new RecursosInsuficientesException();
         }
     }

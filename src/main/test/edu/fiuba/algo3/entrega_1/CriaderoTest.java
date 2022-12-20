@@ -10,6 +10,8 @@ import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -19,9 +21,11 @@ public class CriaderoTest {
 
     //Comienzo caso de uso 1
     @Test
-    public void criaderoSeInicializaConTresLarvas() throws NoExisteEdificioCorrelativoException 
+    public void criaderoSeInicializaConTresLarvas() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException 
     {
-        Criadero criadero = new Criadero(new Posicion(1, 1), new Mapa());
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(2,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -31,7 +35,9 @@ public class CriaderoTest {
 
     @Test
     public void seEngendraUnZanganoEnCriaderoYDisminuyeLarva() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
-        Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(2,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -43,7 +49,9 @@ public class CriaderoTest {
 
     @Test
     public void seRegeneraUnaLarvaLuegoDeUnTiempo() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
-        Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(2,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -56,7 +64,9 @@ public class CriaderoTest {
 
     @Test
     public void noSePuedeEngendrarMasDeTresZanganos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
-        Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(2,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -73,7 +83,9 @@ public class CriaderoTest {
 
     @Test
     public void seConsumenTodasLasLarvasYSeRegeneranDespsDeTresTurnos() throws CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, RequerimientosInsuficientesException, maximaPoblacionAlcanzadaException {
-        Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(2,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -93,8 +105,10 @@ public class CriaderoTest {
     // Caso de uso 2
 
     @Test
-    public void seConstruyeEnElCuartoTurno() throws NoExisteEdificioCorrelativoException {
-        Criadero criadero = new Criadero(new Posicion(2,2), new Mapa());
+    public void seConstruyeEnElCuartoTurno() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(2,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
         criadero.pasarTiempo();
         assertFalse(criadero.llenoDeLarvas());
         criadero.pasarTiempo();
@@ -114,9 +128,11 @@ public class CriaderoTest {
 
     //caso de uso 10
     @Test
-    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos() throws NoExisteEdificioCorrelativoException{
+    public void seRegeneraTodaLaVidaDespuesDeAlgunosTurnos() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException{
         //given
-        Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(2,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -132,9 +148,11 @@ public class CriaderoTest {
     }
 
     @Test
-    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno() throws NoExisteEdificioCorrelativoException{
+    public void seRegeneraLaVidaParcialmenteDespuesDeUnTurno() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException{
         //given
-        Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(2,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -161,7 +179,7 @@ public class CriaderoTest {
         jugador.pasarTiempo();
         criadero.dañar(550);
         jugador.incrementarMineral(150);    //Le agrego el mineral necesario para cpp¿onstruir
-        assertTrue(jugador.agregarConstruccion(new ReservaDeReproduccion(new Posicion(9, 14), mapa)));
+        assertDoesNotThrow(()->{ new ReservaDeReproduccion(new Posicion(9, 14), jugador); });
     }
 }
 

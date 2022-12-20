@@ -25,15 +25,15 @@ public class ReservaDeReproduccion extends Edificio{
         zona = new ZonaMoho(this.posicion);
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
-        if(this.jugador == null){
-            crearJugadorPorDefecto();
-        }
+        // if(this.jugador == null){
+        //     crearJugadorPorDefecto();
+        // }
     }
 
     public ReservaDeReproduccion(Posicion posicion, Jugador jugador) throws RecursosInsuficientesException {
         this(posicion, jugador.getMapa());
         this.jugador = jugador;
-        if(this.jugador.agregarConstruccion(this)){
+        if(!this.jugador.agregarConstruccion(this)){
             throw new RecursosInsuficientesException();
         }
     }

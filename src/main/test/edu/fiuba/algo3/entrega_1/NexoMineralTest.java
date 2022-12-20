@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mena;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class NexoMineralTest {
     //Caso de uso 7
     @Test
-    public void SeMinaElMineralConUnNexoMineralYLoMinaExitosamente() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
+    public void SeMinaElMineralConUnNexoMineralYLoMinaExitosamente() throws MenaOcupadaException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         NexoMineral nexito = new NexoMineral(new Posicion(2, 2), new Mena(new Posicion(2, 2)), jugador);
@@ -31,7 +32,7 @@ public class NexoMineralTest {
     }
 
     @Test
-    public void nexoMineralNoConstruidoNoMinaMineral() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
+    public void nexoMineralNoConstruidoNoMinaMineral() throws MenaOcupadaException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         NexoMineral nexito = new NexoMineral(new Posicion(2, 2), new Mena(new Posicion(2, 2)), jugador);
@@ -44,7 +45,7 @@ public class NexoMineralTest {
     }
 
     @Test
-    public void nexoMineralNoMinaMenaAgotada() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
+    public void nexoMineralNoMinaMenaAgotada() throws MenaOcupadaException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);
         NexoMineral nexito = new NexoMineral(new Posicion(2, 1), new Mena(new Posicion(2, 1)), jugador);
@@ -61,7 +62,7 @@ public class NexoMineralTest {
 
     // Caso de uso 11
     @Test
-    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
+    public void recibeDañoYElEscudoYSeRecuperaConElTiempoHastaEstarCompleto() throws MenaOcupadaException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
 
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);
@@ -81,7 +82,7 @@ public class NexoMineralTest {
 
     // Caso de uso 12
     @Test
-    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() throws MenaOcupadaException, NoExisteEdificioCorrelativoException {
+    public void recibeDañoElEscudoYSeRecuperaPeroLaVidaNo() throws MenaOcupadaException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
 
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);

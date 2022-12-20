@@ -36,8 +36,8 @@ public class Jugador {
         this.mapa = mapa;
         this.construcciones = new ArrayList<>();
         this.individuos = new ArrayList<>();
-        this.mineral = new Mineral(2000);
-        this.gas = new GasVespeno(2000);
+        this.mineral = new Mineral(200);
+        this.gas = new GasVespeno(0);
         this.capacidad = capacidad;
         unidadesCreadas = 0;
     }
@@ -102,9 +102,10 @@ public class Jugador {
 
     public boolean agregarConstruccion(Construccion construccion){
         if(!mapa.verificarPosicionDisponible(construccion)){
+            System.out.println("\n DIO FALSE LA VERIFICACION DE POSICION DISPONIBLE");
             return false;
         }
-        
+        System.out.println("\n SE AGREGA AL MAPA");
         return construccion.agregarAlMapa(this.mineral, this.gas);
     }
 

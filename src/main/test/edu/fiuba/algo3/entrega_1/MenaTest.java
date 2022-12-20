@@ -20,7 +20,6 @@ public class MenaTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(1, 2), mena, mapa);
-        jugador.agregarConstruccion(nexo);
         assertThrows(MenaOcupadaException.class, ()->{ new NexoMineral(new Posicion(1, 2), mena, mapa); });
     }
     @Test

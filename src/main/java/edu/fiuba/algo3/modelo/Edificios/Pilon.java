@@ -23,15 +23,15 @@ public class Pilon extends Edificio{
         tiempo = 0;
         this.zona = mapa.getZonaNeutral();
         this.vida = new VidaEscudoProtoss(300, 300);
-        if(this.jugador == null){
-            crearJugadorPorDefecto();
-        }
+        // if(this.jugador == null){
+        //     crearJugadorPorDefecto();
+        // }
     }
 
     public Pilon(Posicion posicion, Jugador jugador) throws RecursosInsuficientesException {
         this(posicion, jugador.getMapa());
         this.jugador = jugador;
-        if(this.jugador.agregarConstruccion(this)){
+        if(!this.jugador.agregarConstruccion(this)){
             throw new RecursosInsuficientesException();
         }
     }

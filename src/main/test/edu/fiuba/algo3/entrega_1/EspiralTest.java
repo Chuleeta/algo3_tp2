@@ -26,28 +26,24 @@ public class EspiralTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(1,3), jugador);
-        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Posicion(1,2), jugador);
         jugador.incrementarMineral(2000);
         jugador.incrementarGas(2000);
-        jugador.agregarConstruccion(reserva);
+        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Posicion(1,2), jugador);
         for(int i = 0; i < 13; i += 1){
             jugador.pasarTiempo();
         }
         Guarida guarida = new Guarida(new Posicion(2,1), jugador);
-        jugador.agregarConstruccion(guarida);
         for(int i = 0; i < 13; i += 1){
             jugador.pasarTiempo();
         }
 
         Espiral espiral = new Espiral(new Posicion(2,2), jugador);
-        jugador.agregarConstruccion(espiral);
         espiral.pasarTiempo();
         espiral.pasarTiempo();
         espiral.pasarTiempo();
@@ -89,17 +85,7 @@ public class EspiralTest {
     @Test
     public void noSePuedeConstruirEspiralSiNoHayGuarida() throws NoExisteEdificioCorrelativoException {
         //given
-        Espiral espiral = new Espiral(new Posicion(1,1), new Mapa());
-        espiral.pasarTiempo();
-        espiral.pasarTiempo();
-        espiral.pasarTiempo();
-        espiral.pasarTiempo();
-        espiral.pasarTiempo();
-        espiral.pasarTiempo();
-        espiral.pasarTiempo();
-        espiral.pasarTiempo();
-        espiral.pasarTiempo();
-        assertThrows(NoExisteEdificioCorrelativoException.class, () ->{ espiral.pasarTiempo();});
+        assertThrows(NoExisteEdificioCorrelativoException.class, () ->{ new Espiral(new Posicion(1,1), new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), new Mapa(), 200));});
     }
 
 
@@ -109,13 +95,27 @@ public class EspiralTest {
         //given
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-        // es el edificio correlativo
+        jugador.incrementarMineral(1000);
+        Criadero criadero = new Criadero(new Posicion(2,3), jugador);
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
         ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(2,2), jugador);
-        reservaDeReproduccion.agregarAlMapa(new Mineral(150), new GasVespeno(100));
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        jugador.incrementarMineral(2000);
+        jugador.incrementarGas(2000);
         Guarida guarida = new Guarida(new Posicion(2,1), jugador);
-        guarida.agregarAlMapa(new Mineral(200), new GasVespeno(100));
         Espiral espiral = new Espiral(new Posicion(3,3), jugador);
-        espiral.agregarAlMapa(new Mineral(150), new GasVespeno(100));
         for (int i = 0; i < 10; i++)
             espiral.pasarTiempo();
 

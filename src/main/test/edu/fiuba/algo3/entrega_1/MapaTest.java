@@ -21,6 +21,8 @@ import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -36,13 +38,14 @@ public class MapaTest {
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), jugador);
         jugador.incrementarMineral(2000);
-        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertTrue(jugador.agregarConstruccion(new Extractor(new Posicion(8,8), new Volcan(new Posicion(8, 8)), mapa)));
-        assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(125,3), new Volcan(new Posicion(125, 3)), mapa)));
+        //assertTrue(new Extractor(new Posicion(8,8), new Volcan(new Posicion(8, 8)), mapa));
+        //assertFalse(new Extractor(new Posicion(125,3), new Volcan(new Posicion(125, 3)), mapa));
+        assertDoesNotThrow(()->{ new Extractor(new Posicion(8,8), new Volcan(new Posicion(8, 8)), jugador); });
+        assertThrows(RecursosInsuficientesException.class, () ->{ new Extractor(new Posicion(125,3), new Volcan(new Posicion(125, 3)), jugador);});
     }
 
     @Test
@@ -51,14 +54,15 @@ public class MapaTest {
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(10,10), jugador);
         jugador.incrementarMineral(300);
-        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertTrue(jugador.agregarConstruccion(new Acceso(new Posicion(10, 9), mapa )));
-        assertFalse(jugador.agregarConstruccion(new Acceso(new Posicion(2, 2), mapa)));
+        //assertTrue(jugador.agregarConstruccion(new Acceso(new Posicion(10, 9), mapa )));
+        //assertFalse(jugador.agregarConstruccion(new Acceso(new Posicion(2, 2), mapa)));
+        assertDoesNotThrow(()->{ new Acceso(new Posicion(10, 9), jugador); });
+        assertThrows(RecursosInsuficientesException.class, () ->{ new Acceso(new Posicion(2, 2), jugador);});
     }
 
     // Caso de uso 6
@@ -69,13 +73,14 @@ public class MapaTest {
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9, 9), jugador);
         jugador.incrementarMineral(200);
-        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(8, 8), new Volcan(new Posicion(8, 8)), mapa)));
+        //assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(8, 8), new Volcan(new Posicion(8, 8)), mapa)));
+        assertThrows(RecursosInsuficientesException.class, () ->{ new Extractor(new Posicion(8, 8), new Volcan(new Posicion(8, 8)), jugador);});
         jugador.pasarTiempo();
-        assertTrue(jugador.agregarConstruccion(new Extractor(new Posicion(8, 8), new Volcan(new Posicion(8, 8)), mapa)));
+        assertDoesNotThrow(()->{ new Extractor(new Posicion(8, 8), new Volcan(new Posicion(8, 8)), jugador); });
+        //assertTrue(jugador.agregarConstruccion(new Extractor(new Posicion(8, 8), new Volcan(new Posicion(8, 8)), mapa)));
     }
 
     @Test
@@ -84,12 +89,12 @@ public class MapaTest {
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9, 9), jugador);
         jugador.incrementarMineral(800);
-        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(9, 16), new Volcan(new Posicion(9, 16)), mapa)));
+        //assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(9, 16), new Volcan(new Posicion(9, 16)), mapa)));
+        assertThrows(RecursosInsuficientesException.class, () ->{ new Extractor(new Posicion(9, 16), new Volcan(new Posicion(9, 16)), jugador);});
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -98,20 +103,21 @@ public class MapaTest {
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertTrue(jugador.agregarConstruccion(new Extractor(new Posicion(3, 15), new Volcan(new Posicion(3, 15)), mapa)));
+        //assertTrue(jugador.agregarConstruccion(new Extractor(new Posicion(3, 15), new Volcan(new Posicion(3, 15)), mapa)));
+        assertDoesNotThrow(()->{ new Extractor(new Posicion(3, 15), new Volcan(new Posicion(3, 15)), jugador); });
     }
-
+    
     @Test
     public void noSePuedeConstruirExtractorSinRecursos() throws VolcanOcupadoException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), jugador);
-        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(9,8), new Volcan(new Posicion(9, 8)), mapa)));
+        //assertFalse(jugador.agregarConstruccion(new Extractor(new Posicion(9,8), new Volcan(new Posicion(9, 8)), mapa)));
+        assertThrows(RecursosInsuficientesException.class, () ->{ new Extractor(new Posicion(9,8), new Volcan(new Posicion(9, 8)), jugador);});
     }
 
     @Test
@@ -119,12 +125,12 @@ public class MapaTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), jugador);
-        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Criadero(new Posicion(9,8), mapa)));
+        //assertFalse(jugador.agregarConstruccion(new Criadero(new Posicion(9,8), mapa)));
+        assertThrows(RecursosInsuficientesException.class, () ->{ new Criadero(new Posicion(9,8), jugador);});
     }
 
     @Test
@@ -132,12 +138,12 @@ public class MapaTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), jugador);
-        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new ReservaDeReproduccion(new Posicion(9,8), mapa)));
+        //assertFalse(jugador.agregarConstruccion(new ReservaDeReproduccion(new Posicion(9,8), mapa)));
+        assertThrows(RecursosInsuficientesException.class, () ->{ new ReservaDeReproduccion(new Posicion(9,8), jugador);});
     }
 
     @Test
@@ -145,12 +151,12 @@ public class MapaTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), jugador);
-        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Guarida(new Posicion(9,8), mapa)));
+        //assertFalse(jugador.agregarConstruccion(new Guarida(new Posicion(9,8), mapa)));
+        assertThrows(NoExisteEdificioCorrelativoException.class, () ->{ new Guarida(new Posicion(9,8), jugador);});
     }
 
     @Test
@@ -158,12 +164,12 @@ public class MapaTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         Criadero criadero = new Criadero(new Posicion(9,9), jugador);
-        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Espiral(new Posicion(9,8), mapa)));
+        assertThrows(NoExisteEdificioCorrelativoException.class, () ->{ new Espiral(new Posicion(9,8), jugador);});
+        //assertFalse(jugador.agregarConstruccion(new Espiral(new Posicion(9,8), mapa)));
     }
 
     @Test
@@ -172,14 +178,14 @@ public class MapaTest {
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
         Pilon pilonDos = new Pilon(new Posicion(10, 9), jugador);
-        jugador.agregarConstruccion(pilonDos);
-        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new NexoMineral(new Posicion(9,8), new Mena(new Posicion(9, 8)), mapa)));
+        //assertFalse(jugador.agregarConstruccion(new NexoMineral(new Posicion(9,8), new Mena(new Posicion(9, 8)), mapa)));
+        //new NexoMineral(new Posicion(9,8), new Mena(new Posicion(9, 8)), jugador);
+        assertThrows(RecursosInsuficientesException.class, () ->{ new NexoMineral(new Posicion(9,8), new Mena(new Posicion(9, 8)), jugador);});
     }
 
     @Test
@@ -188,14 +194,13 @@ public class MapaTest {
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
         Pilon pilonDos = new Pilon(new Posicion(10, 9), jugador);
-        jugador.agregarConstruccion(pilonDos);
-        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Pilon(new Posicion(9,8), mapa)));
+        //assertFalse(jugador.agregarConstruccion(new Pilon(new Posicion(9,8), mapa)));
+        assertThrows(RecursosInsuficientesException.class, () ->{ new Pilon(new Posicion(9,8), jugador);});
     }
 
     @Test
@@ -204,14 +209,13 @@ public class MapaTest {
         Jugador jugador = new Jugador("jugadorUno", "protoss", "zerg", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
         Pilon pilonDos = new Pilon(new Posicion(10, 9), jugador);
-        jugador.agregarConstruccion(pilonDos);
-        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Asimilador(new Posicion(9,8), new Volcan(new Posicion(9, 8)), mapa)));
+        //assertFalse(jugador.agregarConstruccion(new Asimilador(new Posicion(9,8), new Volcan(new Posicion(9, 8)), mapa)));
+        assertThrows(RecursosInsuficientesException.class, () ->{ new Asimilador(new Posicion(9,8), new Volcan(new Posicion(9, 8)), jugador);});
     }
 
     @Test
@@ -219,13 +223,13 @@ public class MapaTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
-        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new Acceso(new Posicion(9,8), mapa)));
+        //assertFalse(jugador.agregarConstruccion(new Acceso(new Posicion(9,8), mapa)));
+        assertThrows(RecursosInsuficientesException.class, () ->{ new Acceso(new Posicion(9,8), jugador);});
     }
 
     @Test
@@ -233,13 +237,15 @@ public class MapaTest {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
-        jugador.agregarConstruccion(pilon);
+        jugador.incrementarMineral(50);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertFalse(jugador.agregarConstruccion(new PuertoEstelar(new Posicion(9,8), mapa)));
+        Acceso acceso = new Acceso(new Posicion(9, 10), jugador);
+        //assertFalse(jugador.agregarConstruccion(new PuertoEstelar(new Posicion(9,8), mapa)));
+        assertThrows(RecursosInsuficientesException.class, () ->{ new PuertoEstelar(new Posicion(9,8), jugador);});
     }
 
     @Test
@@ -248,15 +254,16 @@ public class MapaTest {
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
         jugador.incrementarMineral(800);
-        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertTrue(jugador.agregarConstruccion(new Acceso(new Posicion(9,8), mapa)));
+        //assertTrue(jugador.agregarConstruccion(new Acceso(new Posicion(9,8), jugador)));
+        assertDoesNotThrow(()->{ new Acceso(new Posicion(9,8), jugador); });
         pilon.destruir();
-        assertFalse(jugador.agregarConstruccion(new Acceso(new Posicion(9,10), mapa)));
+        //assertFalse(jugador.agregarConstruccion(new Acceso(new Posicion(9,10), jugador)));
+        assertThrows(RecursosInsuficientesException.class, () ->{ new Acceso(new Posicion(9,10), jugador);});
     }
 
 
@@ -266,16 +273,13 @@ public class MapaTest {
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
         jugador.incrementarMineral(800);
-        jugador.agregarConstruccion(pilon);
         Pilon pilon2 = new Pilon(new Posicion(9,7), jugador);
-        jugador.agregarConstruccion(pilon2);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         Acceso acceso = new Acceso(new Posicion(9,8), jugador);
-        assertTrue(jugador.agregarConstruccion(acceso));
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -313,16 +317,15 @@ public class MapaTest {
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
         jugador.incrementarMineral(800);
-        jugador.agregarConstruccion(pilon);
         Criadero criadero = new Criadero(new Posicion(9,7), jugador);
-        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        Construccion acceso = new Acceso(new Posicion(9,8), jugador);
-        assertFalse(jugador.agregarConstruccion(acceso));
+        // Construccion acceso = new Acceso(new Posicion(9,8), jugador);
+        // assertFalse(jugador.agregarConstruccion(acceso));
+        assertThrows(RecursosInsuficientesException.class, () ->{ new Acceso(new Posicion(9,8), jugador);});
     }
 
     @Test
@@ -331,9 +334,7 @@ public class MapaTest {
         Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugador);
         jugador.incrementarMineral(800);
-        jugador.agregarConstruccion(pilon);
         Criadero criadero = new Criadero(new Posicion(9,20), jugador);
-        jugador.agregarConstruccion(criadero);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -343,8 +344,9 @@ public class MapaTest {
         for(int i = 0; i < 40; i+=1){
             jugador.pasarTiempo();
         }
-        Construccion extractor = new Extractor(new Posicion(9,10), new Volcan(new Posicion(9, 10)), mapa);
-        assertTrue(jugador.agregarConstruccion(extractor));
+        // Construccion extractor = new Extractor(new Posicion(9,10), new Volcan(new Posicion(9, 10)), mapa);
+        // assertTrue(jugador.agregarConstruccion(extractor));
+        assertDoesNotThrow(()->{ new Extractor(new Posicion(9,10), new Volcan(new Posicion(9, 10)), jugador); });
     }
 
 }

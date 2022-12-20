@@ -27,15 +27,15 @@ public class Acceso extends Edificio{
         tiempo = 0;
         this.zona = new ZonaEnergia(this.posicion);
         this.vida = new VidaEscudoProtoss(500, 500);
-        if(this.jugador == null){
-            crearJugadorPorDefecto();
-        }
+        // if(this.jugador == null){
+        //     crearJugadorPorDefecto();
+        // }
     }
 
     public Acceso(Posicion posicion, Jugador jugador) throws RecursosInsuficientesException {
         this(posicion, jugador.getMapa());
         this.jugador = jugador;
-        if(this.jugador.agregarConstruccion(this)){
+        if(!this.jugador.agregarConstruccion(this)){
             throw new RecursosInsuficientesException();
         }
     }

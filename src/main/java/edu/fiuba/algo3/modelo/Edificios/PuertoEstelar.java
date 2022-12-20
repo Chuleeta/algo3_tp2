@@ -23,16 +23,16 @@ public class PuertoEstelar extends Edificio{
         this.mapa = mapa;
         tiempo = 0;
         this.vida = new VidaEscudoProtoss(600, 600);
-        if(this.jugador == null){
-            crearJugadorPorDefecto();
-        }
+        // if(this.jugador == null){
+        //     crearJugadorPorDefecto();
+        // }
     }
 
     public PuertoEstelar(Posicion posicion, Jugador jugador) throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         this(posicion, jugador.getMapa());
         this.jugador = jugador;
         this.jugador.verificarEdificacionCorrelativa(this);
-        if(this.jugador.agregarConstruccion(this)){
+        if(!this.jugador.agregarConstruccion(this)){
             throw new RecursosInsuficientesException();
         }
     }

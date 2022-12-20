@@ -23,10 +23,9 @@ public class GuaridaTest {
         //given
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-        Criadero criadero = new Criadero(new Posicion(1,3), mapa);
+        Criadero criadero = new Criadero(new Posicion(1,3), jugador);
         jugador.incrementarMineral(2000);
         jugador.incrementarGas(2000);
-        jugador.agregarConstruccion(criadero);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
@@ -34,12 +33,10 @@ public class GuaridaTest {
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Posicion(1,2), jugador);
-        jugador.agregarConstruccion(reserva);
         for(int i = 0; i < 13; i += 1){
             reserva.pasarTiempo();
         }
         Guarida guarida = new Guarida(new Posicion(1,1), jugador);
-        jugador.agregarConstruccion(guarida);
         guarida.pasarTiempo();
         guarida.pasarTiempo();
         guarida.pasarTiempo();
@@ -80,21 +77,18 @@ public class GuaridaTest {
     }
     // caso de uso 17
     @Test
-    public void noSePuedeConstruirGuaridaSiNoHayReservaDeReproduccion() throws NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirGuaridaSiNoHayReservaDeReproduccion() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         //given
-        Guarida guarida = new Guarida(new Posicion(1,1), new Mapa());
-        guarida.pasarTiempo();
-        guarida.pasarTiempo();
-        guarida.pasarTiempo();
-        guarida.pasarTiempo();
-        guarida.pasarTiempo();
-        guarida.pasarTiempo();
-        guarida.pasarTiempo();
-        guarida.pasarTiempo();
-        guarida.pasarTiempo();
-        guarida.pasarTiempo();
-        guarida.pasarTiempo();
-        assertThrows(NoExisteEdificioCorrelativoException.class, () ->{ guarida.pasarTiempo();});
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(4,1), mapa, 200);
+        jugador.incrementarMineral(1000);
+        Criadero criadero = new Criadero(new Posicion(2,3), jugador);
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+
+        assertThrows(NoExisteEdificioCorrelativoException.class, () ->{ new Guarida(new Posicion(1,1), jugador);;});
     }
 
     // caso 22
@@ -105,11 +99,25 @@ public class GuaridaTest {
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         jugador.incrementarGas(2000);
         jugador.incrementarMineral(2000);
-        // es el edificio correlativo
+        Criadero criadero = new Criadero(new Posicion(2,3), jugador);
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
         ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(2,2), jugador);
-        jugador.agregarConstruccion(reservaDeReproduccion);
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
+        reservaDeReproduccion.pasarTiempo();
         Guarida guarida = new Guarida(new Posicion(1,2), jugador);
-        jugador.agregarConstruccion(guarida);
         for (int i = 0; i < 13; i++)
             jugador.pasarTiempo();
 
