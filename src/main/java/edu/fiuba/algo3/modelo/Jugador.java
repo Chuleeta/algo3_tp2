@@ -43,8 +43,8 @@ public class Jugador {
         this.mapa = mapa;
         this.construcciones = new ArrayList<>();
         this.individuos = new ArrayList<>();
-        this.mineral = new Mineral(200);
-        this.gas = new GasVespeno(0);
+        this.mineral = new Mineral(2000);
+        this.gas = new GasVespeno(2000);
         this.capacidad = capacidad;
         unidadesCreadas = 0;
     }
@@ -255,8 +255,11 @@ public class Jugador {
 
     public void atacarUnidad(Posicion posicion, Individuo individuoAtacante) throws NoSeEncuentraAlIndividuoException {
         Individuo individuoAtacado = encontrarIndividuo(posicion);
-        if(individuoAtacado != null) individuoAtacante.atacar(individuoAtacado);
-        else throw new NoSeEncuentraAlIndividuoException();
+        if(individuoAtacado != null) {
+            System.out.print(individuoAtacante.atacar(individuoAtacado));
+            return;
+        }
+        throw new NoSeEncuentraAlIndividuoException();
     }
 
     private Individuo encontrarIndividuo(Posicion posicion) {
