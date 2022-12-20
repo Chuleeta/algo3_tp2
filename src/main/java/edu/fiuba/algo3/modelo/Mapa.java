@@ -75,7 +75,7 @@ public class Mapa {
     }
     public boolean inyectarRecurso(Zangano zangano) throws MenaOcupadaException{
         for (RecursoInyectable recurso:recursosInyectables){
-            if(recurso.inyectarRecurso(zangano)){
+            if(recurso.mostrarPosicion().posicionesIguales(zangano.posicion()) && recurso.inyectarRecurso(zangano)){
                 return true;
             }
         }

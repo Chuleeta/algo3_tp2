@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.javafx;
-import edu.fiuba.algo3.javafx.Eventos.AtacarHandler;
 import edu.fiuba.algo3.modelo.Construccion;
 import edu.fiuba.algo3.modelo.Jugador;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,22 +13,22 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class UnidadEstatica extends Rectangle implements Notificable {
+public class UnidadEdificio extends Rectangle implements Notificable {
     private final BotonModal botonAtacar;
     private Construccion construccion;
-    public UnidadEstatica(Construccion construccion, int coordenadaX, int coordenadaY) {
+    public UnidadEdificio(Construccion construccion, int coordenadaX, int coordenadaY) {
         super(20, 20, Color.GREEN);
         this.construccion = construccion;
         this.setTranslateX(coordenadaX);
         this.setTranslateY(coordenadaY);
-        this.botonAtacar = new BotonModal("Atacar");
+        this.botonAtacar = new BotonModal(this.construccion.obtenerVida().vidaRestante());
         this.setOnMouseClicked(e -> {
             if(e.getButton().equals(MouseButton.PRIMARY)){
                 if(e.getClickCount() == 2){
                     VBox eleccionUsuario = new VBox();
                     HBox opciones = new HBox();
                     VBox opciones1 = new VBox();
-                    Label seleccionarAccion = new Label("Seleccionar accion\n");
+                    Label seleccionarAccion = new Label("Propiedades\n");
                     String pathicono = this.getClass().getResource("/imagenes/icono.png").toString();
                     Image icono = new Image(pathicono);
                     opciones1.getChildren().addAll(this.botonAtacar);
@@ -48,7 +45,7 @@ public class UnidadEstatica extends Rectangle implements Notificable {
                     sc.setFill(Color.RED);
                     Stage s = new Stage();
                     s.initModality(Modality.APPLICATION_MODAL);
-                    s.setTitle("Opciones de la unidad");
+                    s.setTitle("Propuedades de la unidad");
                     s.getIcons().add(icono);
                     s.setResizable(false);
                     s.setScene(sc);

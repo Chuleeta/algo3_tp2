@@ -1,12 +1,10 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
 import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
-import edu.fiuba.algo3.modelo.Exceptions.PuertoEstelarNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
-import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
 import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
@@ -72,7 +70,7 @@ public class Zangano extends Individuo{
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
-        this.jugador.añadirMineral(minarMena());
+        if (this.jugador != null) this.jugador.añadirMineral(minarMena());
     }
     public void ocuparMena(Mena mena) throws MenaOcupadaException {
         if (this.estado.estaConstruido()) {
@@ -109,13 +107,21 @@ public class Zangano extends Individuo{
 
     @Override
     public boolean moverUnidad(Posicion nuevaPosicion) {
-        if(super.moverUnidad(nuevaPosicion)){
-            try {
-                mapa.inyectarRecurso(this);
-                return true;
-            } catch (MenaOcupadaException e) {
-                return true;
+        if (this.estado.estaConstruido()) {
+            if(super.moverUnidad(nuevaPosicion)){
+                if (this.mena != null) {
+                    this.mena.desocupar();
+                    this.mena = null;
+                }
+                try {
+                    mapa.inyectarRecurso(this);
+                    return true;
+                } catch (MenaOcupadaException e) {
+                    this.mena = null;
+                    return true;
+                }
             }
+            return false;
         }
         return false;
     }
@@ -129,4 +135,5 @@ public class Zangano extends Individuo{
         }
         return false;
     }
+
 }

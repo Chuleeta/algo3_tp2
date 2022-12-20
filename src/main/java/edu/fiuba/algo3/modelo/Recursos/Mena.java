@@ -79,11 +79,15 @@ public class Mena implements RecursoInyectable{
 
     @Override
     public String getSpray(){
-        return "azul";
+        return "grey";
     }
 
     @Override
     public Posicion mostrarPosicion() {
         return this.posicion;
+    }
+
+    public void desocupar() {
+        this.estaOcupado = false;
     }
 }

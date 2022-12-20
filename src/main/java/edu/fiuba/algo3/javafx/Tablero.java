@@ -3,29 +3,17 @@ package edu.fiuba.algo3.javafx;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Timer;
-import java.util.stream.IntStream;
 
 import edu.fiuba.algo3.modelo.Construccion;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
-import javafx.beans.binding.Bindings;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -48,29 +36,7 @@ public class Tablero {
         this.mapaVista = new Pane();
         this.juego = juego;
         crearGrilla();
-        /*¨Rectangle J1 = new Rectangle(20, 20, Color.GREEN);
-        J1.setTranslateX(10);
-        J1.setTranslateY(10);
-        hacerMovible(J1);
-        */
-        actualizarConstrucciones();
-        // ArrayList<Construccion> construcciones = juego.mostrarConstrucciones();
-        // for (Construccion construccion : construcciones) {
-        //     Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
-        //     J2.setTranslateX((construccion.mostrarPosicion().coordenadaX() * 40) + 10);
-        //     J2.setTranslateY((construccion.mostrarPosicion().coordenadaY() * 40) + 10);
-        //     hacerMovible(J2);
-        //     mapaVista.getChildren().add(J2);
-        // }
-
-        // Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
-        // J2.setTranslateX(850);
-        // J2.setTranslateY(691);
-        // hacerMovible(J2);
-
-        // mapaVista.getChildren().add(J1);
-        //mapaVista.getChildren().add(J2);
-
+        actualizar();
         mapaVista.setPrefSize(880, 721);
         mapaVista.setStyle("-fx-background-color: #717D8C");
 
@@ -97,53 +63,63 @@ public class Tablero {
         }
     }
 
-    public UnidadMovible crearUnidadMovible(Individuo individuo) {
+    public UnidadIndividuo crearUnidadMovible(Individuo individuo) {
         int coordenadaX = (individuo.posicion().coordenadaX() * 40) + 10;
         int coordenadaY = (individuo.posicion().coordenadaY() * 40) + 10;
-        UnidadMovible unidad = new UnidadMovible(individuo, coordenadaX, coordenadaY);
+        UnidadIndividuo unidad = new UnidadIndividuo(individuo, coordenadaX, coordenadaY);
         hacerMovible(unidad);
         this.juegoVista.agregarSuscriptorPasarTurno(unidad);
         return unidad;
     }
-    public UnidadEstatica crearUnidadEstatica(Construccion construccion) {
+    public UnidadEdificio crearUnidadEstatica(Construccion construccion) {
         int coordenadaX = (construccion.mostrarPosicion().coordenadaX() * 40) + 10;
         int coordenadaY = (construccion.mostrarPosicion().coordenadaY() * 40) + 10;
-        UnidadEstatica unidad = new UnidadEstatica(construccion, coordenadaX, coordenadaY);
+        UnidadEdificio unidad = new UnidadEdificio(construccion, coordenadaX, coordenadaY);
+        unidad.setOnMouseReleased(e ->{
+            mostrarPosicion(unidad);
+        });
         this.juegoVista.agregarSuscriptorPasarTurno(unidad);
         return unidad;
     }
 
     public void actualizarConstrucciones() {
-        ArrayList<Construccion> construcciones = juego.mostrarConstrucciones();
-        ArrayList<Individuo> unidades = juego.mostrarUnidades();
-        for (Construccion construccion : construcciones) {
-            UnidadEstatica unidad = crearUnidadEstatica(construccion);
-            mapaVista.getChildren().add(unidad);
+        ArrayList<Construccion> construcciones = this.juego.mostrarConstrucciones();
+        if(construcciones.size() > 0){
+            for (Construccion construccion : construcciones) {
+                this.insertarConstruccion(construccion);
+            }
         }
-        for (Individuo individuo : unidades) {
-            UnidadMovible unidad = crearUnidadMovible(individuo);
-            mapaVista.getChildren().add(unidad);
-        }
+    }
 
+    public void actualizarRecursos() {
         ArrayList<RecursoInyectable> recursos = juego.mostrarRecursos();
         for (RecursoInyectable recurso : recursos) {
-            Rectangle J2 = new Rectangle(20, 20, Color.GREEN);
-            if(recurso.getSpray() == "rojo"){
-                J2 = new Rectangle(20, 20, Color.RED);
-            }else{
-                J2 = new Rectangle(20, 20, Color.BLUE);
-            }
-            J2.setTranslateX((recurso.mostrarPosicion().coordenadaX() * 40) + 10);
-            J2.setTranslateY((recurso.mostrarPosicion().coordenadaY() * 40) + 10);
-            mapaVista.getChildren().add(J2);
+            int coordenadaX = (recurso.mostrarPosicion().coordenadaX() * 40) + 10;
+            int coordenadaY = (recurso.mostrarPosicion().coordenadaY() * 40) + 10;
+            UnidadRecurso unidad = new UnidadRecurso(recurso, coordenadaX, coordenadaY);
+            unidad.setOnMouseReleased(e ->{
+                mostrarPosicion(unidad);
+            });
+            mostrarPosicion(unidad);
+            mapaVista.getChildren().add(unidad);
         }
+    }
+    public void actualizarUnidades() {
+        ArrayList<Individuo> individuos = this.juego.mostrarUnidades();
+        System.out.println(individuos.size());
+        if(individuos.size() != 0){
+            for (Individuo individuo : individuos) {
+                this.insertarUnidad(individuo);
+            }
+        }
+
     }
 
     private void seleccionarVerPosicion(Node n){
         
     }
 
-    private void hacerMovible(UnidadMovible n) {
+    private void hacerMovible(UnidadIndividuo n) {
         Paint colorOriginal = ((Shape) n).getFill();;
         n.setOnMousePressed(e ->{
             this.startX = (int)(e.getSceneX() - n.getTranslateX());
@@ -200,31 +176,36 @@ public class Tablero {
                     n.setTranslateY(e.getSceneY() - startY);
                 }
             }
-            //PARA VER LA POSICION DEL NODO O CUADRADO
-            //System.out.println("\nX: " + n.getTranslateX());
-            //System.out.println("\nY: " + n.getTranslateY());
         });
         
         n.setOnMouseReleased(e ->{
-            /*
-             * Aca lo que pasa es que se toma la posicion del mouse 
-             * se le aproxima un multiplo de 40
-             * una vez se consigue ese multiplo de 40 se le sumo 10 en ambos ejes
-             * y de esta forma queda centrado en el cuadrado
-             * 
-             * SI SE QUIERE CONSEGUIR LA POSICION DEL MAPA PARA EL MODELO:
-             * ej: tengo la posicion (453.4343, 300.32423)
-             * primero se encuentra el multiplo mas cercano osea: (440, 320)
-             * desp se divide por 40 ya que es lo q miden los lados de los cuadrados que hacen de mapa
-             * (440, 320) ---> (11, 8) ---> new Posicion(11,8)
-            */
-            ((Shape) n).setFill(colorOriginal);// 458.12312039123 ---> 458.1--> 450---> 11.25 --> 11 13 --> posicion(11, 13)
-            this.juegoVista.setPosicionSeleccionada(calcularPosicion(n));
+
+           mostrarPosicion(n);
+           n.setFill(colorOriginal);
 
         });
     }
 
-    private Posicion calcularPosicion(UnidadMovible n) {
+    private void mostrarPosicion(Rectangle n) {
+        /*
+         * Aca lo que pasa es que se toma la posicion del mouse
+         * se le aproxima un multiplo de 40
+         * una vez se consigue ese multiplo de 40 se le sumo 10 en ambos ejes
+         * y de esta forma queda centrado en el cuadrado
+         *
+         * SI SE QUIERE CONSEGUIR LA POSICION DEL MAPA PARA EL MODELO:
+         * ej: tengo la posicion (453.4343, 300.32423)
+         * primero se encuentra el multiplo mas cercano osea: (440, 320)
+         * desp se divide por 40 ya que es lo q miden los lados de los cuadrados que hacen de mapa
+         * (440, 320) ---> (11, 8) ---> new Posicion(11,8)
+         */
+        Paint colorOriginal = ((Shape) n).getFill();;
+        ((Shape) n).setFill(colorOriginal);// 458.12312039123 ---> 458.1--> 450---> 11.25 --> 11 13 --> posicion(11, 13)
+        this.juegoVista.setPosicionSeleccionada(calcularPosicion(n));
+
+    }
+
+    private Posicion calcularPosicion(Rectangle n) {
         double resultadoX = new BigDecimal(n.getTranslateX()).setScale(1, RoundingMode.UP).doubleValue();
         double resultadoY = new BigDecimal(n.getTranslateY()).setScale(1, RoundingMode.UP).doubleValue();
         n.setTranslateX(encontrarMultiploDeMasCercanoA(40, (int)resultadoX) + 10);
@@ -250,13 +231,24 @@ public class Tablero {
     public void insertarConstruccion(Construccion construccion) {
         if(construccion == null)
             System.out.println("\n inserta construccion");
-        UnidadEstatica nuevo = crearUnidadEstatica(construccion);
+        UnidadEdificio nuevo = crearUnidadEstatica(construccion);
         mapaVista.getChildren().add(nuevo);
     }
     public void insertarUnidad(Individuo unidad) {
+        System.out.println(unidad.posicion().coordenadaX());
+        System.out.println(unidad.posicion().coordenadaY());
         if(unidad == null)
             System.out.println("\n inserta construccion");
-        UnidadMovible nuevo = crearUnidadMovible(unidad);
+        UnidadIndividuo nuevo = crearUnidadMovible(unidad);
+
         mapaVista.getChildren().add(nuevo);
+    }
+
+    public void actualizar() {
+        mapaVista.getChildren().clear();
+        crearGrilla();
+        actualizarConstrucciones();
+        actualizarRecursos();
+        actualizarUnidades();
     }
 }

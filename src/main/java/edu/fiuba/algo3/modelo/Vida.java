@@ -12,7 +12,9 @@ public abstract class Vida {
     public abstract void dañar(int daño);
     public abstract void regenerar();
     public abstract boolean tieneEscudoCompleto();
-
+    public String vidaRestante() {
+        return String.valueOf("Vida: " + this.vida);
+    }
     public boolean verificarSiEstaMuerto(){
         return (this.vida <= 0);
     }
