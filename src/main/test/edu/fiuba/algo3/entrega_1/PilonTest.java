@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PilonTest {
@@ -47,5 +48,14 @@ public class PilonTest {
         pilon.pasarTiempo();
         assertTrue(pilon.tieneEscudoCompleto());
         assertFalse(pilon.tieneVidaCompleta());
+    }
+
+    @Test
+    public void construirDosPilonesEnLaMismaPosicionTiraRecursosInsuficientesException() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
+        Pilon pilon = new Pilon(new Posicion(1, 1), jugador);
+        //new Pilon(new Posicion(1, 1), jugador);
+        assertThrows(RecursosInsuficientesException.class, () ->{ new Pilon(new Posicion(1, 1), jugador);});
     }
 }

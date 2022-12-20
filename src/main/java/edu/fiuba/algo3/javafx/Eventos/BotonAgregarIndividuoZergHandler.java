@@ -211,12 +211,14 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZangano.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
             try {
-                new Zangano(new Mineral(1000), inputUsuario, jugador);
+                new Zangano(inputUsuario, jugador);
                 juegoVista.actualizarTablero();
             } catch (RequerimientosInsuficientesException ex) {
                 noSePuedeConstruir("\nRequerimientosInsuficientesException");
             } catch (CriaderoNoDisponibleException ex) {
                 noSePuedeConstruir("\nCriaderoNoDisponibleException");
+            } catch (NoExisteEdificioCorrelativoException e1) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
             }
             s.close();
         });
@@ -229,12 +231,14 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZerling.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
             try {
-                new Zerling(new Mineral(1000), inputUsuario, jugador);
+                new Zerling(inputUsuario, jugador);
                 juegoVista.actualizarTablero();
             } catch (RequerimientosInsuficientesException ex) {
                 noSePuedeConstruir("\nRequerimientosInsuficientesException");
             } catch (ReservaDeReproduccionNoDisponibleException ex) {
                 throw new RuntimeException(ex);
+            } catch (NoExisteEdificioCorrelativoException e1) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
             }
             s.close();
         });
@@ -247,12 +251,14 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonHidralisco.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
             try {
-                new Hidralisco(new Mineral(1000), new GasVespeno(1000), inputUsuario, jugador);
+                new Hidralisco(inputUsuario, jugador);
                 juegoVista.actualizarTablero();
             } catch (RequerimientosInsuficientesException ex) {
                 noSePuedeConstruir("\nRequerimientosInsuficientesException");
             } catch (GuaridaNoDisponibleException ex) {
                 throw new RuntimeException(ex);
+            } catch (NoExisteEdificioCorrelativoException e1) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
             }
             s.close();
         });
@@ -265,12 +271,14 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonMutalisco.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
             try {
-                new Mutalisco(new Mineral(1000), new GasVespeno(1000), inputUsuario, jugador);
+                new Mutalisco(inputUsuario, jugador);
                 juegoVista.actualizarTablero();
             } catch (RequerimientosInsuficientesException ex) {
                 noSePuedeConstruir("\nRequerimientosInsuficientesException");
             } catch (EspiralNoDisponibleException ex) {
                 throw new RuntimeException(ex);
+            } catch (NoExisteEdificioCorrelativoException e1) {
+                noSePuedeConstruir("\nRequerimientosInsuficientesException");
             }
             s.close();
         });
@@ -283,7 +291,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonGuardian.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
             try {
-                new Guardian(new Mineral(1000), new GasVespeno(1000), inputUsuario, jugador);
+                new Guardian(inputUsuario, jugador);
                 juegoVista.actualizarTablero();
             } catch (RequerimientosInsuficientesException ex) {
                 noSePuedeConstruir("\nRequerimientosInsuficientesException");
@@ -301,7 +309,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonDevorador.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
             try {
-                new Devorador(new Mineral(1000), new GasVespeno(1000), inputUsuario, jugador);
+                new Devorador(inputUsuario, jugador);
                 juegoVista.actualizarTablero();
             } catch (RequerimientosInsuficientesException ex) {
                 noSePuedeConstruir("\nRequerimientosInsuficientesException");

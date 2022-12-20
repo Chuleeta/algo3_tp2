@@ -10,6 +10,8 @@ import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mena;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 
@@ -34,15 +36,18 @@ public class Zangano extends Individuo implements UnidadTierra{
         this.posicion = posicion;
     }
 
-    public Zangano(Mineral mineral, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, CriaderoNoDisponibleException {
-        this(mineral);
+    public Zangano(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException {
+        this.vida = new VidaZerg(25);
+        this.estado = new EstadoNoConstruido();
+        this.tiempoDeConstruccion = 1;
+        this.tiempo = 0;
         this.posicion = posicion;
         this.jugador = jugador;
-        if(!this.jugador.validarCorrelativaCriadero()){
-            throw new CriaderoNoDisponibleException();
-        }
         jugador.añadirUnidad();
-        jugador.agregarIndividuo(this);
+        this.jugador.verificarEdificacionCorrelativa(this);
+        if(!this.jugador.agregarIndividuo(this) || !this.mapa.agregarOcupable(this, posicion)){
+            throw new RequerimientosInsuficientesException();
+        }
     }
 
     private void construir() {
@@ -99,6 +104,16 @@ public class Zangano extends Individuo implements UnidadTierra{
     @Override
     public boolean estaHabilitado(UnidadVoladora unidad) {
         return true;
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(25)&& gas.invertir(0))
+        {
+            this.jugador.agregarEnListaIndividuo(this);
+            return true;
+        }
+        return false;
     }
 
 }

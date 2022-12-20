@@ -4,7 +4,13 @@ import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.maximaPoblacionAlcanzadaException;
+import edu.fiuba.algo3.modelo.Individuos.Dragon;
+import edu.fiuba.algo3.modelo.Individuos.Hidralisco;
+import edu.fiuba.algo3.modelo.Individuos.Mutalisco;
+import edu.fiuba.algo3.modelo.Individuos.Scout;
+import edu.fiuba.algo3.modelo.Individuos.Zangano;
 import edu.fiuba.algo3.modelo.Individuos.Zealot;
+import edu.fiuba.algo3.modelo.Individuos.Zerling;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Mapa;
@@ -35,7 +41,7 @@ public class Acceso extends Edificio{
     public Acceso(Posicion posicion, Jugador jugador) throws RecursosInsuficientesException {
         this(posicion, jugador.getMapa());
         this.jugador = jugador;
-        if(!this.jugador.agregarConstruccion(this)){
+        if(!this.jugador.agregarConstruccion(this) || !this.mapa.agregarOcupable(this, posicion)){
             throw new RecursosInsuficientesException();
         }
     }
@@ -111,6 +117,48 @@ public class Acceso extends Edificio{
     @Override
     public boolean verificarCorrelativa(PuertoEstelar puertoEstelar) {
         return true;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Zangano zangano) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Zerling zerling) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Hidralisco hidralisco) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Mutalisco mutalisco) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Zealot zealot) {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Dragon dragon) {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Scout scout) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

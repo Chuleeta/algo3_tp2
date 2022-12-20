@@ -8,6 +8,13 @@ import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
+import edu.fiuba.algo3.modelo.Individuos.Dragon;
+import edu.fiuba.algo3.modelo.Individuos.Hidralisco;
+import edu.fiuba.algo3.modelo.Individuos.Mutalisco;
+import edu.fiuba.algo3.modelo.Individuos.Scout;
+import edu.fiuba.algo3.modelo.Individuos.Zangano;
+import edu.fiuba.algo3.modelo.Individuos.Zealot;
+import edu.fiuba.algo3.modelo.Individuos.Zerling;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
@@ -32,7 +39,7 @@ public class PuertoEstelar extends Edificio{
         this(posicion, jugador.getMapa());
         this.jugador = jugador;
         this.jugador.verificarEdificacionCorrelativa(this);
-        if(!this.jugador.agregarConstruccion(this)){
+        if(!this.jugador.agregarConstruccion(this) || !this.mapa.agregarOcupable(this, posicion)){
             throw new RecursosInsuficientesException();
         }
     }
@@ -107,6 +114,48 @@ public class PuertoEstelar extends Edificio{
     public boolean verificarCorrelativa(PuertoEstelar puertoEstelar) {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Zangano zangano) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Zerling zerling) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Hidralisco hidralisco) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Mutalisco mutalisco) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Zealot zealot) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Dragon dragon) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Scout scout) {
+        // TODO Auto-generated method stub
+        return true;
     }
 
 }

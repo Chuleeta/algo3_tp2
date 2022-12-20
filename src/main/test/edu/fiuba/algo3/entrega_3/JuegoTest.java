@@ -51,7 +51,7 @@ public class JuegoTest {
 
         Juego juego = new Juego(mapa, jugadorUno, jugadorDos);
 
-        Dragon dragon = new Dragon(mineral, gas, new Posicion(9,18), jugadorUno);
+        Dragon dragon = new Dragon(new Posicion(9,18), jugadorUno);
         jugadorUno.agregarIndividuo(dragon);
         
         assertTrue(juego.pasarTiempo());

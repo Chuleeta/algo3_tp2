@@ -2,12 +2,15 @@ package edu.fiuba.algo3.modelo.Individuos;
 
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
+import edu.fiuba.algo3.modelo.Ocupable;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Vida;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
+import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
+import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
-public abstract class Individuo 
+public abstract class Individuo  implements Ocupable
 {
     protected EstadoConstruccion estado;
     protected Vida vida;
@@ -20,6 +23,11 @@ public abstract class Individuo
     public Posicion posicion()
     {
         return this.posicion;
+    }
+
+    @Override
+    public boolean estaOcupada(Posicion posicionDada) {
+        return this.posicion.posicionesIguales(posicionDada);
     }
 
     public Vida obtenerVida(){
@@ -61,4 +69,6 @@ public abstract class Individuo
     public Jugador mostrarJugador(){
         return this.jugador;
     }
+
+    public abstract boolean agregarAlMapa(Mineral mineral, GasVespeno gas);
 }

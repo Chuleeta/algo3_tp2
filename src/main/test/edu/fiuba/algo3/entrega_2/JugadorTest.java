@@ -115,7 +115,7 @@ public class JugadorTest {
         criadero.pasarTiempo();
         Mineral mineralAmo = new Mineral(50);
         GasVespeno gas = new GasVespeno(0);
-        AmoSupremo amoSupremo = new AmoSupremo(mineralAmo, gas, new Posicion(4,4), jugadorUno);
+        AmoSupremo amoSupremo = new AmoSupremo(new Posicion(4,4), jugadorUno);
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
@@ -153,7 +153,7 @@ public class JugadorTest {
         criadero.pasarTiempo();
         Mineral mineralAmo = new Mineral(50);
         GasVespeno gas = new GasVespeno(0);
-        AmoSupremo amoSupremo = new AmoSupremo(mineralAmo, gas, new Posicion(4,4), jugadorUno);
+        AmoSupremo amoSupremo = new AmoSupremo(new Posicion(4,4), jugadorUno);
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
@@ -293,13 +293,14 @@ public class JugadorTest {
         Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 0);
         Mineral mineralAmo = new Mineral(50);
         GasVespeno gas = new GasVespeno(0);
-        AmoSupremo amoSupremo = new AmoSupremo(mineralAmo, gas, new Posicion(4,4), jugadorUno);
+        AmoSupremo amoSupremo = new AmoSupremo(new Posicion(4,4), jugadorUno);
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
         amoSupremo.destruir();
+        jugadorUno.incrementarMineral(50);
         Criadero criadero = new Criadero(new Posicion(2,2), jugadorUno);
         criadero.pasarTiempo();
         criadero.pasarTiempo();

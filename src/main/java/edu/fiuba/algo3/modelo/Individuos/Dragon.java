@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
 import edu.fiuba.algo3.modelo.Exceptions.AccesoNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
@@ -29,11 +30,20 @@ public class Dragon extends Individuo implements UnidadTierra {
         this.posicion = posicion;
     }
 
-    public Dragon(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, AccesoNoDisponibleException {
-        this(mineral, gas, posicion, jugador.getMapa());
+    public Dragon(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, AccesoNoDisponibleException, NoExisteEdificioCorrelativoException {
+        this.mapa = jugador.getMapa();
+        this.unidadesDeDaño = 20;
+        this.vida = new VidaEscudoProtoss(100, 80);
+        this.estado = new EstadoNoConstruido();
+        this.tiempoDeConstruccion = 6;
+        this.tiempo = 0;
+        this.rangoDeAtaque = 4;
+        this.posicion = posicion;
         this.jugador = jugador;
-        if(this.jugador.validarCorrelativaAcceso()){
-            throw new AccesoNoDisponibleException();
+        jugador.añadirUnidad();
+        this.jugador.verificarEdificacionCorrelativa(this);
+        if(!this.jugador.agregarIndividuo(this) || !this.mapa.agregarOcupable(this, posicion)){
+            throw new RequerimientosInsuficientesException();
         }
     }
 
@@ -82,5 +92,13 @@ public class Dragon extends Individuo implements UnidadTierra {
         return true;
     }
 
-
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(125)&& gas.invertir(50))
+        {
+            this.jugador.agregarEnListaIndividuo(this);
+            return true;
+        }
+        return false;
+    }
 }

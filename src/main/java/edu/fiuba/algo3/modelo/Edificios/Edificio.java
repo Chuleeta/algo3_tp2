@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
 import edu.fiuba.algo3.modelo.Estados.EstadoDesactivado;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Individuos.CorrelativaIndividuo;
 import edu.fiuba.algo3.modelo.Zonas.Zona;
 
 public abstract class Edificio implements Construccion, Ocupable {
@@ -50,7 +51,7 @@ public abstract class Edificio implements Construccion, Ocupable {
 
     @Override
     public boolean estaOcupada(Posicion posicionDada) {
-        return this.posicion.equals(posicionDada);
+        return this.posicion.posicionesIguales(posicionDada);
     }
 
     // public void crearJugadorPorDefecto() {
