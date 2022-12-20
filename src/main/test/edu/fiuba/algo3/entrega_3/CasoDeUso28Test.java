@@ -2,8 +2,10 @@ package edu.fiuba.algo3.entrega_3;
 
 import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Individuos.*;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
@@ -50,15 +52,15 @@ public class CasoDeUso28Test {
     }
 
     @Test
-    public void testUnZealotSeVuelveInvisibleAlMatarUnaCombinacionDeTresEnemigos() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
-
+    public void testUnZealotSeVuelveInvisibleAlMatarUnaCombinacionDeTresEnemigos() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(3,2), jugador);
         Mineral mineral = new Mineral(1200);
         GasVespeno gas = new GasVespeno(300);
-        Mapa mapa = new Mapa();
         Zealot zealot = new Zealot(mineral, new Posicion(2, 2), mapa);
         Zerling zerlingUno = new Zerling(mineral, new Posicion(2,3), mapa);
         Zerling zerlingDos = new Zerling(mineral, new Posicion(1,2), mapa);
-        Criadero criadero = new Criadero(new Posicion(3,2), mapa);
         AmoSupremo amoSupremo = new AmoSupremo(mineral, gas, new Posicion(1, 3), mapa);
 
         for (int i = 0; i < 5; i ++){

@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Individuos.Dragon;
 import edu.fiuba.algo3.modelo.Individuos.Guardian;
@@ -37,7 +38,7 @@ public class ZerlingTest {
     }
     // caso 18
     @Test
-    public void zerlingDañaNexoMineral50vecesYSon200UnidadesDeAtaque() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void zerlingDañaNexoMineral50vecesYSon200UnidadesDeAtaque() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador= new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(2,2), new Mena(new Posicion(2,2)), jugador);
@@ -45,7 +46,6 @@ public class ZerlingTest {
         // tiempo de construccion
         Mineral mineral = new Mineral(75);
         GasVespeno gas = new GasVespeno(0);
-        jugador.agregarConstruccion(nexo);
 
         Zerling zerling = new Zerling(mineral, new Posicion(1,2), mapa);
         jugador.agregarIndividuo(zerling);
@@ -73,7 +73,7 @@ public class ZerlingTest {
 
     // caso 23
     @Test
-    public void zerlingNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void zerlingNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(2,2), new Mena(new Posicion(2,1)), jugador);

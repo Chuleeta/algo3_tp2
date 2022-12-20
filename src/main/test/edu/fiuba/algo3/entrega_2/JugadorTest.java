@@ -193,6 +193,7 @@ public class JugadorTest {
         pilon.pasarTiempo();
         pilon.pasarTiempo();
         pilon.pasarTiempo();
+        jugadorUno.incrementarMineral(1000);
         Acceso acceso = new Acceso(new Posicion(1,1), jugadorUno);
         acceso.pasarTiempo();
         acceso.pasarTiempo();
@@ -223,6 +224,7 @@ public class JugadorTest {
         pilon.pasarTiempo();
         pilon.pasarTiempo();
         pilon.pasarTiempo();
+        jugadorUno.incrementarMineral(1000);
         Acceso acceso = new Acceso(new Posicion(1,1), jugadorUno);
         acceso.pasarTiempo();
         acceso.pasarTiempo();
@@ -254,6 +256,7 @@ public class JugadorTest {
         pilon.pasarTiempo();
         pilon.pasarTiempo();
         pilon.pasarTiempo();
+        jugadorUno.incrementarMineral(1000);
         Acceso acceso = new Acceso(new Posicion(1,1), jugadorUno);
         acceso.pasarTiempo();
         acceso.pasarTiempo();

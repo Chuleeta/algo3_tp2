@@ -102,10 +102,8 @@ public class Jugador {
 
     public boolean agregarConstruccion(Construccion construccion){
         if(!mapa.verificarPosicionDisponible(construccion)){
-            System.out.println("\n DIO FALSE LA VERIFICACION DE POSICION DISPONIBLE");
             return false;
         }
-        System.out.println("\n SE AGREGA AL MAPA");
         return construccion.agregarAlMapa(this.mineral, this.gas);
     }
 

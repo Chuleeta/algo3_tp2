@@ -25,13 +25,12 @@ public class MutaliscoTest {
 
     // caso 22
     @Test
-    public void mutaliscoNoGeneraDañoPorNoEstarConstruidoAun() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void mutaliscoNoGeneraDañoPorNoEstarConstruidoAun() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), jugador);
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
-        jugador.agregarConstruccion(nexo);
         Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(3, 3), mapa);
         jugador.agregarIndividuo(mutalisco);
         // EL tiempo de construccion es 4, con un solo tiempo no esta construido
@@ -48,14 +47,13 @@ public class MutaliscoTest {
 
     // caso 18
     @Test
-    public void mutaliscoAtacaNexoMineral23VecesYGenera207UnidadesDeDaño() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void mutaliscoAtacaNexoMineral23VecesYGenera207UnidadesDeDaño() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), jugador);
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
         Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(3,1), mapa);
-        jugador.agregarConstruccion(nexo);
         jugador.agregarIndividuo(mutalisco);
         // tiempo de construccion
         jugador.pasarTiempo();
@@ -86,14 +84,13 @@ public class MutaliscoTest {
     }
     // caso 23
     @Test
-    public void mutaliscoNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void mutaliscoNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(2,1), new Mena(new Posicion(2,1)), jugador);
         Mineral mineral = new Mineral(150);
         GasVespeno gas = new GasVespeno(100);
         Mutalisco mutalisco = new Mutalisco(mineral, gas, new Posicion(6,3),mapa);
-        jugador.agregarConstruccion(nexo);
         jugador.agregarIndividuo(mutalisco);
         // tiempo de construccion
         jugador.pasarTiempo();

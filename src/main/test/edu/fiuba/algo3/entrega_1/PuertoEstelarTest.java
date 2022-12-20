@@ -23,14 +23,12 @@ public class PuertoEstelarTest {
         Pilon pilon = new Pilon(new Posicion(1, 3), jugador);
         jugador.incrementarMineral(800);
         jugador.incrementarGas(800);
-        jugador.agregarConstruccion(pilon);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         Acceso acceso = new Acceso(new Posicion(1, 2), jugador);
-        jugador.agregarConstruccion(acceso);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -40,7 +38,6 @@ public class PuertoEstelarTest {
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         PuertoEstelar puertoEstelar = new PuertoEstelar(new Posicion(2, 1), jugador);
-        jugador.agregarConstruccion(puertoEstelar);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -66,7 +63,6 @@ public class PuertoEstelarTest {
         jugador.incrementarMineral(800);
         jugador.incrementarGas(800);
         Pilon pilon = new Pilon(new Posicion(2, 1), jugador);
-        jugador.agregarConstruccion(pilon);
 
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -74,7 +70,6 @@ public class PuertoEstelarTest {
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         Acceso acceso = new Acceso(new Posicion(1,2), jugador);
-        jugador.agregarConstruccion(acceso);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -85,7 +80,6 @@ public class PuertoEstelarTest {
         jugador.pasarTiempo();
 
         PuertoEstelar puertoEstelar = new PuertoEstelar(new Posicion(2, 2), jugador);
-        jugador.agregarConstruccion(puertoEstelar);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -110,19 +104,11 @@ public class PuertoEstelarTest {
     }
 
     @Test
-    public void noSePuedeConstruirPuertoEstelarSiNoHayAcceso() throws NoExisteEdificioCorrelativoException {
+    public void noSePuedeConstruirPuertoEstelarSiNoHayAcceso() throws NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         //given
-        PuertoEstelar puerto = new PuertoEstelar(new Posicion(1,1), new Mapa());
-        puerto.pasarTiempo();
-        puerto.pasarTiempo();
-        puerto.pasarTiempo();
-        puerto.pasarTiempo();
-        puerto.pasarTiempo();
-        puerto.pasarTiempo();
-        puerto.pasarTiempo();
-        puerto.pasarTiempo();
-        puerto.pasarTiempo();
-        assertThrows(NoExisteEdificioCorrelativoException.class, () ->{ puerto.pasarTiempo();});
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
+        assertThrows(NoExisteEdificioCorrelativoException.class, () ->{ new PuertoEstelar(new Posicion(1,1), jugador);});
     }
 
 }
