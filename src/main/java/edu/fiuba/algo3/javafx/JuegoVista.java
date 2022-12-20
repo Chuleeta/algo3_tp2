@@ -449,6 +449,7 @@ public class JuegoVista extends BorderPane {
     }
 
     public void actualizarTablero() {
+      /*
         //this.tablero.actualizarConstrucciones();
         ArrayList<Construccion> construccionesJ1 = this.jugadorUno.getConstrucciones();
         if(construccionesJ1.size() > 0){
@@ -468,6 +469,9 @@ public class JuegoVista extends BorderPane {
                 tablero.insertarUnidad(individuo);
             }
         }
+        */
+
+        tablero.actualizar();
     }
 
     public void agregarSuscriptorPasarTurno(Notificable notificable) {

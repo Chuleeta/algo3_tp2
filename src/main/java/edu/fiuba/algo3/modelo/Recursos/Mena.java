@@ -86,4 +86,8 @@ public class Mena implements RecursoInyectable{
     public Posicion mostrarPosicion() {
         return this.posicion;
     }
+
+    public void desocupar() {
+        this.estaOcupado = false;
+    }
 }

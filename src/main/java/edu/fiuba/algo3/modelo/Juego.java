@@ -27,7 +27,12 @@ public class Juego {
     }
 
     public ArrayList<Construccion> mostrarConstrucciones() {
-        return mapa.mostrarConstrucciones();
+        ArrayList<Construccion> construcciones = new ArrayList<Construccion>();
+        for (Construccion construccion : jugadorUno.getConstrucciones())
+            construcciones.add(construccion);
+        for (Construccion construccion : jugadorDos.getConstrucciones())
+            construcciones.add(construccion);
+        return construcciones;
     }
 
     public ArrayList<RecursoInyectable> mostrarRecursos() {

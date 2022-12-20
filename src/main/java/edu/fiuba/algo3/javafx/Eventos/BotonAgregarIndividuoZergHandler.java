@@ -210,15 +210,17 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZangano.setOnMouseExited(e -> botonZangano.setStyle(botonNormal));
         botonZangano.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                new Zangano(inputUsuario, jugador);
-                juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (CriaderoNoDisponibleException ex) {
-                noSePuedeConstruir("\nCriaderoNoDisponibleException");
+            if (inputUsuario != null) {
+                try {
+                    new Zangano(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RequerimientosInsuficientesException ex) {
+                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                } catch (CriaderoNoDisponibleException ex) {
+                    noSePuedeConstruir("\nCriaderoNoDisponibleException");
+                }
+                s.close();
             }
-            s.close();
         });
         
         Button botonZerling = new Button("Zerling");

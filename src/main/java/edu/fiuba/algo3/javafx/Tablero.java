@@ -224,7 +224,7 @@ public class Tablero {
         });
     }
 
-    private Posicion calcularPosicion(UnidadMovible n) {
+    private Posicion calcularPosicion(Rectangle n) {
         double resultadoX = new BigDecimal(n.getTranslateX()).setScale(1, RoundingMode.UP).doubleValue();
         double resultadoY = new BigDecimal(n.getTranslateY()).setScale(1, RoundingMode.UP).doubleValue();
         n.setTranslateX(encontrarMultiploDeMasCercanoA(40, (int)resultadoX) + 10);
@@ -254,9 +254,30 @@ public class Tablero {
         mapaVista.getChildren().add(nuevo);
     }
     public void insertarUnidad(Individuo unidad) {
+        System.out.println(unidad.posicion().coordenadaX());
+        System.out.println(unidad.posicion().coordenadaY());
         if(unidad == null)
             System.out.println("\n inserta construccion");
         UnidadMovible nuevo = crearUnidadMovible(unidad);
+
         mapaVista.getChildren().add(nuevo);
+    }
+
+    public void actualizar() {
+        ArrayList<Construccion> construcciones = this.juego.mostrarConstrucciones();
+        if(construcciones.size() > 0){
+            for (Construccion construccion : construcciones) {
+                mapaVista.getChildren().remove(construccion);
+                this.insertarConstruccion(construccion);
+            }
+        }
+        ArrayList<Individuo> individuos = this.juego.mostrarUnidades();
+        System.out.println(individuos.size());
+        if(individuos.size() != 0){
+            for (Individuo individuo : individuos) {
+                mapaVista.getChildren().remove(individuo);
+                this.insertarUnidad(individuo);
+            }
+        }
     }
 }

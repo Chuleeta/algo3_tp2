@@ -107,14 +107,22 @@ public class Zangano extends Individuo implements UnidadTierra{
 
     @Override
     public boolean moverUnidad(Posicion nuevaPosicion) {
-        if(super.moverUnidad(nuevaPosicion)){
-            try {
-                mapa.inyectarRecurso(this);
-                return true;
-            } catch (MenaOcupadaException e) {
-                return true;
+        if (this.estado.estaConstruido()) {
+            if(super.moverUnidad(nuevaPosicion)){
+                if (this.mena != null) {
+                    this.mena.desocupar();
+                    this.mena = null;
+                }
+                try {
+                    mapa.inyectarRecurso(this);
+                    return true;
+                } catch (MenaOcupadaException e) {
+                    this.mena = null;
+                    return true;
+                }
             }
+            return false;
         }
         return false;
-    }
+        }
 }
