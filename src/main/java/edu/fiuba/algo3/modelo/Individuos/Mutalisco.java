@@ -107,4 +107,14 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
         return false;
     }
 
+    @Override
+    public boolean validarCorrelativaEvolucion(Devorador devorador) {
+        return true;
+    }
+
+    @Override
+    public boolean validarCorrelativaEvolucion(Guardian guardian) {
+        return true;
+    }
+
 }

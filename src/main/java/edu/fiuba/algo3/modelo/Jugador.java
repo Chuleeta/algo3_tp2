@@ -4,7 +4,9 @@ import edu.fiuba.algo3.modelo.Edificios.*;
 import edu.fiuba.algo3.modelo.Exceptions.AtributoInvalidoException;
 import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Individuos.Devorador;
 import edu.fiuba.algo3.modelo.Individuos.Dragon;
+import edu.fiuba.algo3.modelo.Individuos.Guardian;
 import edu.fiuba.algo3.modelo.Individuos.Hidralisco;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Individuos.Mutalisco;
@@ -329,5 +331,25 @@ public class Jugador {
             }
         }
         throw new NoExisteEdificioCorrelativoException();
+    }
+
+    public boolean validarCorrelativaEvolucion(Devorador devorador) {
+        for (Individuo individuo : this.individuos) {
+            if (individuo.validarCorrelativaEvolucion(devorador)) {
+                eliminarIndividuo(individuo);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validarCorrelativaEvolucion(Guardian guardian) {
+        for (Individuo individuo : this.individuos) {
+            if (individuo.validarCorrelativaEvolucion(guardian)) {
+                eliminarIndividuo(individuo);
+                return true;
+            }
+        }
+        return false;
     }
 }

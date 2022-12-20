@@ -40,15 +40,11 @@ public class Guardian extends Individuo implements UnidadVoladora{
         this.tiempo = 0;
         this.posicion = posicion;
         this.jugador = jugador;
-        Individuo correlativo = this.jugador.validarCorrelativaGuardian(posicion);
-        if(correlativo == null){
-            throw new EspiralNoDisponibleException();
-        }
-        this.jugador.eliminarIndividuo(correlativo);
         jugador.añadirUnidad();
-        if(!this.jugador.agregarIndividuo(this)){
+        if(!this.jugador.agregarIndividuo(this) || !this.jugador.validarCorrelativaEvolucion(this)){
             throw new RequerimientosInsuficientesException();
         }
+        this.mapa.agregarOcupable(this, this.posicion);
     }
 
     private void construir() {

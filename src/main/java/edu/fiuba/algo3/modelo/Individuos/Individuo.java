@@ -71,4 +71,13 @@ public abstract class Individuo  implements Ocupable
     }
 
     public abstract boolean agregarAlMapa(Mineral mineral, GasVespeno gas);
+
+    public boolean validarCorrelativaEvolucion(Devorador devorador) {
+        return false;
+    }
+
+    public boolean validarCorrelativaEvolucion(Guardian guardian) {
+        return false;
+    }
+    
 }

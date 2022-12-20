@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Edificios.Extractor;
 import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Individuos.Devorador;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
@@ -163,4 +164,11 @@ public class Mapa {
     public void destruirConstruccion(Construccion construccion) {
         this.construcciones.remove(construccion);
     }
+
+    // public void eliminarOcupable(Posicion posicion) {
+    //     for (Ocupable ocupable:ocupables){
+    //         if(ocupable.estaOcupada(posicion))
+    //            ocupables.remove(ocupable);
+    //         }
+    // }
 }
