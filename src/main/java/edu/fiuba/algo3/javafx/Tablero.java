@@ -75,6 +75,9 @@ public class Tablero {
         int coordenadaX = (construccion.mostrarPosicion().coordenadaX() * 40) + 10;
         int coordenadaY = (construccion.mostrarPosicion().coordenadaY() * 40) + 10;
         UnidadEdificio unidad = new UnidadEdificio(construccion, coordenadaX, coordenadaY);
+        unidad.setOnMouseReleased(e ->{
+            mostrarPosicion(unidad);
+        });
         this.juegoVista.agregarSuscriptorPasarTurno(unidad);
         return unidad;
     }
@@ -94,6 +97,10 @@ public class Tablero {
             int coordenadaX = (recurso.mostrarPosicion().coordenadaX() * 40) + 10;
             int coordenadaY = (recurso.mostrarPosicion().coordenadaY() * 40) + 10;
             UnidadRecurso unidad = new UnidadRecurso(recurso, coordenadaX, coordenadaY);
+            unidad.setOnMouseReleased(e ->{
+                mostrarPosicion(unidad);
+            });
+            mostrarPosicion(unidad);
             mapaVista.getChildren().add(unidad);
         }
     }
@@ -172,22 +179,30 @@ public class Tablero {
         });
         
         n.setOnMouseReleased(e ->{
-            /*
-             * Aca lo que pasa es que se toma la posicion del mouse 
-             * se le aproxima un multiplo de 40
-             * una vez se consigue ese multiplo de 40 se le sumo 10 en ambos ejes
-             * y de esta forma queda centrado en el cuadrado
-             * 
-             * SI SE QUIERE CONSEGUIR LA POSICION DEL MAPA PARA EL MODELO:
-             * ej: tengo la posicion (453.4343, 300.32423)
-             * primero se encuentra el multiplo mas cercano osea: (440, 320)
-             * desp se divide por 40 ya que es lo q miden los lados de los cuadrados que hacen de mapa
-             * (440, 320) ---> (11, 8) ---> new Posicion(11,8)
-            */
-            ((Shape) n).setFill(colorOriginal);// 458.12312039123 ---> 458.1--> 450---> 11.25 --> 11 13 --> posicion(11, 13)
-            this.juegoVista.setPosicionSeleccionada(calcularPosicion(n));
+
+           mostrarPosicion(n);
+           n.setFill(colorOriginal);
 
         });
+    }
+
+    private void mostrarPosicion(Rectangle n) {
+        /*
+         * Aca lo que pasa es que se toma la posicion del mouse
+         * se le aproxima un multiplo de 40
+         * una vez se consigue ese multiplo de 40 se le sumo 10 en ambos ejes
+         * y de esta forma queda centrado en el cuadrado
+         *
+         * SI SE QUIERE CONSEGUIR LA POSICION DEL MAPA PARA EL MODELO:
+         * ej: tengo la posicion (453.4343, 300.32423)
+         * primero se encuentra el multiplo mas cercano osea: (440, 320)
+         * desp se divide por 40 ya que es lo q miden los lados de los cuadrados que hacen de mapa
+         * (440, 320) ---> (11, 8) ---> new Posicion(11,8)
+         */
+        Paint colorOriginal = ((Shape) n).getFill();;
+        ((Shape) n).setFill(colorOriginal);// 458.12312039123 ---> 458.1--> 450---> 11.25 --> 11 13 --> posicion(11, 13)
+        this.juegoVista.setPosicionSeleccionada(calcularPosicion(n));
+
     }
 
     private Posicion calcularPosicion(Rectangle n) {
