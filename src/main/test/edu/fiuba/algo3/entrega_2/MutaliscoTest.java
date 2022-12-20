@@ -155,48 +155,49 @@ public class MutaliscoTest {
         assertTrue(nexo.tieneEscudoCompleto());
     }
 
-    // @Test
-    // public void mutaliscoPuedeAtacarUnidadVoladoraYTerrestre() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, EspiralNoDisponibleException, ReservaDeReproduccionNoDisponibleException {
-    //     Mapa mapa = new Mapa();
-    //     Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
-    //     jugador.incrementarMineral(1000);
-    //     jugador.incrementarGas(1000);
-    //     Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
-    //     criadero.pasarTiempo();
-    //     criadero.pasarTiempo();
-    //     criadero.pasarTiempo();
-    //     criadero.pasarTiempo();
-    //     ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(2, 2), jugador);
-    //     for(int i=0; i<20; i++)
-    //         reservaDeReproduccion.pasarTiempo();
-    //     Guarida guarida = new Guarida(new Posicion(2,3), jugador);
-    //     for(int i=0; i<20; i++)
-    //         guarida.pasarTiempo();
-    //     Espiral espiral = new Espiral(new Posicion(3,3), jugador);
-    //     for(int i=0; i<20; i++)
-    //         espiral.pasarTiempo();
-    //     Zerling zerling = new Zerling(new Posicion(1,2), jugador);
-    //     Guardian guardian = new Guardian(new Posicion(1,3), jugador);
-    //     Mutalisco mutal = new Mutalisco(new Posicion(1,4), jugador);
-    //     mutal.pasarTiempo();
-    //     mutal.pasarTiempo();
-    //     mutal.pasarTiempo();
-    //     mutal.pasarTiempo();
-    //     mutal.pasarTiempo();
-    //     mutal.pasarTiempo();
-    //     mutal.pasarTiempo();
-    //     assertTrue(zerling.tieneVidaCompleta());
-    //     assertTrue(guardian.tieneVidaCompleta());
-    //     for (int i = 0; i < 10; i++)
-    //     {
-    //         mutal.atacar(zerling);
-    //         mutal.atacar(guardian);
-    //     }
+    @Test
+    public void mutaliscoPuedeAtacarUnidadVoladoraYTerrestre() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, EspiralNoDisponibleException, ReservaDeReproduccionNoDisponibleException {
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        jugador.incrementarMineral(1000);
+        jugador.incrementarGas(1000);
+        Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(2, 2), jugador);
+        for(int i=0; i<20; i++)
+            reservaDeReproduccion.pasarTiempo();
+        Guarida guarida = new Guarida(new Posicion(2,3), jugador);
+        for(int i=0; i<20; i++)
+            guarida.pasarTiempo();
+        Espiral espiral = new Espiral(new Posicion(3,3), jugador);
+        for(int i=0; i<20; i++)
+            espiral.pasarTiempo();
+        Zerling zerling = new Zerling(new Posicion(1,2), jugador);
+        Mutalisco mutaltemporal = new Mutalisco(new Posicion(1,3), jugador);
+        Guardian guardian = new Guardian(new Posicion(1,3), jugador);
+        Mutalisco mutal = new Mutalisco(new Posicion(1,4), jugador);
+        mutal.pasarTiempo();
+        mutal.pasarTiempo();
+        mutal.pasarTiempo();
+        mutal.pasarTiempo();
+        mutal.pasarTiempo();
+        mutal.pasarTiempo();
+        mutal.pasarTiempo();
+        assertTrue(zerling.tieneVidaCompleta());
+        assertTrue(guardian.tieneVidaCompleta());
+        for (int i = 0; i < 10; i++)
+        {
+            mutal.atacar(zerling);
+            mutal.atacar(guardian);
+        }
 
 
-    //     assertFalse(zerling.tieneVidaCompleta());
-    //     assertFalse(guardian.tieneVidaCompleta());
-    // }
+        assertFalse(zerling.tieneVidaCompleta());
+        assertFalse(guardian.tieneVidaCompleta());
+    }
 
     @Test
     public void mutaliscoPuedeMoverseAZonaEspacialYAOtroLado() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {

@@ -47,7 +47,7 @@ public class Devorador extends Individuo implements UnidadVoladora{
         }
         this.jugador.eliminarIndividuo(correlativo);
         jugador.añadirUnidad();
-        if(!this.jugador.agregarIndividuo(this) || !this.mapa.agregarOcupable(this, posicion)){
+        if(!this.jugador.agregarIndividuo(this)){
             throw new RequerimientosInsuficientesException();
         }
     }

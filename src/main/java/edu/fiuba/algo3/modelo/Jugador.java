@@ -121,6 +121,7 @@ public class Jugador {
         return individuos.remove(individuo);
     }
 
+
     public void agregarEnListaConstruccion(Construccion construccion) {
         construcciones.add(construccion);
     }

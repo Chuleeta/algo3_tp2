@@ -74,12 +74,6 @@ public class JugadorTest {
 
         assertThrows(AtributoInvalidoException.class, () -> jugadorDos.validarAtributos(jugadorUno));
     }
-    // @Test
-    // public void testSeLanzaExcepcionAlCrearAlJugadorUno() throws AtributoInvalidoException {
-    //     Jugador jugadorUno = new Jugador("juga", "azul", "zerg");
-
-    //     assertThrows(AtributoInvalidoException.class, () -> jugadorUno.validarAtributos("juga"));
-    // }
 
     // caso 26 para los zergs
 
