@@ -108,13 +108,12 @@ public class JugadorTest {
         Posicion posicionUno = new Posicion(1,1);
         Mapa mapa = new Mapa();
         Jugador jugadorUno = new Jugador("jugadorUno", "azul", "zerg", posicionUno, mapa, 0);
-        Criadero criadero = new Criadero(new Posicion(1,1), jugadorUno);
+        Criadero criadero = new Criadero(new Posicion(5,1), jugadorUno);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        Mineral mineralAmo = new Mineral(50);
-        GasVespeno gas = new GasVespeno(0);
+        jugadorUno.incrementarMineral(100);
         AmoSupremo amoSupremo = new AmoSupremo(new Posicion(4,4), jugadorUno);
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
@@ -137,8 +136,6 @@ public class JugadorTest {
         assertNotNull(criadero.engendrarZangano(mineral));
         assertNotNull(criadero.engendrarZangano(mineral));
         assertNotNull(criadero.engendrarZangano(mineral));
-        criadero.pasarTiempo();
-        assertNotNull(criadero.engendrarZangano(mineral));
     }
 
     @Test
@@ -151,8 +148,7 @@ public class JugadorTest {
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        Mineral mineralAmo = new Mineral(50);
-        GasVespeno gas = new GasVespeno(0);
+        jugadorUno.incrementarMineral(100);
         AmoSupremo amoSupremo = new AmoSupremo(new Posicion(4,4), jugadorUno);
         amoSupremo.pasarTiempo();
         amoSupremo.pasarTiempo();
@@ -177,7 +173,6 @@ public class JugadorTest {
         assertNotNull(criadero.engendrarZangano(mineral));
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        assertNotNull(criadero.engendrarZangano(mineral));
         assertThrows(maximaPoblacionAlcanzadaException.class, () -> criadero.engendrarZangano(mineral));
     }
 
@@ -313,7 +308,6 @@ public class JugadorTest {
         criadero.pasarTiempo();
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-        assertNotNull(criadero.engendrarZangano(mineral));
         assertNotNull(criadero.engendrarZangano(mineral));
         assertThrows(maximaPoblacionAlcanzadaException.class, () -> criadero.engendrarZangano(mineral));
     }

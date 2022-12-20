@@ -1,7 +1,11 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Edificios.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.Guarida;
 import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
+import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
+import edu.fiuba.algo3.modelo.Exceptions.GuaridaNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
@@ -41,15 +45,21 @@ public class HidraliscoTest {
 
     // caso 18
     @Test
-    public void HidraliscoAtacaNexoMineral20VecesYGenera200UnidadesDeDaño() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+    public void HidraliscoAtacaNexoMineral20VecesYGenera200UnidadesDeDaño() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, GuaridaNoDisponibleException {
         Mapa mapa = new Mapa();
-        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(0,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(1,2), new Mena(new Posicion(1,2)), jugador);
         // tiempo de construccion
-        Mineral mineral = new Mineral(125);
-        GasVespeno gas = new GasVespeno(25);
-        Hidralisco hidralisco = new Hidralisco(mineral, gas, new Posicion(3,3), new Mapa());
-        jugador.agregarIndividuo(hidralisco);
+        jugador.incrementarMineral(1000);
+        jugador.incrementarGas(1000);
+        Criadero criadero = new Criadero(new Posicion(1,1), jugador);
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        jugador.pasarTiempo();
+        ReservaDeReproduccion reserva = new ReservaDeReproduccion(new Posicion(1,3), jugador);
+        Guarida guarida = new Guarida(new Posicion(2,3), jugador);
+        Hidralisco hidralisco = new Hidralisco(new Posicion(3,3), jugador);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -80,7 +90,6 @@ public class HidraliscoTest {
         Mineral mineral = new Mineral(125);
         GasVespeno gas = new GasVespeno(25);
         Hidralisco hidralisco = new Hidralisco(mineral, gas, new Posicion(12,10), mapa);
-        jugador.agregarIndividuo(hidralisco);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();

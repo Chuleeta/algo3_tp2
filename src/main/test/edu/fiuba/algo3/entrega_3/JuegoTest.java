@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Edificios.Acceso;
 import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.Pilon;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
@@ -34,9 +35,7 @@ public class JuegoTest {
         Jugador jugadorUno = new Jugador("jugadorUno", "azul", "protoss", new Posicion(1,1), mapa, 200);
         Jugador jugadorDos = new Jugador("jugadorDos", "rojo", "zerg", new Posicion(100,100), mapa, 200);
         Pilon pilon = new Pilon(new Posicion(9,9), jugadorUno);
-        jugadorUno.agregarConstruccion(pilon);
         Criadero criadero = new Criadero(new Posicion(9,20), jugadorDos);
-        jugadorDos.agregarConstruccion(criadero);
 
         jugadorUno.pasarTiempo();
         jugadorUno.pasarTiempo();
@@ -50,9 +49,11 @@ public class JuegoTest {
         jugadorDos.pasarTiempo();
 
         Juego juego = new Juego(mapa, jugadorUno, jugadorDos);
+        jugadorUno.incrementarMineral(1000);
+        jugadorUno.incrementarGas(1000);
+        Acceso acceso = new Acceso(new Posicion(9,8), jugadorUno);
 
         Dragon dragon = new Dragon(new Posicion(9,18), jugadorUno);
-        jugadorUno.agregarIndividuo(dragon);
         
         assertTrue(juego.pasarTiempo());
         assertTrue(juego.pasarTiempo());
@@ -66,14 +67,4 @@ public class JuegoTest {
 
         assertFalse(juego.pasarTiempo());
     }
-
-    // @Test
-    // public void creoUnJuegoNuevoSinEdificios(){
-        
-    // }
-    
-    // @Test
-    // public void creoUnJuegoNuevoSinEdificios(){
-        
-    // }
 }

@@ -1,11 +1,18 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.modelo.Edificios.Criadero;
+import edu.fiuba.algo3.modelo.Edificios.Espiral;
+import edu.fiuba.algo3.modelo.Edificios.Guarida;
 import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
+import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
+import edu.fiuba.algo3.modelo.Exceptions.AccesoNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.EspiralNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Exceptions.ReservaDeReproduccionNoDisponibleException;
 import edu.fiuba.algo3.modelo.Individuos.Dragon;
 import edu.fiuba.algo3.modelo.Individuos.Guardian;
 import edu.fiuba.algo3.modelo.Individuos.Zerling;
@@ -38,17 +45,23 @@ public class ZerlingTest {
     }
     // caso 18
     @Test
-    public void zerlingDañaNexoMineral50vecesYSon200UnidadesDeAtaque() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+    public void zerlingDañaNexoMineral50vecesYSon200UnidadesDeAtaque() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, ReservaDeReproduccionNoDisponibleException {
         Mapa mapa = new Mapa();
         Jugador jugador= new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(2,2), new Mena(new Posicion(2,2)), jugador);
 
-        // tiempo de construccion
-        Mineral mineral = new Mineral(75);
-        GasVespeno gas = new GasVespeno(0);
+        jugador.incrementarMineral(1000);
+        jugador.incrementarGas(1000);
+        Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(3, 2), jugador);
+        for(int i=0; i<20; i++)
+            reservaDeReproduccion.pasarTiempo();
 
-        Zerling zerling = new Zerling(mineral, new Posicion(1,2), mapa);
-        jugador.agregarIndividuo(zerling);
+        Zerling zerling = new Zerling(new Posicion(1,2), jugador);
 
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -73,17 +86,24 @@ public class ZerlingTest {
 
     // caso 23
     @Test
-    public void zerlingNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+    public void zerlingNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, ReservaDeReproduccionNoDisponibleException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(2,2), new Mena(new Posicion(2,1)), jugador);
 
         // tiempo de construccion
-        Mineral mineral = new Mineral(75);
-        GasVespeno gas = new GasVespeno(0);
-        jugador.agregarConstruccion(nexo);
+        jugador.incrementarMineral(1000);
+        jugador.incrementarGas(1000);
+        Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(3, 2), jugador);
+        for(int i=0; i<20; i++)
+            reservaDeReproduccion.pasarTiempo();
 
-        Zerling zerling = new Zerling(mineral, new Posicion(3,3), mapa);
+        Zerling zerling = new Zerling(new Posicion(1,10), jugador);
         jugador.agregarIndividuo(zerling);
         jugador.pasarTiempo();
         jugador.pasarTiempo();
@@ -96,40 +116,66 @@ public class ZerlingTest {
 
     }
 
+    // @Test
+    // public void zerlingNoPuedeAtacarUnidadVoladoraPeroSiTerrestre() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException, ReservaDeReproduccionNoDisponibleException, EspiralNoDisponibleException, AccesoNoDisponibleException {
+
+    //     Mapa mapa = new Mapa();
+    //     Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+    //     jugador.incrementarMineral(1000);
+    //     jugador.incrementarGas(1000);
+    //     Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
+    //     criadero.pasarTiempo();
+    //     criadero.pasarTiempo();
+    //     criadero.pasarTiempo();
+    //     criadero.pasarTiempo();
+    //     ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(3, 2), jugador);
+    //     for(int i=0; i<20; i++)
+    //         reservaDeReproduccion.pasarTiempo();
+    //     Guarida guarida = new Guarida(new Posicion(2,3), jugador);
+    //     for(int i=0; i<20; i++)
+    //         guarida.pasarTiempo();
+    //     Espiral espiral = new Espiral(new Posicion(3,3), jugador);
+    //     for(int i=0; i<20; i++)
+    //         espiral.pasarTiempo();
+    //     Zerling zerling = new Zerling(new Posicion(1,2), jugador);
+    //     Guardian guardian = new Guardian(new Posicion(1,2), jugador);
+    //     Dragon dragon = new Dragon(new Posicion(1,2), jugador);
+    //     zerling.pasarTiempo();
+    //     zerling.pasarTiempo();
+    //     zerling.pasarTiempo();
+    //     zerling.pasarTiempo();
+    //     zerling.pasarTiempo();
+    //     zerling.pasarTiempo();
+    //     assertTrue(dragon.tieneVidaCompleta());
+    //     assertTrue(guardian.tieneVidaCompleta());
+    //     for (int i = 0; i < 30; i++)
+    //     {
+    //         zerling.atacar(dragon);
+    //         zerling.atacar(guardian);
+    //     }
+
+
+    //     assertFalse(dragon.tieneVidaCompleta());
+    //     assertTrue(guardian.tieneVidaCompleta());
+    // }
+
     @Test
-    public void zerlingNoPuedeAtacarUnidadVoladoraPeroSiTerrestre() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
-
-        Mineral mineral = new Mineral(10000);
-        GasVespeno gas = new GasVespeno(1000);
-        Zerling zerling = new Zerling(mineral, new Posicion(1,2), new Mapa());
-        Guardian guardian = new Guardian(mineral, gas, new Posicion(1,2), new Mapa());
-        Dragon dragon = new Dragon(mineral,gas, new Posicion(1,2), new Mapa());
-        zerling.pasarTiempo();
-        zerling.pasarTiempo();
-        zerling.pasarTiempo();
-        zerling.pasarTiempo();
-        zerling.pasarTiempo();
-        zerling.pasarTiempo();
-        assertTrue(dragon.tieneVidaCompleta());
-        assertTrue(guardian.tieneVidaCompleta());
-        for (int i = 0; i < 30; i++)
-        {
-            zerling.atacar(dragon);
-            zerling.atacar(guardian);
-        }
-
-
-        assertFalse(dragon.tieneVidaCompleta());
-        assertTrue(guardian.tieneVidaCompleta());
-    }
-
-    @Test
-    public void zealotNoPuedeMoverseAZonaEspacialPeroSiAOtroLado() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void zealotNoPuedeMoverseAZonaEspacialPeroSiAOtroLado() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, ReservaDeReproduccionNoDisponibleException, RecursosInsuficientesException {
 
         Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         mapa.agregarAreaEspacial(new AreaEspacial(0, 0, 10, 10));
-        Mineral mineral = new Mineral(10000);
-        Zerling zerling = new Zerling(mineral, new Posicion(11,11), mapa);
+        jugador.incrementarMineral(1000);
+        jugador.incrementarGas(1000);
+        Criadero criadero = new Criadero(new Posicion(1, 1), jugador);
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        criadero.pasarTiempo();
+        ReservaDeReproduccion reservaDeReproduccion = new ReservaDeReproduccion(new Posicion(3, 2), jugador);
+        for(int i=0; i<20; i++)
+            reservaDeReproduccion.pasarTiempo();
+        Zerling zerling = new Zerling(new Posicion(11,11), jugador);
         zerling.pasarTiempo();
         zerling.pasarTiempo();
         zerling.pasarTiempo();
