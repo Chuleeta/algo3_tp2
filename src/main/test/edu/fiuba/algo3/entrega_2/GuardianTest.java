@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Individuos.Guardian;
 import edu.fiuba.algo3.modelo.Individuos.Scout;
@@ -35,11 +36,10 @@ public class GuardianTest {
 
     // caso 18
     @Test
-    public void guardianAtacaNexoMineral8vecesYDaña200unidades() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void guardianAtacaNexoMineral8vecesYDaña200unidades() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(1,1), new Mena(new Posicion(2,1)), jugador);
-        jugador.agregarConstruccion(nexo);
         Guardian guardian = new Guardian(new Mineral(200), new GasVespeno(200), new Posicion(8, 8), mapa);
         guardian.pasarTiempo();
         guardian.pasarTiempo();
@@ -67,11 +67,10 @@ public class GuardianTest {
 
     // caso 23
     @Test
-    public void guardianNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+    public void guardianNoAtacaNexoMineralPorqueEstaFueraDeRango() throws MenaOcupadaException, RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
         Mapa mapa = new Mapa();
         Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
         NexoMineral nexo = new NexoMineral(new Posicion(1,2), new Mena(new Posicion(1,2)), jugador);
-        jugador.agregarConstruccion(nexo);
         Guardian guardian = new Guardian(new Mineral(100), new GasVespeno(150), new Posicion(2, 13), new Mapa());
         guardian.pasarTiempo();
         guardian.pasarTiempo();

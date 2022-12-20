@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Individuos.Guardian;
 import edu.fiuba.algo3.modelo.Individuos.Scout;
@@ -36,9 +37,10 @@ public class ScoutTest {
     }
     // caso 18
     @Test
-    public void scoutAtaca10VecesACriaderoYSon200UnidadesDeAtaque() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
-
-        Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
+    public void scoutAtaca10VecesACriaderoYSon200UnidadesDeAtaque() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(1,1), jugador);
         Mineral mineral = new Mineral(300);
         GasVespeno gas = new GasVespeno(150);
         Scout scout = new Scout(mineral, gas, new Posicion(1,5), new Mapa());
@@ -78,9 +80,11 @@ public class ScoutTest {
 
     // caso 23
     @Test
-    public void scoutNoAtacaCriaderolPorqueEstaFueraDeRango() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
-
-        Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
+    public void scoutNoAtacaCriaderolPorqueEstaFueraDeRango() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+        
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(1,1), jugador);
         Mineral mineral = new Mineral(300);
         GasVespeno gas = new GasVespeno(150);
         Scout scout = new Scout(mineral, gas, new Posicion(1,6), new Mapa());

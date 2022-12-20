@@ -9,7 +9,15 @@ import edu.fiuba.algo3.modelo.Recursos.Mena;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Individuos.Dragon;
+import edu.fiuba.algo3.modelo.Individuos.Hidralisco;
+import edu.fiuba.algo3.modelo.Individuos.Mutalisco;
+import edu.fiuba.algo3.modelo.Individuos.Scout;
+import edu.fiuba.algo3.modelo.Individuos.Zangano;
+import edu.fiuba.algo3.modelo.Individuos.Zealot;
+import edu.fiuba.algo3.modelo.Individuos.Zerling;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.VidaEscudoProtoss;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
@@ -29,17 +37,20 @@ public class NexoMineral extends Edificio{
         this.zona = new ZonaNeutral();
         this.mapa = mapa;
         this.vida = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
-        if(this.jugador == null){
-            crearJugadorPorDefecto();
-        }
+        // if(this.jugador == null){
+        //     crearJugadorPorDefecto();
+        // }
     }
 
-    public NexoMineral(Posicion posicion, Mena mena, Jugador jugador) throws MenaOcupadaException {
+    public NexoMineral(Posicion posicion, Mena mena, Jugador jugador) throws MenaOcupadaException, RecursosInsuficientesException {
         this(posicion, mena, jugador.getMapa());
         this.jugador = jugador;
+        if(!this.jugador.agregarConstruccion(this) || !this.mapa.agregarOcupable(this, posicion)){
+            throw new RecursosInsuficientesException();
+        }
     }
-
-    public NexoMineral(Posicion posicion, Jugador jugador) throws MenaOcupadaException {
+    
+    public NexoMineral(Posicion posicion, Jugador jugador) throws MenaOcupadaException, RecursosInsuficientesException {
         // this.mena = mena;
         // this.mena.ocupar();
         this.posicion = posicion;
@@ -49,6 +60,9 @@ public class NexoMineral extends Edificio{
         this.mapa = jugador.getMapa();
         this.vida = new VidaEscudoProtoss(VIDA_ESCUDO_COMPLETO, VIDA_ESCUDO_COMPLETO);
         if(!this.mapa.inyectarRecurso(this))  throw new MenaOcupadaException();
+        if(!this.jugador.agregarConstruccion(this)){
+            throw new RecursosInsuficientesException();
+        }
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException
@@ -107,5 +121,65 @@ public class NexoMineral extends Edificio{
     public void setMena(Mena mena) throws MenaOcupadaException{
         mena.ocupar();
         this.mena = mena;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Espiral espiral) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Guarida guarida) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(PuertoEstelar puertoEstelar) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Zangano zangano) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Zerling zerling) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Hidralisco hidralisco) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Mutalisco mutalisco) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Zealot zealot) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Dragon dragon) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Scout scout) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

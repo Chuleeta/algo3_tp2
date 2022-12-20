@@ -32,7 +32,13 @@ public class Guardian extends Individuo implements UnidadVoladora{
     }
 
     public Guardian(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, EspiralNoDisponibleException {
-        this(jugador.invertirMineral(), jugador.invertirGas(), posicion, jugador.getMapa());
+        this.mapa = jugador.getMapa();
+        this.vida = new VidaZerg(100);
+        this.rangoDeAtaque = 10;
+        this.estado = new EstadoNoConstruido();
+        this.tiempoDeConstruccion = 4;
+        this.tiempo = 0;
+        this.posicion = posicion;
         this.jugador = jugador;
         Individuo correlativo = this.jugador.validarCorrelativaGuardian(posicion);
         if(correlativo == null){
@@ -40,7 +46,9 @@ public class Guardian extends Individuo implements UnidadVoladora{
         }
         this.jugador.eliminarIndividuo(correlativo);
         jugador.añadirUnidad();
-        jugador.agregarIndividuo(this);
+        if(!this.jugador.agregarIndividuo(this) || !this.mapa.agregarOcupable(this, posicion)){
+            throw new RequerimientosInsuficientesException();
+        }
     }
 
     private void construir() {
@@ -75,6 +83,16 @@ public class Guardian extends Individuo implements UnidadVoladora{
     {
         this.posicion = posicion;
         return true;
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(50)&& gas.invertir(100))
+        {
+            this.jugador.agregarEnListaIndividuo(this);
+            return true;
+        }
+        return false;
     }
 
 }

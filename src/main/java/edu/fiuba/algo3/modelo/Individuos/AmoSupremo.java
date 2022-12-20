@@ -28,12 +28,21 @@ public class AmoSupremo extends Individuo {
         this.tiempo = 0;
         rangoDeAtaque= 0;
         this.posicion = posicion;
-        crearJugadorPorDefecto();
     }
 
-    public AmoSupremo(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException {
-        this(mineral, gas, posicion, jugador.getMapa());
+    public AmoSupremo(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException {
+        this.vida = new VidaZerg(200);
+        this.mapa = jugador.getMapa();
+        this.estado = new EstadoNoConstruido();
+        this.tiempoDeConstruccion = 5;
+        this.tiempo = 0;
+        rangoDeAtaque= 0;
+        this.posicion = posicion;
         this.jugador = jugador;
+        jugador.añadirUnidad();
+        if(!this.jugador.agregarIndividuo(this) || !this.mapa.agregarOcupable(this, posicion)){
+            throw new RequerimientosInsuficientesException();
+        }
     }
 
     private void construir() {
@@ -67,5 +76,15 @@ public class AmoSupremo extends Individuo {
 
     public void destruir() {
         jugador.decrementarCapacidadDePoblacion(5);
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(50)&& gas.invertir(0))
+        {
+            this.jugador.agregarEnListaIndividuo(this);
+            return true;
+        }
+        return false;
     }
 }

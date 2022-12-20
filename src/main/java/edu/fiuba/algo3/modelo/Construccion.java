@@ -1,13 +1,15 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Edificios.CorrelativaEdificio;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Individuos.CorrelativaIndividuo;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
 import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
-public interface Construccion {
+public interface Construccion extends CorrelativaEdificio, CorrelativaIndividuo {
     void construir() throws NoExisteEdificioCorrelativoException;
     boolean habita(ZonaNeutral zona);
     boolean habita(ZonaMoho zona);

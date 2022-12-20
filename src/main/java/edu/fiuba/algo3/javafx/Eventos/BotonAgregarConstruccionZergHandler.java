@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.Edificios.Extractor;
 import edu.fiuba.algo3.modelo.Edificios.Guarida;
 import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 import edu.fiuba.algo3.modelo.Jugador;
@@ -146,7 +147,7 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
             return null;
         }
         
-        return (new Posicion(valorX-1, valorY-1));
+        return (new Posicion(valorX, valorY));
     }
     
     
@@ -173,12 +174,16 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonCriadero.setOnMouseExited(e -> botonCriadero.setStyle(botonNormal));
         botonCriadero.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Criadero criadero = new Criadero(inputUsuario, this.jugador);
-            if(this.jugador.agregarConstruccion(criadero)){
+            try {
+                Criadero criadero = new Criadero(inputUsuario, this.jugador);
                 juegoVista.actualizarTablero();
-            }else{
+            } catch (RecursosInsuficientesException e1) {
                 noSePuedeConstruir();
             }
+            // if(this.jugador.agregarConstruccion(criadero)){
+            //     juegoVista.actualizarTablero();
+            // }else{
+            // }
             s.close();
         });
         
@@ -189,12 +194,15 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonReserva.setOnMouseExited(e -> botonReserva.setStyle(botonNormal));
         botonReserva.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            ReservaDeReproduccion reserva = new ReservaDeReproduccion(inputUsuario, this.jugador);
-            if(this.jugador.agregarConstruccion(reserva)){
+            try {
+                ReservaDeReproduccion reserva = new ReservaDeReproduccion(inputUsuario, this.jugador);
                 juegoVista.actualizarTablero();
-            }else{
+            } catch (RecursosInsuficientesException e1) {
                 noSePuedeConstruir();
             }
+            // if(this.jugador.agregarConstruccion(reserva)){
+            // }else{
+            // }
             s.close();
         });
         
@@ -210,12 +218,15 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
             //this.jugador.mapa.agregarRecursoInyectable(volcan, inputUsuario);
             try {
                 Extractor extractor = new Extractor(inputUsuario, jugador);
-                if(this.jugador.agregarConstruccion(extractor)){
-                    juegoVista.actualizarTablero();
-                }else{
-                    noSePuedeConstruir();
-                }
+                juegoVista.actualizarTablero();
+                // if(this.jugador.agregarConstruccion(extractor)){
+                //     juegoVista.actualizarTablero();
+                // }else{
+                //     noSePuedeConstruir();
+                // }
             } catch (VolcanOcupadoException e1) {
+                noSePuedeConstruir();
+            } catch (RecursosInsuficientesException e1) {
                 noSePuedeConstruir();
             }
             //Extractor extractor = new Extractor(inputUsuario, this.jugador.mapa, this.jugador);
@@ -234,10 +245,13 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonGuarida.setOnMouseExited(e -> botonGuarida.setStyle(botonNormal));
         botonGuarida.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Guarida guarida = new Guarida(inputUsuario, this.jugador);
-            if(this.jugador.agregarConstruccion(guarida)){
+            Guarida guarida;
+            try {
+                guarida = new Guarida(inputUsuario, this.jugador);
                 juegoVista.actualizarTablero();
-            }else{
+            } catch (NoExisteEdificioCorrelativoException e1) {
+                noSePuedeConstruir();
+            } catch (RecursosInsuficientesException e1) {
                 noSePuedeConstruir();
             }
             s.close();
@@ -250,12 +264,18 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonEspiral.setOnMouseExited(e -> botonEspiral.setStyle(botonNormal));
         botonEspiral.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Espiral espiral = new Espiral(inputUsuario, this.jugador);
-            if(this.jugador.agregarConstruccion(espiral)){
+            try {
+                Espiral espiral = new Espiral(inputUsuario, this.jugador);
                 juegoVista.actualizarTablero();
-            }else{
+            } catch (RecursosInsuficientesException e1) {
+                noSePuedeConstruir();
+            } catch (NoExisteEdificioCorrelativoException e1) {
                 noSePuedeConstruir();
             }
+            // if(this.jugador.agregarConstruccion(espiral)){
+            // }else{
+            //     noSePuedeConstruir();
+            // }
             s.close();
         });
         

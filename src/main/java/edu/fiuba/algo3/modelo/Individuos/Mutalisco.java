@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.AccesoNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.EspiralNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.PuertoEstelarNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Jugador;
@@ -32,15 +33,20 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
         rangoDeAtaque= 3;
         this.posicion = posicion;
     }
-
-    public Mutalisco(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, EspiralNoDisponibleException {
-        this(jugador.invertirMineral(), jugador.invertirGas(), posicion, jugador.getMapa());
+    public Mutalisco(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, EspiralNoDisponibleException, NoExisteEdificioCorrelativoException {
+        this.vida = new VidaZerg(120);
+        this.mapa = jugador.getMapa();
+        this.estado = new EstadoNoConstruido();
+        this.tiempoDeConstruccion = 7;
+        this.tiempo = 0;
+        this.rangoDeAtaque= 3;
+        this.posicion = posicion;
         this.jugador = jugador;
-        if(!this.jugador.validarCorrelativaEspiral()){
-            throw new EspiralNoDisponibleException();
-        }
-        jugador.agregarIndividuo(this);
         jugador.añadirUnidad();
+        this.jugador.verificarEdificacionCorrelativa(this);
+        if(!this.jugador.agregarIndividuo(this) || !this.mapa.agregarOcupable(this, posicion)){
+            throw new RequerimientosInsuficientesException();
+        }
     }
 
     private void construir() {
@@ -89,6 +95,16 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
     public Devorador evolucionarADevorador(Mineral mineral, GasVespeno gas) throws RequerimientosInsuficientesException
     {
         return new Devorador(mineral, gas, this.posicion, this.mapa);
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(100)&& gas.invertir(100))
+        {
+            this.jugador.agregarEnListaIndividuo(this);
+            return true;
+        }
+        return false;
     }
 
 }

@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Individuos;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.GuaridaNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.ReservaDeReproduccionNoDisponibleException;
 import edu.fiuba.algo3.modelo.Jugador;
@@ -32,14 +33,21 @@ public class Hidralisco extends Individuo{
         rangoDeAtaque = 4;
     }
 
-    public Hidralisco(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, GuaridaNoDisponibleException {
-        this(jugador.invertirMineral(), jugador.invertirGas(), posicion, jugador.getMapa());
+    public Hidralisco(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, GuaridaNoDisponibleException, NoExisteEdificioCorrelativoException {
+
+        this.mapa = jugador.getMapa();
+        this.vida = new VidaZerg(80);
+        this.estado = new EstadoNoConstruido();
+        this.tiempoDeConstruccion = 4;
+        this.tiempo = 0;
+        this.posicion = posicion;
+        this.rangoDeAtaque = 4;
         this.jugador = jugador;
-        if(!this.jugador.validarCorrelativaGuarida()){
-            throw new GuaridaNoDisponibleException();
-        }
         jugador.añadirUnidad();
-        jugador.agregarIndividuo(this);
+        this.jugador.verificarEdificacionCorrelativa(this);
+        if(!this.jugador.agregarIndividuo(this) || !this.mapa.agregarOcupable(this, posicion)){
+            throw new RequerimientosInsuficientesException();
+        }
     }
 
     private void construir() {
@@ -80,5 +88,15 @@ public class Hidralisco extends Individuo{
             return false;
         this.posicion = posicion;
         return true;
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(75)&& gas.invertir(25))
+        {
+            this.jugador.agregarEnListaIndividuo(this);
+            return true;
+        }
+        return false;
     }
 }

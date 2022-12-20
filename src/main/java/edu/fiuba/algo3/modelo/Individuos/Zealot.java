@@ -6,7 +6,9 @@ import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.AccesoNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
+import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
 import java.util.HashMap;
@@ -36,11 +38,22 @@ public class Zealot extends Individuo{
         this.mapa = mapa;
     }
 
-    public Zealot(Mineral mineral, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, AccesoNoDisponibleException {
-        this(mineral, posicion, jugador.getMapa());
+    public Zealot(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, AccesoNoDisponibleException, NoExisteEdificioCorrelativoException {
+        atacados = new HashMap<>();
+        asesinatos = 0;
+        this.vida = new VidaEscudoProtoss(100, 60);
+        this.estado = new EstadoNoConstruido();
+        this.tiempoDeConstruccion = 4;
+        this.tiempo = 0;
+        rangoDeAtaque = 1;
+        invisible = false;
+        this.posicion = posicion;
+        this.mapa = jugador.getMapa();
         this.jugador = jugador;
-        if(this.jugador.validarCorrelativaAcceso()){
-            throw new AccesoNoDisponibleException();
+        jugador.añadirUnidad();
+        this.jugador.verificarEdificacionCorrelativa(this);
+        if(!this.jugador.agregarIndividuo(this) || !this.mapa.agregarOcupable(this, posicion)){
+            throw new RequerimientosInsuficientesException();
         }
     }
 
@@ -104,6 +117,17 @@ public class Zealot extends Individuo{
             return false;
         this.posicion = posicion;
         return true;
+    }
+
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(100)&& gas.invertir(0))
+        {
+            this.jugador.agregarEnListaIndividuo(this);
+            return true;
+        }
+        return false;
     }
 
 }

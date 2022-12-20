@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Edificios.Criadero;
 import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Individuos.Dragon;
 import edu.fiuba.algo3.modelo.Individuos.Guardian;
@@ -35,9 +36,10 @@ public class DragonTest {
     }
     // caso 18
     @Test
-    public void dragonAtaca10VecesACriaderoYSon200UnidadesDeAtaque() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
-
-        Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
+    public void dragonAtaca10VecesACriaderoYSon200UnidadesDeAtaque() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(1,1), jugador);
         Mineral mineral = new Mineral(125);
         GasVespeno gas = new GasVespeno(50);
         Dragon dragon = new Dragon(mineral, gas, new Posicion(1,5), new Mapa());
@@ -74,9 +76,10 @@ public class DragonTest {
 
     // caso 23
     @Test
-    public void dragonNoAtacaCriaderoPorqueEstaFueraDeRango() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
-
-        Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
+    public void dragonNoAtacaCriaderoPorqueEstaFueraDeRango() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException, RecursosInsuficientesException {
+        Mapa mapa = new Mapa();
+        Jugador jugador = new Jugador("jugadorUno", "azul", "zerg", new Posicion(1,1), mapa, 200);
+        Criadero criadero = new Criadero(new Posicion(1,1), jugador);
         Mineral mineral = new Mineral(125);
         GasVespeno gas = new GasVespeno(50);
         Dragon dragon = new Dragon(mineral, gas, new Posicion(1,6), new Mapa());

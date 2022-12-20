@@ -3,10 +3,14 @@ package edu.fiuba.algo3.javafx.Eventos;
 import edu.fiuba.algo3.javafx.JuegoVista;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
+import edu.fiuba.algo3.modelo.Edificios.Acceso;
+import edu.fiuba.algo3.modelo.Edificios.Asimilador;
 import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
 import edu.fiuba.algo3.modelo.Edificios.Pilon;
+import edu.fiuba.algo3.modelo.Edificios.PuertoEstelar;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -167,15 +171,17 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
             Posicion inputUsuario = this.cargarPosicion();
             try {
                 NexoMineral nexo = new NexoMineral(inputUsuario, this.jugador);
+                juegoVista.actualizarTablero();
                 
-                if(this.jugador.agregarConstruccion(nexo)){
-                    juegoVista.actualizarTablero();
-                }else{
-                    noSePuedeConstruir();
-                }
             } catch (MenaOcupadaException e1) {
                 noSePuedeConstruir();
+            } catch (RecursosInsuficientesException e1) {
+                noSePuedeConstruir();
             }
+            // if(this.jugador.agregarConstruccion(nexo)){
+            // }else{
+            //     noSePuedeConstruir();
+            // }
             s.close();
         });
         
@@ -186,10 +192,10 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonPilon.setOnMouseExited(e -> botonPilon.setStyle(botonNormal));
         botonPilon.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Pilon pilon = new Pilon(inputUsuario, this.jugador);
-            if(this.jugador.agregarConstruccion(pilon)){
+            try {
+                Pilon pilon = new Pilon(inputUsuario, this.jugador);
                 juegoVista.actualizarTablero();
-            }else{
+            } catch (RecursosInsuficientesException e1) {
                 noSePuedeConstruir();
             }
             s.close();
@@ -202,7 +208,15 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonAsimilador.setOnMouseExited(e -> botonAsimilador.setStyle(botonNormal));
         botonAsimilador.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                Asimilador asimilador = new Asimilador(inputUsuario, this.jugador);
+                juegoVista.actualizarTablero();
+            } catch (RecursosInsuficientesException e1) {
+                noSePuedeConstruir();
+            } catch (VolcanOcupadoException e1) {
+                noSePuedeConstruir();
+            }
+            s.close();
         });
         
         Button botonAcceso = new Button("Acceso");
@@ -212,7 +226,13 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonAcceso.setOnMouseExited(e -> botonAcceso.setStyle(botonNormal));
         botonAcceso.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                Acceso acceso = new Acceso(inputUsuario, this.jugador);
+                juegoVista.actualizarTablero();
+            } catch (RecursosInsuficientesException e1) {
+                noSePuedeConstruir();
+            }
+            s.close();
         });
         
         Button botonPuerto = new Button("Puerto\nEstelar");
@@ -222,7 +242,15 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonPuerto.setOnMouseExited(e -> botonPuerto.setStyle(botonNormal));
         botonPuerto.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                PuertoEstelar puertoEstelar = new PuertoEstelar(inputUsuario, this.jugador);
+                juegoVista.actualizarTablero();
+            } catch (RecursosInsuficientesException e1) {
+                noSePuedeConstruir();
+            } catch (NoExisteEdificioCorrelativoException e1) {
+                noSePuedeConstruir();
+            }
+            s.close();
         });
         
         VBox eleccionUsuario = new VBox();

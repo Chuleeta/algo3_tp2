@@ -9,9 +9,16 @@ import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
+import edu.fiuba.algo3.modelo.Individuos.Dragon;
+import edu.fiuba.algo3.modelo.Individuos.Hidralisco;
+import edu.fiuba.algo3.modelo.Individuos.Mutalisco;
+import edu.fiuba.algo3.modelo.Individuos.Scout;
 import edu.fiuba.algo3.modelo.Individuos.Zangano;
+import edu.fiuba.algo3.modelo.Individuos.Zealot;
+import edu.fiuba.algo3.modelo.Individuos.Zerling;
 import edu.fiuba.algo3.modelo.Zonas.ZonaEnergia;
 import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
@@ -35,17 +42,20 @@ public class Extractor extends Edificio{
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
         this.gas = new GasVespeno(0);
-        if(this.jugador == null){
-            crearJugadorPorDefecto();
+        // if(this.jugador == null){
+        //     crearJugadorPorDefecto();
+        // }
+    }
+
+    public Extractor(Posicion posicion, Volcan volcan, Jugador jugador) throws VolcanOcupadoException, RecursosInsuficientesException {
+        this(posicion, volcan, jugador.getMapa());
+        this.jugador = jugador;
+        if(!this.jugador.agregarConstruccion(this) || !this.mapa.agregarOcupable(this, posicion)){
+            throw new RecursosInsuficientesException();
         }
     }
 
-    public Extractor(Posicion posicion, Volcan volcan, Jugador jugador) throws VolcanOcupadoException {
-        this(posicion, volcan, jugador.getMapa());
-        this.jugador = jugador;
-    }
-
-    public Extractor(Posicion posicion, Jugador jugador) throws VolcanOcupadoException {
+    public Extractor(Posicion posicion, Jugador jugador) throws VolcanOcupadoException, RecursosInsuficientesException {
         this.posicion = posicion;
         estado = new EstadoNoConstruido();
         this.jugador = jugador;
@@ -56,6 +66,9 @@ public class Extractor extends Edificio{
         this.vida = new VidaZerg(VIDA_COMPLETA);
         this.gas = new GasVespeno(0);
         if(!this.mapa.inyectarRecurso(this)) throw new VolcanOcupadoException();
+        if(!this.jugador.agregarConstruccion(this) || !this.mapa.agregarOcupable(this, posicion)){
+            throw new RecursosInsuficientesException();
+        }
     }
 
     public void pasarTiempo() throws NoExisteEdificioCorrelativoException
@@ -133,6 +146,66 @@ public class Extractor extends Edificio{
     public void setVolcan(Volcan volcan) throws VolcanOcupadoException{
         volcan.ocupar();
         this.volcan = volcan;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Espiral espiral) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Guarida guarida) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(PuertoEstelar puertoEstelar) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Zangano zangano) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Zerling zerling) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Hidralisco hidralisco) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Mutalisco mutalisco) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Zealot zealot) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Dragon dragon) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean verificarCorrelativa(Scout scout) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
     /*public void destruir()

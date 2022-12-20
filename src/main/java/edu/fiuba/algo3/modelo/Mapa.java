@@ -90,9 +90,9 @@ public class Mapa {
         return true;
     }
 
-    public boolean verificarEdificacionCorrelativa(Jugador jugador, Edificio edificioCorrelativo) {
-        return jugador.construcciones.stream().anyMatch(clase -> clase.getClass().isInstance(edificioCorrelativo));
-    }
+    // public boolean verificarEdificacionCorrelativa(Jugador jugador, Edificio edificioCorrelativo) {
+    //     return jugador.construcciones.stream().anyMatch(clase -> clase.getClass().isInstance(edificioCorrelativo));
+    // }
 
     public boolean verificarPosicionDisponible(Construccion construccion){
         for (Zona zona:zonas)

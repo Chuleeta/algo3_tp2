@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
 import edu.fiuba.algo3.modelo.Exceptions.AccesoNoDisponibleException;
+import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.PuertoEstelarNoDisponibleException;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Mapa;
@@ -30,11 +31,19 @@ public class Scout extends Individuo implements UnidadVoladora{
         this.mapa = mapa;
     }
 
-    public Scout(Mineral mineral, GasVespeno gas, Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, PuertoEstelarNoDisponibleException {
-        this(mineral, gas, posicion, jugador.getMapa());
+    public Scout(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, PuertoEstelarNoDisponibleException, NoExisteEdificioCorrelativoException {
+        this.vida = new VidaEscudoProtoss(100, 80);
+        this.estado = new EstadoNoConstruido();
+        this.tiempoDeConstruccion = 9;
+        this.tiempo = 0;
+        this.rangoDeAtaque = 4;
+        this.posicion = posicion;
+        this.mapa = jugador.getMapa();
         this.jugador = jugador;
-        if(this.jugador.validarCorrelativaAcceso()){
-            throw new PuertoEstelarNoDisponibleException();
+        jugador.añadirUnidad();
+        this.jugador.verificarEdificacionCorrelativa(this);
+        if(!this.jugador.agregarIndividuo(this) || !this.mapa.agregarOcupable(this, posicion)){
+            throw new RequerimientosInsuficientesException();
         }
     }
 
@@ -73,5 +82,15 @@ public class Scout extends Individuo implements UnidadVoladora{
     {
         this.posicion = posicion;
         return true;
+    }
+
+    @Override
+    public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
+        if(mineral.invertir(300)&& gas.invertir(150))
+        {
+            this.jugador.agregarEnListaIndividuo(this);
+            return true;
+        }
+        return false;
     }
 }

@@ -213,7 +213,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
             try {
                 new Zangano(inputUsuario, jugador);
                 juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
+            } catch (RequerimientosInsuficientesException | NoExisteEdificioCorrelativoException ex) {
                 noSePuedeConstruir("\nRequerimientosInsuficientesException");
             } catch (CriaderoNoDisponibleException ex) {
                 noSePuedeConstruir("\nCriaderoNoDisponibleException");
@@ -233,7 +233,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
                 juegoVista.actualizarTablero();
             } catch (RequerimientosInsuficientesException ex) {
                 noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (ReservaDeReproduccionNoDisponibleException ex) {
+            } catch (ReservaDeReproduccionNoDisponibleException | NoExisteEdificioCorrelativoException ex) {
                 noSePuedeConstruir("\nReservaDeReproduccionNoDisponibleException");
             }
             s.close();
@@ -251,7 +251,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
                 juegoVista.actualizarTablero();
             } catch (RequerimientosInsuficientesException ex) {
                 noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (GuaridaNoDisponibleException ex) {
+            } catch (GuaridaNoDisponibleException | NoExisteEdificioCorrelativoException ex) {
                 noSePuedeConstruir("\nGuaridaNoDisponibleException");
             }
             s.close();
@@ -267,10 +267,9 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
             try {
                 new Mutalisco(inputUsuario, jugador);
                 juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
+            } catch (RequerimientosInsuficientesException | NoExisteEdificioCorrelativoException ex) {
                 noSePuedeConstruir("\nRequerimientosInsuficientesException");
             } catch (EspiralNoDisponibleException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
             }
             s.close();
         });
