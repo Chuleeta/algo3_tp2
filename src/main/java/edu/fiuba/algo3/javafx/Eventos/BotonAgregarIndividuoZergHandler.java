@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -343,42 +342,8 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         s.getIcons().add(this.icono);
         s.setResizable(false);
         s.setScene(sc);
-        //s.show();
         s.showAndWait();
 
-        // ButtonType botonAmo = new ButtonType("Amo Supremo");
-        // ButtonType botonZangano = new ButtonType("Zangano");
-        // ButtonType botonZerling = new ButtonType("Zerling");
-        // ButtonType botonHidralisco = new ButtonType("Hidralisco");
-        // ButtonType botonMutalisco = new ButtonType("Mutalisco");
-        //ButtonType botonGuardian = new ButtonType("Guardian");
-        //ButtonType botonDevorador = new ButtonType("Devorador");
-
-
-        //alert.getButtonTypes().setAll(botonAmo, botonZangano, botonZerling, botonHidralisco/*, botonMutaliscobotonGuardian, botonDevorador*/);
-
-        //Optional<ButtonType> result = alert.showAndWait();
-        // if (result.get() == botonAmo){
-        //     AmoSupremo amo = null;
-        //     try {
-        //         amo = new AmoSupremo(jugador.mineral, new GasVespeno(0), new Posicion(2, 2), juegoVista.juego.mapa);
-        //     } catch (RequerimientosInsuficientesException e) {
-        //         e.printStackTrace();
-        //     }
-        //     jugador.agregarIndividuo(amo);
-        // }else if (result.get() == botonZangano) {
-        //     String pos = cargarPosicion();
-        //     System.out.println("\nPOSICION: " + pos);
-        //     //Zangano zangano = new Zangano();
-        // } else if (result.get() == botonZerling) {
-        //     // Zerling zerling = new Zerling();
-        // } else if (result.get() == botonHidralisco) {
-        //     // Hidralisco hidralisco = new Hidralisco();
-        // }  else if (result.get() == botonMutalisco) {
-        //     // Mutalisco mutalisco = new Mutalisco();
-        // } else {
-        //     // ... user chose CANCEL or closed the dialog
-        // }
     }
 
 }
