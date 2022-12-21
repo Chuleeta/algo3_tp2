@@ -130,7 +130,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
             return null;
         }
 
-        return (new Posicion(valorX - 1, valorY -1));
+        return (new Posicion(valorX, valorY));
     }
 
     private void noSePuedeConstruir(String text) {
@@ -201,6 +201,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZangano.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
             if (inputUsuario != null) {
+                System.out.print("Creacion de Zangano posicion: " + inputUsuario.coordenadaX() + "" + inputUsuario.coordenadaY());
                 try {
                     new Zangano(inputUsuario, jugador);
                     juegoVista.actualizarTablero();

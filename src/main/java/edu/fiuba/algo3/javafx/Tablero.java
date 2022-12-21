@@ -66,8 +66,8 @@ public class Tablero {
     }
 
     public UnidadIndividuo crearUnidadMovible(Individuo individuo, Jugador oponente) {
-        int coordenadaX = (individuo.posicion().coordenadaX() * 40) + 10;
-        int coordenadaY = (individuo.posicion().coordenadaY() * 40) + 10;
+        int coordenadaX = ((individuo.posicion().coordenadaX()-1) * 40) + 10;
+        int coordenadaY = ((individuo.posicion().coordenadaY()-1) * 40) + 10;
         AtacarHandler action = new AtacarHandler(juegoVista, oponente, individuo);
         UnidadIndividuo unidad = new UnidadIndividuo(individuo, coordenadaX, coordenadaY, action);
         hacerMovible(unidad);
@@ -75,8 +75,8 @@ public class Tablero {
         return unidad;
     }
     public UnidadEdificio crearUnidadEstatica(Construccion construccion) {
-        int coordenadaX = (construccion.mostrarPosicion().coordenadaX() * 40) + 10;
-        int coordenadaY = (construccion.mostrarPosicion().coordenadaY() * 40) + 10;
+        int coordenadaX = ((construccion.mostrarPosicion().coordenadaX()-1) * 40) + 10;
+        int coordenadaY = ((construccion.mostrarPosicion().coordenadaY()-1) * 40) + 10;
         UnidadEdificio unidad = new UnidadEdificio(construccion, coordenadaX, coordenadaY);
         unidad.setOnMouseReleased(e ->{
             mostrarPosicion(unidad);

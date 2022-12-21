@@ -14,14 +14,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class UnidadEdificio extends Rectangle implements Notificable {
-    private final BotonModal botonAtacar;
+    private final BotonModal botonVida;
     private Construccion construccion;
     public UnidadEdificio(Construccion construccion, int coordenadaX, int coordenadaY) {
         super(20, 20, Color.GREEN);
         this.construccion = construccion;
         this.setTranslateX(coordenadaX);
         this.setTranslateY(coordenadaY);
-        this.botonAtacar = new BotonModal(this.construccion.obtenerVida().vidaRestante());
+        this.botonVida = new BotonModal(this.construccion.obtenerVida().vidaRestante());
         this.setOnMouseClicked(e -> {
             if(e.getButton().equals(MouseButton.PRIMARY)){
                 if(e.getClickCount() == 2){
@@ -31,7 +31,8 @@ public class UnidadEdificio extends Rectangle implements Notificable {
                     Label seleccionarAccion = new Label("Propiedades\n");
                     String pathicono = this.getClass().getResource("/imagenes/icono.png").toString();
                     Image icono = new Image(pathicono);
-                    opciones1.getChildren().addAll(this.botonAtacar);
+                    botonVida.setText(construccion.obtenerVida().vidaRestante());
+                    opciones1.getChildren().addAll(this.botonVida);
                     opciones1.setSpacing(10);
                     opciones1.setAlignment(Pos.CENTER);
                     opciones.getChildren().addAll(opciones1);
