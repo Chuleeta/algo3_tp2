@@ -21,7 +21,7 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class ReservaDeReproduccion extends Edificio{
-    private static int VIDA_COMPLETA = 10;
+    private static int VIDA_COMPLETA = 1000;
 
     public ReservaDeReproduccion(Posicion posicion, Mapa mapa)
     {
