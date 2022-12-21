@@ -259,13 +259,13 @@ public class Jugador {
             individuoAtacante.atacar(individuoAtacado);
             return;
         }
+
         Construccion construccion = encontrarConstruccion(posicion);
         System.out.println(construccion);
         if(construccion != null) {
             individuoAtacante.atacar(construccion);
             return;
         }
-
         throw new NoSeEncuentraAlIndividuoException();
     }
 

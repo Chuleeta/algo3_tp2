@@ -43,7 +43,7 @@ public abstract class Individuo  implements Ocupable
     public boolean atacar(Construccion edificio) {
         if (estado.estaConstruido()) {
             if (estaDentroDelRango(edificio.posicion())) {
-                edificio.dañar(unidadesDeDañoTerrestre);
+                edificio.recibirAtaqueTerrestre(unidadesDeDañoTerrestre);
                 return true;
             }
         }
