@@ -94,9 +94,9 @@ public class JuegoVista extends BorderPane {
 		
 	}
 
-    public void  setPosicionSeleccionada(int X, int Y){
-       this.pisicionSeleccionadaX = X;
-       this.pisicionSeleccionadaY = Y;
+    public void  setPosicionSeleccionada(Posicion posicion){
+       this.pisicionSeleccionadaX = posicion.coordenadaX();
+       this.pisicionSeleccionadaY = posicion.coordenadaY();
        this.posicionSeleccionada.setText(String.format("Posicion Seleccionada - En X: " + this.pisicionSeleccionadaX + " | En Y: " + this.pisicionSeleccionadaY));
     }
 
@@ -165,27 +165,21 @@ public class JuegoVista extends BorderPane {
             agregarIndividuoProtossHandler = new BotonAgregarIndividuoProtossHandler(this, jugadorUno);
         }
 
-        // creacion de botones
+        // creacion de botones y Labels
 
         BotonGenerico botonAgregarIndividuoZerg = new BotonGenerico("Agregar\nindividuo", agregarIndividuoZergHandler, jugadorUno);
         BotonGenerico botonAgregarIndividuoProtoss = new BotonGenerico("Agregar\nindividuo", agregarIndividuoProtossHandler, jugadorUno);
         BotonGenerico botonAgregarConstruccionZerg = new BotonGenerico("Agregar\nconstruccion", agregarConstruccionZergHandler, jugadorUno);
         BotonGenerico botonAgregarConstruccionProtoss = new BotonGenerico("Agregar\nconstruccion", agregarConstruccionProtossHandler, jugadorUno);
+        LabelMinerales mineralesJugadorUno = new LabelMinerales(jugadorUno);
+        LabelMinerales mineralesJugadorDos = new LabelMinerales(jugadorDos);
+
         pasarturno.añadirSuscriptor(botonAgregarConstruccionZerg);
         pasarturno.añadirSuscriptor(botonAgregarConstruccionProtoss);
         pasarturno.añadirSuscriptor(botonAgregarIndividuoProtoss);
         pasarturno.añadirSuscriptor(botonAgregarIndividuoZerg);
-
-        // label de minerales
-
-        Label mineralesJugadorUno = new Label("Minerales: \n" + jugadorUno.mineral.cantidad);
-        Label mineralesJugadorDos = new Label("Minerales: \n" + jugadorDos.mineral.cantidad);
-        mineralesJugadorUno.setFont(fuente);
-        mineralesJugadorUno.setStyle(formatoTexto);
-        mineralesJugadorUno.setPadding(new Insets(0, 0, 0, 25));
-        mineralesJugadorDos.setFont(fuente);
-        mineralesJugadorDos.setStyle(formatoTexto);
-        mineralesJugadorDos.setPadding(new Insets(0, 0, 0, 20));
+        pasarturno.añadirSuscriptor(mineralesJugadorDos);
+        pasarTurno.añadirSuscriptor(mineralesJugadorUno);
 
         VBox turnoActual = new VBox();
 
@@ -455,25 +449,7 @@ public class JuegoVista extends BorderPane {
     }
 
     public void actualizarTablero() {
-        //this.tablero.actualizarConstrucciones();
-        ArrayList<Construccion> construccionesJ1 = this.jugadorUno.getConstrucciones();
-        if(construccionesJ1.size() > 0){
-            for (Construccion construccion : construccionesJ1) {
-                tablero.insertarConstruccion(construccion);
-            }
-        }
-        ArrayList<Construccion> construccionesJ2 = this.jugadorDos.getConstrucciones();
-        if(construccionesJ2.size() != 0){
-            for (Construccion construccion : construccionesJ2) {
-                tablero.insertarConstruccion(construccion);
-            }
-        }
-        ArrayList<Individuo> individuos = this.juego.mostrarUnidades();
-        if(individuos.size() != 0){
-            for (Individuo individuo : individuos) {
-                tablero.insertarUnidad(individuo);
-            }
-        }
+        tablero.actualizar();
     }
 
     public void agregarSuscriptorPasarTurno(Notificable notificable) {

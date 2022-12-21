@@ -10,6 +10,7 @@ import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
 import edu.fiuba.algo3.modelo.Individuos.Devorador;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
+import edu.fiuba.algo3.modelo.Individuos.Zangano;
 import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 import edu.fiuba.algo3.modelo.Zonas.Zona;
@@ -70,6 +71,14 @@ public class Mapa {
         for (RecursoInyectable recurso:recursosInyectables){
             if(recurso.inyectarRecurso(asimilador))
                 return true;
+        }
+        return false;
+    }
+    public boolean inyectarRecurso(Zangano zangano) throws MenaOcupadaException{
+        for (RecursoInyectable recurso:recursosInyectables){
+            if(recurso.mostrarPosicion().posicionesIguales(zangano.posicion()) && recurso.inyectarRecurso(zangano)){
+                return true;
+            }
         }
         return false;
     }

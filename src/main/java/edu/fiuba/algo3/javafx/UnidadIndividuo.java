@@ -1,9 +1,8 @@
 package edu.fiuba.algo3.javafx;
 import edu.fiuba.algo3.javafx.Eventos.AtacarHandler;
-import edu.fiuba.algo3.modelo.Construccion;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Jugador;
-import javafx.event.ActionEvent;
+import edu.fiuba.algo3.modelo.Posicion;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,25 +16,32 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class UnidadMovible extends Rectangle implements Notificable {
+public class UnidadIndividuo extends Rectangle implements Notificable {
     private final BotonModal botonAtacar;
+    private final EventHandler action;
+    private final BotonModal botonVida;
     private Individuo individuo;
-    public UnidadMovible(Individuo individuo, int coordenadaX, int coordenadaY) {
+    public UnidadIndividuo(Individuo individuo, int coordenadaX, int coordenadaY, EventHandler action) {
         super(20, 20, Color.BLACK);
         this.individuo = individuo;
         this.setTranslateX(coordenadaX);
         this.setTranslateY(coordenadaY);
         this.botonAtacar = new BotonModal("Atacar");
+        this.botonVida = new BotonModal(individuo.obtenerVida().vidaRestante());
+        this.action = action;
         this.setOnMouseClicked(e -> {
                 if(e.getButton().equals(MouseButton.PRIMARY)){
                     if(e.getClickCount() == 2){
+                        System.out.print("Atacante x:" + individuo.posicion().coordenadaX() + "y:" + individuo.posicion().coordenadaY());
                         VBox eleccionUsuario = new VBox();
                         HBox opciones = new HBox();
                         VBox opciones1 = new VBox();
                         Label seleccionarAccion = new Label("Seleccionar accion\n");
                         String pathicono = this.getClass().getResource("/imagenes/icono.png").toString();
                         Image icono = new Image(pathicono);
-                        opciones1.getChildren().addAll(this.botonAtacar);
+                        botonAtacar.setOnAction(action);
+                        botonVida.setText(individuo.obtenerVida().vidaRestante());
+                        opciones1.getChildren().addAll(botonAtacar, botonVida);
                         opciones1.setSpacing(10);
                         opciones1.setAlignment(Pos.CENTER);
                         opciones.getChildren().addAll(opciones1);
@@ -62,5 +68,9 @@ public class UnidadMovible extends Rectangle implements Notificable {
     @Override
     public void actualizar(Jugador jugadorDeTurno) {
         this.setDisable(jugadorDeTurno != this.individuo.mostrarJugador());
+    }
+
+    public boolean moverUnidad(Posicion nuevaPosicion) {
+        return this.individuo.moverUnidad(nuevaPosicion);
     }
 }

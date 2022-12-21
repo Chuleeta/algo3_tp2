@@ -1,23 +1,14 @@
 package edu.fiuba.algo3.javafx.Eventos;
 
 import edu.fiuba.algo3.javafx.JuegoVista;
-import edu.fiuba.algo3.modelo.Construccion;
-import edu.fiuba.algo3.modelo.Edificios.Criadero;
-import edu.fiuba.algo3.modelo.Edificios.Espiral;
-import edu.fiuba.algo3.modelo.Edificios.Guarida;
-import edu.fiuba.algo3.modelo.Edificios.ReservaDeReproduccion;
 import edu.fiuba.algo3.modelo.Exceptions.*;
 import edu.fiuba.algo3.modelo.Individuos.*;
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Larva;
 import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
-import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -25,11 +16,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-
 import java.io.InputStream;
-import java.util.Optional;
 
 public class BotonAgregarIndividuoZergHandler extends BorderPane implements EventHandler<ActionEvent>{
 
@@ -129,18 +117,20 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         int valorX = 0;
         int valorY = 0;
         if(posicionDeseadaX.getValue() != null){
+            System.out.println("en x: " + posicionDeseadaX.getValue());
             valorX = Integer.valueOf(posicionDeseadaX.getValue());
         }else{
             return null;
         }
 
         if(posicionDeseadaY.getValue() != null){
+            System.out.println("en y: " + posicionDeseadaY.getValue());
             valorY = Integer.valueOf(posicionDeseadaY.getValue());
         }else{
             return null;
         }
 
-        return (new Posicion(valorX-1, valorY-1));
+        return (new Posicion(valorX - 1, valorY -1));
     }
 
     private void noSePuedeConstruir(String text) {
@@ -210,17 +200,18 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZangano.setOnMouseExited(e -> botonZangano.setStyle(botonNormal));
         botonZangano.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                new Zangano(inputUsuario, jugador);
-                juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (CriaderoNoDisponibleException ex) {
-                noSePuedeConstruir("\nCriaderoNoDisponibleException");
-            } catch (NoExisteEdificioCorrelativoException e1) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            if (inputUsuario != null) {
+                try {
+                    new Zangano(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RequerimientosInsuficientesException | NoExisteEdificioCorrelativoException ex) {
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
+                } catch (CriaderoNoDisponibleException ex) {
+                    noSePuedeConstruir("\nCriadero No Disponible");
+                }
+                s.close();
+
             }
-            s.close();
         });
         
         Button botonZerling = new Button("Zerling");
@@ -230,15 +221,17 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZerling.setOnMouseExited(e -> botonZerling.setStyle(botonNormal));
         botonZerling.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                new Zerling(inputUsuario, jugador);
-                juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (ReservaDeReproduccionNoDisponibleException ex) {
-                throw new RuntimeException(ex);
-            } catch (NoExisteEdificioCorrelativoException e1) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+
+            if (inputUsuario != null) {
+                System.out.print("Creacion de zerling posicion: " + inputUsuario.coordenadaX() + "" + inputUsuario.coordenadaY());
+                try {
+                    new Zerling(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RequerimientosInsuficientesException ex) {
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
+                } catch (ReservaDeReproduccionNoDisponibleException | NoExisteEdificioCorrelativoException ex) {
+                    noSePuedeConstruir("\nReserva De Reproduccion No Disponible");
+                }
             }
             s.close();
         });
@@ -250,17 +243,17 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonHidralisco.setOnMouseExited(e -> botonHidralisco.setStyle(botonNormal));
         botonHidralisco.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                new Hidralisco(inputUsuario, jugador);
-                juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (GuaridaNoDisponibleException ex) {
-                throw new RuntimeException(ex);
-            } catch (NoExisteEdificioCorrelativoException e1) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+            if (inputUsuario != null) {
+                try {
+                    new Hidralisco(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RequerimientosInsuficientesException | NoExisteEdificioCorrelativoException ex) {
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
+                } catch (GuaridaNoDisponibleException ex) {
+                    noSePuedeConstruir("\nGuarida No Disponible");
+                }
+                s.close();
             }
-            s.close();
         });
         
         Button botonMutalisco = new Button("Mutalisco");
@@ -270,15 +263,16 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonMutalisco.setOnMouseExited(e -> botonMutalisco.setStyle(botonNormal));
         botonMutalisco.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                new Mutalisco(inputUsuario, jugador);
-                juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (EspiralNoDisponibleException ex) {
-                throw new RuntimeException(ex);
-            } catch (NoExisteEdificioCorrelativoException e1) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
+
+            if (inputUsuario != null) {
+                try {
+                    new Mutalisco(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RequerimientosInsuficientesException | NoExisteEdificioCorrelativoException ex) {
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
+                } catch (EspiralNoDisponibleException ex) {
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
+                }
             }
             s.close();
         });
@@ -290,13 +284,15 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonGuardian.setOnMouseExited(e -> botonGuardian.setStyle(botonNormal));
         botonGuardian.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                new Guardian(inputUsuario, jugador);
-                juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (EspiralNoDisponibleException ex) {
-                noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
+            if (inputUsuario != null) {
+                try {
+                    new Guardian(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RequerimientosInsuficientesException ex) {
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
+                } catch (EspiralNoDisponibleException ex) {
+                    noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
+                }
             }
             s.close();
         });
@@ -308,13 +304,15 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonDevorador.setOnMouseExited(e -> botonDevorador.setStyle(botonNormal));
         botonDevorador.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                new Devorador(inputUsuario, jugador);
-                juegoVista.actualizarTablero();
-            } catch (RequerimientosInsuficientesException ex) {
-                noSePuedeConstruir("\nRequerimientosInsuficientesException");
-            } catch (EspiralNoDisponibleException ex) {
-                noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
+            if (inputUsuario != null) {
+                try {
+                    new Devorador(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RequerimientosInsuficientesException ex) {
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
+                } catch (EspiralNoDisponibleException ex) {
+                    noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
+                }
             }
             s.close();
         });
@@ -347,42 +345,8 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         s.getIcons().add(this.icono);
         s.setResizable(false);
         s.setScene(sc);
-        //s.show();
         s.showAndWait();
 
-        // ButtonType botonAmo = new ButtonType("Amo Supremo");
-        // ButtonType botonZangano = new ButtonType("Zangano");
-        // ButtonType botonZerling = new ButtonType("Zerling");
-        // ButtonType botonHidralisco = new ButtonType("Hidralisco");
-        // ButtonType botonMutalisco = new ButtonType("Mutalisco");
-        //ButtonType botonGuardian = new ButtonType("Guardian");
-        //ButtonType botonDevorador = new ButtonType("Devorador");
-
-
-        //alert.getButtonTypes().setAll(botonAmo, botonZangano, botonZerling, botonHidralisco/*, botonMutaliscobotonGuardian, botonDevorador*/);
-
-        //Optional<ButtonType> result = alert.showAndWait();
-        // if (result.get() == botonAmo){
-        //     AmoSupremo amo = null;
-        //     try {
-        //         amo = new AmoSupremo(jugador.mineral, new GasVespeno(0), new Posicion(2, 2), juegoVista.juego.mapa);
-        //     } catch (RequerimientosInsuficientesException e) {
-        //         e.printStackTrace();
-        //     }
-        //     jugador.agregarIndividuo(amo);
-        // }else if (result.get() == botonZangano) {
-        //     String pos = cargarPosicion();
-        //     System.out.println("\nPOSICION: " + pos);
-        //     //Zangano zangano = new Zangano();
-        // } else if (result.get() == botonZerling) {
-        //     // Zerling zerling = new Zerling();
-        // } else if (result.get() == botonHidralisco) {
-        //     // Hidralisco hidralisco = new Hidralisco();
-        // }  else if (result.get() == botonMutalisco) {
-        //     // Mutalisco mutalisco = new Mutalisco();
-        // } else {
-        //     // ... user chose CANCEL or closed the dialog
-        // }
     }
 
 }

@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
 import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
-import edu.fiuba.algo3.modelo.Exceptions.PuertoEstelarNoDisponibleException;
 import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
@@ -15,7 +14,7 @@ import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mena;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 
-public class Zangano extends Individuo implements UnidadTierra{
+public class Zangano extends Individuo{
 
     private int tiempoDeConstruccion;
     private int tiempo;
@@ -28,6 +27,8 @@ public class Zangano extends Individuo implements UnidadTierra{
         this.vida = new VidaZerg(25);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 1;
+        this.unidadesDeDañoAereo = 0;
+        this.unidadesDeDañoTerrestre = 0;
         this.tiempo = 0;
     }
 
@@ -36,6 +37,7 @@ public class Zangano extends Individuo implements UnidadTierra{
         this.posicion = posicion;
     }
 
+
     public Zangano(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, CriaderoNoDisponibleException, NoExisteEdificioCorrelativoException {
         this.vida = new VidaZerg(25);
         this.estado = new EstadoNoConstruido();
@@ -43,6 +45,7 @@ public class Zangano extends Individuo implements UnidadTierra{
         this.tiempo = 0;
         this.posicion = posicion;
         this.jugador = jugador;
+        this.mapa = jugador.getMapa();
         jugador.añadirUnidad();
         this.jugador.verificarEdificacionCorrelativa(this);
         if(!this.jugador.agregarIndividuo(this) || !this.mapa.agregarOcupable(this, posicion)){
@@ -54,9 +57,21 @@ public class Zangano extends Individuo implements UnidadTierra{
         this.estado = new EstadoConstruido();
     }
 
+    @Override
+    public boolean recibirAtaqueAereo(int unidades) {
+        return false;
+    }
+
+    @Override
+    public boolean recibirAtaqueTerrestre(int unidades) {
+        vida.dañar(unidades);
+        return true;
+    }
+
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
+        if (this.jugador != null) this.jugador.añadirMineral(minarMena());
     }
     public void ocuparMena(Mena mena) throws MenaOcupadaException {
         if (this.estado.estaConstruido()) {
@@ -78,12 +93,7 @@ public class Zangano extends Individuo implements UnidadTierra{
         return 0;
     }
 
-    public boolean atacar(UnidadTierra unidad)
-    {
-        return false;
-    }
-
-    public boolean atacar(UnidadVoladora unidad)
+    public boolean atacar(Individuo individuo)
     {
         return false;
     }
@@ -97,13 +107,24 @@ public class Zangano extends Individuo implements UnidadTierra{
     }
 
     @Override
-    public boolean estaHabilitado(UnidadTierra unidad) {
-        return true;
-    }
-
-    @Override
-    public boolean estaHabilitado(UnidadVoladora unidad) {
-        return true;
+    public boolean moverUnidad(Posicion nuevaPosicion) {
+        if (this.estado.estaConstruido()) {
+            if(super.moverUnidad(nuevaPosicion)){
+                if (this.mena != null) {
+                    this.mena.desocupar();
+                    this.mena = null;
+                }
+                try {
+                    mapa.inyectarRecurso(this);
+                    return true;
+                } catch (MenaOcupadaException e) {
+                    this.mena = null;
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
     }
 
     @Override

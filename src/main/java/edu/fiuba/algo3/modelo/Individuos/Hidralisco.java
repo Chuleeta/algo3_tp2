@@ -14,7 +14,7 @@ import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import javafx.geometry.Pos;
 
-public class Hidralisco extends Individuo implements UnidadTierra{
+public class Hidralisco extends Individuo{
     private final int tiempoDeConstruccion;
     private int tiempo;
 
@@ -22,7 +22,8 @@ public class Hidralisco extends Individuo implements UnidadTierra{
         if (!mineral.invertir(75) | !gas.invertir(25)) {
             throw new RequerimientosInsuficientesException();
         }
-        this.unidadesDeDaño = 10;
+        this.unidadesDeDañoTerrestre = 10;
+        this.unidadesDeDañoAereo = 10;
         this.mapa = mapa;
         this.vida = new VidaZerg(80);
         this.estado = new EstadoNoConstruido();
@@ -33,7 +34,7 @@ public class Hidralisco extends Individuo implements UnidadTierra{
     }
 
     public Hidralisco(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, GuaridaNoDisponibleException, NoExisteEdificioCorrelativoException {
-        this.unidadesDeDaño = 10;
+
         this.mapa = jugador.getMapa();
         this.vida = new VidaZerg(80);
         this.estado = new EstadoNoConstruido();
@@ -53,29 +54,30 @@ public class Hidralisco extends Individuo implements UnidadTierra{
         this.estado = new EstadoConstruido();
     }
 
+
+    @Override
+    public boolean recibirAtaqueAereo(int unidades) {
+        return false;
+    }
+
+    @Override
+    public boolean recibirAtaqueTerrestre(int unidades) {
+        vida.dañar(unidades);
+        return true;
+    }
+
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
     }
 
-    public boolean atacar(UnidadTierra unidad)
+    public boolean atacar(Individuo individuo)
     {
-        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion()) && estaHabilitadoParaAtacar(unidad)) {
-            unidad.recibirDaño(this.unidadesDeDaño);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean estaHabilitadoParaAtacar(UnidadTierra unidad) {
-        return unidad.estaHabilitado(this);
-    }
-
-    public boolean atacar(UnidadVoladora unidad)
-    {
-        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
-            unidad.recibirDaño(this.unidadesDeDaño);
-            return true;
+        if (estado.estaConstruido() && estaDentroDelRango(individuo.posicion())) {
+            if(individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre)){
+                return true;
+            }
+            return individuo.recibirAtaqueAereo(unidadesDeDañoAereo);
         }
         return false;
     }
@@ -85,16 +87,6 @@ public class Hidralisco extends Individuo implements UnidadTierra{
         if(mapa.enAreaEspacial(posicion))
             return false;
         this.posicion = posicion;
-        return true;
-    }
-
-    @Override
-    public boolean estaHabilitado(UnidadTierra unidad) {
-        return true;
-    }
-
-    @Override
-    public boolean estaHabilitado(UnidadVoladora unidad) {
         return true;
     }
 

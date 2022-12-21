@@ -22,5 +22,6 @@ public class VidaZerg extends Vida{
 
     public void dañar(int daño) {
         this.vida -= daño;
+        System.out.print("Daño: " + daño + "Vida Restate:" + this.vida);
     }
 }

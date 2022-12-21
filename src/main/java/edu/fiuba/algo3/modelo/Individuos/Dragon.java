@@ -12,7 +12,7 @@ import edu.fiuba.algo3.modelo.Exceptions.RequerimientosInsuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
-public class Dragon extends Individuo implements UnidadTierra {
+public class Dragon extends Individuo {
     private final int tiempoDeConstruccion;
     private int tiempo;
 
@@ -21,7 +21,8 @@ public class Dragon extends Individuo implements UnidadTierra {
             throw new RequerimientosInsuficientesException();
         }
         this.mapa = mapa;
-        this.unidadesDeDaño = 20;
+        this.unidadesDeDañoTerrestre = 20;
+        this.unidadesDeDañoAereo = 20;
         this.vida = new VidaEscudoProtoss(100, 80);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 6;
@@ -32,7 +33,6 @@ public class Dragon extends Individuo implements UnidadTierra {
 
     public Dragon(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, AccesoNoDisponibleException, NoExisteEdificioCorrelativoException {
         this.mapa = jugador.getMapa();
-        this.unidadesDeDaño = 20;
         this.vida = new VidaEscudoProtoss(100, 80);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 6;
@@ -51,44 +51,37 @@ public class Dragon extends Individuo implements UnidadTierra {
         this.estado = new EstadoConstruido();
     }
 
+    @Override
+    public boolean recibirAtaqueAereo(int unidades) {
+        return false;
+    }
+
+    @Override
+    public boolean recibirAtaqueTerrestre(int unidades) {
+        vida.dañar(unidades);
+        return true;
+    }
+
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
     }
 
-    public boolean atacar(UnidadTierra unidad)
+    public boolean atacar(Individuo individuo)
     {
-        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
-            unidad.recibirDaño(this.unidadesDeDaño);
-            return true;
+        if (estado.estaConstruido() && estaDentroDelRango(individuo.posicion())) {
+            if (individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre)){
+                return true;
+            }
+            return individuo.recibirAtaqueAereo(unidadesDeDañoAereo);
         }
         return false;
     }
-
-    public boolean atacar(UnidadVoladora unidad)
-    {
-        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
-            unidad.recibirDaño(this.unidadesDeDaño);
-            return true;
-        }
-        return false;
-    }
-
     public boolean mover(Posicion posicion)
     {
         if(mapa.enAreaEspacial(posicion))
             return false;
         this.posicion = posicion;
-        return true;
-    }
-
-    @Override
-    public boolean estaHabilitado(UnidadTierra unidad) {
-        return true;
-    }
-
-    @Override
-    public boolean estaHabilitado(UnidadVoladora unidad) {
         return true;
     }
 

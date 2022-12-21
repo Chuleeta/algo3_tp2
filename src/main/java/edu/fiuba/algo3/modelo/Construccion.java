@@ -20,4 +20,11 @@ public interface Construccion extends CorrelativaEdificio, CorrelativaIndividuo 
     boolean estaOcupada(Posicion posicionDada);
     Posicion mostrarPosicion ();
     Jugador mostrarJugador();
+    public Vida obtenerVida();
+    public abstract void recibirAtaqueAereo(int unidades);
+
+    public abstract void recibirAtaqueTerrestre(int unidades);
+    public void dañar(int daño);
+    public Posicion posicion();
+
 }

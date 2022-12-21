@@ -14,7 +14,7 @@ import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.VidaZerg;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 
-public class Zerling extends Individuo implements UnidadTierra{
+public class Zerling extends Individuo{
     private int tiempo;
 
     private int tiempoDeConstruccion;
@@ -24,7 +24,8 @@ public class Zerling extends Individuo implements UnidadTierra{
             throw new RequerimientosInsuficientesException();
         }
         this.posicion = posicion;
-        this.unidadesDeDaño = 4;
+        this.unidadesDeDañoTerrestre = 4;
+        this.unidadesDeDañoAereo = 0;
         this.vida = new VidaZerg(35);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 2;
@@ -35,10 +36,11 @@ public class Zerling extends Individuo implements UnidadTierra{
 
     public Zerling(Posicion posicion, Jugador jugador) throws RequerimientosInsuficientesException, ReservaDeReproduccionNoDisponibleException, NoExisteEdificioCorrelativoException {
         this.posicion = posicion;
-        this.unidadesDeDaño = 4;
         this.vida = new VidaZerg(35);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 2;
+        this.unidadesDeDañoTerrestre = 4;
+        this.unidadesDeDañoAereo = 0;
         this.tiempo = 0;
         rangoDeAtaque = 1;
         this.mapa = jugador.getMapa();
@@ -50,6 +52,17 @@ public class Zerling extends Individuo implements UnidadTierra{
         }
     }
 
+    @Override
+    public boolean recibirAtaqueAereo(int unidades) {
+        return false;
+    }
+
+    @Override
+    public boolean recibirAtaqueTerrestre(int unidades) {
+        vida.dañar(unidades);
+        return true;
+    }
+
     public void pasarTiempo() {
         this.tiempo += 1;
         if (estado.puedeConstruirse(this.tiempoDeConstruccion, this.tiempo )) construir();
@@ -58,21 +71,11 @@ public class Zerling extends Individuo implements UnidadTierra{
         this.estado = new EstadoConstruido();
     }
 
-    public boolean atacar(UnidadTierra unidad)
+    public boolean atacar(Individuo individuo)
     {
-        if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion()) && estaHabilitadoParaAtacar(unidad)) {
-            unidad.recibirDaño(this.unidadesDeDaño);
-            return true;
+        if (estado.estaConstruido() && estaDentroDelRango(individuo.posicion())) {
+            return individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre);
         }
-        return false;
-    }
-
-    private boolean estaHabilitadoParaAtacar(UnidadTierra unidad) {
-        return unidad.estaHabilitado(this);
-    }
-
-    public boolean atacar(UnidadVoladora unidad)
-    {
         return false;
     }
 
@@ -85,16 +88,6 @@ public class Zerling extends Individuo implements UnidadTierra{
     }
 
     @Override
-    public boolean estaHabilitado(UnidadTierra unidad) {
-        return true;
-    }
-
-    @Override
-    public boolean estaHabilitado(UnidadVoladora unidad) {
-        return true;
-    }
-
-    @Override
     public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
         if(mineral.invertir(25)&& gas.invertir(0))
         {
@@ -103,4 +96,5 @@ public class Zerling extends Individuo implements UnidadTierra{
         }
         return false;
     }
+
 }

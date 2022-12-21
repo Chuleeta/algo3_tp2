@@ -1,6 +1,11 @@
 package edu.fiuba.algo3.javafx.Eventos;
 
 import edu.fiuba.algo3.javafx.JuegoVista;
+import edu.fiuba.algo3.modelo.Edificios.NexoMineral;
+import edu.fiuba.algo3.modelo.Exceptions.*;
+import edu.fiuba.algo3.modelo.Individuos.Dragon;
+import edu.fiuba.algo3.modelo.Individuos.Scout;
+import edu.fiuba.algo3.modelo.Individuos.Zealot;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import javafx.event.ActionEvent;
@@ -145,7 +150,7 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
         
         InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente = Font.loadFont(is, 25);
-
+        Stage s = new Stage();
         InputStream is2 = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
         Font fuente2 = Font.loadFont(is2, 25);
 
@@ -163,8 +168,15 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
         botonZealot.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                Zealot zealot = new Zealot(inputUsuario, this.jugador);
+                juegoVista.actualizarTablero();
+            } catch (AccesoNoDisponibleException | NoExisteEdificioCorrelativoException | RequerimientosInsuficientesException e1) {
+                noSePuedeConstruir();
+            }
+            s.close();
         });
-        
+
         Button botonScout = new Button("Scout");
         botonScout.setFont(fuente2);
         botonScout.setStyle(botonNormal);
@@ -173,8 +185,15 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
         botonScout.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                Scout scout = new Scout(inputUsuario, this.jugador);
+                juegoVista.actualizarTablero();
+            } catch (PuertoEstelarNoDisponibleException | NoExisteEdificioCorrelativoException | RequerimientosInsuficientesException e1) {
+                noSePuedeConstruir();
+            }
+            s.close();
         });
-        
+
         Button botonDragon = new Button("Dragon");
         botonDragon.setFont(fuente2);
         botonDragon.setStyle(botonNormal);
@@ -183,10 +202,17 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
         botonDragon.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
             System.out.println("\n input usuario: "+ inputUsuario);
+            try {
+                Dragon dragon = new Dragon(inputUsuario, this.jugador);
+                juegoVista.actualizarTablero();
+            } catch (AccesoNoDisponibleException | NoExisteEdificioCorrelativoException | RequerimientosInsuficientesException e1) {
+                noSePuedeConstruir();
+            }
+            s.close();
         });
-        
+
         VBox inputPosicion = new VBox();
-        
+
         opciones.getChildren().addAll(botonZealot, botonScout, botonDragon);
         opciones.setSpacing(20);
         opciones.setAlignment(Pos.CENTER);
@@ -196,7 +222,7 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
         inputPosicion.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
         Scene sc = new Scene(inputPosicion, 800, 300, Color.rgb(47, 52, 58));
         sc.setFill(Color.RED);
-        Stage s = new Stage();
+        //Stage s = new Stage();
         s.initModality(Modality.APPLICATION_MODAL);
         s.setTitle("Tienda Individuos Protoss");
         s.getIcons().add(this.icono);
@@ -232,5 +258,39 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
         // } else {
         //     // ... user chose CANCEL or closed the dialog
         // }
+    }
+
+    private void noSePuedeConstruir() {
+        InputStream is = getClass().getResourceAsStream("/fonts/Starcraft-Normal.ttf");
+        Font fuente = Font.loadFont(is, 20);
+
+        Label ingresarPosicion = new Label("Posicion Ingresada Invalida o\n\nRequerimientos Insuficientes!");
+        ingresarPosicion.setFont(fuente);
+        ingresarPosicion.setStyle(formatoTexto);
+        ingresarPosicion.setAlignment(Pos.CENTER);
+
+        Button botonConfirmar = new Button("Confirmar");
+        botonConfirmar.setFont(fuente);
+        botonConfirmar.setStyle(botonNormal);
+        botonConfirmar.setOnMouseEntered(e -> botonConfirmar.setStyle(botonAntesDeSerPresionado));
+        botonConfirmar.setOnMouseExited(e -> botonConfirmar.setStyle(botonNormal));
+
+
+        VBox inputPosicion = new VBox();
+        inputPosicion.getChildren().addAll(ingresarPosicion, botonConfirmar);
+        inputPosicion.setSpacing(30);
+        inputPosicion.setAlignment(Pos.CENTER);
+        inputPosicion.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
+
+        Scene sc = new Scene(inputPosicion, 500, 300);
+        Stage s = new Stage();
+        s.setResizable(false);
+        s.setTitle("Fallo Al Construir Edificio");
+        s.getIcons().add(this.icono);
+        botonConfirmar.setOnAction(e-> {
+            s.close();
+        });
+        s.setScene(sc);
+        s.showAndWait();
     }
 }
