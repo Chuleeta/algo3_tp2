@@ -161,4 +161,9 @@ public class Acceso extends Edificio{
         return false;
     }
 
+    @Override
+    public String getSpray(){
+        return "/imagenes/acceso.png";
+    }
+
 }

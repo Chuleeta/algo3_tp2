@@ -161,4 +161,9 @@ public class Pilon extends Edificio{
         // TODO Auto-generated method stub
         return false;
     }
+
+    @Override
+    public String getSpray(){
+        return "/imagenes/pilon.png";
+    }
 }

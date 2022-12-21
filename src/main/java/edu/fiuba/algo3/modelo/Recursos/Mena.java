@@ -79,7 +79,7 @@ public class Mena implements RecursoInyectable{
 
     @Override
     public String getSpray(){
-        return "grey";
+        return "/imagenes/mena.png";
     }
 
     @Override

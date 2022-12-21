@@ -93,4 +93,9 @@ public class Guardian extends Individuo implements UnidadVoladora{
         return false;
     }
 
+    @Override
+    public String getSpray(){
+        return "/imagenes/guardian.png";
+    }
+
 }

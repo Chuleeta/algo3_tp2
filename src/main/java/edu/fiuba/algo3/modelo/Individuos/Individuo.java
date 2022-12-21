@@ -86,4 +86,5 @@ public abstract class Individuo  implements Ocupable
         return false;
     }
     
+    public abstract String getSpray();
 }

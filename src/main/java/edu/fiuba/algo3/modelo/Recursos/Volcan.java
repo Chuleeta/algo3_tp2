@@ -85,7 +85,7 @@ public class Volcan implements RecursoInyectable{
 
     @Override
     public String getSpray(){
-        return "rojo";
+        return "/imagenes/volcan.png";
     }
 
     @Override

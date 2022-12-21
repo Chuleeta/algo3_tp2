@@ -214,4 +214,9 @@ public class Criadero extends Edificio{
         // TODO Auto-generated method stub
         return false;
     }
+
+    @Override
+    public String getSpray(){
+        return "/imagenes/criadero.png";
+    }
 }

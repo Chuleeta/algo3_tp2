@@ -131,4 +131,9 @@ public class Zealot extends Individuo{
         return false;
     }
 
+    @Override
+    public String getSpray(){
+        return "/imagenes/zealot.png";
+    }
+
 }

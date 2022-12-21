@@ -168,4 +168,9 @@ public class Guarida extends Edificio{
         // TODO Auto-generated method stub
         return false;
     }
+
+    @Override
+    public String getSpray(){
+        return "/imagenes/guarida.png";
+    }
 }

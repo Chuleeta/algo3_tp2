@@ -163,4 +163,8 @@ public class ReservaDeReproduccion extends Edificio{
         return false;
     }
 
+    @Override
+    public String getSpray(){
+        return "/imagenes/reserva.png";
+    }
 }

@@ -97,4 +97,9 @@ public class Zerling extends Individuo{
         return false;
     }
 
+    @Override
+    public String getSpray(){
+        return "/imagenes/zerling.png";
+    }
+
 }

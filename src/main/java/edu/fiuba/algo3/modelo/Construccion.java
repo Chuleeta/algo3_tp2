@@ -27,4 +27,5 @@ public interface Construccion extends CorrelativaEdificio, CorrelativaIndividuo 
     public void dañar(int daño);
     public Posicion posicion();
 
+    String getSpray();
 }

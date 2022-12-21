@@ -68,8 +68,10 @@ public class Tablero {
     }
 
     public UnidadIndividuo crearUnidadMovible(Individuo individuo, Jugador oponente) {
-        int coordenadaX = ((individuo.posicion().coordenadaX()-1) * 40) + 10;
-        int coordenadaY = ((individuo.posicion().coordenadaY()-1) * 40) + 10;
+        // int coordenadaX = ((individuo.posicion().coordenadaX()-1) * 40) + 10;
+        // int coordenadaY = ((individuo.posicion().coordenadaY()-1) * 40) + 10;
+        int coordenadaX = ((individuo.posicion().coordenadaX()-1) * 40);
+        int coordenadaY = ((individuo.posicion().coordenadaY()-1) * 40);
         AtacarHandler action = new AtacarHandler(juegoVista, oponente, individuo);
         UnidadIndividuo unidad = new UnidadIndividuo(individuo, coordenadaX, coordenadaY, action);
         hacerMovible(unidad);
@@ -77,8 +79,10 @@ public class Tablero {
         return unidad;
     }
     public UnidadEdificio crearUnidadEstatica(Construccion construccion) {
-        int coordenadaX = ((construccion.mostrarPosicion().coordenadaX()-1) * 40) + 10;
-        int coordenadaY = ((construccion.mostrarPosicion().coordenadaY()-1) * 40) + 10;
+        // int coordenadaX = ((construccion.mostrarPosicion().coordenadaX()-1) * 40) + 10;
+        // int coordenadaY = ((construccion.mostrarPosicion().coordenadaY()-1) * 40) + 10;
+        int coordenadaX = ((construccion.mostrarPosicion().coordenadaX()-1) * 40);
+        int coordenadaY = ((construccion.mostrarPosicion().coordenadaY()-1) * 40);
         UnidadEdificio unidad = new UnidadEdificio(construccion, coordenadaX, coordenadaY);
         unidad.setOnMouseReleased(e ->{
             mostrarPosicion(unidad);
@@ -131,8 +135,10 @@ public class Tablero {
     public void actualizarRecursos() {
         ArrayList<RecursoInyectable> recursos = juego.mostrarRecursos();
         for (RecursoInyectable recurso : recursos) {
-            int coordenadaX = ((recurso.mostrarPosicion().coordenadaX() - 1) * 40) + 10;
-            int coordenadaY = ((recurso.mostrarPosicion().coordenadaY() - 1) * 40) + 10;
+            // int coordenadaX = ((recurso.mostrarPosicion().coordenadaX() - 1) * 40) + 10;
+            // int coordenadaY = ((recurso.mostrarPosicion().coordenadaY() - 1) * 40) + 10;
+            int coordenadaX = ((recurso.mostrarPosicion().coordenadaX() - 1) * 40);
+            int coordenadaY = ((recurso.mostrarPosicion().coordenadaY() - 1) * 40);
             UnidadRecurso unidad = new UnidadRecurso(recurso, coordenadaX /*- 1*/, coordenadaY /*- 1*/);
             unidad.setOnMouseReleased(e ->{
                 mostrarPosicion(unidad);
@@ -245,8 +251,10 @@ public class Tablero {
     private Posicion calcularPosicion(Rectangle n) {
         double resultadoX = new BigDecimal(n.getTranslateX()).setScale(1, RoundingMode.UP).doubleValue();
         double resultadoY = new BigDecimal(n.getTranslateY()).setScale(1, RoundingMode.UP).doubleValue();
-        n.setTranslateX(encontrarMultiploDeMasCercanoA(40, (int)resultadoX) + 10);
-        n.setTranslateY(encontrarMultiploDeMasCercanoA(40, (int)resultadoY) + 10);
+        // n.setTranslateX(encontrarMultiploDeMasCercanoA(40, (int)resultadoX) + 10);
+        // n.setTranslateY(encontrarMultiploDeMasCercanoA(40, (int)resultadoY) + 10);
+        n.setTranslateX(encontrarMultiploDeMasCercanoA(40, (int)resultadoX));
+        n.setTranslateY(encontrarMultiploDeMasCercanoA(40, (int)resultadoY));
         double xDouble = encontrarMultiploDeMasCercanoA(40, (int)resultadoX);
         double yDouble = encontrarMultiploDeMasCercanoA(40, (int)resultadoY);
         int x = (Math.round((float)xDouble) / 40) + 1;
@@ -284,8 +292,8 @@ public class Tablero {
         mapaVista.getChildren().clear();
         crearGrilla();
         actualizarZonasAereas();
-        actualizarConstrucciones();
         actualizarRecursos();
+        actualizarConstrucciones();
         actualizarUnidades();
     }
 }

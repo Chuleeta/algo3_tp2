@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,10 +23,13 @@ public class UnidadIndividuo extends Rectangle implements Notificable {
     private final BotonModal botonVida;
     private Individuo individuo;
     public UnidadIndividuo(Individuo individuo, int coordenadaX, int coordenadaY, EventHandler action) {
-        super(20, 20, Color.BLACK);
+        super(40, 40, Color.BLACK);
         this.individuo = individuo;
         this.setTranslateX(coordenadaX);
         this.setTranslateY(coordenadaY);
+        String pathLogo = this.getClass().getResource(individuo.getSpray()).toString();
+        Image logo = new Image(pathLogo);
+        this.setFill(new ImagePattern(logo));
         this.botonAtacar = new BotonModal("Atacar");
         this.botonVida = new BotonModal(individuo.obtenerVida().vidaRestante());
         this.action = action;

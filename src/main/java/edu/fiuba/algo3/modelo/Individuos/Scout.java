@@ -95,4 +95,9 @@ public class Scout extends Individuo implements UnidadVoladora{
         }
         return false;
     }
+
+    @Override
+    public String getSpray(){
+        return "/imagenes/scout.png";
+    }
 }

@@ -182,4 +182,9 @@ public class NexoMineral extends Edificio{
         // TODO Auto-generated method stub
         return false;
     }
+
+    @Override
+    public String getSpray(){
+        return "/imagenes/nexomineral.png";
+    }
 }

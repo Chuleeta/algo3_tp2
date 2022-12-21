@@ -158,4 +158,9 @@ public class PuertoEstelar extends Edificio{
         return true;
     }
 
+    @Override
+    public String getSpray(){
+        return "/imagenes/puertoestelar.png";
+    }
+
 }

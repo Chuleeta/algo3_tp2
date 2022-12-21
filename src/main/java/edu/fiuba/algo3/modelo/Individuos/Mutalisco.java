@@ -119,4 +119,9 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
         return true;
     }
 
+    @Override
+    public String getSpray(){
+        return "/imagenes/mutalisco.png";
+    }
+
 }

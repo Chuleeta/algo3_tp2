@@ -105,4 +105,9 @@ public class Devorador extends Individuo implements UnidadVoladora{
         }
         return false;
     }
+
+    @Override
+    public String getSpray(){
+        return "/imagenes/devorador.png";
+    }
 }

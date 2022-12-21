@@ -208,6 +208,10 @@ public class Extractor extends Edificio{
         return false;
     }
 
+    @Override
+    public String getSpray(){
+        return "/imagenes/extractor.png";
+    }
     /*public void destruir()
     {
         this.mapa.destruirConstruccion(this);

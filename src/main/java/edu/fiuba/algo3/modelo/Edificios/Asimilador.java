@@ -194,6 +194,11 @@ public class Asimilador extends Edificio{
         return false;
     }
 
+    @Override
+    public String getSpray(){
+        return "/imagenes/asimilador.png";
+    }
+
     /*public void destruir()
     {
         this.jugador.destruirConstruccion(this);

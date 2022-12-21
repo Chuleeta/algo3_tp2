@@ -96,4 +96,9 @@ public class Dragon extends Individuo {
         }
         return false;
     }
+
+    @Override
+    public String getSpray(){
+        return "/imagenes/dragon.png";
+    }
 }

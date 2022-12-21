@@ -89,4 +89,9 @@ public class AmoSupremo extends Individuo {
         }
         return false;
     }
+
+    @Override
+    public String getSpray(){
+        return "/imagenes/amosupremo.png";
+    }
 }

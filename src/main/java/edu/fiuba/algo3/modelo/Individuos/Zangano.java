@@ -139,4 +139,9 @@ public class Zangano extends Individuo{
         return false;
     }
 
+    @Override
+    public String getSpray(){
+        return "/imagenes/zangano.png";
+    }
+
 }

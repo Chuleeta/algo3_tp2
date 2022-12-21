@@ -101,4 +101,9 @@ public class Hidralisco extends Individuo{
         }
         return false;
     }
+
+    @Override
+    public String getSpray(){
+        return "/imagenes/hidralisco.png";
+    }
 }

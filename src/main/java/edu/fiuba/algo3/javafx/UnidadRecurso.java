@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -17,12 +18,12 @@ import javafx.stage.Stage;
 public class UnidadRecurso extends Rectangle {
     private RecursoInyectable recurso;
     public UnidadRecurso(RecursoInyectable recurso, int coordenadaX, int coordenadaY) {
-        super(20, 20, Color.GREY);
-        if (recurso.getSpray() == "grey"){
-            this.setFill(Color.GREY);
-        } else {
+        super(40, 40, Color.GREY);
             this.setFill(Color.BROWN);
-        }
+            String pathLogo = this.getClass().getResource(recurso.getSpray()).toString();
+		    Image logo = new Image(pathLogo);
+            this.setFill(new ImagePattern(logo));
+        
         this.recurso = recurso;
         this.setTranslateX(coordenadaX);
         this.setTranslateY(coordenadaY);
