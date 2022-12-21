@@ -170,6 +170,7 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonNexo.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
             try {
+                System.out.println(this.cargarPosicion().coordenadaX() + "" + this.cargarPosicion().coordenadaY());
                 NexoMineral nexo = new NexoMineral(inputUsuario, this.jugador);
                 juegoVista.actualizarTablero();
                 
@@ -226,6 +227,7 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonAcceso.setOnMouseExited(e -> botonAcceso.setStyle(botonNormal));
         botonAcceso.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
+            System.out.println(this.cargarPosicion().coordenadaX() + "" + this.cargarPosicion().coordenadaY());
             try {
                 Acceso acceso = new Acceso(inputUsuario, this.jugador);
                 juegoVista.actualizarTablero();

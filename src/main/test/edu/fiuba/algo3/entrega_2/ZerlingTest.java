@@ -149,7 +149,7 @@ public class ZerlingTest {
         pilon.pasarTiempo();
         jugadorProtoss.incrementarMineral(1000);
         jugadorProtoss.incrementarGas(1000);
-        Acceso acceso = new Acceso(new Posicion(11, 10), jugadorProtoss);
+        Acceso acceso = new Acceso(new Posicion(8, 8), jugadorProtoss);
         Zerling zerling = new Zerling(new Posicion(1,2), jugador);
         Mutalisco mutaltemporal = new Mutalisco(new Posicion(1,5), jugador);
         Guardian guardian = new Guardian(new Posicion(1,5), jugador);
