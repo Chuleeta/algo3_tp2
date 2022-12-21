@@ -23,7 +23,7 @@ public class Juego {
         this.jugadorUno.pasarTiempo();
         this.jugadorDos.pasarTiempo();
         
-        return (this.jugadorDos.verificarConstruccionesVacias() && this.jugadorUno.verificarConstruccionesVacias());
+        return (!this.jugadorDos.verificarConstruccionesVacias() && !this.jugadorUno.verificarConstruccionesVacias());
     }
 
     public ArrayList<Construccion> mostrarConstrucciones() {

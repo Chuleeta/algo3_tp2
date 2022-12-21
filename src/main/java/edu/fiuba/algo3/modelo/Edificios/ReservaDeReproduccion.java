@@ -21,7 +21,7 @@ import edu.fiuba.algo3.modelo.Zonas.ZonaMoho;
 import edu.fiuba.algo3.modelo.Zonas.ZonaNeutral;
 
 public class ReservaDeReproduccion extends Edificio{
-    private static int VIDA_COMPLETA = 1000;
+    private static int VIDA_COMPLETA = 10;
 
     public ReservaDeReproduccion(Posicion posicion, Mapa mapa)
     {
@@ -31,9 +31,6 @@ public class ReservaDeReproduccion extends Edificio{
         zona = new ZonaMoho(this.posicion);
         tiempo = 0;
         this.vida = new VidaZerg(VIDA_COMPLETA);
-        // if(this.jugador == null){
-        //     crearJugadorPorDefecto();
-        // }
     }
 
     public ReservaDeReproduccion(Posicion posicion, Jugador jugador) throws RecursosInsuficientesException {

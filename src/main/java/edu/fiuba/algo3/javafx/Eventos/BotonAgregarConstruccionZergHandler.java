@@ -309,39 +309,6 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         //s.show();
         s.showAndWait();
 
-
-        // Label etiqueta = new Label();
-        // etiqueta.setText("Agregar Construccion Zerg");
-        // // vista.agregarElementosAEjecutar(etiqueta);
-        // // tablero.agregarBloqueDobleRepeticion();
-
-        // Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        // alert.setTitle("Construcciones zerg");
-        // alert.setHeaderText("Seleccione la construccion que desea construir");
-
-        // ButtonType botonCriadero = new ButtonType("Criadero");
-        // ButtonType botonReserva = new ButtonType("Reserva de\nReproduccion");
-        // ButtonType botonExtractor = new ButtonType("Extractor");
-        // ButtonType botonGuarida = new ButtonType("Guarida");
-        // ButtonType botonEspiral = new ButtonType("Espiral");
-
-
-        // alert.getButtonTypes().setAll(botonCriadero, botonReserva, botonExtractor, botonGuarida, botonEspiral);
-
-        // Optional<ButtonType> result = alert.showAndWait();
-        // if (result.get() == botonCriadero){
-        //     // Criadero criadero = new Criadero();
-        // }else if (result.get() == botonReserva) {
-        //     //ReservaDeReproduccion reserva = new ReservaDeReproduccion();
-        // } else if (result.get() == botonExtractor) {
-        //     // Extractor extractor = new Extractor();
-        // } else if (result.get() == botonGuarida) {
-        //     // Guarida guarida = new Guarida();
-        // }  else if (result.get() == botonEspiral) {
-        //     // Espiral espiral = new Espiral();
-        // } else {
-        //     // ... user chose CANCEL or closed the dialog
-        // }
     }
 
     private void noSePuedeConstruir() {
