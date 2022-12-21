@@ -25,7 +25,7 @@ public class Criadero extends Edificio{
 
     private List<Larva> larvas;
     private static int COSTO_DE_CONSTRUCCION = 200;
-    private static int VIDA_COMPLETA = 500;
+    private static int VIDA_COMPLETA = 10;
 
     public Criadero(Posicion posicion, Mapa mapa) {
         this.posicion = posicion;

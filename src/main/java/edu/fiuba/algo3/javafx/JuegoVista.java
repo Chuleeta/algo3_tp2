@@ -50,7 +50,7 @@ public class JuegoVista extends BorderPane {
 	private Image logo;
 	private Image fondo;
 
-    private Label nombreDelJugador;
+    private LabelTurno nombreDelJugador;
     private Image datosJugador;
     private String turnoJugadorActual;
     
@@ -106,7 +106,7 @@ public class JuegoVista extends BorderPane {
 
         //JUGADOR Jugadndo
         this.turnoJugadorActual = "1";
-        this.nombreDelJugador = new Label("Turno Jugador : " + turnoJugadorActual);
+        this.nombreDelJugador = new LabelTurno(jugadorUno);
         nombreDelJugador.setFont(fuente);
         nombreDelJugador.setStyle(formatoTexto);
         this.posicionSeleccionada = new Label("Posicion Seleccionada - En X: " + this.pisicionSeleccionadaX + " | En Y: " + this.pisicionSeleccionadaY);
@@ -124,15 +124,7 @@ public class JuegoVista extends BorderPane {
         nombreDelJugador2.setFont(fuente);
         nombreDelJugador2.setStyle(formatoTexto);
         nombreDelJugador2.setPadding(new Insets(0, 0, 0, 25));
-        /*if (eleccionRaza1 == "Zerg") {
-            jugadorUno = jugadorUno.definirZerg();
-            jugadorDos = jugadorDos.definirProtoss();
-            jugadorUno = new JugadorZerg(nombreJugador1, "rojo", eleccionRaza1, new Posicion(0, 0), mapa, 0);
-            jugadorDos = new JugadorProtoss(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
-        } else {
-            jugadorUno = new JugadorProtoss(nombreJugador1, "rojo", eleccionRaza1, new Posicion(0, 0), mapa, 0);
-            jugadorDos = new JugadorZerg(nombreJugador2, "azul", eleccionRaza2, new Posicion(ancho, alto), mapa, 0);
-        }*/
+
 
         //raza
         Label razaJugador1 = new Label("Raza: \n" + eleccionRaza1);
@@ -150,7 +142,7 @@ public class JuegoVista extends BorderPane {
         BotonAgregarIndividuoZergHandler agregarIndividuoZergHandler;
         BotonAgregarConstruccionProtossHandler agregarConstruccionProtossHandler;
         BotonAgregarIndividuoProtossHandler agregarIndividuoProtossHandler;
-        PasarTurno pasarturno = new PasarTurno("Pasar turno", jugadorUno, jugadorDos);
+        PasarTurno pasarturno = new PasarTurno("Pasar turno", juego);
         this.pasarTurno = pasarturno;
         if (eleccionRaza1 == "Zerg") {
             agregarConstruccionZergHandler = new BotonAgregarConstruccionZergHandler(this, jugadorUno);
@@ -184,6 +176,7 @@ public class JuegoVista extends BorderPane {
         pasarTurno.añadirSuscriptor(mineralesJugadorUno);
         pasarTurno.añadirSuscriptor(gasJugadorUno);
         pasarTurno.añadirSuscriptor(gasJugadorDos);
+        pasarturno.añadirSuscriptor(nombreDelJugador);
 
         VBox turnoActual = new VBox();
 

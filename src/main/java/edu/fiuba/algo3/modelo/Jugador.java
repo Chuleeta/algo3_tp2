@@ -45,8 +45,8 @@ public class Jugador {
         this.mapa = mapa;
         this.construcciones = new ArrayList<>();
         this.individuos = new ArrayList<>();
-        this.mineral = new Mineral(200);
-        this.gas = new GasVespeno(0);
+        this.mineral = new Mineral(2000);
+        this.gas = new GasVespeno(2000);
         this.capacidad = capacidad;
         unidadesCreadas = 0;
     }
@@ -107,7 +107,6 @@ public class Jugador {
             individuo.pasarTiempo();
         }
         mapa.filtrarConstrucciones(construcciones);
-        System.out.println(this.mineral.getCantidad());
     }
 
     public boolean agregarConstruccion(Construccion construccion){
@@ -139,7 +138,9 @@ public class Jugador {
         construccionesDestruidas += 1;
     }
     public boolean verificarConstruccionesVacias() {
-        return (!this.construcciones.isEmpty());
+
+        return ((this.construcciones.size() == 0) && (construccionesDestruidas > 0)) ;
+
     }
 
     public ArrayList<Construccion> getConstrucciones() {
