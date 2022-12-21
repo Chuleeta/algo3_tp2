@@ -58,7 +58,7 @@ public class Zerling extends Individuo{
     }
 
     @Override
-    public boolean recibirAtaqueTerrestre(int unidades) {
+    public boolean recibirAtaqueTerrestre(int unidades, Posicion posicionAtacante) {
         vida.dañar(unidades);
         return true;
     }
@@ -74,7 +74,7 @@ public class Zerling extends Individuo{
     public boolean atacar(Individuo individuo)
     {
         if (estado.estaConstruido() && estaDentroDelRango(individuo.posicion())) {
-            return individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre);
+            return individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre, this.posicion);
         }
         return false;
     }

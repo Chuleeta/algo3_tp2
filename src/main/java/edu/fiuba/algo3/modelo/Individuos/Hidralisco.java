@@ -63,7 +63,7 @@ public class Hidralisco extends Individuo{
     }
 
     @Override
-    public boolean recibirAtaqueTerrestre(int unidades) {
+    public boolean recibirAtaqueTerrestre(int unidades, Posicion posicionAtacante) {
         vida.dañar(unidades);
         return true;
     }
@@ -76,7 +76,7 @@ public class Hidralisco extends Individuo{
     public boolean atacar(Individuo individuo)
     {
         if (estado.estaConstruido() && estaDentroDelRango(individuo.posicion())) {
-            if(individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre)){
+            if(individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre, this.posicion)){
                 return true;
             }
             return individuo.recibirAtaqueAereo(unidadesDeDañoAereo);

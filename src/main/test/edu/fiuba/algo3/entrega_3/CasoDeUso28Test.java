@@ -244,7 +244,8 @@ public class CasoDeUso28Test {
         assertTrue(zealot.invisible);
 
         //zealot.recibirDaño(60);         //Le quito el escudo
-        hidralisco.atacar(zealot);
+        for(int i=0; i<7; i++)
+            hidralisco.atacar(zealot);
 
         assertFalse(zealot.tieneVidaCompleta()); //Hidralisco esta en rango de zealot y le quita vida aunque sea invisible. No hay vida completa
 

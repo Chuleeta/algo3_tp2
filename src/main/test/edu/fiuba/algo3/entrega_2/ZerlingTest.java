@@ -141,7 +141,7 @@ public class ZerlingTest {
         Espiral espiral = new Espiral(new Posicion(3,3), jugador);
         for(int i=0; i<20; i++)
             espiral.pasarTiempo();
-        Pilon pilon = new Pilon(new Posicion(10, 10), jugadorProtoss);
+        Pilon pilon = new Pilon(new Posicion(8, 8), jugadorProtoss);
         pilon.pasarTiempo();
         pilon.pasarTiempo();
         pilon.pasarTiempo();
@@ -149,7 +149,7 @@ public class ZerlingTest {
         pilon.pasarTiempo();
         jugadorProtoss.incrementarMineral(1000);
         jugadorProtoss.incrementarGas(1000);
-        Acceso acceso = new Acceso(new Posicion(11, 10), jugadorProtoss);
+        Acceso acceso = new Acceso(new Posicion(9, 9), jugadorProtoss);
         Zerling zerling = new Zerling(new Posicion(1,2), jugador);
         Mutalisco mutaltemporal = new Mutalisco(new Posicion(1,5), jugador);
         Guardian guardian = new Guardian(new Posicion(1,5), jugador);

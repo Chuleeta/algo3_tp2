@@ -62,7 +62,7 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
     }
 
     @Override
-    public boolean recibirAtaqueTerrestre(int unidades) {
+    public boolean recibirAtaqueTerrestre(int unidades, Posicion posicionAtacante) {
         return false;
     }
 
@@ -74,7 +74,7 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
     public boolean atacar(Individuo individuo)
     {
         if (estado.estaConstruido() && estaDentroDelRango(individuo.posicion())) {
-            if(individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre)){
+            if(individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre, this.posicion)){
                 return true;
             }
             return individuo.recibirAtaqueAereo(unidadesDeDañoAereo);

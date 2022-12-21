@@ -59,7 +59,7 @@ public abstract class Individuo  implements Ocupable
 
     public abstract boolean recibirAtaqueAereo(int unidades);
 
-    public abstract boolean recibirAtaqueTerrestre(int unidades);
+    public abstract boolean recibirAtaqueTerrestre(int unidades, Posicion posicionAtacante);
 
     public void crearJugadorPorDefecto() {
         jugador = new Jugador("Default Jugador", "Color Default", "Raza default", new Posicion(6,6), new Mapa(), 200);

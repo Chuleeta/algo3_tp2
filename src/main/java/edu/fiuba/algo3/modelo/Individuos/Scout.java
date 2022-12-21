@@ -60,7 +60,7 @@ public class Scout extends Individuo implements UnidadVoladora{
     }
 
     @Override
-    public boolean recibirAtaqueTerrestre(int unidades) {
+    public boolean recibirAtaqueTerrestre(int unidades, Posicion posicionAtacante) {
         return false;
     }
 
@@ -75,7 +75,7 @@ public class Scout extends Individuo implements UnidadVoladora{
             if (individuo.recibirAtaqueAereo(unidadesDeDañoAereo)){
                 return true;
             }
-            return individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre);
+            return individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre, this.posicion);
         }
         return false;
     }

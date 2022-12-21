@@ -65,7 +65,7 @@ public class Zangano extends Individuo{
     }
 
     @Override
-    public boolean recibirAtaqueTerrestre(int unidades) {
+    public boolean recibirAtaqueTerrestre(int unidades, Posicion posicionAtacante) {
         vida.dañar(unidades);
         return true;
     }

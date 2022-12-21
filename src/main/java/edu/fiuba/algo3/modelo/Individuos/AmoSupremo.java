@@ -59,7 +59,7 @@ public class AmoSupremo extends Individuo {
     }
 
     @Override
-    public boolean recibirAtaqueTerrestre(int unidades) {
+    public boolean recibirAtaqueTerrestre(int unidades, Posicion posicionAtacante) {
         return false;
     }
 

@@ -63,7 +63,7 @@ public class Devorador extends Individuo implements UnidadVoladora{
     }
 
     @Override
-    public boolean recibirAtaqueTerrestre(int unidades) {
+    public boolean recibirAtaqueTerrestre(int unidades, Posicion posicionAtacante) {
         return false;
     }
 

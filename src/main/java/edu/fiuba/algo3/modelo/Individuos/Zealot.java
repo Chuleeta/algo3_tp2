@@ -70,7 +70,7 @@ public class Zealot extends Individuo{
     public boolean atacar(Individuo unidad)
     {
         if (estado.estaConstruido() && estaDentroDelRango(unidad.posicion())) {
-            if (unidad.recibirAtaqueTerrestre(unidadesDeDañoTerrestre)){
+            if (unidad.recibirAtaqueTerrestre(unidadesDeDañoTerrestre, this.posicion)){
                 atacados.put(unidad, unidad.obtenerVida());
                 if(atacados.get(unidad).vida <= 0) {
                     atacados.remove(unidad);
@@ -106,8 +106,8 @@ public class Zealot extends Individuo{
     }
 
     @Override
-    public boolean recibirAtaqueTerrestre(int unidades) {
-        if(!mapa.laZonaEstaVigilada(posicion) && invisible) return false;
+    public boolean recibirAtaqueTerrestre(int unidades, Posicion posicionAtacante) {
+        if(!mapa.laZonaEstaVigilada(posicion) && !estaDentroDelRango(posicionAtacante) && invisible) return false;
         vida.dañar(unidades);
         return true;
     }

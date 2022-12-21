@@ -60,7 +60,7 @@ public class Guardian extends Individuo implements UnidadVoladora{
     }
 
     @Override
-    public boolean recibirAtaqueTerrestre(int unidades) {
+    public boolean recibirAtaqueTerrestre(int unidades, Posicion posicionAtacante) {
         return false;
     }
 
@@ -72,7 +72,7 @@ public class Guardian extends Individuo implements UnidadVoladora{
     public boolean atacar(Individuo individuo)
     {
         if (estado.estaConstruido() && estaDentroDelRango(individuo.posicion())) {
-            return individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre);
+            return individuo.recibirAtaqueTerrestre(unidadesDeDañoTerrestre, this.posicion);
         }
         return false;
     }
