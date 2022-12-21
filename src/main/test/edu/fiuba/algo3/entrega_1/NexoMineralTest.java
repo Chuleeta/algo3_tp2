@@ -27,7 +27,7 @@ public class NexoMineralTest {
         jugador.pasarTiempo();
         jugador.pasarTiempo();
         jugador.pasarTiempo();
-        assertEquals(jugador.mineral.getCantidad(), 250);
+        assertEquals(jugador.mineral.getCantidad(), 275);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class NexoMineralTest {
         jugador.pasarTiempo();
         jugador.pasarTiempo();
 
-        assertEquals(jugador.mineral.getCantidad(), 150);
+        assertEquals(jugador.mineral.getCantidad(), 175);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class NexoMineralTest {
         for(int i = 0; i<60; i+=1){
             jugador.pasarTiempo();
         }
-        assertEquals(jugador.mineral.getCantidad(), 2150);
+        assertEquals(jugador.mineral.getCantidad(), 2175);
     }
 
     // Caso de uso 11
