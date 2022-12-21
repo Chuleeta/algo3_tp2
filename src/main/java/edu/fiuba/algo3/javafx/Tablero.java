@@ -97,9 +97,9 @@ public class Tablero {
     public void actualizarRecursos() {
         ArrayList<RecursoInyectable> recursos = juego.mostrarRecursos();
         for (RecursoInyectable recurso : recursos) {
-            int coordenadaX = (recurso.mostrarPosicion().coordenadaX() * 40) + 10;
-            int coordenadaY = (recurso.mostrarPosicion().coordenadaY() * 40) + 10;
-            UnidadRecurso unidad = new UnidadRecurso(recurso, coordenadaX, coordenadaY);
+            int coordenadaX = ((recurso.mostrarPosicion().coordenadaX() - 1) * 40) + 10;
+            int coordenadaY = ((recurso.mostrarPosicion().coordenadaY() - 1) * 40) + 10;
+            UnidadRecurso unidad = new UnidadRecurso(recurso, coordenadaX - 1, coordenadaY - 1);
             unidad.setOnMouseReleased(e ->{
                 mostrarPosicion(unidad);
             });

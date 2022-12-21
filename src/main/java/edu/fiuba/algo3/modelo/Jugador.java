@@ -256,10 +256,27 @@ public class Jugador {
     public void atacarUnidad(Posicion posicion, Individuo individuoAtacante) throws NoSeEncuentraAlIndividuoException {
         Individuo individuoAtacado = encontrarIndividuo(posicion);
         if(individuoAtacado != null) {
-            System.out.print(individuoAtacante.atacar(individuoAtacado));
+            individuoAtacante.atacar(individuoAtacado);
             return;
         }
+        Construccion construccion = encontrarConstruccion(posicion);
+        System.out.println(construccion);
+        if(construccion != null) {
+            individuoAtacante.atacar(construccion);
+            return;
+        }
+
         throw new NoSeEncuentraAlIndividuoException();
+    }
+
+    private Construccion encontrarConstruccion(Posicion posicion) {
+        for (Construccion construccion : this.construcciones) {
+            System.out.println("x: " + construccion.posicion().coordenadaX() + "y: " + construccion.posicion().coordenadaY());
+            if (construccion.posicion().posicionesIguales(posicion)) {
+                return construccion;
+            }
+        }
+        return null;
     }
 
     private Individuo encontrarIndividuo(Posicion posicion) {
@@ -267,6 +284,7 @@ public class Jugador {
     }
 
     public void verificarEdificacionCorrelativa(Guarida guarida) throws NoExisteEdificioCorrelativoException {
+
         for (Construccion construccion : this.construcciones) {
             if (construccion.verificarCorrelativa(guarida)) {
                 return;
