@@ -141,7 +141,7 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
             return null;
         }
 
-        return (new Posicion(valorX-1, valorY-1));
+        return (new Posicion(valorX, valorY));
     }
 
 
