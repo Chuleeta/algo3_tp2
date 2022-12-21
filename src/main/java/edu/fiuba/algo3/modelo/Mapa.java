@@ -169,4 +169,8 @@ public class Mapa {
     public void destruirConstruccion(Construccion construccion) {
         this.construcciones.remove(construccion);
     }
+
+    public ArrayList<AreaEspacial> getAreaEspacial() {
+        return this.areasEspaciales;
+    }
 }

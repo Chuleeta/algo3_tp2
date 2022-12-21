@@ -45,7 +45,7 @@ public class Jugador {
         this.mapa = mapa;
         this.construcciones = new ArrayList<>();
         this.individuos = new ArrayList<>();
-        this.mineral = new Mineral(2000);
+        this.mineral = new Mineral(200);
         this.gas = new GasVespeno(0);
         this.capacidad = capacidad;
         unidadesCreadas = 0;

@@ -15,4 +15,20 @@ public class AreaEspacial {
     {
         return posicion.adentro(inicioX, inicioY, finalX, finalY);
     }
+    
+    public int getPosicionInicialX(){
+        return this.inicioX;
+    }
+
+    public int getPosicionInicialY(){
+        return this.inicioY;
+    }
+
+    public int getPosicionFinalX(){
+        return this.finalX;
+    }
+
+    public int getPosicionFinalY(){
+        return this.finalY;
+    }
 }

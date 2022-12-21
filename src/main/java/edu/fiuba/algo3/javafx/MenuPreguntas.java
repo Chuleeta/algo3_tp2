@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 import java.io.InputStream;
 import java.lang.Runnable;
 
+import edu.fiuba.algo3.modelo.AreaEspacial;
 import edu.fiuba.algo3.modelo.Base;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Jugador;
@@ -168,6 +169,8 @@ public class MenuPreguntas extends BorderPane{
         siguiente.setOnAction(e-> {
             //CREO EL JUEGO
             Mapa mapa = new Mapa();
+            mapa.agregarAreaEspacial(new AreaEspacial(1, 18, 4, 15));
+            mapa.agregarAreaEspacial(new AreaEspacial(19, 4, 22, 1));
             Posicion posicionJugadorUno = new Posicion(1,1);
             Posicion posicionJugadorDos = new Posicion(18, 22);
             Jugador jugadorUno = new Jugador(nombreDelJugador1.getText(), "azul", seleccionRaza1.getValue(), posicionJugadorUno, mapa, 0);

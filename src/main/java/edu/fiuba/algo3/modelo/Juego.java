@@ -35,6 +35,14 @@ public class Juego {
         return construcciones;
     }
 
+    
+    public ArrayList<AreaEspacial> mostrarAreaEspacial() {
+        ArrayList<AreaEspacial> areasEspaciales = new ArrayList<AreaEspacial>();
+        for (AreaEspacial areasEspacial : this.mapa.getAreaEspacial())
+            areasEspaciales.add(areasEspacial);
+        return areasEspaciales;
+    }
+
     public ArrayList<RecursoInyectable> mostrarRecursos() {
         return mapa.mostrarRecursos();
     }

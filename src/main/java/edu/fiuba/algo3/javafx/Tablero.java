@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import edu.fiuba.algo3.javafx.Eventos.AtacarHandler;
+import edu.fiuba.algo3.modelo.AreaEspacial;
 import edu.fiuba.algo3.modelo.Construccion;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Juego;
@@ -13,6 +14,7 @@ import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.chart.AreaChart;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -90,6 +92,38 @@ public class Tablero {
         if(construcciones.size() > 0){
             for (Construccion construccion : construcciones) {
                 this.insertarConstruccion(construccion);
+            }
+        }
+    }
+
+    public void actualizarZonasAereas() {
+        ArrayList<AreaEspacial> areasEspaciales = this.juego.mostrarAreaEspacial();
+        if(areasEspaciales.size() > 0){
+            for (AreaEspacial areaEspacial : areasEspaciales) {
+                this.insertarAreaEspacial(areaEspacial);
+            }
+        }
+    }
+
+    private void insertarAreaEspacial(AreaEspacial areaEspacial) {
+        int posInicialX = areaEspacial.getPosicionInicialX();
+        int posInicialY = areaEspacial.getPosicionInicialY();
+        int posFinalX = areaEspacial.getPosicionFinalX();
+        int posFinalY = areaEspacial.getPosicionFinalY();
+        for(int i = posInicialX; i <= posFinalX; i++){
+            for(int j = posInicialY; j >= posFinalY; j--){
+                //int coordenadaX = ((i-1) * 40) + 10;
+                //int coordenadaY = ((j-1) * 40) + 10;
+                int coordenadaX = ((i-1) * 40);
+                int coordenadaY = ((j-1) * 40);
+                Rectangle r = new Rectangle(coordenadaX, coordenadaY, 40, 40);
+                r.setFill(Color.BLACK);
+                r.setStroke(Color.BLACK);
+                System.out.println("\n COORD X: " + coordenadaX);
+                System.out.println("\n COORD Y: "+ coordenadaY);
+                r.setX(coordenadaX);
+                r.setY(coordenadaY);
+                mapaVista.getChildren().add(r);
             }
         }
     }
@@ -249,6 +283,7 @@ public class Tablero {
     public void actualizar() {
         mapaVista.getChildren().clear();
         crearGrilla();
+        actualizarZonasAereas();
         actualizarConstrucciones();
         actualizarRecursos();
         actualizarUnidades();
