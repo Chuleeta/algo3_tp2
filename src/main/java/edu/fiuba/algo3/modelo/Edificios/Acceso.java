@@ -33,9 +33,6 @@ public class Acceso extends Edificio{
         tiempo = 0;
         this.zona = new ZonaEnergia(this.posicion);
         this.vida = new VidaEscudoProtoss(500, 500);
-        // if(this.jugador == null){
-        //     crearJugadorPorDefecto();
-        // }
     }
 
     public Acceso(Posicion posicion, Jugador jugador) throws RecursosInsuficientesException {
@@ -85,9 +82,11 @@ public class Acceso extends Edificio{
     public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
         if(mineral.invertir(150))
         {
+            System.out.println("\nNO Falla el agregar al mapa");
             this.jugador.agregarEnListaConstruccion(this);
             return true;
         }
+        System.out.println("\nFalla el agregar al mapa");
         return false;
     }
 

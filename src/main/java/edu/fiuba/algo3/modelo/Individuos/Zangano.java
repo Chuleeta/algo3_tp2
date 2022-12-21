@@ -52,7 +52,8 @@ public class Zangano extends Individuo{
         this.mapa = jugador.getMapa();
         jugador.añadirUnidad();
         this.jugador.verificarEdificacionCorrelativa(this);
-        if(!this.jugador.agregarIndividuo(this) || !this.mapa.agregarOcupable(this, posicion)){
+        //if(!this.jugador.agregarIndividuo(this) || !this.mapa.agregarOcupable(this, posicion)){
+        if(!this.jugador.agregarIndividuo(this)){
             throw new RequerimientosInsuficientesException();
         }
     }

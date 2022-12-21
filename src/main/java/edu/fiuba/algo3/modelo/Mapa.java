@@ -96,8 +96,12 @@ public class Mapa {
     public boolean verificarPosicionDisponible(Construccion construccion){
         for (Zona zona:zonas)
         {
-            if(zona.puedeHabitar(construccion))
+            if(zona.puedeHabitar(construccion)){
+                System.out.println("\nPuede Habitar zona da true");
                 return true;
+            }
+            System.out.println(zona);
+            System.out.println("\nPuede Habitar zona da false");
         }
         return false;
     }

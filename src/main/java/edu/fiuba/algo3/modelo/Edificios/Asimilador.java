@@ -61,7 +61,8 @@ public class Asimilador extends Edificio{
         this.zona = new ZonaNeutral();
         this.jugador = jugador;
         if(!this.mapa.inyectarRecurso(this)) throw new VolcanOcupadoException();
-        if(!this.jugador.agregarConstruccion(this) || !this.mapa.agregarOcupable(this, posicion)){
+        //if(!this.jugador.agregarConstruccion(this) || !this.mapa.agregarOcupable(this, posicion)){
+        if(!this.jugador.agregarConstruccion(this)){
             throw new RecursosInsuficientesException();
         }
     }
