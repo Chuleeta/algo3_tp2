@@ -167,12 +167,13 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
         botonZealot.setOnMouseExited(e -> botonZealot.setStyle(botonNormal));
         botonZealot.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
-            try {
-                Zealot zealot = new Zealot(inputUsuario, this.jugador);
-                juegoVista.actualizarTablero();
-            } catch (AccesoNoDisponibleException | NoExisteEdificioCorrelativoException | RequerimientosInsuficientesException e1) {
-                noSePuedeConstruir();
+            if (inputUsuario != null) {
+                try {
+                    new Zealot(inputUsuario, this.jugador);
+                    juegoVista.actualizarTablero();
+                } catch (AccesoNoDisponibleException | NoExisteEdificioCorrelativoException | RequerimientosInsuficientesException e1) {
+                    noSePuedeConstruir();
+                }
             }
             s.close();
         });
@@ -184,12 +185,13 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
         botonScout.setOnMouseExited(e -> botonScout.setStyle(botonNormal));
         botonScout.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
-            try {
-                Scout scout = new Scout(inputUsuario, this.jugador);
-                juegoVista.actualizarTablero();
-            } catch (PuertoEstelarNoDisponibleException | NoExisteEdificioCorrelativoException | RequerimientosInsuficientesException e1) {
-                noSePuedeConstruir();
+            if (inputUsuario != null) {
+                try {
+                    new Scout(inputUsuario, this.jugador);
+                    juegoVista.actualizarTablero();
+                } catch (PuertoEstelarNoDisponibleException | NoExisteEdificioCorrelativoException | RequerimientosInsuficientesException e1) {
+                    noSePuedeConstruir();
+                }
             }
             s.close();
         });
@@ -201,12 +203,13 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
         botonDragon.setOnMouseExited(e -> botonDragon.setStyle(botonNormal));
         botonDragon.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
-            try {
-                Dragon dragon = new Dragon(inputUsuario, this.jugador);
-                juegoVista.actualizarTablero();
-            } catch (AccesoNoDisponibleException | NoExisteEdificioCorrelativoException | RequerimientosInsuficientesException e1) {
-                noSePuedeConstruir();
+            if (inputUsuario != null) {
+                try {
+                    new Dragon(inputUsuario, this.jugador);
+                    juegoVista.actualizarTablero();
+                } catch (AccesoNoDisponibleException | NoExisteEdificioCorrelativoException | RequerimientosInsuficientesException e1) {
+                    noSePuedeConstruir();
+                }
             }
             s.close();
         });
@@ -222,7 +225,6 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
         inputPosicion.setBackground(new Background(new BackgroundFill(Color.rgb(47, 52, 58), new CornerRadii(0), Insets.EMPTY)));
         Scene sc = new Scene(inputPosicion, 800, 300, Color.rgb(47, 52, 58));
         sc.setFill(Color.RED);
-        //Stage s = new Stage();
         s.initModality(Modality.APPLICATION_MODAL);
         s.setTitle("Tienda Individuos Protoss");
         s.getIcons().add(this.icono);
@@ -230,34 +232,6 @@ public class BotonAgregarIndividuoProtossHandler  implements EventHandler<Action
         s.setScene(sc);
         //s.show();
         s.showAndWait();
-
-
-        // Label etiqueta = new Label();
-        // etiqueta.setText("Agregar Individuo Protoss");
-        // // vista.agregarElementosAEjecutar(etiqueta);
-        // // tablero.agregarBloqueDobleRepeticion();
-
-        // Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        // alert.setTitle("Unidades protoss");
-        // alert.setHeaderText("Seleccione la unidad que desea enjendrar");
-
-        // ButtonType botonZealot = new ButtonType("Zealot");
-        // ButtonType botonScout = new ButtonType("Scout");
-        // ButtonType botonDragon = new ButtonType("Dragon");
-
-
-        // alert.getButtonTypes().setAll(botonZealot, botonDragon, botonScout);
-
-        // Optional<ButtonType> result = alert.showAndWait();
-        // if (result.get() == botonZealot){
-        //     // Zealot zealot = new Zealot();
-        // }else if (result.get() == botonDragon) {
-        //     //Dragon dragon = new Dragon();
-        // } else if (result.get() == botonScout) {
-        //     // Scout scout = new Scout();
-        // } else {
-        //     // ... user chose CANCEL or closed the dialog
-        // }
     }
 
     private void noSePuedeConstruir() {

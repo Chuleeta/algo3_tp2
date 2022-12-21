@@ -174,16 +174,14 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonCriadero.setOnMouseExited(e -> botonCriadero.setStyle(botonNormal));
         botonCriadero.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                Criadero criadero = new Criadero(inputUsuario, this.jugador);
-                juegoVista.actualizarTablero();
-            } catch (RecursosInsuficientesException e1) {
-                noSePuedeConstruir();
+            if (inputUsuario != null) {
+                try {
+                    Criadero criadero = new Criadero(inputUsuario, this.jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RecursosInsuficientesException e1) {
+                    noSePuedeConstruir();
+                }
             }
-            // if(this.jugador.agregarConstruccion(criadero)){
-            //     juegoVista.actualizarTablero();
-            // }else{
-            // }
             s.close();
         });
         
@@ -194,15 +192,14 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonReserva.setOnMouseExited(e -> botonReserva.setStyle(botonNormal));
         botonReserva.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                ReservaDeReproduccion reserva = new ReservaDeReproduccion(inputUsuario, this.jugador);
-                juegoVista.actualizarTablero();
-            } catch (RecursosInsuficientesException e1) {
-                noSePuedeConstruir();
+            if (inputUsuario != null) {
+                try {
+                    ReservaDeReproduccion reserva = new ReservaDeReproduccion(inputUsuario, this.jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RecursosInsuficientesException e1) {
+                    noSePuedeConstruir();
+                }
             }
-            // if(this.jugador.agregarConstruccion(reserva)){
-            // }else{
-            // }
             s.close();
         });
         
@@ -213,28 +210,17 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonExtractor.setOnMouseExited(e -> botonExtractor.setStyle(botonNormal));
         botonExtractor.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            //ACA TIENE Q SELECCIONAR UN VOLCAN
-            //Volcan volcan = new Volcan(inputUsuario);
-            //this.jugador.mapa.agregarRecursoInyectable(volcan, inputUsuario);
-            try {
-                Extractor extractor = new Extractor(inputUsuario, jugador);
-                juegoVista.actualizarTablero();
-                // if(this.jugador.agregarConstruccion(extractor)){
-                //     juegoVista.actualizarTablero();
-                // }else{
-                //     noSePuedeConstruir();
-                // }
-            } catch (VolcanOcupadoException e1) {
-                noSePuedeConstruir();
-            } catch (RecursosInsuficientesException e1) {
-                noSePuedeConstruir();
+            if (inputUsuario != null) {
+                try {
+                    Extractor extractor = new Extractor(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+
+                } catch (VolcanOcupadoException e1) {
+                    noSePuedeConstruir();
+                } catch (RecursosInsuficientesException e1) {
+                    noSePuedeConstruir();
+                }
             }
-            //Extractor extractor = new Extractor(inputUsuario, this.jugador.mapa, this.jugador);
-            // if(this.jugador.agregarConstruccion(extractor)){
-            //     juegoVista.actualizarTablero();
-            // }else{
-            //     noSePuedeConstruir();
-            // }
             s.close();
         });
         
@@ -245,15 +231,17 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonGuarida.setOnMouseExited(e -> botonGuarida.setStyle(botonNormal));
         botonGuarida.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            Guarida guarida;
-            try {
-                guarida = new Guarida(inputUsuario, this.jugador);
-                juegoVista.actualizarTablero();
-            } catch (NoExisteEdificioCorrelativoException e1) {
-                noSePuedeConstruir();
-            } catch (RecursosInsuficientesException e1) {
-                noSePuedeConstruir();
+            if (inputUsuario != null) {
+                try {
+                    new Guarida(inputUsuario, this.jugador);
+                    juegoVista.actualizarTablero();
+                } catch (NoExisteEdificioCorrelativoException e1) {
+                    noSePuedeConstruir();
+                } catch (RecursosInsuficientesException e1) {
+                    noSePuedeConstruir();
+                }
             }
+
             s.close();
         });
         
@@ -264,18 +252,16 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         botonEspiral.setOnMouseExited(e -> botonEspiral.setStyle(botonNormal));
         botonEspiral.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                Espiral espiral = new Espiral(inputUsuario, this.jugador);
-                juegoVista.actualizarTablero();
-            } catch (RecursosInsuficientesException e1) {
-                noSePuedeConstruir();
-            } catch (NoExisteEdificioCorrelativoException e1) {
-                noSePuedeConstruir();
+            if (inputUsuario != null) {
+                try {
+                    Espiral espiral = new Espiral(inputUsuario, this.jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RecursosInsuficientesException e1) {
+                    noSePuedeConstruir();
+                } catch (NoExisteEdificioCorrelativoException e1) {
+                    noSePuedeConstruir();
+                }
             }
-            // if(this.jugador.agregarConstruccion(espiral)){
-            // }else{
-            //     noSePuedeConstruir();
-            // }
             s.close();
         });
         
@@ -306,7 +292,6 @@ public class BotonAgregarConstruccionZergHandler  implements EventHandler<Action
         s.getIcons().add(this.icono);
         s.setResizable(false);
         s.setScene(sc);
-        //s.show();
         s.showAndWait();
 
     }

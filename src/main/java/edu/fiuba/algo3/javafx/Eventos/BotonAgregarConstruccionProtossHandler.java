@@ -47,8 +47,6 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
     String formatoTexto = "-fx-border-width: 0px; -fx-border-color: #80CEB9; -fx-background-color: transparent; -fx-text-fill: #F3CA4C";
 
     public BotonAgregarConstruccionProtossHandler(JuegoVista juegoVista, Jugador jugador) {
-        //this.stage = stage;
-        //this.escenaParaDobleRepeticion = escenaParaDobleRepeticion;
         cargarImagenes();
         this.juegoVista = juegoVista;
         this.jugador = jugador;
@@ -178,10 +176,6 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
             } catch (RecursosInsuficientesException e1) {
                 noSePuedeConstruir();
             }
-            // if(this.jugador.agregarConstruccion(nexo)){
-            // }else{
-            //     noSePuedeConstruir();
-            // }
             s.close();
         });
         
@@ -192,12 +186,15 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonPilon.setOnMouseExited(e -> botonPilon.setStyle(botonNormal));
         botonPilon.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                Pilon pilon = new Pilon(inputUsuario, this.jugador);
-                juegoVista.actualizarTablero();
-            } catch (RecursosInsuficientesException e1) {
-                noSePuedeConstruir();
+            if (inputUsuario != null) {
+                try {
+                    Pilon pilon = new Pilon(inputUsuario, this.jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RecursosInsuficientesException e1) {
+                    noSePuedeConstruir();
+                }
             }
+
             s.close();
         });
         
@@ -208,13 +205,15 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonAsimilador.setOnMouseExited(e -> botonAsimilador.setStyle(botonNormal));
         botonAsimilador.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                Asimilador asimilador = new Asimilador(inputUsuario, this.jugador);
-                juegoVista.actualizarTablero();
-            } catch (RecursosInsuficientesException e1) {
-                noSePuedeConstruir();
-            } catch (VolcanOcupadoException e1) {
-                noSePuedeConstruir();
+            if (inputUsuario != null) {
+                try {
+                    new Asimilador(inputUsuario, this.jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RecursosInsuficientesException e1) {
+                    noSePuedeConstruir();
+                } catch (VolcanOcupadoException e1) {
+                    noSePuedeConstruir();
+                }
             }
             s.close();
         });
@@ -226,11 +225,13 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonAcceso.setOnMouseExited(e -> botonAcceso.setStyle(botonNormal));
         botonAcceso.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                Acceso acceso = new Acceso(inputUsuario, this.jugador);
-                juegoVista.actualizarTablero();
-            } catch (RecursosInsuficientesException e1) {
-                noSePuedeConstruir();
+            if (inputUsuario != null) {
+                try {
+                    new Acceso(inputUsuario, this.jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RecursosInsuficientesException e1) {
+                    noSePuedeConstruir();
+                }
             }
             s.close();
         });
@@ -242,14 +243,17 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         botonPuerto.setOnMouseExited(e -> botonPuerto.setStyle(botonNormal));
         botonPuerto.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            try {
-                PuertoEstelar puertoEstelar = new PuertoEstelar(inputUsuario, this.jugador);
-                juegoVista.actualizarTablero();
-            } catch (RecursosInsuficientesException e1) {
-                noSePuedeConstruir();
-            } catch (NoExisteEdificioCorrelativoException e1) {
-                noSePuedeConstruir();
+            if (inputUsuario != null) {
+                try {
+                    new PuertoEstelar(inputUsuario, this.jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RecursosInsuficientesException e1) {
+                    noSePuedeConstruir();
+                } catch (NoExisteEdificioCorrelativoException e1) {
+                    noSePuedeConstruir();
+                }
             }
+
             s.close();
         });
         
@@ -280,43 +284,8 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
         s.getIcons().add(this.icono);
         s.setResizable(false);
         s.setScene(sc);
-        //s.show();
         s.showAndWait();
-        
-        
-        
-        // Label etiqueta = new Label();
-        // etiqueta.setText("Agregar Construccion Protoss");
-        // // vista.agregarElementosAEjecutar(etiqueta);
-        // // tablero.agregarBloqueDobleRepeticion();
 
-        // Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        // alert.setTitle("Construcciones protoss");
-        // alert.setHeaderText("Seleccione la construccion que desea construir");
-
-        // ButtonType botonNexo = new ButtonType("Nexo Mineral");
-        // ButtonType botonPilon = new ButtonType("Pilon");
-        // ButtonType botonAsimilador = new ButtonType("Asimilador");
-        // ButtonType botonAcceso = new ButtonType("Acceso");
-        // ButtonType botonPuerto = new ButtonType("Puerto Estelar");
-
-
-        // alert.getButtonTypes().setAll(botonNexo, botonPilon, botonAsimilador, botonAcceso, botonPuerto);
-
-        // Optional<ButtonType> result = alert.showAndWait();
-        // if (result.get() == botonNexo){
-        //     // NexoMineral nexo = new NexoMineral();
-        // }else if (result.get() == botonPilon) {
-        //     //Pilon pilon = new Pilon();
-        // } else if (result.get() == botonAsimilador) {
-        //     // Asimilador asimilador = new Asimilador();
-        // } else if (result.get() == botonAcceso) {
-        //     // Acceso acceso = new Acceso();
-        // }  else if (result.get() == botonPuerto) {
-        //     // PuertoEstelar puerto = new PuertoEstelar();
-        // } else {
-        //     // ... user chose CANCEL or closed the dialog
-        // }
     }
 
 

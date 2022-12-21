@@ -42,6 +42,7 @@ public abstract class Individuo  implements Ocupable
 
     public boolean atacar(Construccion edificio) {
         if (estado.estaConstruido()) {
+            System.out.println(estaDentroDelRango(edificio.posicion()));
             if (estaDentroDelRango(edificio.posicion())) {
                 edificio.recibirAtaqueTerrestre(unidadesDeDañoTerrestre);
                 return true;
@@ -72,7 +73,6 @@ public abstract class Individuo  implements Ocupable
     }
 
     public boolean moverUnidad(Posicion nuevaPosicion) {
-        System.out.println(nuevaPosicion.coordenadaX());
         this.posicion = nuevaPosicion;
         return true;
     }

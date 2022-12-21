@@ -81,6 +81,20 @@ public class ZealotTest {
         //vida completa
         assertTrue(criadero.tieneVidaCompleta());
     }
+    @Test
+    public void zealotAtacaCriaderoPorqueDentroFueraDeRango() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
+
+        Criadero criadero = new Criadero(new Posicion(1,1), new Mapa());
+        Mineral mineral = new Mineral(100);
+        Zealot zealot = new Zealot(mineral, new Posicion(1,2), new Mapa());
+        zealot.pasarTiempo();
+        zealot.pasarTiempo();
+        zealot.pasarTiempo();
+        zealot.pasarTiempo();
+        for (int i = 0; i < 25; i++)
+            zealot.atacar(criadero);
+        assertFalse(criadero.tieneVidaCompleta());
+    }
 
     @Test
     public void zealotNoPuedeAtacarUnidadVoladoraPeroSiTerrestre() throws RequerimientosInsuficientesException, NoExisteEdificioCorrelativoException {
@@ -125,4 +139,5 @@ public class ZealotTest {
         assertTrue(zealot.mover(new Posicion(12, 12)));
         assertFalse(zealot.mover(new Posicion(3, 3)));
     }
+
 }

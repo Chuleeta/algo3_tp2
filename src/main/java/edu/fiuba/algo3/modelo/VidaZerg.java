@@ -8,7 +8,7 @@ public class VidaZerg extends Vida{
     }
 
     public void regenerar() {
-        this.vida += 100;
+        this.vida += 5;
         if (this.vida > this.vidaCompleta) {
             this.vida = this.vidaCompleta;
         }

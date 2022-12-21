@@ -45,8 +45,8 @@ public class Jugador {
         this.mapa = mapa;
         this.construcciones = new ArrayList<>();
         this.individuos = new ArrayList<>();
-        this.mineral = new Mineral(200);
-        this.gas = new GasVespeno(0);
+        this.mineral = new Mineral(2000);
+        this.gas = new GasVespeno(2000);
         this.capacidad = capacidad;
         unidadesCreadas = 0;
     }
@@ -187,8 +187,8 @@ public class Jugador {
         }
 
         Construccion construccion = encontrarConstruccion(posicion);
-        System.out.println(construccion);
         if(construccion != null) {
+            System.out.println(construccion);
             individuoAtacante.atacar(construccion);
             return;
         }
