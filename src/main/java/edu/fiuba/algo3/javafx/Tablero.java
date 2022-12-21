@@ -68,8 +68,6 @@ public class Tablero {
     }
 
     public UnidadIndividuo crearUnidadMovible(Individuo individuo, Jugador oponente) {
-        // int coordenadaX = ((individuo.posicion().coordenadaX()-1) * 40) + 10;
-        // int coordenadaY = ((individuo.posicion().coordenadaY()-1) * 40) + 10;
         int coordenadaX = ((individuo.posicion().coordenadaX()-1) * 40);
         int coordenadaY = ((individuo.posicion().coordenadaY()-1) * 40);
         AtacarHandler action = new AtacarHandler(juegoVista, oponente, individuo);
@@ -79,8 +77,6 @@ public class Tablero {
         return unidad;
     }
     public UnidadEdificio crearUnidadEstatica(Construccion construccion) {
-        // int coordenadaX = ((construccion.mostrarPosicion().coordenadaX()-1) * 40) + 10;
-        // int coordenadaY = ((construccion.mostrarPosicion().coordenadaY()-1) * 40) + 10;
         int coordenadaX = ((construccion.mostrarPosicion().coordenadaX()-1) * 40);
         int coordenadaY = ((construccion.mostrarPosicion().coordenadaY()-1) * 40);
         UnidadEdificio unidad = new UnidadEdificio(construccion, coordenadaX, coordenadaY);
@@ -116,15 +112,11 @@ public class Tablero {
         int posFinalY = areaEspacial.getPosicionFinalY();
         for(int i = posInicialX; i <= posFinalX; i++){
             for(int j = posInicialY; j >= posFinalY; j--){
-                //int coordenadaX = ((i-1) * 40) + 10;
-                //int coordenadaY = ((j-1) * 40) + 10;
                 int coordenadaX = ((i-1) * 40);
                 int coordenadaY = ((j-1) * 40);
                 Rectangle r = new Rectangle(coordenadaX, coordenadaY, 40, 40);
                 r.setFill(Color.BLACK);
                 r.setStroke(Color.BLACK);
-                System.out.println("\n COORD X: " + coordenadaX);
-                System.out.println("\n COORD Y: "+ coordenadaY);
                 r.setX(coordenadaX);
                 r.setY(coordenadaY);
                 mapaVista.getChildren().add(r);
@@ -135,8 +127,6 @@ public class Tablero {
     public void actualizarRecursos() {
         ArrayList<RecursoInyectable> recursos = juego.mostrarRecursos();
         for (RecursoInyectable recurso : recursos) {
-            // int coordenadaX = ((recurso.mostrarPosicion().coordenadaX() - 1) * 40) + 10;
-            // int coordenadaY = ((recurso.mostrarPosicion().coordenadaY() - 1) * 40) + 10;
             int coordenadaX = ((recurso.mostrarPosicion().coordenadaX() - 1) * 40);
             int coordenadaY = ((recurso.mostrarPosicion().coordenadaY() - 1) * 40);
             UnidadRecurso unidad = new UnidadRecurso(recurso, coordenadaX /*- 1*/, coordenadaY /*- 1*/);
@@ -149,7 +139,6 @@ public class Tablero {
     }
     public void actualizarUnidades() {
         ArrayList<Individuo> individuos = this.juego.mostrarUnidades();
-        System.out.println(individuos.size());
         if(individuos.size() != 0){
             for (Individuo individuo : individuos) {
                 this.insertarUnidad(individuo, juego.getJugadorUno());
@@ -251,8 +240,6 @@ public class Tablero {
     private Posicion calcularPosicion(Rectangle n) {
         double resultadoX = new BigDecimal(n.getTranslateX()).setScale(1, RoundingMode.UP).doubleValue();
         double resultadoY = new BigDecimal(n.getTranslateY()).setScale(1, RoundingMode.UP).doubleValue();
-        // n.setTranslateX(encontrarMultiploDeMasCercanoA(40, (int)resultadoX) + 10);
-        // n.setTranslateY(encontrarMultiploDeMasCercanoA(40, (int)resultadoY) + 10);
         n.setTranslateX(encontrarMultiploDeMasCercanoA(40, (int)resultadoX));
         n.setTranslateY(encontrarMultiploDeMasCercanoA(40, (int)resultadoY));
         double xDouble = encontrarMultiploDeMasCercanoA(40, (int)resultadoX);
@@ -274,8 +261,6 @@ public class Tablero {
 	}
 
     public void insertarConstruccion(Construccion construccion) {
-        if(construccion == null)
-            System.out.println("\n inserta construccion");
         UnidadEdificio nuevo = crearUnidadEstatica(construccion);
         mapaVista.getChildren().add(nuevo);
     }

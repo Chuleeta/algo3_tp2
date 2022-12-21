@@ -84,10 +84,12 @@ public class Extractor extends Edificio{
     }
 
     public void extraerGas(){
-        for(Zangano zangano: zanganos){
-            this.gas.agregarGas(zangano.extraerGas(this.volcan));
+        if(zanganos.size() != 0){
+            for(Zangano zangano: zanganos){
+                this.gas.agregarGas(zangano.extraerGas(this.volcan));
+            }
+            jugador.incrementarGas(this.gas.getCantidad());
         }
-        jugador.incrementarGas(this.gas.getCantidad());
     }
 
     public void agregarZangano(Zangano zangano)
@@ -221,6 +223,10 @@ public class Extractor extends Edificio{
 
     public boolean compararPosicionConOtroRecurso(RecursoInyectable recurso) {
         return recurso.estaOcupada(this.posicion);
+    }
+
+    public void desocupar(Zangano zangano) {
+        this.zanganos.remove(zangano);
     }
 
     // @Override

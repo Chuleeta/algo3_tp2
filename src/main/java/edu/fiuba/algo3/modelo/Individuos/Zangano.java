@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
 import edu.fiuba.algo3.modelo.VidaZerg;
+import edu.fiuba.algo3.modelo.Edificios.Extractor;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
@@ -19,6 +20,7 @@ public class Zangano extends Individuo{
     private int tiempoDeConstruccion;
     private int tiempo;
     private Mena mena;
+    private Extractor extractor;
 
     public Zangano(Mineral mineral) throws RequerimientosInsuficientesException {
         if (!mineral.invertir(25))
@@ -116,6 +118,10 @@ public class Zangano extends Individuo{
                     this.mena.desocupar();
                     this.mena = null;
                 }
+                if (this.extractor != null) {
+                    this.extractor.desocupar(this);
+                    this.extractor = null;
+                }
                 try {
                     mapa.inyectarRecurso(this);
                     return true;
@@ -142,6 +148,10 @@ public class Zangano extends Individuo{
     @Override
     public String getSpray(){
         return "/imagenes/zangano.png";
+    }
+
+    public void ocuparExtractor(Extractor extractorTrabajando) {
+        this.extractor = extractorTrabajando;
     }
 
 }

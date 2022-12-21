@@ -35,8 +35,10 @@ public class Mapa {
     }
 
     public boolean agregarOcupable(Ocupable ocupable, Posicion posicion){
-        if(ocupable == null || !verificarPosicion(posicion))
+        if(ocupable == null || !verificarPosicion(posicion)){
+            System.out.println("\nFalla el agregar ocupable");
             return false;
+        }
         
         this.ocupables.add(ocupable);
         return true;

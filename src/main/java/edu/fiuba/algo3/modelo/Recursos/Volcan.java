@@ -75,9 +75,9 @@ public class Volcan implements RecursoInyectable{
 
     @Override
     public boolean inyectarRecurso(Zangano zangano) {
-        // TODO Auto-generated method stub
         if(estaOcupado && ocupanteExtractor){
             extractorTrabajando.agregarZangano(zangano);
+            zangano.ocuparExtractor(this.extractorTrabajando);
             return true;
         }
         return false;
