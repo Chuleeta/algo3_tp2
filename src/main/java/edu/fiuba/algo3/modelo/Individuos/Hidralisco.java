@@ -38,6 +38,8 @@ public class Hidralisco extends Individuo{
         this.mapa = jugador.getMapa();
         this.vida = new VidaZerg(80);
         this.estado = new EstadoNoConstruido();
+        this.unidadesDeDañoTerrestre = 10;
+        this.unidadesDeDañoAereo = 10;
         this.tiempoDeConstruccion = 4;
         this.tiempo = 0;
         this.posicion = posicion;

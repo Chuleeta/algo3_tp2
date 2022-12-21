@@ -38,6 +38,8 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
         this.mapa = jugador.getMapa();
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 7;
+        this.unidadesDeDañoAereo = 9;
+        this.unidadesDeDañoTerrestre = 9;
         this.tiempo = 0;
         this.rangoDeAtaque= 3;
         this.posicion = posicion;

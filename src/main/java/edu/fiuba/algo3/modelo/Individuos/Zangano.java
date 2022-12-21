@@ -42,6 +42,8 @@ public class Zangano extends Individuo{
         this.vida = new VidaZerg(25);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 1;
+        this.unidadesDeDañoAereo = 0;
+        this.unidadesDeDañoTerrestre = 0;
         this.tiempo = 0;
         this.posicion = posicion;
         this.jugador = jugador;

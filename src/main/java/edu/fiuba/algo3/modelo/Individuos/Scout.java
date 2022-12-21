@@ -35,6 +35,8 @@ public class Scout extends Individuo implements UnidadVoladora{
         this.vida = new VidaEscudoProtoss(100, 80);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 9;
+        this.unidadesDeDañoTerrestre = 8;
+        this.unidadesDeDañoAereo = 14;
         this.tiempo = 0;
         this.rangoDeAtaque = 4;
         this.posicion = posicion;

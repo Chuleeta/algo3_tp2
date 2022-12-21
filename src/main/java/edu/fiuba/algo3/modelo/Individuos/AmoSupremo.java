@@ -34,6 +34,8 @@ public class AmoSupremo extends Individuo {
         this.vida = new VidaZerg(200);
         this.mapa = jugador.getMapa();
         this.estado = new EstadoNoConstruido();
+        this.unidadesDeDañoTerrestre = 0;
+        this.unidadesDeDañoAereo = 0;
         this.tiempoDeConstruccion = 5;
         this.tiempo = 0;
         rangoDeAtaque= 0;

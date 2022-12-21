@@ -43,6 +43,8 @@ public class Zealot extends Individuo{
         this.vida = new VidaEscudoProtoss(100, 60);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 4;
+        this.unidadesDeDañoTerrestre = 8;
+        this.unidadesDeDañoAereo = 0;
         this.tiempo = 0;
         rangoDeAtaque = 1;
         invisible = false;

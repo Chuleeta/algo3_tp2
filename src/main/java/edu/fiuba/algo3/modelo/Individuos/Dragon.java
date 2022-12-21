@@ -35,6 +35,8 @@ public class Dragon extends Individuo {
         this.mapa = jugador.getMapa();
         this.vida = new VidaEscudoProtoss(100, 80);
         this.estado = new EstadoNoConstruido();
+        this.unidadesDeDañoTerrestre = 20;
+        this.unidadesDeDañoAereo = 20;
         this.tiempoDeConstruccion = 6;
         this.tiempo = 0;
         this.rangoDeAtaque = 4;

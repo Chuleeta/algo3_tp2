@@ -37,6 +37,8 @@ public class Devorador extends Individuo implements UnidadVoladora{
 
         this.mapa = jugador.getMapa();
         this.vida = new VidaZerg(100);
+        this.unidadesDeDañoAereo = 15;
+        this.unidadesDeDañoTerrestre = 0;
         this.rangoDeAtaque = 5;
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 4;

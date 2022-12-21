@@ -36,6 +36,8 @@ public class Guardian extends Individuo implements UnidadVoladora{
         this.vida = new VidaZerg(100);
         this.rangoDeAtaque = 10;
         this.estado = new EstadoNoConstruido();
+        this.unidadesDeDañoTerrestre = 25;
+        this.unidadesDeDañoAereo = 0;
         this.tiempoDeConstruccion = 4;
         this.tiempo = 0;
         this.posicion = posicion;
