@@ -61,7 +61,7 @@ public class Mena implements RecursoInyectable{
 
     @Override
     public boolean inyectarRecurso(NexoMineral nexoMineral) throws MenaOcupadaException {
-        if(estaOcupada(nexoMineral.posicion) && !estaOcupado){
+        if(!estaOcupado){
             nexoMineral.setMena(this);
             return true;
         }

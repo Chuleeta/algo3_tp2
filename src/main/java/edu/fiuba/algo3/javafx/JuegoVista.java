@@ -173,6 +173,8 @@ public class JuegoVista extends BorderPane {
         BotonGenerico botonAgregarConstruccionProtoss = new BotonGenerico("Agregar\nconstruccion", agregarConstruccionProtossHandler, jugadorUno);
         LabelMinerales mineralesJugadorUno = new LabelMinerales(jugadorUno);
         LabelMinerales mineralesJugadorDos = new LabelMinerales(jugadorDos);
+        LabelGas gasJugadorUno = new LabelGas(jugadorUno);
+        LabelGas gasJugadorDos = new LabelGas(jugadorDos);
 
         pasarturno.añadirSuscriptor(botonAgregarConstruccionZerg);
         pasarturno.añadirSuscriptor(botonAgregarConstruccionProtoss);
@@ -180,6 +182,8 @@ public class JuegoVista extends BorderPane {
         pasarturno.añadirSuscriptor(botonAgregarIndividuoZerg);
         pasarturno.añadirSuscriptor(mineralesJugadorDos);
         pasarTurno.añadirSuscriptor(mineralesJugadorUno);
+        pasarTurno.añadirSuscriptor(gasJugadorUno);
+        pasarTurno.añadirSuscriptor(gasJugadorDos);
 
         VBox turnoActual = new VBox();
 
@@ -238,10 +242,10 @@ public class JuegoVista extends BorderPane {
         VBox botonesBordeDerecho = new VBox();
         VBox datosJugador2 = new VBox();
         VBox datosJugador1 = new VBox();
-        datosJugador1.getChildren().addAll(nombreDelJugador1, razaJugador1, mineralesJugadorUno);
+        datosJugador1.getChildren().addAll(nombreDelJugador1, razaJugador1, mineralesJugadorUno, gasJugadorUno);
         datosJugador1.setSpacing(30);
         datosJugador1.setBackground(new Background(new BackgroundFill(Color.rgb(63, 84, 99, 0.6), new CornerRadii(20), Insets.EMPTY)));
-        datosJugador2.getChildren().addAll(nombreDelJugador2, razaJugador2, mineralesJugadorDos);
+        datosJugador2.getChildren().addAll(nombreDelJugador2, razaJugador2, mineralesJugadorDos, gasJugadorDos);
         datosJugador2.setSpacing(30);
         datosJugador2.setBackground(new Background(new BackgroundFill(Color.rgb(63, 84, 99,0.6), new CornerRadii(20), Insets.EMPTY)));
 

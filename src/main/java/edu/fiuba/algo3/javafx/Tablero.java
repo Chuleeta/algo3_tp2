@@ -99,7 +99,7 @@ public class Tablero {
         for (RecursoInyectable recurso : recursos) {
             int coordenadaX = ((recurso.mostrarPosicion().coordenadaX() - 1) * 40) + 10;
             int coordenadaY = ((recurso.mostrarPosicion().coordenadaY() - 1) * 40) + 10;
-            UnidadRecurso unidad = new UnidadRecurso(recurso, coordenadaX - 1, coordenadaY - 1);
+            UnidadRecurso unidad = new UnidadRecurso(recurso, coordenadaX /*- 1*/, coordenadaY /*- 1*/);
             unidad.setOnMouseReleased(e ->{
                 mostrarPosicion(unidad);
             });

@@ -10,6 +10,8 @@ import edu.fiuba.algo3.modelo.Individuos.Zangano;
 
 public class Volcan implements RecursoInyectable{
     private Posicion posicion;
+    private boolean ocupanteExtractor;
+    private Extractor extractorTrabajando;
     private int gas;
     private boolean estaOcupado;
 
@@ -47,8 +49,10 @@ public class Volcan implements RecursoInyectable{
 
     @Override
     public boolean inyectarRecurso(Extractor extractor) throws VolcanOcupadoException {
-        if(estaOcupada(extractor.posicion) && !estaOcupado){
+        if(!estaOcupado){
             extractor.setVolcan(this);
+            extractorTrabajando = extractor;
+            ocupanteExtractor = true;
             return true;
         }
         return false;
@@ -56,7 +60,7 @@ public class Volcan implements RecursoInyectable{
 
     @Override
     public boolean inyectarRecurso(Asimilador asimilador) throws VolcanOcupadoException {
-        if(estaOcupada(asimilador.posicion) && !estaOcupado){
+        if(!estaOcupado){
             asimilador.setVolcan(this);
             return true;
         }
@@ -72,6 +76,10 @@ public class Volcan implements RecursoInyectable{
     @Override
     public boolean inyectarRecurso(Zangano zangano) {
         // TODO Auto-generated method stub
+        if(estaOcupado && ocupanteExtractor){
+            extractorTrabajando.agregarZangano(zangano);
+            return true;
+        }
         return false;
     }
 
