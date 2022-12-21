@@ -40,7 +40,7 @@ public class Mena implements RecursoInyectable{
     }
 
     public boolean estaOcupada(Posicion posicionDada) {
-        return this.posicion.equals(posicionDada);
+        return this.posicion.posicionesIguales(posicionDada);
     }
 
     public Posicion getPosicion() {

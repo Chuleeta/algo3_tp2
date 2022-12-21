@@ -15,6 +15,7 @@ import edu.fiuba.algo3.modelo.Individuos.Zerling;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
+import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
 import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Posicion;
@@ -197,6 +198,10 @@ public class Asimilador extends Edificio{
     @Override
     public String getSpray(){
         return "/imagenes/asimilador.png";
+    }
+
+    public boolean compararPosicionConOtroRecurso(RecursoInyectable recurso) {
+        return recurso.estaOcupada(this.posicion);
     }
 
     /*public void destruir()

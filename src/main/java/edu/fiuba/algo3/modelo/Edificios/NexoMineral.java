@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Mapa;
 import edu.fiuba.algo3.modelo.Recursos.Mena;
 import edu.fiuba.algo3.modelo.Exceptions.MenaOcupadaException;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
+import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Exceptions.VolcanOcupadoException;
@@ -186,5 +187,9 @@ public class NexoMineral extends Edificio{
     @Override
     public String getSpray(){
         return "/imagenes/nexomineral.png";
+    }
+
+    public boolean compararPosicionConOtroRecurso(RecursoInyectable recurso) {
+        return recurso.estaOcupada(this.posicion);
     }
 }

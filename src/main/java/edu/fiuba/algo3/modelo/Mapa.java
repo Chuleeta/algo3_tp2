@@ -52,7 +52,7 @@ public class Mapa {
 
     public boolean inyectarRecurso(Extractor extractor) throws VolcanOcupadoException{
         for (RecursoInyectable recurso:recursosInyectables){
-            if(recurso.inyectarRecurso(extractor))
+            if(extractor.compararPosicionConOtroRecurso(recurso) && recurso.inyectarRecurso(extractor))
                 return true;
         }
         return false;
@@ -60,7 +60,7 @@ public class Mapa {
 
     public boolean inyectarRecurso(NexoMineral nexo) throws MenaOcupadaException{
         for (RecursoInyectable recurso:recursosInyectables){
-            if(recurso.inyectarRecurso(nexo)){
+            if(nexo.compararPosicionConOtroRecurso(recurso) && recurso.inyectarRecurso(nexo)){
                 return true;
             }
         }
@@ -69,7 +69,7 @@ public class Mapa {
 
     public boolean inyectarRecurso(Asimilador asimilador) throws VolcanOcupadoException{
         for (RecursoInyectable recurso:recursosInyectables){
-            if(recurso.inyectarRecurso(asimilador))
+            if(asimilador.compararPosicionConOtroRecurso(recurso) && recurso.inyectarRecurso(asimilador))
                 return true;
         }
         return false;

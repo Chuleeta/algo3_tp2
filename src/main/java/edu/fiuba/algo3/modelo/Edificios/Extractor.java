@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.Estados.EstadoConstruido;
 import edu.fiuba.algo3.modelo.Estados.EstadoNoConstruido;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
 import edu.fiuba.algo3.modelo.Recursos.Mineral;
+import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
 import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
 import edu.fiuba.algo3.modelo.Exceptions.RecursosInsuficientesException;
 import edu.fiuba.algo3.modelo.Recursos.Volcan;
@@ -217,6 +218,10 @@ public class Extractor extends Edificio{
         this.mapa.destruirConstruccion(this);
         this.mapa.destruirConstruccionZerg(this);
     }*/
+
+    public boolean compararPosicionConOtroRecurso(RecursoInyectable recurso) {
+        return recurso.estaOcupada(this.posicion);
+    }
 
     // @Override
     // public boolean estaOcupada(Posicion posicionDada) {
