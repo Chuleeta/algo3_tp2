@@ -15,6 +15,11 @@ public class AreaEspacial {
     {
         return posicion.adentro(inicioX, inicioY, finalX, finalY);
     }
+    public boolean posicionAdentro(Posicion posicion) {
+        boolean resultadoX = (inicioX < posicion.coordenadaX()) && (finalX > posicion.coordenadaX());
+        boolean resultadoY = (inicioY > posicion.coordenadaY()) && (finalY < posicion.coordenadaY());
+        return (resultadoY && resultadoX);
+    }
     
     public int getPosicionInicialX(){
         return this.inicioX;

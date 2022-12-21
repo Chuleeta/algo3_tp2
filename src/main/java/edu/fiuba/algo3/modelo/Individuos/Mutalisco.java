@@ -123,5 +123,8 @@ public class Mutalisco extends Individuo implements UnidadVoladora{
     public String getSpray(){
         return "/imagenes/mutalisco.png";
     }
+    public boolean moverUnidad(Posicion nuevaPosicion) {
+        return true;
+    }
 
 }

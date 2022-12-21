@@ -110,4 +110,7 @@ public class Devorador extends Individuo implements UnidadVoladora{
     public String getSpray(){
         return "/imagenes/devorador.png";
     }
+    public boolean moverUnidad(Posicion nuevaPosicion) {
+        return true;
+    }
 }
