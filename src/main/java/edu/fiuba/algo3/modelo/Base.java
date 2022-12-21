@@ -37,7 +37,7 @@ public class Base {
             posibleMena = new Mena(posiblePosicion);
     
             //if(this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion) && mapa.agregarOcupable(posibleMena, posiblePosicion)){
-            if(this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion)){    
+            if(x != 0 && y!= 0 && this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion)){    
                 //System.out.println("\nENTRA AL IF DE MENA");
                 mapa.agregarRecursoInyectable(posibleMena, posiblePosicion);
                 seAgregoAlMapa = true;
@@ -59,7 +59,7 @@ public class Base {
             posibleVolcan = new Volcan(posiblePosicion);
     
             //if(this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion) && mapa.agregarOcupable(posibleVolcan, posiblePosicion)){
-            if(this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion)){
+            if(x != 0 && y!= 0 && this.jugadorDeReferencia.estaCercaDelJugador(posiblePosicion)){
                 //System.out.println("\nENTRA AL IF DE VOLCAN");
                 mapa.agregarRecursoInyectable(posibleVolcan, posiblePosicion);
                 seAgregoAlMapa = true;
