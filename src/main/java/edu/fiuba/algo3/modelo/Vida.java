@@ -13,6 +13,9 @@ public abstract class Vida {
     public abstract void regenerar();
     public abstract boolean tieneEscudoCompleto();
     public String vidaRestante() {
+        if (vida <= 0) {
+            return "Unidad eliminada";
+        }
         return String.valueOf("Vida: " + this.vida);
     }
     public boolean verificarSiEstaMuerto(){

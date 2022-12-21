@@ -42,7 +42,6 @@ public abstract class Individuo  implements Ocupable
 
     public boolean atacar(Construccion edificio) {
         if (estado.estaConstruido()) {
-            System.out.println(estaDentroDelRango(edificio.posicion()));
             if (estaDentroDelRango(edificio.posicion())) {
                 edificio.recibirAtaqueTerrestre(unidadesDeDañoTerrestre);
                 return true;
@@ -77,6 +76,7 @@ public abstract class Individuo  implements Ocupable
             this.posicion = nuevaPosicion;
             return true;
         }
+        recibirDaño(100000);
         return false;
     }
     public abstract boolean agregarAlMapa(Mineral mineral, GasVespeno gas);

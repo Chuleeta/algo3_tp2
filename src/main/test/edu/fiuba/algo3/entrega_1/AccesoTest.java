@@ -27,11 +27,8 @@ public class AccesoTest {
         acceso.pasarTiempo();
         acceso.dañar(500);
         assertFalse(acceso.tieneEscudoCompleto());
-        acceso.pasarTiempo();
-        acceso.pasarTiempo();
-        acceso.pasarTiempo();
-        acceso.pasarTiempo();
-        acceso.pasarTiempo();
+        for (int i = 0; i < 100; i++)
+            acceso.pasarTiempo();
         assertTrue(acceso.tieneEscudoCompleto());
     }
 
@@ -47,13 +44,10 @@ public class AccesoTest {
         acceso.pasarTiempo();
         acceso.pasarTiempo();
         acceso.pasarTiempo();
-        acceso.dañar(550);
+        acceso.dañar(505);
         assertFalse(acceso.tieneEscudoCompleto());
-        acceso.pasarTiempo();
-        acceso.pasarTiempo();
-        acceso.pasarTiempo();
-        acceso.pasarTiempo();
-        acceso.pasarTiempo();
+        for (int i = 0; i < 100; i++)
+            acceso.pasarTiempo();
 
         assertTrue(acceso.tieneEscudoCompleto());
         assertFalse(acceso.tieneVidaCompleta());

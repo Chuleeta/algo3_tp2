@@ -191,7 +191,7 @@ public class ExtractorTest {
         extractor.pasarTiempo();
 
         //when
-        extractor.dañar(200);
+        extractor.dañar(10);
         extractor.pasarTiempo();
         extractor.pasarTiempo();
 

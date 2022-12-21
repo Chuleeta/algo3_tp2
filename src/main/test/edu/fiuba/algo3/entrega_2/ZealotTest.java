@@ -61,6 +61,8 @@ public class ZealotTest {
         //sigue incompleta
         assertFalse(criadero.tieneVidaCompleta());
         criadero.pasarTiempo();
+        for (int i = 0; i < 38; i++)
+            criadero.pasarTiempo();
         //vida completa
         assertTrue(criadero.tieneVidaCompleta());
     }

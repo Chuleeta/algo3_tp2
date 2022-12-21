@@ -70,9 +70,8 @@ public class NexoMineralTest {
         jugador.pasarTiempo();
         nexito.dañar(200);
         assertFalse(nexito.tieneEscudoCompleto());
-        jugador.pasarTiempo();
-        jugador.pasarTiempo();
-        jugador.pasarTiempo();
+        for (int i = 0;  i < 100; i++)
+            jugador.pasarTiempo();
         assertTrue(nexito.tieneEscudoCompleto());
     }
 
@@ -89,9 +88,8 @@ public class NexoMineralTest {
         jugador.pasarTiempo();
         nexito.dañar(300);
         assertFalse(nexito.tieneEscudoCompleto());
-        jugador.pasarTiempo();
-        jugador.pasarTiempo();
-        jugador.pasarTiempo();
+        for (int i = 0;  i < 100; i++)
+            jugador.pasarTiempo();
         assertTrue(nexito.tieneEscudoCompleto());
         assertFalse(nexito.tieneVidaCompleta());
     }

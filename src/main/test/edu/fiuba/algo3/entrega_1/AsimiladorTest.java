@@ -85,12 +85,8 @@ public class AsimiladorTest {
         jugador.pasarTiempo();
         asimilador.dañar(450);
         assertFalse(asimilador.tieneEscudoCompleto());
-
-        jugador.pasarTiempo();
-        jugador.pasarTiempo();
-        jugador.pasarTiempo();
-        jugador.pasarTiempo();
-        jugador.pasarTiempo();
+        for (int i = 0; i < 100; i++)
+            jugador.pasarTiempo();
         assertTrue(asimilador.tieneEscudoCompleto());
     }
 
@@ -102,18 +98,8 @@ public class AsimiladorTest {
         Asimilador asimilador = new Asimilador(new Posicion(2, 1), new Volcan(new Posicion(2, 1)), jugador);
         asimilador.dañar(500);
         assertFalse(asimilador.tieneEscudoCompleto());
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
-
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
-        asimilador.pasarTiempo();
+        for (int i = 0; i < 100; i++)
+            asimilador.pasarTiempo();
         assertTrue(asimilador.tieneEscudoCompleto());
         assertFalse(asimilador.tieneVidaCompleta());
     }

@@ -51,7 +51,7 @@ public class GuaridaTest {
         guarida.pasarTiempo();
 
         //when
-        guarida.dañar(200);
+        guarida.dañar(10);
         guarida.pasarTiempo();
         guarida.pasarTiempo();
 

@@ -50,8 +50,8 @@ public class PuertoEstelarTest {
         jugador.pasarTiempo();
         puertoEstelar.dañar(200);
         assertFalse(puertoEstelar.tieneEscudoCompleto());
-        puertoEstelar.pasarTiempo();
-        puertoEstelar.pasarTiempo();
+        for (int i = 0;  i < 100; i++)
+            puertoEstelar.pasarTiempo();
         assertTrue(puertoEstelar.tieneEscudoCompleto());
     }
 
@@ -93,12 +93,8 @@ public class PuertoEstelarTest {
         puertoEstelar.dañar(700);
         assertFalse(puertoEstelar.tieneEscudoCompleto());
 
-        jugador.pasarTiempo();
-        jugador.pasarTiempo();
-        jugador.pasarTiempo();
-        jugador.pasarTiempo();
-        jugador.pasarTiempo();
-        jugador.pasarTiempo();
+        for (int i = 0;  i < 200; i++)
+            jugador.pasarTiempo();
         assertTrue(puertoEstelar.tieneEscudoCompleto());
         assertFalse(puertoEstelar.tieneVidaCompleta());
     }

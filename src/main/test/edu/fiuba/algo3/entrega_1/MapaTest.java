@@ -292,13 +292,15 @@ public class MapaTest {
         jugador.pasarTiempo();
 
         acceso.dañar(100);
-        jugador.pasarTiempo();
+        for  (int i = 0; i < 100; i++)
+            jugador.pasarTiempo();
         assertTrue(acceso.tieneEscudoCompleto());
         
         pilon.destruir();
         jugador.pasarTiempo();
         acceso.dañar(100);
-        jugador.pasarTiempo();
+        for (int i = 0;  i < 100; i++)
+            jugador.pasarTiempo();
         assertTrue(acceso.tieneEscudoCompleto());
         
         pilon2.destruir();
