@@ -65,4 +65,12 @@ public abstract class Edificio implements Construccion, Ocupable {
         return jugador;
     }
 
+    public void recibirAtaqueAereo(int unidades){
+        return;
+    }
+
+    public void recibirAtaqueTerrestre(int unidades){
+        dañar(unidades);
+    }
+
 }

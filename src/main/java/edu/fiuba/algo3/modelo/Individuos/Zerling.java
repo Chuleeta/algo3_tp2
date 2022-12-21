@@ -39,6 +39,8 @@ public class Zerling extends Individuo{
         this.vida = new VidaZerg(35);
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 2;
+        this.unidadesDeDañoTerrestre = 4;
+        this.unidadesDeDañoAereo = 0;
         this.tiempo = 0;
         rangoDeAtaque = 1;
         this.mapa = jugador.getMapa();

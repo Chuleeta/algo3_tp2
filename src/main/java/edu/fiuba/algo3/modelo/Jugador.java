@@ -43,8 +43,8 @@ public class Jugador {
         this.mapa = mapa;
         this.construcciones = new ArrayList<>();
         this.individuos = new ArrayList<>();
-        this.mineral = new Mineral(200);
-        this.gas = new GasVespeno(0);
+        this.mineral = new Mineral(2000);
+        this.gas = new GasVespeno(2000);
         this.capacidad = capacidad;
         unidadesCreadas = 0;
     }
@@ -255,8 +255,28 @@ public class Jugador {
 
     public void atacarUnidad(Posicion posicion, Individuo individuoAtacante) throws NoSeEncuentraAlIndividuoException {
         Individuo individuoAtacado = encontrarIndividuo(posicion);
-        if(individuoAtacado != null) individuoAtacante.atacar(individuoAtacado);
-        else throw new NoSeEncuentraAlIndividuoException();
+        if(individuoAtacado != null) {
+            individuoAtacante.atacar(individuoAtacado);
+            return;
+        }
+
+        Construccion construccion = encontrarConstruccion(posicion);
+        System.out.println(construccion);
+        if(construccion != null) {
+            individuoAtacante.atacar(construccion);
+            return;
+        }
+        throw new NoSeEncuentraAlIndividuoException();
+    }
+
+    private Construccion encontrarConstruccion(Posicion posicion) {
+        for (Construccion construccion : this.construcciones) {
+            System.out.println("x: " + construccion.posicion().coordenadaX() + "y: " + construccion.posicion().coordenadaY());
+            if (construccion.posicion().posicionesIguales(posicion)) {
+                return construccion;
+            }
+        }
+        return null;
     }
 
     private Individuo encontrarIndividuo(Posicion posicion) {
@@ -264,6 +284,7 @@ public class Jugador {
     }
 
     public void verificarEdificacionCorrelativa(Guarida guarida) throws NoExisteEdificioCorrelativoException {
+
         for (Construccion construccion : this.construcciones) {
             if (construccion.verificarCorrelativa(guarida)) {
                 return;

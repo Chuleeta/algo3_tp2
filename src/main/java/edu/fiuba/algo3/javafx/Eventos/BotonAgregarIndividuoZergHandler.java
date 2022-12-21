@@ -117,18 +117,20 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         int valorX = 0;
         int valorY = 0;
         if(posicionDeseadaX.getValue() != null){
+            System.out.println("en x: " + posicionDeseadaX.getValue());
             valorX = Integer.valueOf(posicionDeseadaX.getValue());
         }else{
             return null;
         }
 
         if(posicionDeseadaY.getValue() != null){
+            System.out.println("en y: " + posicionDeseadaY.getValue());
             valorY = Integer.valueOf(posicionDeseadaY.getValue());
         }else{
             return null;
         }
 
-        return (new Posicion(valorX-1, valorY-1));
+        return (new Posicion(valorX - 1, valorY -1));
     }
 
     private void noSePuedeConstruir(String text) {
@@ -203,9 +205,9 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
                     new Zangano(inputUsuario, jugador);
                     juegoVista.actualizarTablero();
                 } catch (RequerimientosInsuficientesException | NoExisteEdificioCorrelativoException ex) {
-                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
                 } catch (CriaderoNoDisponibleException ex) {
-                    noSePuedeConstruir("\nCriaderoNoDisponibleException");
+                    noSePuedeConstruir("\nCriadero No Disponible");
                 }
                 s.close();
 
@@ -221,13 +223,14 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
             Posicion inputUsuario = this.cargarPosicion();
 
             if (inputUsuario != null) {
+                System.out.print("Creacion de zerling posicion: " + inputUsuario.coordenadaX() + "" + inputUsuario.coordenadaY());
                 try {
                     new Zerling(inputUsuario, jugador);
                     juegoVista.actualizarTablero();
                 } catch (RequerimientosInsuficientesException ex) {
-                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
                 } catch (ReservaDeReproduccionNoDisponibleException | NoExisteEdificioCorrelativoException ex) {
-                    noSePuedeConstruir("\nReservaDeReproduccionNoDisponibleException");
+                    noSePuedeConstruir("\nReserva De Reproduccion No Disponible");
                 }
             }
             s.close();
@@ -245,9 +248,9 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
                     new Hidralisco(inputUsuario, jugador);
                     juegoVista.actualizarTablero();
                 } catch (RequerimientosInsuficientesException | NoExisteEdificioCorrelativoException ex) {
-                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
                 } catch (GuaridaNoDisponibleException ex) {
-                    noSePuedeConstruir("\nGuaridaNoDisponibleException");
+                    noSePuedeConstruir("\nGuarida No Disponible");
                 }
                 s.close();
             }
@@ -266,9 +269,9 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
                     new Mutalisco(inputUsuario, jugador);
                     juegoVista.actualizarTablero();
                 } catch (RequerimientosInsuficientesException | NoExisteEdificioCorrelativoException ex) {
-                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
                 } catch (EspiralNoDisponibleException ex) {
-                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
                 }
             }
             s.close();
@@ -286,7 +289,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
                     new Guardian(inputUsuario, jugador);
                     juegoVista.actualizarTablero();
                 } catch (RequerimientosInsuficientesException ex) {
-                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
                 } catch (EspiralNoDisponibleException ex) {
                     noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
                 }
@@ -306,7 +309,7 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
                     new Devorador(inputUsuario, jugador);
                     juegoVista.actualizarTablero();
                 } catch (RequerimientosInsuficientesException ex) {
-                    noSePuedeConstruir("\nRequerimientosInsuficientesException");
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
                 } catch (EspiralNoDisponibleException ex) {
                     noSePuedeConstruir("\nNo existe mutalisco en esa posicion");
                 }

@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.javafx.Eventos.AtacarHandler;
 import edu.fiuba.algo3.modelo.Construccion;
 import edu.fiuba.algo3.modelo.Individuos.Individuo;
 import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Posicion;
 import edu.fiuba.algo3.modelo.Recursos.RecursoInyectable;
 import javafx.scene.Group;
@@ -63,10 +65,11 @@ public class Tablero {
         }
     }
 
-    public UnidadIndividuo crearUnidadMovible(Individuo individuo) {
+    public UnidadIndividuo crearUnidadMovible(Individuo individuo, Jugador oponente) {
         int coordenadaX = (individuo.posicion().coordenadaX() * 40) + 10;
         int coordenadaY = (individuo.posicion().coordenadaY() * 40) + 10;
-        UnidadIndividuo unidad = new UnidadIndividuo(individuo, coordenadaX, coordenadaY);
+        AtacarHandler action = new AtacarHandler(juegoVista, oponente, individuo);
+        UnidadIndividuo unidad = new UnidadIndividuo(individuo, coordenadaX, coordenadaY, action);
         hacerMovible(unidad);
         this.juegoVista.agregarSuscriptorPasarTurno(unidad);
         return unidad;
@@ -94,9 +97,9 @@ public class Tablero {
     public void actualizarRecursos() {
         ArrayList<RecursoInyectable> recursos = juego.mostrarRecursos();
         for (RecursoInyectable recurso : recursos) {
-            int coordenadaX = (recurso.mostrarPosicion().coordenadaX() * 40) + 10;
-            int coordenadaY = (recurso.mostrarPosicion().coordenadaY() * 40) + 10;
-            UnidadRecurso unidad = new UnidadRecurso(recurso, coordenadaX, coordenadaY);
+            int coordenadaX = ((recurso.mostrarPosicion().coordenadaX() - 1) * 40) + 10;
+            int coordenadaY = ((recurso.mostrarPosicion().coordenadaY() - 1) * 40) + 10;
+            UnidadRecurso unidad = new UnidadRecurso(recurso, coordenadaX - 1, coordenadaY - 1);
             unidad.setOnMouseReleased(e ->{
                 mostrarPosicion(unidad);
             });
@@ -109,7 +112,7 @@ public class Tablero {
         System.out.println(individuos.size());
         if(individuos.size() != 0){
             for (Individuo individuo : individuos) {
-                this.insertarUnidad(individuo);
+                this.insertarUnidad(individuo, juego.getJugadorUno());
             }
         }
 
@@ -234,14 +237,13 @@ public class Tablero {
         UnidadEdificio nuevo = crearUnidadEstatica(construccion);
         mapaVista.getChildren().add(nuevo);
     }
-    public void insertarUnidad(Individuo unidad) {
-        System.out.println(unidad.posicion().coordenadaX());
-        System.out.println(unidad.posicion().coordenadaY());
-        if(unidad == null)
-            System.out.println("\n inserta construccion");
-        UnidadIndividuo nuevo = crearUnidadMovible(unidad);
-
-        mapaVista.getChildren().add(nuevo);
+    public void insertarUnidad(Individuo unidad, Jugador oponente) {
+        if(unidad != null) {
+            UnidadIndividuo nuevo = crearUnidadMovible(unidad, oponente);
+            mapaVista.getChildren().add(nuevo);
+        } else {
+            System.out.println("La unidad es null");
+        }
     }
 
     public void actualizar() {

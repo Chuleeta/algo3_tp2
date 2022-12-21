@@ -1,10 +1,6 @@
 package edu.fiuba.algo3.modelo.Individuos;
 
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Mapa;
-import edu.fiuba.algo3.modelo.Ocupable;
-import edu.fiuba.algo3.modelo.Posicion;
-import edu.fiuba.algo3.modelo.Vida;
+import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Edificios.Edificio;
 import edu.fiuba.algo3.modelo.Estados.EstadoConstruccion;
 import edu.fiuba.algo3.modelo.Recursos.GasVespeno;
@@ -44,10 +40,10 @@ public abstract class Individuo  implements Ocupable
         return posicion.adentro(rangoDeAtaque, this.posicion);
     }
 
-    public boolean atacar(Edificio edificio) {
+    public boolean atacar(Construccion edificio) {
         if (estado.estaConstruido()) {
             if (estaDentroDelRango(edificio.posicion())) {
-                edificio.dañar(unidadesDeDañoTerrestre);
+                edificio.recibirAtaqueTerrestre(unidadesDeDañoTerrestre);
                 return true;
             }
         }
