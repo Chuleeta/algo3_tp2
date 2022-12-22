@@ -273,8 +273,6 @@ public class Tablero {
         if(unidad != null) {
             UnidadIndividuo nuevo = crearUnidadMovible(unidad, oponente);
             mapaVista.getChildren().add(nuevo);
-        } else {
-            System.out.println("La unidad es null");
         }
     }
 

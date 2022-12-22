@@ -82,11 +82,9 @@ public class Acceso extends Edificio{
     public boolean agregarAlMapa(Mineral mineral, GasVespeno gas) {
         if(mineral.invertir(150))
         {
-            System.out.println("\nNO Falla el agregar al mapa");
             this.jugador.agregarEnListaConstruccion(this);
             return true;
         }
-        System.out.println("\nFalla el agregar al mapa");
         return false;
     }
 

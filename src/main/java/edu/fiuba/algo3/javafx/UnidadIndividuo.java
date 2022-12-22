@@ -36,7 +36,6 @@ public class UnidadIndividuo extends Rectangle implements Notificable {
         this.setOnMouseClicked(e -> {
                 if(e.getButton().equals(MouseButton.PRIMARY)){
                     if(e.getClickCount() == 2){
-                        System.out.print("Atacante x:" + individuo.posicion().coordenadaX() + "y:" + individuo.posicion().coordenadaY());
                         VBox eleccionUsuario = new VBox();
                         HBox opciones = new HBox();
                         VBox opciones1 = new VBox();

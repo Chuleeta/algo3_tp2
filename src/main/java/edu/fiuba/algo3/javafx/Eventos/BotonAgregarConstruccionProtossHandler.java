@@ -172,10 +172,8 @@ public class BotonAgregarConstruccionProtossHandler  implements EventHandler<Act
                 juegoVista.actualizarTablero();
                 
             } catch (MenaOcupadaException e1) {
-                System.out.println("\n MENA OCUPADA");
                 noSePuedeConstruir();
             } catch (RecursosInsuficientesException e1) {
-                System.out.println("\n RecursosInsuficientesException");
                 noSePuedeConstruir();
             }
             s.close();

@@ -111,7 +111,6 @@ public class Jugador {
 
     public boolean agregarConstruccion(Construccion construccion){
         if(!mapa.verificarPosicionDisponible(construccion)){
-            System.out.println("\nFalla el verificar posicion disponible");
             return false;
         }
         return construccion.agregarAlMapa(this.mineral, this.gas);
@@ -189,7 +188,6 @@ public class Jugador {
 
         Construccion construccion = encontrarConstruccion(posicion);
         if(construccion != null) {
-            System.out.println(construccion);
             individuoAtacante.atacar(construccion);
             return;
         }
@@ -198,7 +196,6 @@ public class Jugador {
 
     private Construccion encontrarConstruccion(Posicion posicion) {
         for (Construccion construccion : this.construcciones) {
-            System.out.println("x: " + construccion.posicion().coordenadaX() + "y: " + construccion.posicion().coordenadaY());
             if (construccion.posicion().posicionesIguales(posicion)) {
                 return construccion;
             }

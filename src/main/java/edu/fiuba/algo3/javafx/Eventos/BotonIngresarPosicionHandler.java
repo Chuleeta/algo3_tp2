@@ -27,7 +27,6 @@ public class BotonIngresarPosicionHandler implements EventHandler<ActionEvent> {
     }
 
     public String devolverValor(){
-        System.out.println("\nPOSICION ADENTRO: " + td.getEditor().getText());
         return (td.getEditor().getText());
     }
 }

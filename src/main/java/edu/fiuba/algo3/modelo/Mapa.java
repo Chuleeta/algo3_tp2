@@ -36,7 +36,6 @@ public class Mapa {
 
     public boolean agregarOcupable(Ocupable ocupable, Posicion posicion){
         if(ocupable == null || !verificarPosicion(posicion)){
-            System.out.println("\nFalla el agregar ocupable");
             return false;
         }
         
@@ -48,7 +47,6 @@ public class Mapa {
         if(recursoInyectable == null)
             return false;
         this.recursosInyectables.add(recursoInyectable);
-        //System.out.println("\nSE AGREGA");
         return true;
     }
 
@@ -97,11 +95,8 @@ public class Mapa {
         for (Zona zona:zonas)
         {
             if(zona.puedeHabitar(construccion)){
-                System.out.println("\nPuede Habitar zona da true");
                 return true;
             }
-            System.out.println(zona);
-            System.out.println("\nPuede Habitar zona da false");
         }
         return false;
     }
@@ -182,7 +177,6 @@ public class Mapa {
 
     public boolean chequearMovimientoTerrestre(Posicion posicion) {
         for (AreaEspacial area : this.areasEspaciales) {
-            System.out.println(area.abarca(posicion));
             if(area.posicionAdentro(posicion))
                 return false;
         }

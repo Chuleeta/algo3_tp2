@@ -189,7 +189,6 @@ public class AtacarHandler extends BorderPane implements EventHandler<ActionEven
         botonAtacar.setOnMouseExited(e -> botonAtacar.setStyle(botonNormal));
         botonAtacar.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.print("atacado x:" + inputUsuario.coordenadaX() + "y:" + inputUsuario.coordenadaY());
             if (inputUsuario != null) {
                 try {
                     oponente.atacarUnidad(inputUsuario, this.individuo);

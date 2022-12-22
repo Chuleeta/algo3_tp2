@@ -117,14 +117,12 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         int valorX = 0;
         int valorY = 0;
         if(posicionDeseadaX.getValue() != null){
-            System.out.println("en x: " + posicionDeseadaX.getValue());
             valorX = Integer.valueOf(posicionDeseadaX.getValue());
         }else{
             return null;
         }
 
         if(posicionDeseadaY.getValue() != null){
-            System.out.println("en y: " + posicionDeseadaY.getValue());
             valorY = Integer.valueOf(posicionDeseadaY.getValue());
         }else{
             return null;
