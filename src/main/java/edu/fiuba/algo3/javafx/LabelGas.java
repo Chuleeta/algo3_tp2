@@ -17,7 +17,7 @@ public class LabelGas extends Label implements Notificable {
     private final Jugador jugador;
 
     public LabelGas(Jugador jugador) {
-        super("Gas:" + jugador.invertirGas().getCantidad());
+        super("Gas:\n" + jugador.invertirGas().getCantidad());
         super.setFont(fuente);
         super.setStyle(formatoTexto);
         super.setPadding(new Insets(0, 0, 0, 25));
@@ -29,7 +29,7 @@ public class LabelGas extends Label implements Notificable {
 
     @Override
     public void actualizar(Jugador jugadorDeTurno) {
-        super.setText("Gas" + this.jugador.invertirGas().getCantidad());
+        super.setText("Gas:\n" + this.jugador.invertirGas().getCantidad());
     }
 }
 
