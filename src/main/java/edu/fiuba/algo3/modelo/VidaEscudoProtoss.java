@@ -27,7 +27,7 @@ public class VidaEscudoProtoss extends Vida{
         }
     }
     public void regenerar() {
-        this.escudo += 100;
+        this.escudo += 5;
         if (this.escudo > this.vidaCompleta) {
             this.escudo = this.escudoCompleto;
         }
@@ -39,6 +39,9 @@ public class VidaEscudoProtoss extends Vida{
 
     @Override
     public String vidaRestante() {
+        if (vida <= 0) {
+            return "Unidad eliminada";
+        }
         return String.valueOf("Vida:" + this.vida + "," + " Escudo:" + this.escudo);
     }
 }

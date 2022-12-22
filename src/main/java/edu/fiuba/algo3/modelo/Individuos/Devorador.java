@@ -43,7 +43,7 @@ public class Devorador extends Individuo implements UnidadVoladora{
         this.estado = new EstadoNoConstruido();
         this.tiempoDeConstruccion = 4;
         this.tiempo = 0;
-
+        this.posicion = posicion;
         this.jugador = jugador;
         jugador.añadirUnidad();
         if(!this.jugador.agregarIndividuo(this) || !this.jugador.validarCorrelativaEvolucion(this)){
@@ -109,5 +109,8 @@ public class Devorador extends Individuo implements UnidadVoladora{
     @Override
     public String getSpray(){
         return "/imagenes/devorador.png";
+    }
+    public boolean moverUnidad(Posicion nuevaPosicion) {
+        return true;
     }
 }

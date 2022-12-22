@@ -138,13 +138,18 @@ public class Tablero {
         }
     }
     public void actualizarUnidades() {
-        ArrayList<Individuo> individuos = this.juego.mostrarUnidades();
-        if(individuos.size() != 0){
-            for (Individuo individuo : individuos) {
+        ArrayList<Individuo> individuosJugadorUno = this.juego.getJugadorUno().mostrarIndividuos();
+        if(individuosJugadorUno.size() != 0){
+            for (Individuo individuo : individuosJugadorUno) {
+                this.insertarUnidad(individuo, juego.getJugadorDos());
+            }
+        }
+        ArrayList<Individuo> individuosJugadorDos = this.juego.getJugadorDos().mostrarIndividuos();
+        if(individuosJugadorDos.size() != 0){
+            for (Individuo individuo : individuosJugadorDos) {
                 this.insertarUnidad(individuo, juego.getJugadorUno());
             }
         }
-
     }
 
     private void seleccionarVerPosicion(Node n){

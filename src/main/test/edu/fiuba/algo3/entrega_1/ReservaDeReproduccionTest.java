@@ -32,7 +32,7 @@ public class ReservaDeReproduccionTest {
         reserva.pasarTiempo();
 
         //when
-        reserva.dañar(200);
+        reserva.dañar(10);
         reserva.pasarTiempo();
         reserva.pasarTiempo();
 

@@ -108,8 +108,8 @@ public class MutaliscoTest {
         assertFalse(nexo.tieneEscudoCompleto());
         nexo.pasarTiempo();
         //sigue dañado
-        assertFalse(nexo.tieneEscudoCompleto());
-        nexo.pasarTiempo();
+        for (int i = 0;  i < 100; i++)
+            nexo.pasarTiempo();
         //escudo completo
         assertTrue(nexo.tieneEscudoCompleto());
 

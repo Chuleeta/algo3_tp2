@@ -94,4 +94,7 @@ public class AmoSupremo extends Individuo {
     public String getSpray(){
         return "/imagenes/amosupremo.png";
     }
+    public boolean moverUnidad(Posicion nuevaPosicion) {
+        return true;
+    }
 }

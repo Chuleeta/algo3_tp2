@@ -98,4 +98,8 @@ public class Guardian extends Individuo implements UnidadVoladora{
         return "/imagenes/guardian.png";
     }
 
+    public boolean moverUnidad(Posicion nuevaPosicion) {
+        return true;
+    }
+
 }

@@ -139,11 +139,9 @@ public class CriaderoTest {
         criadero.pasarTiempo();
 
         //when
-        criadero.dañar(200);
+        criadero.dañar(10);
         criadero.pasarTiempo();
         criadero.pasarTiempo();
-
-        //then
         assertTrue(criadero.tieneVidaCompleta());
     }
 

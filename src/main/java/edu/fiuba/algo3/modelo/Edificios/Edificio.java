@@ -70,6 +70,7 @@ public abstract class Edificio implements Construccion, Ocupable {
     }
 
     public void recibirAtaqueTerrestre(int unidades){
+        System.out.println(unidades);
         dañar(unidades);
     }
 

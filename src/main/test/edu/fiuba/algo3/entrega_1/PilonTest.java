@@ -25,8 +25,8 @@ public class PilonTest {
         pilon.pasarTiempo();
         pilon.dañar(200);
         assertFalse(pilon.tieneEscudoCompleto());
-        pilon.pasarTiempo();
-        pilon.pasarTiempo();
+        for (int i = 0;  i < 100; i++)
+            pilon.pasarTiempo();
         assertTrue(pilon.tieneEscudoCompleto());
     }
 
@@ -43,9 +43,8 @@ public class PilonTest {
         pilon.pasarTiempo();
         pilon.dañar(350);
         assertFalse(pilon.tieneEscudoCompleto());
-        pilon.pasarTiempo();
-        pilon.pasarTiempo();
-        pilon.pasarTiempo();
+        for (int i = 0;  i < 100; i++)
+            pilon.pasarTiempo();
         assertTrue(pilon.tieneEscudoCompleto());
         assertFalse(pilon.tieneVidaCompleta());
     }

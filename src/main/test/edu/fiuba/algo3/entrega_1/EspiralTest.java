@@ -56,7 +56,7 @@ public class EspiralTest {
         espiral.pasarTiempo();
 
         //when
-        espiral.dañar(200);
+        espiral.dañar(10);
         espiral.pasarTiempo();
         espiral.pasarTiempo();
 

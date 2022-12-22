@@ -80,8 +80,8 @@ public class ZerlingTest {
 
         //escudo dañado
         assertFalse(nexo.tieneEscudoCompleto());
-
-        jugador.pasarTiempo();
+        for (int i = 0;  i < 100; i++)
+            jugador.pasarTiempo();
         //escudo completo
         assertTrue(nexo.tieneEscudoCompleto());
 

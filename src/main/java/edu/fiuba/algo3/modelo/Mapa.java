@@ -179,4 +179,13 @@ public class Mapa {
     public ArrayList<AreaEspacial> getAreaEspacial() {
         return this.areasEspaciales;
     }
+
+    public boolean chequearMovimientoTerrestre(Posicion posicion) {
+        for (AreaEspacial area : this.areasEspaciales) {
+            System.out.println(area.abarca(posicion));
+            if(area.posicionAdentro(posicion))
+                return false;
+        }
+        return true;
+    }
 }

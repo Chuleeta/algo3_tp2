@@ -72,9 +72,12 @@ public abstract class Individuo  implements Ocupable
     }
 
     public boolean moverUnidad(Posicion nuevaPosicion) {
-        System.out.println(nuevaPosicion.coordenadaX());
-        this.posicion = nuevaPosicion;
-        return true;
+        if(mapa.chequearMovimientoTerrestre(nuevaPosicion)){
+            this.posicion = nuevaPosicion;
+            return true;
+        }
+        recibirDaño(100000);
+        return false;
     }
     public abstract boolean agregarAlMapa(Mineral mineral, GasVespeno gas);
 

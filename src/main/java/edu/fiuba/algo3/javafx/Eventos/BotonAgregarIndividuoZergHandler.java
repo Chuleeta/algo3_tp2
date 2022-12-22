@@ -190,7 +190,15 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonAmo.setOnMouseExited(e -> botonAmo.setStyle(botonNormal));
         botonAmo.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-            System.out.println("\n input usuario: "+ inputUsuario);
+            if (inputUsuario != null) {
+                try {
+                    new AmoSupremo(inputUsuario, jugador);
+                    juegoVista.actualizarTablero();
+                } catch (RequerimientosInsuficientesException ex) {
+                    noSePuedeConstruir("\nRequerimientos Insuficientes");
+                }
+                s.close();
+            }
         });
         
         Button botonZangano = new Button("Zangano");
@@ -201,7 +209,6 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonZangano.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
             if (inputUsuario != null) {
-                System.out.print("Creacion de Zangano posicion: " + inputUsuario.coordenadaX() + "" + inputUsuario.coordenadaY());
                 try {
                     new Zangano(inputUsuario, jugador);
                     juegoVista.actualizarTablero();
@@ -224,7 +231,6 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
             Posicion inputUsuario = this.cargarPosicion();
 
             if (inputUsuario != null) {
-                System.out.print("Creacion de zerling posicion: " + inputUsuario.coordenadaX() + "" + inputUsuario.coordenadaY());
                 try {
                     new Zerling(inputUsuario, jugador);
                     juegoVista.actualizarTablero();
@@ -264,7 +270,6 @@ public class BotonAgregarIndividuoZergHandler extends BorderPane implements Even
         botonMutalisco.setOnMouseExited(e -> botonMutalisco.setStyle(botonNormal));
         botonMutalisco.setOnAction(e-> {
             Posicion inputUsuario = this.cargarPosicion();
-
             if (inputUsuario != null) {
                 try {
                     new Mutalisco(inputUsuario, jugador);

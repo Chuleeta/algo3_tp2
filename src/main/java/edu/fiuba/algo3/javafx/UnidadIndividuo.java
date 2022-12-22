@@ -45,7 +45,10 @@ public class UnidadIndividuo extends Rectangle implements Notificable {
                         Image icono = new Image(pathicono);
                         botonAtacar.setOnAction(action);
                         botonVida.setText(individuo.obtenerVida().vidaRestante());
-                        opciones1.getChildren().addAll(botonAtacar, botonVida);
+                        if (!individuo.obtenerVida().verificarSiEstaMuerto()){
+                            opciones1.getChildren().addAll(botonAtacar);
+                        }
+                        opciones1.getChildren().addAll(botonVida);
                         opciones1.setSpacing(10);
                         opciones1.setAlignment(Pos.CENTER);
                         opciones.getChildren().addAll(opciones1);
