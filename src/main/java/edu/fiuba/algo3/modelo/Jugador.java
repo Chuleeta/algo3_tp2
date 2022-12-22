@@ -1,11 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Edificios.*;
-import edu.fiuba.algo3.modelo.Exceptions.AtributoInvalidoException;
-import edu.fiuba.algo3.modelo.Exceptions.CriaderoNoDisponibleException;
-import edu.fiuba.algo3.modelo.Exceptions.NoExisteEdificioCorrelativoException;
+import edu.fiuba.algo3.modelo.Exceptions.*;
 import edu.fiuba.algo3.modelo.Individuos.Devorador;
-import edu.fiuba.algo3.modelo.Exceptions.NoSeEncuentraAlIndividuoException;
 import edu.fiuba.algo3.modelo.Individuos.Dragon;
 import edu.fiuba.algo3.modelo.Individuos.Guardian;
 import edu.fiuba.algo3.modelo.Individuos.Hidralisco;
@@ -45,8 +42,8 @@ public class Jugador {
         this.mapa = mapa;
         this.construcciones = new ArrayList<>();
         this.individuos = new ArrayList<>();
-        this.mineral = new Mineral(225);
-        this.gas = new GasVespeno(0);
+        this.mineral = new Mineral(2005);
+        this.gas = new GasVespeno(2000);
         this.capacidad = capacidad;
         unidadesCreadas = 0;
     }
@@ -247,6 +244,11 @@ public class Jugador {
     public void verificarEdificacionCorrelativa(Zerling zerling) throws NoExisteEdificioCorrelativoException {
         for (Construccion construccion : this.construcciones) {
             if (construccion.verificarCorrelativa(zerling)) {
+                try {
+                    verificarEdificacionCorrelativa(new Zangano(new Mineral(1000)));
+                } catch (RequerimientosInsuficientesException e) {
+                    throw new NoExisteEdificioCorrelativoException();
+                }
                 return;
             }
         }
@@ -256,6 +258,11 @@ public class Jugador {
     public void verificarEdificacionCorrelativa(Hidralisco hidralisco) throws NoExisteEdificioCorrelativoException {
         for (Construccion construccion : this.construcciones) {
             if (construccion.verificarCorrelativa(hidralisco)) {
+                try {
+                    verificarEdificacionCorrelativa(new Zangano(new Mineral(1000)));
+                } catch (RequerimientosInsuficientesException e) {
+                    throw new NoExisteEdificioCorrelativoException();
+                }
                 return;
             }
         }
@@ -265,6 +272,11 @@ public class Jugador {
     public void verificarEdificacionCorrelativa(Mutalisco mutalisco) throws NoExisteEdificioCorrelativoException {
         for (Construccion construccion : this.construcciones) {
             if (construccion.verificarCorrelativa(mutalisco)) {
+                try {
+                    verificarEdificacionCorrelativa(new Zangano(new Mineral(1000)));
+                } catch (RequerimientosInsuficientesException e) {
+                    throw new NoExisteEdificioCorrelativoException();
+                }
                 return;
             }
         }

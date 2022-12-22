@@ -176,7 +176,11 @@ public class Criadero extends Edificio{
     @Override
     public boolean verificarCorrelativa(Zangano zangano) {
         // TODO Auto-generated method stub
-        return true;
+        if (larvas.size() > 0) {
+            larvas.remove(0);
+            return true;
+        }
+        return false;
     }
 
     @Override
